@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI База знаний — Никита Шлык</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --bg2: #111111;
+  --bg3: #1a1a1a;
+  --card: #161616;
+  --border: rgba(255,255,255,0.08);
+  --accent: #F5521A;
+  --accent2: rgba(245,82,26,0.12);
+  --text: #f4f4ef;
+  --muted: #888;
+  --green: #4ade80;
+  --blue: #60a5fa;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background:var(--bg); color:var(--text); font-family:'Montserrat',sans-serif; line-height:1.7; }
+
+/* TOPNAV */
+.topnav {
+  position: sticky; top:0; z-index:100;
+  background: rgba(10,10,10,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex; align-items: center; gap: 0; height: 56px;
+  overflow-x: auto;
+}
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; color:var(--accent); letter-spacing:.05em; margin-right:2rem; white-space:nowrap; }
+.nav-links { display:flex; gap:0.25rem; flex-wrap:nowrap; }
+.nav-link {
+  padding: 0.4rem 0.9rem; border-radius:6px;
+  font-size:0.78rem; font-weight:500; color:var(--muted);
+  text-decoration:none; transition:all 0.2s; white-space:nowrap;
+}
+.nav-link:hover, .nav-link.active { color:var(--text); background:var(--bg3); }
+.nav-link.active { color:var(--accent); }
+
+/* HERO */
+.hero { max-width: 900px; margin: 0 auto; padding: 5rem 2rem 3rem; text-align: center; }
+.hero-badge {
+  display:inline-block; background:var(--accent2); border:1px solid var(--accent);
+  color:var(--accent); font-size:0.7rem; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; padding:0.35rem 1rem; border-radius:100px; margin-bottom:1.5rem;
+}
+.hero h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,6vw,4.5rem); line-height:1.1; letter-spacing:.02em; margin-bottom:1rem; }
+.hero h1 span { color:var(--accent); }
+.hero-sub { font-size:1rem; color:var(--muted); max-width:560px; margin:0 auto 2.5rem; }
+
+/* BLOCKS GRID */
+.blocks-grid {
+  max-width:900px; margin:0 auto; padding:0 2rem 4rem;
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:1rem;
+}
+.block-card {
+  background:var(--card); border:1px solid var(--border); border-radius:16px;
+  padding:1.75rem; cursor:pointer; transition:all 0.25s; text-decoration:none; display:block; color:inherit;
+}
+.block-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+.block-num { font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--accent); opacity:.4; line-height:1; }
+.block-title { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:.03em; margin:0.5rem 0 0.4rem; }
+.block-desc { font-size:0.82rem; color:var(--muted); line-height:1.6; }
+.block-tags { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:1.2rem; }
+.tag { font-size:0.68rem; background:var(--bg3); border:1px solid var(--border); color:var(--muted); padding:0.2rem 0.6rem; border-radius:100px; }
+
+/* CONTENT */
+.content { max-width:820px; margin:0 auto; padding:0 2rem 6rem; }
+
+/* SECTION */
+.section { margin-bottom:1px; }
+.section-header {
+  display:flex; align-items:center; gap:1rem;
+  background:var(--bg2); border:1px solid var(--border); border-radius:12px;
+  padding:1.25rem 1.5rem; cursor:pointer; margin-bottom:2px;
+  transition: border-color 0.2s;
+}
+.section-header:hover { border-color:var(--accent); }
+.section-header.open { border-color:var(--accent); border-radius:12px 12px 0 0; margin-bottom:0; }
+.section-icon { font-size:1.2rem; }
+.section-name { font-family:'Bebas Neue',sans-serif; font-size:1.25rem; letter-spacing:.03em; flex:1; }
+.section-chevron { color:var(--muted); transition:transform 0.3s; font-size:0.85rem; }
+.section-header.open .section-chevron { transform:rotate(180deg); }
+
+.section-body {
+  background:var(--card); border:1px solid var(--accent); border-top:none;
+  border-radius:0 0 12px 12px; padding:2rem; display:none;
+}
+.section-body.open { display:block; }
+
+/* BLOCK DIVIDER */
+.block-divider { padding: 3.5rem 0 1.5rem; scroll-margin-top: 70px; }
+.block-label { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; }
+.block-num-label { font-family:'Bebas Neue',sans-serif; font-size:4rem; color:var(--accent); opacity:.15; line-height:1; }
+.block-title-label { font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:.03em; }
+.block-desc-label { font-size:0.85rem; color:var(--muted); margin-top:0.25rem; }
+
+/* TEXT */
+h2 { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:.03em; margin:1.5rem 0 0.8rem; color:var(--text); }
+h3 { font-size:0.88rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.08em; margin:1.5rem 0 0.75rem; }
+h4 { font-size:0.95rem; font-weight:700; color:var(--text); margin:1rem 0 0.5rem; }
+p { font-size:0.9rem; color:rgba(244,244,239,0.82); margin-bottom:0.75rem; }
+ul { margin:0.5rem 0 1rem 1.1rem; }
+ul li { font-size:0.88rem; color:rgba(244,244,239,0.82); margin-bottom:0.3rem; line-height:1.65; }
+a { color: var(--accent); }
+
+/* CODE */
+.code-wrap { position:relative; margin:1rem 0; }
+.code-label { font-size:0.6rem; text-transform:uppercase; letter-spacing:.1em; color:var(--accent); font-weight:700; margin-bottom:0.4rem; }
+.code-block {
+  background:#0d0d0d; border:1px solid var(--border); border-radius:10px;
+  padding:1.25rem 1rem; padding-right:3.5rem;
+  font-family:'SF Mono','Fira Code','Courier New',monospace;
+  font-size:0.78rem; line-height:1.7; color:#e4e4e7;
+  white-space:pre-wrap; word-break:break-word; overflow-x:auto;
+}
+.code-block.bash { border-left:3px solid var(--accent); }
+.code-block.prompt { border-left:3px solid #60a5fa; color:#c7d2fe; }
+.code-block.tree { border-left:3px solid #4ade80; color:#bbf7d0; font-size:0.82rem; }
+.code-block.cmd { border-left:3px solid #F5521A; color:#fbd38d; padding:0.85rem 1rem; padding-right:3.5rem; }
+.copy-btn {
+  position:absolute; top:0.6rem; right:0.6rem;
+  background:var(--bg3); border:1px solid var(--border); border-radius:6px;
+  color:var(--muted); font-size:0.65rem; font-weight:600; padding:0.3rem 0.6rem;
+  cursor:pointer; transition:all 0.2s; letter-spacing:.05em;
+}
+.copy-btn:hover { background:var(--accent); color:white; border-color:var(--accent); }
+.copy-btn.copied { background:var(--green); color:black; border-color:var(--green); }
+
+/* CLICKABLE COMMAND ROW */
+.cmd-row {
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  background:#0d0d0d; border:1px solid var(--border); border-radius:8px;
+  padding:0.6rem 0.9rem; margin:0.4rem 0;
+  font-family:'SF Mono',monospace; font-size:0.82rem;
+  cursor:pointer; transition:all 0.2s; position:relative;
+}
+.cmd-row:hover { border-color:var(--accent); background:#131313; }
+.cmd-row .cmd-text { color:var(--accent); white-space:nowrap; }
+.cmd-row .cmd-hint { color:var(--muted); font-size:0.72rem; font-family:'Montserrat',sans-serif; flex:1; }
+.cmd-row .cmd-copy { color:var(--muted); font-size:0.65rem; text-transform:uppercase; letter-spacing:.08em; font-family:'Montserrat',sans-serif; font-weight:700; }
+.cmd-row.copied { border-color:var(--green); }
+.cmd-row.copied .cmd-copy { color:var(--green); }
+
+/* TABLE */
+.compare, .skill-table { width:100%; border-collapse:collapse; font-size:0.8rem; margin:1rem 0; }
+.compare th, .skill-table th { color:var(--accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:.07em; padding:0.6rem 0.8rem; border-bottom:1px solid var(--border); text-align:left; }
+.compare td, .skill-table td { padding:0.6rem 0.8rem; border-bottom:1px solid var(--border); color:rgba(244,244,239,0.78); vertical-align:top; }
+.compare td:first-child, .skill-table td:first-child { color:var(--text); font-weight:600; }
+.compare tr:last-child td, .skill-table tr:last-child td { border-bottom:none; }
+
+/* STEPS */
+.steps { display:flex; flex-direction:column; gap:0.75rem; margin:1rem 0; }
+.step { display:flex; gap:1rem; align-items:flex-start; }
+.step-num { background:var(--accent); color:white; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:800; flex-shrink:0; margin-top:2px; }
+.step-text { font-size:0.87rem; color:rgba(244,244,239,0.88); }
+.step-text strong { color:var(--text); }
+
+/* CALLOUT */
+.callout { background:var(--accent2); border:1px solid var(--accent); border-radius:10px; padding:1rem 1.25rem; margin:1rem 0; }
+.callout-label { font-size:0.65rem; text-transform:uppercase; letter-spacing:.1em; color:var(--accent); font-weight:800; margin-bottom:0.4rem; }
+.callout p { color:var(--text); margin:0; font-size:0.87rem; }
+.callout.blue { background:rgba(96,165,250,0.08); border-color:var(--blue); }
+.callout.blue .callout-label { color:var(--blue); }
+.callout.green { background:rgba(74,222,128,0.08); border-color:var(--green); }
+.callout.green .callout-label { color:var(--green); }
+
+/* INFO CARDS */
+.info-cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:0.75rem; margin:1rem 0; }
+.info-card { background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:1rem; }
+.info-card-title { font-size:0.8rem; font-weight:700; color:var(--accent); margin-bottom:0.4rem; }
+.info-card-text { font-size:0.78rem; color:var(--muted); line-height:1.6; }
+
+/* RACET */
+.racet { display:grid; grid-template-columns:repeat(5,1fr); gap:0.5rem; margin:1rem 0; }
+.racet-cell { background:var(--accent2); border:1px solid var(--accent); border-radius:10px; padding:1rem 0.5rem; text-align:center; }
+.racet-letter { font-family:'Bebas Neue',sans-serif; font-size:2rem; color:var(--accent); line-height:1; }
+.racet-name { font-size:0.72rem; font-weight:700; color:var(--text); margin:0.3rem 0 0.2rem; text-transform:uppercase; letter-spacing:.05em; }
+.racet-desc { font-size:0.68rem; color:var(--muted); line-height:1.4; }
+
+/* FILE ROLE TABLE */
+.files-table { display:flex; flex-direction:column; gap:0.5rem; margin:1rem 0; }
+.file-row { background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:0.85rem 1rem; display:grid; grid-template-columns: 150px 1fr; gap:1rem; align-items:start; }
+.file-name { font-family:'SF Mono',monospace; color:var(--accent); font-size:0.82rem; font-weight:700; }
+.file-desc { font-size:0.82rem; color:rgba(244,244,239,0.8); }
+.file-desc strong { color:var(--text); }
+
+/* SCREENSHOT IMAGE */
+.shot {
+  display:block; max-width:100%; height:auto;
+  border-radius:10px; border:1px solid var(--border);
+  margin:1.25rem auto; background:#fff;
+}
+.shot.small { max-width:480px; }
+
+/* GLOSSARY */
+.glossary-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:0.75rem; margin:1rem 0; }
+.gloss-item { background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:0.9rem 1rem; }
+.gloss-term { font-weight:700; color:var(--text); font-size:0.85rem; margin-bottom:0.2rem; }
+.gloss-def { font-size:0.78rem; color:var(--muted); line-height:1.5; }
+
+/* LINKS GRID */
+.links-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:0.6rem; margin:1rem 0; }
+.link-item { background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:0.85rem 1rem; font-size:0.8rem; color:var(--text); text-decoration:none; display:flex; flex-direction:column; gap:0.3rem; transition:border-color .2s; }
+.link-item:hover { border-color:var(--accent); }
+.link-item .li-title { font-weight:700; font-size:0.85rem; color:var(--accent); }
+.link-item .li-sub { color:var(--muted); font-size:0.72rem; line-height:1.5; }
+
+/* CTA */
+.cta-block { background:var(--accent2); border:1px solid var(--accent); border-radius:16px; padding:2.5rem; text-align:center; margin-top:3rem; }
+.cta-title { font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:.03em; margin-bottom:0.75rem; }
+.cta-sub { color:var(--muted); font-size:0.9rem; margin-bottom:1.5rem; }
+.cta-btn { display:inline-block; background:var(--accent); color:white; font-weight:700; font-size:0.9rem; padding:0.85rem 2rem; border-radius:10px; text-decoration:none; transition:opacity .2s; margin:0.3rem; }
+.cta-btn:hover { opacity:0.85; }
+.cta-btn.secondary { background:transparent; border:1px solid var(--accent); color:var(--accent); }
+
+@media(max-width:768px) {
+  body { line-height:1.6; }
+  .topnav { padding:0 0.75rem; height:52px; }
+  .nav-logo { font-size:1.1rem; margin-right:1rem; }
+  .nav-link { padding:0.35rem 0.7rem; font-size:0.72rem; }
+
+  .hero { padding:3rem 1.25rem 2rem; }
+  .hero-badge { font-size:0.62rem; padding:0.3rem 0.8rem; }
+  .hero-sub { font-size:0.92rem; }
+
+  .blocks-grid { padding:0 1rem 2rem; grid-template-columns:1fr; gap:0.75rem; }
+  .block-card { padding:1.25rem; }
+  .block-num { font-size:2.5rem; }
+  .block-title { font-size:1.35rem; }
+
+  .content { padding:0 1rem 4rem; }
+  .block-divider { padding:2rem 0 1rem; }
+  .block-num-label { font-size:3rem; }
+  .block-title-label { font-size:1.5rem; }
+
+  .section-header { padding:1rem 1.1rem; gap:0.75rem; }
+  .section-name { font-size:1rem; letter-spacing:.02em; line-height:1.3; }
+  .section-icon { font-size:1.05rem; }
+  .section-body { padding:1.25rem 1rem; }
+
+  h2 { font-size:1.25rem; }
+  h3 { font-size:0.82rem; }
+  h4 { font-size:0.9rem; }
+  p, ul li { font-size:0.88rem; }
+
+  .code-block { font-size:0.72rem; padding:1rem 0.85rem; padding-right:3rem; }
+  .code-block.tree { font-size:0.7rem; }
+  .copy-btn { font-size:0.6rem; padding:0.25rem 0.5rem; }
+
+  .cmd-row { flex-wrap:wrap; padding:0.55rem 0.7rem; gap:0.4rem 0.75rem; }
+  .cmd-row .cmd-text { font-size:0.78rem; }
+  .cmd-row .cmd-hint { font-size:0.7rem; flex:1 0 100%; order:2; }
+  .cmd-row .cmd-copy { font-size:0.6rem; }
+
+  .racet { grid-template-columns:repeat(2,1fr); }
+  .racet-cell { padding:0.85rem 0.4rem; }
+  .racet-letter { font-size:1.7rem; }
+
+  .compare, .skill-table { font-size:0.75rem; }
+  .compare th, .compare td, .skill-table th, .skill-table td { padding:0.5rem 0.5rem; }
+
+  .info-cards { grid-template-columns:1fr; gap:0.6rem; }
+  .info-card { padding:0.85rem; }
+
+  .file-row { grid-template-columns:1fr; gap:0.3rem; padding:0.75rem 0.85rem; }
+  .file-name { font-size:0.76rem; }
+  .file-desc { font-size:0.78rem; }
+
+  .glossary-grid { grid-template-columns:1fr; gap:0.5rem; }
+  .links-grid { grid-template-columns:1fr; }
+
+  .callout { padding:0.85rem 1rem; }
+  .callout p { font-size:0.82rem; }
+
+  .shot.small { max-width:100%; }
+
+  .cta-block { padding:1.75rem 1rem; }
+  .cta-title { font-size:1.5rem; }
+  .cta-sub { font-size:0.82rem; }
+  .cta-btn { padding:0.75rem 1.5rem; font-size:0.85rem; display:block; margin:0.4rem auto; max-width:260px; }
+}
+
+@media(max-width:400px) {
+  .nav-logo { display:none; }
+  .hero h1 { font-size:2rem; }
+  .racet { grid-template-columns:repeat(2,1fr); gap:0.35rem; }
+  .code-block { font-size:0.68rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPNAV -->
+<nav class="topnav">
+  <div class="nav-logo">AI База</div>
+  <div class="nav-links">
+    <a href="#block0" class="nav-link">Блок 0 — Мышление</a>
+    <a href="#block1" class="nav-link">Блок 1 — Основы</a>
+    <a href="#block2" class="nav-link">Блок 2 — Claude Code</a>
+    <a href="#glossary" class="nav-link">Словарь</a>
+    <a href="100-prompts-pro.html" class="nav-link">+100 промптов</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Бесплатная база знаний</div>
+  <h1>Всё про AI<br>и <span>Claude</span><br>с нуля</h1>
+  <p class="hero-sub">Без воды. Мышление, промпты по R.A.C.E.T., Claude Code и как всё это применять на практике.</p>
+</div>
+
+<!-- BLOCKS OVERVIEW -->
+<div class="blocks-grid">
+  <a href="#block0" class="block-card">
+    <div class="block-num">00</div>
+    <div class="block-title">Мышление</div>
+    <div class="block-desc">Почему "учить AI" не равно "зарабатывать с AI". Диагностика где вы сейчас, 5 ошибок новичков</div>
+    <div class="block-tags"><span class="tag">Старт</span><span class="tag">Цель</span></div>
+  </a>
+  <a href="#block1" class="block-card">
+    <div class="block-num">01</div>
+    <div class="block-title">Основы AI</div>
+    <div class="block-desc">ChatGPT vs Claude, агенты и проекты, формула R.A.C.E.T. и 100 промптов к ней</div>
+    <div class="block-tags"><span class="tag">Новичкам</span><span class="tag">R.A.C.E.T.</span><span class="tag">100 промптов</span></div>
+  </a>
+  <a href="#block2" class="block-card">
+    <div class="block-num">02</div>
+    <div class="block-title">Claude Code</div>
+    <div class="block-desc">Установка, команды, структура проекта, скиллы, память между сессиями</div>
+    <div class="block-tags"><span class="tag">VS Code</span><span class="tag">Команды</span><span class="tag">Скиллы</span></div>
+  </a>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<!-- ═══ BLOCK 0 — МЫШЛЕНИЕ ═══ -->
+<div id="block0" class="block-divider">
+  <div class="block-label">
+    <div class="block-num-label">00</div>
+    <div>
+      <div class="block-title-label">Мышление</div>
+      <div class="block-desc-label">Первый шаг — не инструменты, а понимание куда вы идёте</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="mindset-trap">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🎯</span>
+    <span class="section-name">Почему "выучить AI" не равно "зарабатывать с AI"</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>15 лет в бизнесе. Франчайзинг в 57 городах. Если что-то и понял — рынок не платит за знания, платит за решённые задачи.</p>
+    <p>С AI работает та же логика. Можно выучить 10 нейросетей и не заработать. Можно знать только Claude — и закрывать задачи клиентам.</p>
+    <div class="callout">
+      <div class="callout-label">Суть</div>
+      <p>Никто не покупает "умение пользоваться молотком". Покупают построенный дом. С AI — то же самое.</p>
+    </div>
+    <h3>Цепочка работающей головы</h3>
+    <ol style="padding-left:1.2rem; font-size:0.88rem; color:rgba(244,244,239,0.85); line-height:1.8;">
+      <li><strong>Боль клиента</strong> — у человека есть задача, которую он не может или не хочет решать сам</li>
+      <li><strong>Решение с AI</strong> — конкретный продукт: пост, бот, лендинг, аналитика, скрипт</li>
+      <li><strong>Измеримый результат</strong> — "+30% заявок", "10 часов в неделю экономии", "50 постов за день"</li>
+      <li><strong>Цена</strong> — за результат, не за процесс</li>
+    </ol>
+    <p>Если вы остановились на пункте 1 — у вас хобби. Если дошли до 4 — профессия.</p>
+  </div>
+</div>
+
+<div class="section" id="diagnostic">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">📍</span>
+    <span class="section-name">Диагностика — где вы сейчас</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Навигатор не работает без стартовой точки. Тот же принцип с деньгами и целями: без честного ответа "где я сейчас" — не построить маршрут.</p>
+    <p>Откройте ChatGPT или Claude, скопируйте промпт. Он задаст 8 вопросов и выдаст анализ с рекомендациями по направлению.</p>
+    <div class="code-wrap">
+      <div class="code-label">Промпт — диагностика</div>
+      <div class="code-block prompt">Ты — карьерный и финансовый диагност. Помоги честно разобрать мою текущую ситуацию, чтобы поставить правильную цель.
+
+Задай 8 вопросов по очереди (по одному, жди ответ):
+
+1. Сколько сейчас зарабатываю в месяц? (средний за 3 месяца)
+2. Какой доход хочу через 3 месяца? Через 6?
+3. Сколько часов в день реально готов работать? (честно)
+4. Сколько дней в неделю?
+5. Какие навыки уже есть? (тексты, продажи, дизайн, код, соцсети)
+6. Пробовал ли нейросети? Что именно делал?
+7. Что больше всего останавливает? (страхи, сомнения)
+8. Есть ли компьютер с интернетом для ежедневной работы?
+
+После каждого вопроса предлагай варианты ответа для примера.
+
+Когда ответы готовы — выдай анализ:
+
+ТЕКУЩАЯ ТОЧКА
+- Доход сейчас: [сумма]
+- Цель 3 / 6 мес: [суммы]
+- Ресурс времени: [часов в неделю]
+- Сильные стороны: [список]
+- Зоны роста: [список]
+- Главные страхи + как работать
+
+РЕКОМЕНДАЦИЯ
+- Направление: [нейрокреатор / вайбкодер / архитектор агентов]
+- Обоснование
+- Первые 3 действия
+
+Реалистичная оценка: честно — насколько цели достижимы при заявленном времени. Если завышены — скажи и предложи коррекцию.
+
+Будь дружелюбным, но не приукрашивай.</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="callout blue">
+      <div class="callout-label">Правило</div>
+      <p>Честность важнее удобства. "Зарабатываю 50К" вместо реальных 30К — диагноз будет ложный. "4 часа в день" при реальном часе — план провалится в первую неделю.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="mistakes">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">⚠️</span>
+    <span class="section-name">5 ошибок которые крадут месяцы</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <h4>1. Учат всё подряд</h4>
+    <p>Midjourney, Suno, Runway, Kling, ElevenLabs, HeyGen — и всё по чуть-чуть. За 3 месяца 270 часов на "изучение". За это же время можно было сделать 5-7 оплачиваемых проектов.</p>
+    <p>Правильно — одно направление, один-два инструмента до уровня рабочих задач. Остальное добавится когда понадобится.</p>
+    <h4>2. Не могут сформулировать что делают</h4>
+    <p>"Работаю с нейросетями" — не ответ. Клиент не понимает, зачем ему платить.</p>
+    <div class="callout">
+      <div class="callout-label">Формула позиционирования</div>
+      <p>[Делаю что] + [какой результат] + [для кого] + [за какой срок]</p>
+    </div>
+    <p style="font-size:0.82rem; color:var(--muted);">Плохо: "Помогаю предпринимателям с AI". Хорошо: "Делаю контент-план и 30 постов в Instagram для экспертов-психологов за 3 дня"</p>
+    <h4>3. Бесплатно "для портфолио"</h4>
+    <p>Бесплатная работа обесценивает. Клиент думает: раз не берут денег — значит ничего не стоит. Плюс — потом неудобно повышать до рыночной цены.</p>
+    <p>Первая работа — за деньги. Даже если маленькие. Это другая позиция в диалоге.</p>
+    <h4>4. Ждут "когда будут готовы"</h4>
+    <p>Готовность не уровень знаний. Это решение начать. Люди с 20-летним опытом каждый день сталкиваются с новым и всё равно работают.</p>
+    <p>Первый заказ реально взять через 7-14 дней после старта.</p>
+    <h4>5. Копят чужие промпты вместо понимания</h4>
+    <p>500 промптов в закладках, ни одного решённого запроса. Промпт — инструмент, не решение. Ценность в понимании задачи клиента, не в красивом шаблоне.</p>
+    <p>Отсюда — блок про R.A.C.E.T. ниже. Это не магический промпт, а способ думать о задаче.</p>
+  </div>
+</div>
+
+<!-- SKRITO: Карта роста (#27) — до переработки -->
+<!-- HIDDEN-START: growth-map
+Раздел "Карта роста" скрыт. Причина: логика нарушена — специализация должна быть сразу после онбординга (до проектов), + текущая версия похожа на материал Ледовских. Переделать под своё.
+Оригинальное содержимое — см. git history.
+HIDDEN-END -->
+
+<!-- ═══ BLOCK 1 — ОСНОВЫ AI ═══ -->
+<div id="block1" class="block-divider">
+  <div class="block-label">
+    <div class="block-num-label">01</div>
+    <div>
+      <div class="block-title-label">Основы AI</div>
+      <div class="block-desc-label">Чем ChatGPT отличается от Claude, как устроены агенты и проекты, формула R.A.C.E.T.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="what-is-ai">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🤖</span>
+    <span class="section-name">Что такое нейросеть простыми словами</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Нейросеть — это программа, которую обучили на огромном массиве текстов, картинок, кода. Она не "думает" — она предсказывает, какой ответ ожидается на ваш запрос.</p>
+    <p>Представьте помощника, который прочитал миллиарды страниц и теперь может ответить, сформулировать, разобрать задачу, написать код. Быстрый, но буквальный — что попросили, то и сделает.</p>
+    <div class="info-cards">
+      <div class="info-card"><div class="info-card-title">LLM</div><div class="info-card-text">Large Language Model. Работает с текстом — понимает и генерирует. Claude, ChatGPT, Gemini</div></div>
+      <div class="info-card"><div class="info-card-title">Токен</div><div class="info-card-text">Единица обработки. Примерно 1 слово = 1-2 токена. За них платят — чем меньше, тем дешевле</div></div>
+      <div class="info-card"><div class="info-card-title">Промпт</div><div class="info-card-text">Ваш запрос. Ключевой навык работы с AI — формулировать точно</div></div>
+      <div class="info-card"><div class="info-card-title">Агент</div><div class="info-card-text">AI с конкретной ролью и инструкцией, выполняющий цепочку задач без вашего участия</div></div>
+    </div>
+    <div class="callout green">
+      <div class="callout-label">Ключевой факт</div>
+      <p>AI не читает мысли. AI следует буквально. Качество результата = качество вашего запроса. Всё.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="chatgpt-vs-claude">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">⚡</span>
+    <span class="section-name">ChatGPT vs Claude — когда что выбирать</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Оба — нейросети. Оба отвечают на вопросы и пишут тексты. Разница проявляется на сложных задачах.</p>
+    <table class="compare">
+      <tr><th></th><th>ChatGPT</th><th>Claude</th></tr>
+      <tr><td>Разработчик</td><td>OpenAI</td><td>Anthropic</td></tr>
+      <tr><td>Сильная сторона</td><td>Быстрые ответы, широкий охват, маркетплейс готовых агентов</td><td>Глубокий анализ, длинные тексты, аккуратный код, работа с большим контекстом</td></tr>
+      <tr><td>Маркетплейс</td><td>GPT Store — тысячи готовых агентов</td><td>Нет маркетплейса. Свой агент = свой Project</td></tr>
+      <tr><td>Код</td><td>Хорош для быстрых скриптов</td><td>Для больших проектов — отдельный продукт Claude Code</td></tr>
+      <tr><td>Образ</td><td>Универсальный помощник</td><td>Вдумчивый эксперт</td></tr>
+    </table>
+    <p>На практике полезно использовать оба. ChatGPT — для быстрого мозгового штурма, Claude — когда задача сложная или кода много.</p>
+  </div>
+</div>
+
+<div class="section" id="migrate-from-chatgpt">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🔁</span>
+    <span class="section-name">Переход с ChatGPT — как перенести накопленный контекст</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Если долго работали с ChatGPT — у него накоплен ваш контекст: ваши предпочтения, стиль, часто задаваемые вопросы, правила поведения. Всё это можно одним махом перенести в Claude, чтобы не начинать заново.</p>
+    <p>Займёт 3 минуты. Делается через встроенный инструмент Claude — вручную ничего копировать из старых чатов не надо.</p>
+    <h3>Шаг 1. Открыть настройки Claude</h3>
+    <p>В Claude.ai нажмите на свой профиль в нижнем углу → Settings.</p>
+    <img src="screenshots/migration-1.png" alt="Settings в Claude.ai" class="shot small">
+    <h3>Шаг 2. Capabilities → Start import</h3>
+    <p>Слева в настройках — раздел Capabilities. Прокрутите до блока Memory → пункт "Import memory from other AI providers" → кнопка Start import.</p>
+    <img src="screenshots/migration-2.png" alt="Capabilities и Import memory" class="shot">
+    <h3>Шаг 3. Взять промпт у Claude и отдать ChatGPT</h3>
+    <p>Claude покажет готовый промпт — нажмите Copy.</p>
+    <img src="screenshots/migration-3.png" alt="Готовый промпт от Claude" class="shot small">
+    <p>Открываете ChatGPT, вставляете промпт. ChatGPT выдаст структурированное саммари всего что про вас знает.</p>
+    <img src="screenshots/migration-4.png" alt="Вставка промпта в ChatGPT" class="shot">
+    <h3>Шаг 4. Вернуть ответ в Claude</h3>
+    <p>Копируете ответ ChatGPT → вставляете в нижнее поле Claude → Add to memory.</p>
+    <p>Всё. Весь накопленный контекст из прошлых разговоров теперь у Claude — он знает ваш стиль, правила, предпочтения.</p>
+    <div class="callout green">
+      <div class="callout-label">Когда делать</div>
+      <p>Один раз, когда только начинаете пользоваться Claude. Если в ChatGPT давно не сидели — возможно нечего переносить, тогда просто настраиваете Claude с нуля через Projects.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="ai-capabilities">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🚀</span>
+    <span class="section-name">Что конкретно AI делает в бизнесе</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Нейросеть — это не Google. Google ищет уже существующее. AI создаёт новое, анализирует данные, принимает решения.</p>
+    <h3>AI-роли в малом бизнесе</h3>
+    <div class="info-cards">
+      <div class="info-card"><div class="info-card-title">AI-продавец</div><div class="info-card-text">Отвечает клиентам круглосуточно, ведёт до покупки</div></div>
+      <div class="info-card"><div class="info-card-title">Маркетолог</div><div class="info-card-text">Пишет посты и рекламу за минуты вместо часов</div></div>
+      <div class="info-card"><div class="info-card-title">Дизайнер</div><div class="info-card-text">Картинки для рекламы, презентации, карточки товаров</div></div>
+      <div class="info-card"><div class="info-card-title">Аналитик</div><div class="info-card-text">Разбирает данные, делает отчёты, ищет паттерны</div></div>
+      <div class="info-card"><div class="info-card-title">Разведчик</div><div class="info-card-text">Следит за конкурентами, находит их слабости</div></div>
+      <div class="info-card"><div class="info-card-title">Ассистент руководителя</div><div class="info-card-text">Письма, расписание, подготовка к встречам</div></div>
+      <div class="info-card"><div class="info-card-title">HR-помощник</div><div class="info-card-text">Первичная обработка откликов, тестовые задания</div></div>
+      <div class="info-card"><div class="info-card-title">Копирайтер</div><div class="info-card-text">Тексты для сайта, карточек, рассылок, скриптов</div></div>
+    </div>
+    <h3>Типы задач которые закрывает AI</h3>
+    <ul>
+      <li><strong>Тексты</strong> — продающие, статьи, письма, скрипты, резюме</li>
+      <li><strong>Визуал</strong> — картинки, логотипы, инфографика, презентации</li>
+      <li><strong>Аналитика</strong> — ЦА, конкуренты, продажи, поведение пользователей</li>
+      <li><strong>Код</strong> — сайты, боты, автоматизации, приложения (через Claude Code)</li>
+      <li><strong>Бизнес</strong> — финплан, юрдоки, ТЗ, отчёты, договоры</li>
+      <li><strong>Обучение</strong> — курсы, квизы, тесты, материалы для команды</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section" id="claude-interface">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">💬</span>
+    <span class="section-name">Интерфейс Claude.ai — Chat и Projects</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <h3>Chat — одноразовый разговор</h3>
+    <p>Открыли, написали вопрос, получили ответ. Каждый новый чат — с нуля. Claude не помнит, что вы обсуждали вчера. Подходит для разовых задач: быстро написать пост, сформулировать мысль, разобраться в теме.</p>
+    <h3>Projects — проект с постоянным контекстом</h3>
+    <p>Настроили один раз — и все чаты внутри проекта стартуют "в курсе дела". Не нужно каждый раз объяснять кто вы, чем занимаетесь, какая у вас аудитория.</p>
+    <h4>Пример: создаёте проект "Мой личный бренд"</h4>
+    <p>Вы эксперт, ведёте блог, хотите чтобы Claude помогал создавать контент в вашем стиле. Создаёте Project с этой целью и загружаете в него:</p>
+    <ul>
+      <li><strong>Описание вашей экспертизы</strong> — кто вы, сколько лет в теме, чем отличаетесь от других</li>
+      <li><strong>Описание целевой аудитории</strong> — для кого контент, их боли, желания, возражения</li>
+      <li><strong>Tone of Voice</strong> — как вы общаетесь: разговорно или экспертно, какие слова используете, какие — запрещены</li>
+      <li><strong>Воронку продаж</strong> — какие продукты, по какой цене, как они связаны</li>
+      <li><strong>Успешные примеры</strong> — 5-10 постов которые уже хорошо зашли</li>
+      <li><strong>Правила оформления</strong> — длина, эмодзи, разметка</li>
+    </ul>
+    <p>После этого любой чат в этом проекте — уже с контекстом. Пишете "Сделай пост про новый продукт" — Claude уже знает, как вы пишете и для кого.</p>
+    <div class="callout green">
+      <div class="callout-label">Практический совет</div>
+      <p>Начните с одного Project — под самую частую задачу (например, контент). Добавите остальные когда поймёте, как работает. Не нужно сразу создавать 10.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="agents">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🤝</span>
+    <span class="section-name">Агенты — готовые и свои</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Агент — это AI с конкретной ролью и инструкцией. Не универсальный чат, а специалист: "копирайтер для соцсетей", "аналитик рекламы", "архитектор промптов".</p>
+    <h3>ChatGPT — GPT Store</h3>
+    <p>В ChatGPT есть магазин готовых агентов — тысячи штук по категориям: тексты, продуктивность, ресёрч, обучение, программирование. Зайти можно здесь: <a href="https://chatgpt.com/gpts" target="_blank">chatgpt.com/gpts</a></p>
+    <p>Если нашли нужного, но он на английском — первое же сообщение: "Общайся со мной на русском и кратко объясни что ты умеешь".</p>
+    <h3>Claude — свои через Projects</h3>
+    <p>У Claude нет публичного маркетплейса. Свой агент создаётся через Project с детальной инструкцией — функционально это и есть агент.</p>
+    <h3>Мой агент — Архитектор промптов</h3>
+    <div class="callout">
+      <div class="callout-label">Для вас</div>
+      <p>Я сделал своего GPT-агента, который превращает любой ваш запрос в структурированный промпт по формуле R.A.C.E.T. (про неё ниже). Сохраняйте в закладки:</p>
+      <p style="margin-top:0.5rem;"><a href="https://chatgpt.com/g/g-69d2644a22f48191896fa55e02cf8707-prompt-arkhitektor" target="_blank">→ Открыть Архитектор промптов</a></p>
+    </div>
+    <h3>Создать своего агента</h3>
+    <p>Если в магазине нет подходящего — делаете за 15 минут:</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Определите одну задачу</strong> — не "помогай во всём", а "пишу продающие посты для психологов"</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Настройте роль</strong> — имя агента, описание, кем он выступает</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Дайте базу знаний</strong> — документы, FAQ, примеры работы</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Протестируйте</strong> — задайте 5-10 типичных запросов и посмотрите, отвечает ли так, как нужно</div></div>
+    </div>
+    <p>По сути создание агента = грамотно составленный системный промпт. Формулу — ниже.</p>
+  </div>
+</div>
+
+<div class="section" id="prompting">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">📝</span>
+    <span class="section-name">R.A.C.E.T. — формула промпта</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>AI — талантливый, но очень буквальный исполнитель. Скажете "напиши пост" — получите пост, но не факт что ваш. Скажете по формуле — получите именно то, что нужно.</p>
+    <h3>5 элементов R.A.C.E.T.</h3>
+    <div class="racet">
+      <div class="racet-cell"><div class="racet-letter">R</div><div class="racet-name">Role</div><div class="racet-desc">Кем выступает AI</div></div>
+      <div class="racet-cell"><div class="racet-letter">A</div><div class="racet-name">Action</div><div class="racet-desc">Что сделать</div></div>
+      <div class="racet-cell"><div class="racet-letter">C</div><div class="racet-name">Context</div><div class="racet-desc">Ситуация, данные</div></div>
+      <div class="racet-cell"><div class="racet-letter">E</div><div class="racet-name">Expectation</div><div class="racet-desc">Каким будет результат</div></div>
+      <div class="racet-cell"><div class="racet-letter">T</div><div class="racet-name">Tone</div><div class="racet-desc">Как звучит</div></div>
+    </div>
+    <h3>Сравнение на одной задаче</h3>
+    <div class="code-wrap">
+      <div class="code-label">Плохой промпт</div>
+      <div class="code-block prompt">Напиши продающий текст о курсе по фотографии.</div>
+    </div>
+    <div class="code-wrap">
+      <div class="code-label">По R.A.C.E.T.</div>
+      <div class="code-block prompt">Role: фотограф-преподаватель с 10-летним опытом, автор методики "Первые красивые фото за 3 дня", обучил 1000+ новичков.
+
+Action: напиши продающий пост в Instagram, который:
+1. Разрушает миф о необходимости дорогой техники
+2. Показывает результаты учеников
+3. Ведёт на бесплатный мастер-класс
+
+Context:
+- Аудитория: новички 25-35 лет, мечтают о красивых фото
+- Главная боль: думают, что нужна дорогая камера и годы учёбы
+- Наше решение: результат на первом занятии, на любой технике
+- Цифра: 80% учеников делают продающие фото за 2 месяца
+
+Expectation:
+- Объём 1500 знаков
+- Структура: боль → миф → решение → доказательство → призыв
+- Эмодзи в меру, 1-2 на абзац
+- Обязательно: CTA с дедлайном
+
+Tone: вдохновляющий, но экспертный. Без пафоса. Акцент на простоте и достижимости.</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <h3>Приёмы усиления</h3>
+    <h4>Для Role — опиши экспертизу через "суперсилу"</h4>
+    <p>Не "диетолог", а "нутрициолог с 15 лет опыта, специализация — похудение без диет, автор книги о здоровом питании". Чем конкретнее — тем лучше отыгрывает.</p>
+    <h4>Для Tone — приём "персонаж или ситуация"</h4>
+    <ul>
+      <li>Персонаж: "Пиши как [известный блогер в нише] в его стиле"</li>
+      <li>Ситуация: "Представь, что мы сидим в кафе и обсуждаем это"</li>
+      <li>Метафора: "Как старший брат, который делится опытом"</li>
+    </ul>
+    <div class="callout blue">
+      <div class="callout-label">3 типичные ошибки</div>
+      <p>1. <strong>Размыто</strong> — "сделай сайт". 2. <strong>Много сразу</strong> — регистрация+каталог+корзина+оплата одним запросом. 3. <strong>Нет контекста</strong> — AI не читает мысли.</p>
+    </div>
+    <div class="callout green">
+      <div class="callout-label">100 готовых промптов</div>
+      <p>Собрал отдельный файл — 100 промптов PRO-уровня по формуле R.A.C.E.T. по 8 сферам жизни: бизнес, маркетинг, контент, продуктивность, саморазвитие, креатив, здоровье, финансы.</p>
+      <p style="margin-top:0.5rem;"><a href="100-prompts-pro.html">→ Открыть коллекцию 100 промптов</a></p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="prompting-techniques">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🔥</span>
+    <span class="section-name">Техники прокачки промптов</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <h3>Chain prompting — цепочка вместо одного запроса</h3>
+    <p>Вместо того чтобы грузить всё в один промпт — дробите на шаги:</p>
+    <div class="code-wrap">
+      <div class="code-label">3 шага вместо одного</div>
+      <div class="code-block prompt">Шаг 1: Назови 3 главных страха родителей при покупке детского самоката.
+
+Шаг 2: Как наш самокат решает каждый из этих страхов? Конкретно.
+
+Шаг 3: Собери продающий пост про самокат, начиная с главного страха.</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <h3>Инверсия — думай наоборот</h3>
+    <p>Вместо "как привлечь" — "почему уходят". Когда ищешь проблемы, решения всплывают сами.</p>
+    <ul>
+      <li>"Как сделать крутой сайт" → "5 причин, почему люди закрывают сайт в первые 3 секунды"</li>
+      <li>"Как поднять конверсию" → "Что в моей воронке отталкивает клиентов"</li>
+    </ul>
+    <h3>Итерации — первый результат это черновик</h3>
+    <p>Не бери первый ответ. Прогоняй через 2-3 итерации:</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Критика.</strong> "Проанализируй этот текст как маркетолог с 10-летним опытом. Что улучшить?"</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Переработка.</strong> "Применение замечаний. Сделай сильнее."</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Сравнение.</strong> "Сравни обе версии. Что стало лучше? Что ещё улучшить?"</div></div>
+    </div>
+    <h3>Усилители</h3>
+    <ul>
+      <li><strong>Шкала качества</strong> — "Оцени каждый абзац 1-10. Переписывай до 9"</li>
+      <li><strong>Критик наоборот</strong> — "Сначала найди все слабые места. Потом исправь"</li>
+      <li><strong>С примерами</strong> — вместо "напиши пост" покажи 2-3 успешных и скажи "в таком стиле"</li>
+      <li><strong>Поиск данных</strong> — "Перед написанием найди актуальные тренды на рынке X"</li>
+    </ul>
+    <h3>Специальные шаблоны</h3>
+    <h4>Для анализа данных</h4>
+    <div class="code-wrap">
+      <div class="code-block prompt">Анализ [чего]:
+- Что смотрим: [метрики]
+- Что ищем: аномалии, тренды, точки роста
+- Как показать: таблица + 3 главных вывода
+- Формат: маркированный список с цифрами</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <h4>Для принятия решений</h4>
+    <div class="code-wrap">
+      <div class="code-block prompt">Помоги принять решение: [вопрос]
+
+Критерии успеха:
+- [метрика 1]
+- [метрика 2]
+
+Формат ответа:
+✓ Плюсы
+✗ Минусы
+! Риски
+→ Рекомендация + обоснование</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+  </div>
+</div>
+
+<!-- SKRITO: Nano Banana (#28) — перенесём в отдельный блок AI-креаторство -->
+<!-- HIDDEN-START: nano-banana
+Раздел про Nano Banana скрыт. Переезжает в отдельный блок "AI-креаторство" (визуал, нейроаватары, генерация видео). Занесено в PLAN.md.
+HIDDEN-END -->
+
+<!-- ═══ BLOCK 2 — CLAUDE CODE ═══ -->
+<div id="block2" class="block-divider">
+  <div class="block-label">
+    <div class="block-num-label">02</div>
+    <div>
+      <div class="block-title-label">Claude Code</div>
+      <div class="block-desc-label">Как превратить Claude в исполнителя, который создаёт файлы, проекты и продукты</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="install">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">⚙️</span>
+    <span class="section-name">Установка за 5 минут</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <h3>Что понадобится</h3>
+    <ul>
+      <li><strong>VS Code</strong> — бесплатный редактор, внутри которого будет жить Claude Code</li>
+      <li><strong>Claude Pro или Max</strong> — подписка, $20 или $100-200/мес</li>
+      <li><strong>Аккаунт GitHub</strong> — для сохранений проектов в облако (позже)</li>
+    </ul>
+    <h3>Шаги</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text">Скачать VS Code: <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Для Windows:</strong> при установке поставить галку "Добавить в PATH". Без неё Claude не запустится</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Открыть VS Code → иконка расширений слева (Cmd/Ctrl+Shift+X) → в поиске "Claude Code" от Anthropic → Install</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Нажать иконку Claude в верхней панели → команда /login → авторизоваться через браузер</div></div>
+    </div>
+    <div class="code-wrap">
+      <div class="code-label">Альтернатива — через терминал</div>
+      <div class="code-block bash">npm install -g @anthropic-ai/claude-code</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <h3>Проверка что всё работает</h3>
+    <p>Создайте папку в <code>Documents/Projects</code>, откройте её в VS Code (File → Open Folder), запустите Claude Code и напишите:</p>
+    <div class="code-wrap">
+      <div class="code-label">Первый тест</div>
+      <div class="code-block prompt">Создай файл test.md с текстом "Claude работает". Потом прочитай его и подтверди.</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <p>Если файл появился и Claude ответил — всё готово.</p>
+  </div>
+</div>
+
+<div class="section" id="concepts">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">📚</span>
+    <span class="section-name">Базовые понятия — скиллы, плагины, MCP, агенты</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Прежде чем лезть в фишки и трюки — нужно понять из чего состоит экосистема Claude Code. Четыре понятия, которые путают новички.</p>
+    <h3>Скилл</h3>
+    <p><strong>Это готовая инструкция для Claude на конкретную задачу.</strong> Пишете в чате <code>/carousel</code> — Claude уже знает как делать карусель для Instagram: сколько слайдов, какая структура, какие хуки.</p>
+    <p>Скилл — это не плагин. Это файл с правилами, который Claude читает, когда вы вызываете команду. Можете написать свой скилл за 10 минут. В моём случае скиллы живут в папке <code>.claude/skills/</code> — <code>/telegram</code>, <code>/reels-tiktok</code>, <code>/lead-magnet</code> и т.д.</p>
+    <h3>Плагин</h3>
+    <p><strong>Это расширение самого Claude Code.</strong> Добавляет новые возможности: работу с браузером, доступ к свежей документации, память между сессиями. Устанавливается один раз командой, работает фоном.</p>
+    <p>Например <code>Superpowers</code> — плагин, внутри которого живёт целая библиотека скиллов. Без него многие команды не заработают.</p>
+    <h3>MCP — Model Context Protocol</h3>
+    <p><strong>Это способ подключать к Claude внешние инструменты.</strong> Браузер, файловую систему, базы данных, сторонние API. MCP — как USB-порт: один стандарт подключения для разных устройств.</p>
+    <p>Пример: <code>Playwright MCP</code> даёт Claude возможность открывать сайты и кликать на кнопки. Без MCP Claude не может работать с внешним миром — только с файлами внутри проекта.</p>
+    <h3>Агент</h3>
+    <p><strong>Это Claude со специализацией и автономией.</strong> Получает задачу — сам ищет информацию, создаёт файлы, проверяет результат, отчитывается. В отличие от обычного чата, агент делает цепочку шагов без промежуточных вопросов.</p>
+    <p>Простой пример: агент "ресёрчер" получает тему → сам ищет материалы → анализирует → делает отчёт. Не надо каждый раз говорить "дальше".</p>
+    <div class="callout green">
+      <div class="callout-label">Как запомнить</div>
+      <p>Скилл — инструкция. Плагин — расширение. MCP — способ подключения. Агент — автономный Claude.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="commands">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">⌨️</span>
+    <span class="section-name">Основные команды Claude Code</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Команды начинаются со слэша <code>/</code>. Вводятся прямо в чате Claude.</p>
+    <h3>Системные</h3>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/login</span>
+      <span class="cmd-hint">Авторизация через браузер</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/logout</span>
+      <span class="cmd-hint">Выйти из аккаунта</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/model</span>
+      <span class="cmd-hint">Переключить модель (Sonnet, Opus, Haiku)</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/clear</span>
+      <span class="cmd-hint">Очистить чат и начать заново</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/help</span>
+      <span class="cmd-hint">Список всех команд</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <h3>Работа с Git</h3>
+    <p>Claude умеет сам делать git-операции. Команды работают как обычные вопросы — просто просите.</p>
+    <div class="code-wrap">
+      <div class="code-label">Сохранить текущее состояние</div>
+      <div class="code-block cmd">Сделай коммит с сообщением: "Добавил визитку"</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="code-wrap">
+      <div class="code-label">Отправить в облако</div>
+      <div class="code-block cmd">Сделай коммит и пуш</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="code-wrap">
+      <div class="code-label">Откатиться к сохранению</div>
+      <div class="code-block cmd">Покажи историю коммитов и верни проект к версии "Добавил визитку"</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <h3>Зачем вообще коммиты — объяснение на пальцах</h3>
+    <p>Коммит — это как сохранение в видеоигре. Прошли уровень, что-то получилось — сохранились. Дальше что-то сломалось? Не страшно, грузитесь с последнего коммита.</p>
+    <p><strong>Важно: коммит ≠ пуш.</strong> Это две разные операции:</p>
+    <ul>
+      <li><strong>Коммит</strong> — сохранил версию на своём компьютере. Только локально</li>
+      <li><strong>Пуш</strong> — отправил сохранения в облако (GitHub). Теперь можно открыть с другого компа или восстановить, если комп сломается</li>
+    </ul>
+    <h3>Правило коммитов — всегда с комментарием</h3>
+    <p>Коммит без комментария — как сохранение без даты. Когда через месяц захотите откатиться, не поймёте куда. Поэтому:</p>
+    <ul>
+      <li><strong>Плохо:</strong> "сделай коммит"</li>
+      <li><strong>Хорошо:</strong> "сделай коммит с сообщением: подключил интеграцию со Stripe для оплаты"</li>
+    </ul>
+    <h3>Ритм работы</h3>
+    <table class="compare">
+      <tr><th>Когда</th><th>Что делать</th></tr>
+      <tr><td>Сделали что-то, что работает</td><td>Коммит с описанием что изменили</td></tr>
+      <tr><td>2-3 коммита накопилось</td><td>Пуш в облако</td></tr>
+      <tr><td>Прошло 30 минут работы</td><td>Коммит + пуш по рефлексу</td></tr>
+      <tr><td>Закрываете проект на день</td><td>Коммит + пуш — обязательно</td></tr>
+      <tr><td>Что-то сломалось после последних изменений</td><td>Откат к предыдущему коммиту</td></tr>
+    </table>
+    <h3>Быстрое подключение GitHub</h3>
+    <div class="code-wrap">
+      <div class="code-label">Одной фразой</div>
+      <div class="code-block cmd">Подключи проект к GitHub. Создай репозиторий и отправь файлы.</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="project-structure">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">📁</span>
+    <span class="section-name">Структура папки проекта</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Каждый проект живёт в своей папке. Без папки Claude не знает куда сохранять файлы.</p>
+    <h3>Правила имени папки</h3>
+    <ul>
+      <li>Только латиница: <code>kontent-zavod</code>, не "контент-завод"</li>
+      <li>Без пробелов — дефис между словами</li>
+      <li>Без спецсимволов (! @ # и т.п.)</li>
+      <li>Строчные буквы</li>
+    </ul>
+    <h3>Что внутри папки</h3>
+    <div class="code-wrap">
+      <div class="code-label">Рабочая структура</div>
+      <div class="code-block tree">Documents/Projects/
+└── my-project/
+    ├── CLAUDE.md          ← правила работы
+    ├── PLAN.md            ← что делаем и что сделали
+    ├── MEMORY.md          ← долгосрочная память
+    ├── memory/
+    │   ├── 2026-04-12.md  ← дневники сессий
+    │   └── feedback_*.md  ← правки пользователя
+    ├── knowledge/         ← база знаний проекта
+    └── [рабочие файлы]</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <h3>Что в каком файле — чтобы не путаться</h3>
+    <div class="files-table">
+      <div class="file-row">
+        <div class="file-name">CLAUDE.md</div>
+        <div class="file-desc"><strong>Правила работы в проекте.</strong> Стиль, запреты, визуал, технологии, протокол памяти. Claude читает <em>при каждом запуске</em> — поэтому здесь только то, что должно применяться <em>всегда</em>. Не складываем сюда задачи или временные факты.</div>
+      </div>
+      <div class="file-row">
+        <div class="file-name">PLAN.md</div>
+        <div class="file-desc"><strong>Чек-лист задач проекта.</strong> Что сделано, что в работе, что впереди. Обновляется каждый раз когда появляется или закрывается задача. Не смешивать с правилами — это динамический файл.</div>
+      </div>
+      <div class="file-row">
+        <div class="file-name">MEMORY.md</div>
+        <div class="file-desc"><strong>Долгосрочная память.</strong> Важные факты, принятые решения, ссылки на источники, стратегия. Что не должно теряться между сессиями. Максимум 200 строк — если больше, убираем устаревшее.</div>
+      </div>
+      <div class="file-row">
+        <div class="file-name">memory/YYYY-MM-DD.md</div>
+        <div class="file-desc"><strong>Дневник конкретной сессии.</strong> Что обсуждали, какие решения приняли. Создаётся в начале каждой новой сессии.</div>
+      </div>
+      <div class="file-row">
+        <div class="file-name">memory/feedback_тема.md</div>
+        <div class="file-desc"><strong>Ваши правки и замечания.</strong> Чтобы не повторять одно и то же. Например feedback_style.md — правки по стилю текста.</div>
+      </div>
+      <div class="file-row">
+        <div class="file-name">knowledge/</div>
+        <div class="file-desc"><strong>База знаний проекта.</strong> Архитектура, чеклисты, решения типовых багов, материалы по конкурентам. То что нужно держать под рукой, но читать только когда потребуется.</div>
+      </div>
+      <div class="file-row">
+        <div class="file-name">project.md <span style="color:var(--muted); font-weight:400;">(опционально)</span></div>
+        <div class="file-desc"><strong>Паспорт большого проекта.</strong> Для сложных продуктов с целевой аудиторией, оффером, конкурентами, воронкой. Для контент-завода или небольшого сайта — избыточно. Используйте когда проект выходит за рамки "пишу себе контент" и становится полноценным продуктом с клиентами.</div>
+      </div>
+    </div>
+    <div class="callout blue">
+      <div class="callout-label">Практика Никиты</div>
+      <p>В этом проекте (Контент-завод) используются только <code>CLAUDE.md</code>, <code>PLAN.md</code>, <code>MEMORY.md</code> плюс папки <code>memory/</code> и <code>knowledge/</code>. <code>project.md</code> не заведён — потому что проект не требует паспорта клиентского продукта. Это мой личный контент-инструмент, не сервис на продажу.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="memory-system">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🧠</span>
+    <span class="section-name">CLAUDE.md и память между сессиями</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Закрыли чат — Claude всё забыл. Каждый новый чат как новый сотрудник в первый день. Решение — правила и протокол памяти в файлах, которые Claude читает при старте.</p>
+    <h3>Протокол старта сессии</h3>
+    <p>Прописывается в CLAUDE.md. Claude выполняет автоматически при первом сообщении в новой сессии:</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text">Прочитать MEMORY.md — долгосрочный контекст</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Прочитать memory/ за последние 3 дня — что обсуждали недавно</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Создать memory/YYYY-MM-DD.md — файл сегодняшней сессии</div></div>
+    </div>
+    <h3>Правила во время работы</h3>
+    <ul>
+      <li>Каждые 5 сообщений — итог в memory/YYYY-MM-DD.md</li>
+      <li>Новый долгосрочный факт → в MEMORY.md</li>
+      <li>Правка пользователя → memory/feedback_тема.md</li>
+      <li>Одинаковый вопрос возник 2+ раза → в knowledge/</li>
+    </ul>
+    <h3>Шаблон CLAUDE.md — копируйте к себе</h3>
+    <div class="code-wrap">
+      <div class="code-label">CLAUDE.md — базовый</div>
+      <div class="code-block prompt"># CLAUDE.md — правила работы
+
+## Стиль кода
+- Всё в одном HTML-файле, без внешних библиотек
+- Адаптивная вёрстка, mobile-first
+- Перед созданием файла — расскажи что планируешь
+
+## Визуал
+- Тёмный фон #0a0a0a
+- Акцент #F5521A
+- Шрифты Bebas Neue + Montserrat
+- Минимальный размер текста 38px
+
+## Стиль текста
+- Разговорный русский, короткие абзацы
+- Тире только короткое (-), не длинное
+- Без жирного и маркированных списков в постах
+- Запрещённые слова: погружение, на стыке, уникальная методика, пассивный доход
+
+## Память — ОБЯЗАТЕЛЬНО
+При старте сессии:
+1. Прочитай MEMORY.md
+2. Прочитай memory/ за 3 дня
+3. Создай memory/YYYY-MM-DD.md
+
+Во время работы:
+- Каждые 5 сообщений — итог в memory/
+- Новый факт → MEMORY.md
+- Моя правка → memory/feedback_тема.md
+
+Самопроверка: 10+ сообщений без записи в memory/ = нарушение, запиши сейчас.</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="callout green">
+      <div class="callout-label">Тест что работает</div>
+      <p>Откройте новый чат, дайте короткую задачу без упоминания правил. Если Claude сам применил ваш стиль — CLAUDE.md читается.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SKRITO: Tone of Voice (#29) — переедет в блок про контент-завод -->
+<!-- HIDDEN-START: tone-of-voice
+Раздел про Tone of Voice скрыт. Переедет в будущий блок про контент-завод (это не тема Claude Code). Сохранено для будущего переноса.
+HIDDEN-END -->
+
+<div class="section" id="skills">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">⚡</span>
+    <span class="section-name">Скиллы и плагины — что установить</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Напомню: <strong>скилл</strong> — инструкция на задачу (вызывается через /команду), <strong>плагин</strong> — расширение самого Claude Code.</p>
+    <h3>Обязательные плагины</h3>
+    <p>Ставятся один раз в терминале VS Code. После установки — перезапустить Claude.</p>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/install superpowers</span>
+      <span class="cmd-hint">Главный плагин. Внутри — библиотека скиллов для контента и работы с файлами</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/install context7</span>
+      <span class="cmd-hint">Автоподгрузка свежей документации инструментов</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">npm install -g @playwright/mcp@latest</span>
+      <span class="cmd-hint">Браузер для Claude — открывать сайты, кликать, заполнять формы</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <h3>Скиллы для контента (входят в Superpowers)</h3>
+    <p>После установки Superpowers — работают сразу. Просто вызываете /команду.</p>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/telegram</span>
+      <span class="cmd-hint">Пост для Telegram-канала</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/carousel</span>
+      <span class="cmd-hint">Карусель из 7-10 слайдов для Instagram</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/reels-tiktok</span>
+      <span class="cmd-hint">Сценарий короткого видео — 3 варианта хука</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/threads</span>
+      <span class="cmd-hint">Ветка постов-тезисов</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/copywriter</span>
+      <span class="cmd-hint">Усилить текст, хук, призыв к действию</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/content-strategist</span>
+      <span class="cmd-hint">Контент-план на неделю или месяц</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/lead-magnet</span>
+      <span class="cmd-hint">Структура и контент лид-магнита</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/competitor-analysis</span>
+      <span class="cmd-hint">Разбор чужого контента</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/product-strategist</span>
+      <span class="cmd-hint">Анализ ЦА, воронки, сегменты</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <h3>Скиллы для работы с файлами</h3>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/pdf</span>
+      <span class="cmd-hint">Читать, объединять, разбивать PDF</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/docx</span>
+      <span class="cmd-hint">Работа с Word-документами</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/xlsx</span>
+      <span class="cmd-hint">Excel / CSV таблицы</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/pptx</span>
+      <span class="cmd-hint">Презентации PowerPoint</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/frontend-design</span>
+      <span class="cmd-hint">Сайты, лендинги, интерфейсы</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <div class="cmd-row" onclick="copyRow(this)">
+      <span class="cmd-text">/canvas-design</span>
+      <span class="cmd-hint">Постеры, визуальный дизайн</span>
+      <span class="cmd-copy">Копировать</span>
+    </div>
+    <h3>Создаёте свои скиллы</h3>
+    <p>Скилл — это просто .md файл в папке <code>.claude/skills/</code>. Там описывается, что Claude должен делать при вызове команды.</p>
+    <p>Помните <a href="100-prompts-pro.html">100 промптов по R.A.C.E.T.</a> из первого блока? Каждый из них можно превратить в свой скилл. Схема простая:</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text">Берёте промпт, который часто используете</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Сохраняете его в <code>.claude/skills/ваше-имя/SKILL.md</code></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Вызываете командой <code>/ваше-имя</code> — Claude читает инструкцию и выполняет</div></div>
+    </div>
+    <p>Так из промпта "Анализ ЦА с 5 уровнями глубины" делается скилл <code>/ca-deep</code>. Из "Продающий пост по PAS" — <code>/pas-post</code>. Применяете раз в неделю вместо того чтобы каждый раз копировать длинный промпт.</p>
+  </div>
+</div>
+
+<div class="section" id="github-repos">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">📦</span>
+    <span class="section-name">Полезные GitHub-репозитории и как их использовать</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>На GitHub выложены сотни готовых наработок — скиллов, примеров, библиотек. Вот те, которые реально пригодятся.</p>
+    <h3>Список</h3>
+    <div class="links-grid">
+      <a class="link-item" href="https://github.com/anthropics/claude-code" target="_blank"><span class="li-title">anthropics/claude-code</span><span class="li-sub">Официальный репозиторий Claude Code. Документация, примеры использования</span></a>
+      <a class="link-item" href="https://github.com/anthropics/claude-cookbooks" target="_blank"><span class="li-title">anthropics/claude-cookbooks</span><span class="li-sub">Библиотека готовых промптов и примеров для разных задач</span></a>
+      <a class="link-item" href="https://github.com/anthropics/claude-quickstarts" target="_blank"><span class="li-title">anthropics/claude-quickstarts</span><span class="li-sub">Шаблоны интеграций — от чатбота до поиска по документам</span></a>
+      <a class="link-item" href="https://github.com/obra/superpowers" target="_blank"><span class="li-title">obra/superpowers</span><span class="li-sub">Фреймворк скиллов — основной плагин для расширения Claude</span></a>
+      <a class="link-item" href="https://github.com/datalab-to/marker" target="_blank"><span class="li-title">datalab-to/marker</span><span class="li-sub">Конвертер PDF в чистый Markdown. Экономит токены на 30-40%</span></a>
+    </div>
+    <h3>Как перенести репозиторий к себе</h3>
+    <p>Два варианта — смотря зачем он нужен.</p>
+    <h4>Вариант 1. Просто использовать готовое</h4>
+    <p>Если это плагин или инструмент, который ставится командой — обычно инструкция в README репозитория. Скажите Claude:</p>
+    <div class="code-wrap">
+      <div class="code-label">Один промпт</div>
+      <div class="code-block cmd">Установи плагин из репозитория github.com/obra/superpowers по инструкции из README. Проверь что работает.</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <h4>Вариант 2. Скопировать к себе и модифицировать</h4>
+    <p>Если хотите изучить или доработать под себя — клонируете репозиторий в свою папку:</p>
+    <div class="code-wrap">
+      <div class="code-label">В терминале VS Code</div>
+      <div class="code-block bash">cd Documents/Projects
+git clone https://github.com/НАЗВАНИЕ/РЕПОЗИТОРИЙ.git
+cd РЕПОЗИТОРИЙ</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <p>Дальше открываете папку в VS Code (File → Open Folder) и просите Claude объяснить что внутри:</p>
+    <div class="code-wrap">
+      <div class="code-label">Изучение</div>
+      <div class="code-block cmd">Я только что склонировал этот репозиторий. Изучи структуру и объясни простыми словами: что это делает, как этим пользоваться, что можно применить для моих задач.</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="token-tricks">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">💰</span>
+    <span class="section-name">Экономия токенов — фишки и подводные камни</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>За каждый символ в чате вы платите. На мелких задачах это копейки, на больших — заметно. Два места, где деньги утекают без надобности.</p>
+    <h3>Фишка 1. Playwright — fetch вместо скриншотов</h3>
+    <p>Playwright MCP нужен, когда Claude должен работать с сайтами — кликать, логиниться, заполнять формы. Но по умолчанию он делает скриншот на каждый шаг. 10 шагов = 10 скриншотов = серьёзные траты.</p>
+    <div class="callout">
+      <div class="callout-label">Когда нужен MCP реально</div>
+      <p>Когда требуется интерактив — нажать на кнопку, ввести данные, пройти по сайту как пользователь. Без MCP этого не сделать.</p>
+    </div>
+    <p>Но если задача — <strong>просто собрать данные</strong> с 20-100 страниц (например, спарсить статьи конкурента), есть способ без скриншотов:</p>
+    <div class="code-wrap">
+      <div class="code-label">Промпт экономии</div>
+      <div class="code-block cmd">Используй fetch() внутри браузера чтобы загрузить все страницы параллельно и сохрани результаты в файл. Без скриншотов.</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <p>Claude загружает десятки страниц за один вызов, сразу пишет на диск. Без визуализации каждого шага. На задаче парсинга экономится до 90% токенов.</p>
+    <h3>Фишка 2. Marker — PDF в Markdown</h3>
+    <p>PDF — формат для печати. В нём колонки, таблицы-картинки, разорванные строки. Claude тратит токены на разбор визуала вместо содержания. Marker превращает PDF в чистый Markdown — в котором Claude и "думает".</p>
+    <div class="code-wrap">
+      <div class="code-label">Установка и использование</div>
+      <div class="code-block bash">pip install marker-pdf
+marker_single документ.pdf output/</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <p>Потом даёте Claude получившийся .md файл — обработка в разы дешевле и точнее.</p>
+  </div>
+</div>
+
+<!-- SKRITO: AI-команда агентов (#30) — схема украдена, + user не разобрался -->
+<!-- HIDDEN-START: ai-team
+Раздел "AI-команда агентов" скрыт. Причина: схема координатор+кодер+маркетолог скопирована у конкурента. Плюс пользователь пока сам не разобрался с темой. Вернём когда будет собственная схема и опыт.
+HIDDEN-END -->
+
+<!-- SKRITO: NotebookLM (#31) -->
+<!-- HIDDEN-START: notebooklm
+Раздел про NotebookLM скрыт. Вернём когда станет актуальным и будет интегрировано в рабочий процесс.
+HIDDEN-END -->
+
+<!-- ═══ BLOCK 3 — КОНТЕНТ (ЦЕЛИКОМ СКРЫТ) ═══ -->
+<!-- HIDDEN-START: block3-content
+Целый Блок 3 "Контент с AI" скрыт. Вернём когда появится отдельный блок "Контент-завод" с переработанной структурой. Содержимое (3 типа постов, формула 40/30/30, каскадный промпт, типичные ошибки) сохранено — см. git history.
+HIDDEN-END -->
+
+<!-- ═══ ГЛОССАРИЙ ═══ -->
+<div id="glossary" class="block-divider">
+  <div class="block-label">
+    <div class="block-num-label">🔤</div>
+    <div>
+      <div class="block-title-label">Словарь терминов</div>
+      <div class="block-desc-label">Всё что встретится на пути простыми словами</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">📖</span>
+    <span class="section-name">Термины</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <div class="glossary-grid">
+      <div class="gloss-item"><div class="gloss-term">LLM</div><div class="gloss-def">Большая языковая модель. Claude, ChatGPT, Gemini — это LLM</div></div>
+      <div class="gloss-item"><div class="gloss-term">Промпт</div><div class="gloss-def">Ваш запрос к AI. Главный инструмент получения нужного результата</div></div>
+      <div class="gloss-item"><div class="gloss-term">R.A.C.E.T.</div><div class="gloss-def">Формула промпта: Role, Action, Context, Expectation, Tone</div></div>
+      <div class="gloss-item"><div class="gloss-term">Токен</div><div class="gloss-def">Единица обработки текста AI. Ориентир — 1 слово ≈ 1-2 токена</div></div>
+      <div class="gloss-item"><div class="gloss-term">Агент</div><div class="gloss-def">AI со специализацией и автономией. Делает цепочку шагов сам</div></div>
+      <div class="gloss-item"><div class="gloss-term">Скилл</div><div class="gloss-def">Готовая инструкция на конкретную задачу. Вызывается через /команду</div></div>
+      <div class="gloss-item"><div class="gloss-term">Плагин</div><div class="gloss-def">Расширение Claude Code. Ставится один раз, даёт новые возможности</div></div>
+      <div class="gloss-item"><div class="gloss-term">MCP</div><div class="gloss-def">Model Context Protocol — способ подключать к Claude внешние инструменты</div></div>
+      <div class="gloss-item"><div class="gloss-term">CLAUDE.md</div><div class="gloss-def">Файл правил проекта. Claude читает при каждом запуске сессии</div></div>
+      <div class="gloss-item"><div class="gloss-term">Git / Commit</div><div class="gloss-def">Сохранение версии. Как чекпоинт в видеоигре</div></div>
+      <div class="gloss-item"><div class="gloss-term">Push</div><div class="gloss-def">Отправка сохранений в облако (GitHub). Защита от поломки компа</div></div>
+      <div class="gloss-item"><div class="gloss-term">Фронтенд</div><div class="gloss-def">Всё что видит пользователь: кнопки, тексты, картинки</div></div>
+      <div class="gloss-item"><div class="gloss-term">Бэкенд</div><div class="gloss-def">Внутренняя логика: данные, авторизация, обработка</div></div>
+      <div class="gloss-item"><div class="gloss-term">API</div><div class="gloss-def">Способ программ общаться между собой</div></div>
+      <div class="gloss-item"><div class="gloss-term">Деплой</div><div class="gloss-def">Публикация сайта или приложения в интернет</div></div>
+      <div class="gloss-item"><div class="gloss-term">MVP</div><div class="gloss-def">Минимальная рабочая версия продукта. Самокат прежде чем строить машину</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-block">
+  <div class="cta-title">Следующий шаг</div>
+  <div class="cta-sub">Подписывайтесь на Telegram — разборы, живые примеры и что я применяю сам</div>
+  <a href="https://t.me/nikitashlyk" class="cta-btn" target="_blank">Telegram</a>
+</div>
+
+</div>
+
+<script>
+function toggle(header) {
+  const body = header.nextElementSibling;
+  header.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+function copy(btn) {
+  const code = btn.previousElementSibling.innerText;
+  navigator.clipboard.writeText(code).then(() => {
+    const old = btn.innerText;
+    btn.innerText = 'СКОПИРОВАНО';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.innerText = old; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+function copyRow(row) {
+  const text = row.querySelector('.cmd-text').innerText;
+  const copyEl = row.querySelector('.cmd-copy');
+  navigator.clipboard.writeText(text).then(() => {
+    const old = copyEl.innerText;
+    copyEl.innerText = 'Скопировано';
+    row.classList.add('copied');
+    setTimeout(() => { copyEl.innerText = old; row.classList.remove('copied'); }, 1500);
+  });
+}
+
+// Deep linking — открыть аккордеон по якорю
+function openFromHash() {
+  const hash = window.location.hash.substring(1);
+  if (!hash) return;
+  const target = document.getElementById(hash);
+  if (!target) return;
+
+  const header = target.querySelector(':scope > .section-header');
+  if (header && !header.classList.contains('open')) {
+    header.classList.add('open');
+    header.nextElementSibling.classList.add('open');
+  }
+
+  const parentSection = target.closest('.section');
+  if (parentSection && parentSection !== target) {
+    const ph = parentSection.querySelector(':scope > .section-header');
+    if (ph && !ph.classList.contains('open')) {
+      ph.classList.add('open');
+      ph.nextElementSibling.classList.add('open');
+    }
+  }
+  setTimeout(() => target.scrollIntoView({behavior: 'smooth', block: 'start'}), 100);
+}
+
+window.addEventListener('load', openFromHash);
+window.addEventListener('hashchange', openFromHash);
+
+// Active nav highlight
+const links = document.querySelectorAll('.nav-link[href^="#"]');
+const sections = Array.from(links).map(l => document.getElementById(l.getAttribute('href').substring(1))).filter(Boolean);
+function updateActive() {
+  const scrollY = window.scrollY + 100;
+  let activeIdx = -1;
+  sections.forEach((s, i) => { if (s.offsetTop <= scrollY) activeIdx = i; });
+  links.forEach((l, i) => l.classList.toggle('active', i === activeIdx));
+}
+window.addEventListener('scroll', updateActive);
+updateActive();
+</script>
+</body>
+</html>

@@ -1,0 +1,3159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100 промптов PRO — по сферам жизни</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --bg2: #111111;
+  --bg3: #1a1a1a;
+  --card: #161616;
+  --border: rgba(255,255,255,0.08);
+  --accent: #F5521A;
+  --accent2: rgba(245,82,26,0.12);
+  --text: #f4f4ef;
+  --muted: #888;
+  --blue: #60a5fa;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background:var(--bg); color:var(--text); font-family:'Montserrat',sans-serif; line-height:1.7; }
+.topnav {
+  position: sticky; top:0; z-index:100;
+  background: rgba(10,10,10,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem; display: flex; align-items: center; gap: 0; height: 56px;
+  overflow-x: auto;
+}
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; color:var(--accent); letter-spacing:.05em; margin-right:2rem; white-space:nowrap; }
+.nav-links { display:flex; gap:0.25rem; flex-wrap:nowrap; }
+.nav-link {
+  padding: 0.4rem 0.9rem; border-radius:6px;
+  font-size:0.78rem; font-weight:500; color:var(--muted);
+  text-decoration:none; transition:all 0.2s; white-space:nowrap;
+}
+.nav-link:hover, .nav-link.active { color:var(--text); background:var(--bg3); }
+.nav-link.active { color:var(--accent); }
+
+.hero { max-width: 900px; margin: 0 auto; padding: 5rem 2rem 2rem; text-align: center; }
+.hero-badge { display:inline-block; background:var(--accent2); border:1px solid var(--accent); color:var(--accent); font-size:0.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:0.35rem 1rem; border-radius:100px; margin-bottom:1.5rem; }
+.hero h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,6vw,4.5rem); line-height:1.1; letter-spacing:.02em; margin-bottom:1rem; }
+.hero h1 span { color:var(--accent); }
+.hero-sub { font-size:1rem; color:var(--muted); max-width:620px; margin:0 auto 2.5rem; }
+
+.intro { max-width:760px; margin:0 auto; padding:0 2rem 3rem; }
+.intro p { font-size:0.92rem; color:rgba(244,244,239,0.82); margin-bottom:0.75rem; }
+
+.formula { background:var(--card); border:1px solid var(--accent); border-radius:16px; padding:2rem; margin:2rem 0; }
+.formula-title { font-family:'Bebas Neue',sans-serif; font-size:1.4rem; letter-spacing:.03em; margin-bottom:1rem; }
+.racet { display:grid; grid-template-columns:repeat(5,1fr); gap:0.5rem; margin:1rem 0; }
+.racet-cell { background:var(--accent2); border:1px solid var(--accent); border-radius:10px; padding:1rem 0.5rem; text-align:center; }
+.racet-letter { font-family:'Bebas Neue',sans-serif; font-size:2rem; color:var(--accent); line-height:1; }
+.racet-name { font-size:0.72rem; font-weight:700; color:var(--text); margin:0.3rem 0 0.2rem; text-transform:uppercase; letter-spacing:.05em; }
+.racet-desc { font-size:0.68rem; color:var(--muted); line-height:1.4; }
+
+/* CATEGORY GRID */
+.cat-grid { max-width:820px; margin:0 auto; padding:0 2rem 3rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0.75rem; }
+.cat-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.25rem; text-decoration:none; color:inherit; transition:all 0.2s; }
+.cat-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+.cat-icon { font-size:1.5rem; margin-bottom:0.5rem; }
+.cat-name { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.03em; margin-bottom:0.3rem; }
+.cat-count { font-size:0.72rem; color:var(--muted); }
+
+/* CONTENT */
+.content { max-width:820px; margin:0 auto; padding:0 2rem 6rem; }
+
+.category { margin-bottom:3rem; scroll-margin-top: 70px; }
+.cat-header { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; padding-bottom:0.75rem; border-bottom:2px solid var(--accent); }
+.cat-header-num { font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--accent); opacity:.3; line-height:1; }
+.cat-header-title { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:.03em; }
+.cat-header-sub { font-size:0.78rem; color:var(--muted); margin-top:0.2rem; }
+
+.prompt { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.5rem; margin-bottom:1rem; transition:border-color .2s; }
+.prompt:hover { border-color:var(--accent); }
+.prompt-head { display:flex; gap:1rem; align-items:flex-start; margin-bottom:1rem; }
+.prompt-num { background:var(--accent); color:white; width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.85rem; font-weight:800; flex-shrink:0; font-family:'Bebas Neue',sans-serif; }
+.prompt-title { font-weight:700; font-size:0.95rem; color:var(--text); line-height:1.4; }
+.prompt-use { font-size:0.74rem; color:var(--muted); margin-top:0.25rem; }
+
+.code-wrap { position:relative; }
+.code-block {
+  background:#0d0d0d; border:1px solid var(--border); border-radius:10px;
+  padding:1.25rem 1rem; padding-right:3.5rem;
+  font-family:'SF Mono','Fira Code',monospace;
+  font-size:0.78rem; line-height:1.7; color:#c7d2fe;
+  white-space:pre-wrap; word-break:break-word; overflow-x:auto;
+  border-left:3px solid var(--blue);
+}
+.copy-btn {
+  position:absolute; top:0.6rem; right:0.6rem;
+  background:var(--bg3); border:1px solid var(--border); border-radius:6px;
+  color:var(--muted); font-size:0.65rem; font-weight:600; padding:0.3rem 0.6rem;
+  cursor:pointer; transition:all 0.2s; letter-spacing:.05em;
+}
+.copy-btn:hover { background:var(--accent); color:white; border-color:var(--accent); }
+.copy-btn.copied { background:#4ade80; color:black; border-color:#4ade80; }
+
+.back-btn { display:inline-block; background:var(--bg3); border:1px solid var(--border); color:var(--text); font-size:0.78rem; padding:0.5rem 1rem; border-radius:8px; text-decoration:none; margin:2rem 0; transition:border-color .2s; }
+.back-btn:hover { border-color:var(--accent); }
+
+@media(max-width:768px) {
+  body { line-height:1.6; }
+  .topnav { padding:0 0.75rem; height:52px; }
+  .nav-logo { font-size:1.1rem; margin-right:1rem; }
+  .nav-link { padding:0.35rem 0.7rem; font-size:0.72rem; }
+
+  .hero { padding:3rem 1rem 1rem; }
+  .hero-sub { font-size:0.92rem; }
+
+  .intro, .cat-grid, .content { padding-left:1rem; padding-right:1rem; }
+
+  .formula { padding:1.25rem; }
+  .formula-title { font-size:1.2rem; }
+
+  .racet { grid-template-columns:repeat(2,1fr); gap:0.4rem; }
+  .racet-cell { padding:0.85rem 0.4rem; }
+  .racet-letter { font-size:1.7rem; }
+  .racet-name { font-size:0.65rem; }
+  .racet-desc { font-size:0.62rem; }
+
+  .cat-grid { grid-template-columns:1fr; gap:0.6rem; }
+  .cat-card { padding:1rem 1.1rem; }
+
+  .category { margin-bottom:2rem; }
+  .cat-header { gap:0.75rem; }
+  .cat-header-num { font-size:2.25rem; }
+  .cat-header-title { font-size:1.35rem; }
+  .cat-header-sub { font-size:0.72rem; }
+
+  .prompt { padding:1.15rem 1rem; }
+  .prompt-num { width:28px; height:28px; font-size:0.75rem; }
+  .prompt-title { font-size:0.88rem; }
+  .prompt-use { font-size:0.7rem; }
+
+  .code-block { font-size:0.72rem; padding:1rem 0.85rem; padding-right:3rem; line-height:1.6; }
+  .copy-btn { font-size:0.6rem; padding:0.25rem 0.5rem; }
+}
+
+@media(max-width:400px) {
+  .nav-logo { display:none; }
+  .racet { grid-template-columns:repeat(2,1fr); gap:0.3rem; }
+  .code-block { font-size:0.68rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-logo">+100 PRO</div>
+  <div class="nav-links">
+    <a href="knowledge-base.html" class="nav-link">← База знаний</a>
+    <a href="#cat-business" class="nav-link">Бизнес</a>
+    <a href="#cat-marketing" class="nav-link">Маркетинг</a>
+    <a href="#cat-content" class="nav-link">Контент</a>
+    <a href="#cat-productivity" class="nav-link">Продуктивность</a>
+    <a href="#cat-self" class="nav-link">Саморазвитие</a>
+    <a href="#cat-creative" class="nav-link">Креатив</a>
+    <a href="#cat-health" class="nav-link">Здоровье</a>
+    <a href="#cat-finance" class="nav-link">Финансы</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Приложение к базе знаний</div>
+  <h1>100 промптов<br><span>PRO уровня</span></h1>
+  <p class="hero-sub">Готовые промпты по формуле R.A.C.E.T. — с ролью, детальной постановкой, уровнями анализа и форматом вывода. Копируй, подставляй данные, получай экспертный результат.</p>
+</div>
+
+<div class="intro">
+  <div class="formula">
+    <div class="formula-title">Формула R.A.C.E.T.</div>
+    <div class="racet">
+      <div class="racet-cell"><div class="racet-letter">R</div><div class="racet-name">Role</div><div class="racet-desc">Кем выступает AI</div></div>
+      <div class="racet-cell"><div class="racet-letter">A</div><div class="racet-name">Action</div><div class="racet-desc">Что сделать</div></div>
+      <div class="racet-cell"><div class="racet-letter">C</div><div class="racet-name">Context</div><div class="racet-desc">Данные</div></div>
+      <div class="racet-cell"><div class="racet-letter">E</div><div class="racet-name">Expectation</div><div class="racet-desc">Формат</div></div>
+      <div class="racet-cell"><div class="racet-letter">T</div><div class="racet-name">Tone</div><div class="racet-desc">Как звучит</div></div>
+    </div>
+    <p style="font-size:0.82rem; color:var(--muted); margin-top:1rem;">В каждом промпте добавлены: уровни анализа (от очевидного к стратегическим инсайтам) + правило анти-поверхностности. Работают в ChatGPT, Claude, Gemini.</p>
+  </div>
+</div>
+
+<div class="cat-grid">
+  <a href="#cat-business" class="cat-card"><div class="cat-icon">💼</div><div class="cat-name">Бизнес</div><div class="cat-count">15 промптов</div></a>
+  <a href="#cat-marketing" class="cat-card"><div class="cat-icon">📢</div><div class="cat-name">Маркетинг и продажи</div><div class="cat-count">15 промптов</div></a>
+  <a href="#cat-content" class="cat-card"><div class="cat-icon">✍️</div><div class="cat-name">Контент и соцсети</div><div class="cat-count">15 промптов</div></a>
+  <a href="#cat-productivity" class="cat-card"><div class="cat-icon">⚡</div><div class="cat-name">Продуктивность</div><div class="cat-count">10 промптов</div></a>
+  <a href="#cat-self" class="cat-card"><div class="cat-icon">🌱</div><div class="cat-name">Саморазвитие</div><div class="cat-count">10 промптов</div></a>
+  <a href="#cat-creative" class="cat-card"><div class="cat-icon">🎨</div><div class="cat-name">Креатив</div><div class="cat-count">10 промптов</div></a>
+  <a href="#cat-health" class="cat-card"><div class="cat-icon">💪</div><div class="cat-name">Здоровье и отношения</div><div class="cat-count">10 промптов</div></a>
+  <a href="#cat-finance" class="cat-card"><div class="cat-icon">💰</div><div class="cat-name">Финансы</div><div class="cat-count">15 промптов</div></a>
+</div>
+
+<div class="content">
+
+<!-- ═══ БИЗНЕС ═══ -->
+<div class="category" id="cat-business">
+  <div class="cat-header">
+    <div class="cat-header-num">01</div>
+    <div><div class="cat-header-title">💼 Бизнес</div><div class="cat-header-sub">Стратегия, ЦА, продукт, оффер, бизнес-модель</div></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">1</div><div><div class="prompt-title">Глубокий анализ целевой аудитории</div><div class="prompt-use">Когда: запускаете продукт и нужно понять кому и как продавать</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: ты — multi-expert: маркетинговый стратег + поведенческий психолог + data-аналитик + продуктолог.
+
+Action: проведи глубокий анализ ЦА для [продукт / ниша / рынок].
+
+Задача:
+- выявить ключевые сегменты
+- найти реальные боли (не заявленные)
+- определить скрытые мотивы и триггеры покупки
+- разобрать процесс принятия решения
+- найти неочевидные инсайты для маркетинга
+
+Context: [опиши продукт, текущие продажи, что знаешь о клиентах]
+
+Expectation — 5 уровней анализа:
+1. Очевидное (демография, поверхностные потребности)
+2. Поведение (как ищут, сравнивают, выбирают)
+3. Психология (страхи, желания, эмоциональные драйверы)
+4. Скрытые паттерны (противоречия, когнитивные искажения)
+5. Стратегические инсайты (как использовать в маркетинге)
+
+Формат: 7 разделов — сегменты, боли vs заявленные, мотивы, барьеры, путь к покупке, инсайты, применение.
+
+Tone: эксперт уровня top-1%. Анти-поверхностность: не давай ответов вроде "хотят качество и низкую цену". Только глубина и причинно-следственные связи.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">2</div><div><div class="prompt-title">Проверка идеи бизнеса на жизнеспособность</div><div class="prompt-use">Когда: есть идея, нужно понять стоит ли в неё вкладываться</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: венчурный аналитик с 15-летним опытом, специализация — проверка ранних стадий. Разобрал 500+ идей, 80% отсеивал на этом этапе.
+
+Action: проведи жёсткую диагностику моей идеи и вынеси вердикт — стоит ли в неё вкладываться.
+
+Context: [описание идеи в 3-4 предложениях]
+
+Expectation — 5 уровней проверки:
+1. Проблема — реальная или выдуманная? Насколько болит?
+2. Рынок — объём, растёт/падает, конкуренты
+3. Монетизация — как именно деньги заходят, LTV/CAC
+4. Исполнимость — ресурсы, время, команда
+5. Стратегический потенциал — что будет через 2 года
+
+Формат:
+- Вердикт: GO / ПЕРЕСМОТРЕТЬ / STOP (одним словом)
+- 3 главных риска
+- 3 признака что идея сработает
+- Альтернативная формулировка идеи (если слабая)
+- Минимальный тест — как за 2 недели понять реально ли
+
+Tone: беспощадно честный. Не щади чувства. Анти-поверхностность: никаких общих фраз про "надо работать над продуктом".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">3</div><div><div class="prompt-title">Продуктовая стратегия — где горячий сегмент</div><div class="prompt-use">Когда: у вас уже есть продукт, но продажи идут неровно</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: продуктовый стратег. Работал с стартапами от ранней стадии до $10M ARR. Специализация — находить сегменты с высокой готовностью платить.
+
+Action: найди в моей аудитории самый горячий сегмент — тех кто готов купить сейчас с минимальным прогревом.
+
+Context:
+- продукт: [описание]
+- текущие клиенты: [3-5 типажей]
+- цена: [сумма]
+- средний цикл сделки: [дни/недели]
+
+Expectation — 5 уровней:
+1. Кто покупает сейчас — реальные типажи
+2. У кого самая острая боль — интенсивность проблемы 1-10
+3. У кого максимальная готовность платить — деньги и срочность
+4. Пересечение — сегмент где всё сошлось
+5. Как достучаться — каналы, триггеры, оффер
+
+Формат:
+- Горячий сегмент одной фразой
+- 5 признаков которые его выдают
+- Оффер именно для них
+- 3 канала доступа
+- Квалифицирующие вопросы на первом касании
+
+Tone: прагматик. Не "все ЦА хороши" — а конкретно кто платит больше и быстрее.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">4</div><div><div class="prompt-title">Анализ конкурентов — где их слабые места</div><div class="prompt-use">Когда: нужно отстроиться на рынке</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: конкурентный аналитик, ex-McKinsey, специализация — вскрывать уязвимости лидеров рынка.
+
+Action: проведи сравнительный анализ 5 главных конкурентов и найди стратегические дыры в их позиционировании.
+
+Context:
+- моя ниша: [описание]
+- конкуренты: [5 названий или "найди сам в нише"]
+- мои сильные стороны: [что умеем лучше других]
+
+Expectation — 5 уровней:
+1. Позиционирование каждого (одной фразой)
+2. Сильные стороны и главный оффер
+3. Уязвимости — где слабо, жалобы клиентов
+4. Что игнорируют все — слепая зона рынка
+5. Моё окно возможностей — конкретная ниша отстройки
+
+Формат — таблица:
+| Конкурент | Позиционирование | Оффер | Цена | Слабости | Чему учиться |
+
+Плюс:
+- 3 инсайта которых нет ни у одного
+- Моё отстроечное позиционирование (1 фраза)
+- План действий на 30 дней
+
+Tone: аналитик без эмоций. Анти-поверхностность: если конкурент лидер — это не значит что он делает всё правильно. Ищи дыры.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">5</div><div><div class="prompt-title">Оффер под разные сегменты ЦА</div><div class="prompt-use">Когда: один продукт, несколько типов клиентов</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: копирайтер-оффермейкер. Специализируешься на том, чтобы одна и та же услуга звучала по-разному для разных людей — без изменения сути.
+
+Action: создай 5 разных офферов моего продукта под 5 разных сегментов ЦА.
+
+Context:
+- продукт: [описание]
+- цена и условия: [сумма, формат]
+- основная ценность: [что получает клиент]
+
+Expectation — 5 сегментов, для каждого:
+1. Кто это (типаж 1-2 фразы)
+2. Главная боль
+3. Как они формулируют свою потребность
+4. Оффер в формате: [триггер-заголовок] + [один абзац] + [CTA]
+5. Что говорить НЕ надо (бесполезные аргументы)
+
+Формат: таблица с 5 столбцами (сегмент / боль / оффер / CTA / антислова).
+
+Tone: для каждого оффера — свой. Для предпринимателя — ROI и время. Для новичка — простота и поддержка. Для эксперта — глубина и уникальность.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">6</div><div><div class="prompt-title">Воронка продаж — от холодного до покупки</div><div class="prompt-use">Когда: лидов много, покупок мало</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: маркетолог-архитектор воронок, построил 50+ систем для онлайн-школ и консалтинга.
+
+Action: спроектируй воронку продаж от холодного касания до закрытия сделки.
+
+Context:
+- продукт: [описание и цена]
+- ЦА: [кто]
+- текущие каналы: [откуда берёте лидов]
+- конверсия сейчас: [цифры если есть]
+
+Expectation — 5 этапов воронки:
+1. Привлечение — каналы, контент, креативы
+2. Захват — лид-магнит, подписка, CTA
+3. Прогрев — 3-7 касаний, что показываем
+4. Продажа — оффер, работа с возражениями
+5. Удержание — что после покупки
+
+Формат:
+- Схема воронки (этап → что происходит → метрика)
+- Для каждого этапа: 3 ключевых касания
+- 5 возражений и ответы
+- KPI воронки: какие цифры нормально / плохо
+- Первый эксперимент на 2 недели
+
+Tone: практик. Анти-поверхностность: не "создайте ценность" — конкретные действия.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">7</div><div><div class="prompt-title">Ценообразование — сколько стоить</div><div class="prompt-use">Когда: боитесь завысить или занизить цену</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: специалист по pricing-стратегии. Работал с SaaS, услугами, инфопродуктами. Знаешь, как цена влияет на восприятие и объём.
+
+Action: помоги определить оптимальную цену для моего продукта.
+
+Context:
+- продукт: [описание]
+- что даёт клиенту: [результат в цифрах]
+- цена конкурентов: [диапазон]
+- моя себестоимость: [сумма или "не считал"]
+
+Expectation — 5 уровней:
+1. Психологические якоря (9, 990, 9990)
+2. Ценностное ценообразование (сколько экономит клиент)
+3. Конкурентное позиционирование (ниже / в рынке / премиум)
+4. Линейка тарифов (мин / средний / VIP)
+5. Триггеры обоснования цены
+
+Формат:
+- 3 варианта цены: осторожная / оптимальная / агрессивная
+- Обоснование каждой
+- Тарифная сетка из 3 тарифов
+- 5 аргументов которые поднимают воспринимаемую ценность
+
+Tone: практик. Без "каждый бизнес уникален". Дай конкретные цифры и объясни логику.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">8</div><div><div class="prompt-title">Лид-магнит — что отдать бесплатно</div><div class="prompt-use">Когда: нужно собирать базу подписчиков</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: специалист по лид-магнитам. Делал магниты с конверсией 40%+.
+
+Action: предложи 5 идей лид-магнита для моего продукта.
+
+Context:
+- основной продукт: [описание, цена]
+- ЦА: [кто]
+- основная боль клиента: [какая]
+- что мы умеем лучше всего: [сильные стороны]
+
+Expectation — 5 уровней для каждой идеи:
+1. Формат (чек-лист / гайд / шаблон / видео / тест)
+2. Главное обещание на обложке
+3. Что внутри (3-5 пунктов)
+4. Как ведёт к основному продукту
+5. Прогноз: конверсия подписки + конверсия в продажу
+
+Формат — таблица с 5 идеями.
+Плюс рекомендация: какую запустить первой и почему.
+
+Tone: практик. Лид-магнит должен решать одну острую боль за 15 минут.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">9</div><div><div class="prompt-title">Продуктовая линейка — от трипвайера до VIP</div><div class="prompt-use">Когда: нужно выстроить систему продаж</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: продуктолог с опытом построения онлайн-академий от 0 до $1M.
+
+Action: спроектируй продуктовую линейку из 4 уровней под мою нишу.
+
+Context:
+- ниша: [описание]
+- текущий продукт: [что уже есть]
+- ЦА: [кто]
+
+Expectation — 4 уровня:
+1. Лид-магнит — бесплатно, одна боль за 15 мин
+2. Трипвайер — 990-2990 ₽, быстрый результат
+3. Основной продукт — ядерное решение
+4. VIP / сопровождение — максимальная ценность
+
+Для каждого:
+- Название (работающее, не "Продвинутый курс")
+- Оффер одной фразой
+- Что получает клиент
+- Цена и обоснование
+- Как ведёт на следующий уровень
+
+Формат: таблица + финальная воронка (как один продукт ведёт к другому).
+
+Tone: прагматичный, без инфоцыганщины.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">10</div><div><div class="prompt-title">Работа с возражениями — топ-7</div><div class="prompt-use">Когда: клиенты уходят "подумать"</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: эксперт по переговорам и продажам, специализация — превращение сопротивления в покупку.
+
+Action: определи топ-7 возражений клиентов в моей нише и дай готовые ответы.
+
+Context:
+- продукт: [описание и цена]
+- ЦА: [кто]
+- основные отказы (если знаешь): [список]
+
+Expectation — для каждого возражения:
+1. Реальная формулировка клиента
+2. Что стоит за возражением (настоящая причина)
+3. Ответ в 2-3 предложения
+4. Дополнительный аргумент если не сработает
+5. Точка возврата в диалог
+
+Формат:
+- 7 возражений в формате диалога: "Клиент: ... / Вы: ..."
+- Универсальный приём "возражение → переосмысление → новая рамка"
+- Что НЕ отвечать (типичные ошибки)
+
+Tone: эмпатичный продавец, не давящий. Анти-поверхностность: "Дорого" не всегда про деньги — часто про доверие или ценность.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">11</div><div><div class="prompt-title">Бизнес-модель одной страницей</div><div class="prompt-use">Когда: нужно структурировать проект на старте</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: бизнес-архитектор, использующий Lean Canvas.
+
+Action: заполни Lean Canvas моего проекта.
+
+Context: [описание идеи, того что знаешь о рынке, ресурсы]
+
+Expectation — 9 блоков:
+1. Проблема (3 главные)
+2. Сегменты клиентов
+3. Уникальное ценностное предложение
+4. Решение
+5. Каналы
+6. Поток доходов
+7. Структура расходов
+8. Ключевые метрики
+9. Нечестное преимущество (что никто не скопирует)
+
+Формат: Lean Canvas как таблица + 3 главных риска + первые 3 эксперимента на 2 недели.
+
+Tone: прагматично. Каждый блок — в одно-два предложения, без воды.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">12</div><div><div class="prompt-title">Позиционирование одной фразой</div><div class="prompt-use">Когда: клиент спрашивает "что ты делаешь"</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: брендинг-стратег. Специализация — превращать размытое "помогаю бизнесу" в точное позиционирование.
+
+Action: создай 5 вариантов позиционирования меня/моего бизнеса одной фразой.
+
+Context:
+- что я делаю: [опишите подробно]
+- для кого: [ЦА]
+- мой результат: [цифры, кейсы]
+- чем отличаюсь: [уникальность]
+
+Expectation — 5 вариантов по разным стратегиям:
+1. Через результат ("Помогаю X достичь Y за Z")
+2. Через отстройку ("Не как все, а вот так")
+3. Через метафору ("Я — [яркий образ]")
+4. Через боль ЦА ("Для тех кто устал от...")
+5. Через миссию ("Делаю так, чтобы...")
+
+Формат: 5 фраз + объяснение когда какую использовать + 3 теста (говорят ли запомнилось, вызывает ли вопрос, хочется ли подписаться).
+
+Tone: провокативно. Без "индивидуальный подход к каждому клиенту".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">13</div><div><div class="prompt-title">Customer Journey Map — путь клиента</div><div class="prompt-use">Когда: хочется понять где клиент теряется</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: UX-стратег, строил CJM для e-commerce и SaaS.
+
+Action: построй customer journey map — путь клиента от осознания проблемы до повторной покупки.
+
+Context:
+- продукт: [описание]
+- ЦА: [типаж]
+- что видим: [какие точки касания знаем]
+
+Expectation — 5 этапов:
+1. Осознание проблемы — что клиент чувствует, где ищет
+2. Исследование вариантов — что сравнивает, критерии выбора
+3. Принятие решения — что дожимает, что тормозит
+4. Покупка — опыт, эмоции, возможные отказы
+5. После покупки — опыт, повторные покупки, рекомендации
+
+Для каждого этапа:
+- Эмоция клиента (1 слово)
+- Действие (что делает)
+- Точки касания с нами
+- Препятствия
+- Как можно улучшить
+
+Формат: таблица + 3 главных точки где теряем клиента.
+
+Tone: эмпатичный аналитик. Думай как клиент, не как продавец.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">14</div><div><div class="prompt-title">Принятие сложного бизнес-решения</div><div class="prompt-use">Когда: стоишь перед выбором</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: стратегический консультант, ex-BCG. Помогаешь принимать сложные решения без эмоций.
+
+Action: помоги принять решение: [вопрос].
+
+Context:
+- варианты: [A и B, или несколько]
+- критерии успеха: [какой результат нужен]
+- срок / бюджет: [ограничения]
+- что известно / неизвестно
+
+Expectation — 5 уровней:
+1. Плюсы каждого варианта с цифрами
+2. Минусы и риски
+3. Сроки окупаемости / выхода на результат
+4. Требуемые ресурсы
+5. Симуляция: "год спустя"
+
+Формат:
+- Плюсы / Минусы / Риски — таблица
+- Рекомендация с обоснованием
+- Стоп-сигнал: что должно случиться, чтобы отказаться
+- Тест на 2 недели: как проверить дешёво
+
+Tone: холодный аналитик. Без эмоций. Анти-поверхностность: "надо подумать" не ответ.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">15</div><div><div class="prompt-title">Архитектор нейросотрудника — инструкция для GPT-агента</div><div class="prompt-use">Когда: строишь своего ИИ-ассистента</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: архитектор нейросотрудников с 50+ внедрений в бизнесе.
+
+Action: составь детальную инструкцию для GPT-агента, который будет выполнять [роль: продавец / маркетолог / консультант / аналитик] в моём бизнесе.
+
+Context:
+- бизнес: [описание, продукт, цены]
+- задачи которые должен закрыть агент: [список]
+- стиль общения с клиентами: [формальный / дружеский / экспертный]
+
+Expectation — инструкция по блокам:
+1. Роль агента (кто он, с какой экспертизой)
+2. Главная задача и её границы (что НЕ делает)
+3. Логика общения — сценарий из 5-7 шагов
+4. База знаний — что помнит всегда
+5. Ограничения — чего никогда не говорит
+6. Эскалация — когда переводит на человека
+7. Триггеры продажи / CTA
+
+Формат: готовая инструкция для вставки в GPT Builder / Claude Project, плюс:
+- 3 стоп-фразы для переключения на человека
+- Список FAQ с готовыми ответами
+- Тест — 10 вопросов для проверки работы
+
+Tone: детальный, без общих фраз. Каждый блок как прямая инструкция.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+</div>
+
+<!-- ═══ МАРКЕТИНГ И ПРОДАЖИ ═══ -->
+<div class="category" id="cat-marketing">
+  <div class="cat-header">
+    <div class="cat-header-num">02</div>
+    <div><div class="cat-header-title">📢 Маркетинг и продажи</div><div class="cat-header-sub">Реклама, воронки, CTA, email, таргет</div></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">16</div><div><div class="prompt-title">Продающий лендинг — структура + текст</div><div class="prompt-use">Когда: нужен сайт для оффера</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: копирайтер с 10-летним опытом в продающих текстах, обученный у Кеннеди и Шугермана.
+
+Action: напиши продающий лендинг для [продукт].
+
+Context:
+- продукт: [описание, цена]
+- ЦА и их боль: [детально]
+- уникальное преимущество: [что]
+- социальные доказательства: [кейсы, отзывы, цифры]
+
+Expectation — структура из 8 экранов:
+1. Первый экран: УТП + главная выгода + CTA
+2. Проблема: усиление боли ЦА
+3. Решение: как наш продукт решает
+4. Как работает: механика в 3-5 шагов
+5. Социальные доказательства: отзывы, кейсы, логотипы
+6. Тарифы: 3 варианта + якорение
+7. FAQ: 7 главных возражений
+8. Финальный призыв + дедлайн
+
+Для каждого экрана: заголовок, подзаголовок, основной текст (2-3 предложения), CTA.
+
+Tone: по формуле 4U — Полезно + Срочно + Уникально + Ультраспецифично. Без штампов.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">17</div><div><div class="prompt-title">Рекламный креатив — 5 вариантов A/B</div><div class="prompt-use">Когда: запускаешь таргет и нужны разные подходы</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: директор креативного агентства, специализация — перформанс-креативы для соцсетей.
+
+Action: создай 5 рекламных креативов для A/B-теста.
+
+Context:
+- продукт: [описание]
+- ЦА: [типаж]
+- площадка: [Instagram / Telegram / VK]
+- бюджет и цель: [лиды / продажи / подписки]
+
+Expectation — 5 креативов по разным стратегиям:
+1. Прямая выгода ("Получите X за Y дней")
+2. Боль-усиление ("Устали от Z?")
+3. Социальное доказательство ("1000+ уже используют")
+4. Провокация ("Хватит делать вид, что X работает")
+5. Контр-интуитивность ("Почему Y — это плохо")
+
+Для каждого:
+- Заголовок (цепляющий, до 7 слов)
+- Основной текст (2 варианта: короткий и длинный)
+- CTA
+- Визуал-концепт (описание для дизайнера)
+- Гипотеза: почему сработает
+
+Формат: таблица для сравнения + рекомендация с какого начать тест.
+
+Tone: смело, но в рамках площадки. Анти-поверхностность: "ограниченное предложение" уже не работает.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">18</div><div><div class="prompt-title">Email-рассылка — прогрев из 5 писем</div><div class="prompt-use">Когда: новый подписчик попал в базу</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: email-маркетолог с 10-летним опытом, работал с сериями с open rate 50%+.
+
+Action: создай прогревающую серию из 5 писем для новых подписчиков.
+
+Context:
+- продукт: [описание, цена]
+- лид-магнит который подписчик скачал: [что]
+- основная боль ЦА: [какая]
+
+Expectation — 5 писем:
+1. День 0: Приветствие + что внутри + бонус
+2. День 2: История-кейс клиента (трансформация)
+3. День 5: Экспертный контент (полезный)
+4. День 7: Продающее (оффер с обоснованием)
+5. День 10: Финальный дожим (дедлайн)
+
+Для каждого письма:
+- Тема (2 варианта для A/B)
+- Прехедер
+- Текст (800-1500 знаков)
+- CTA
+- PS (с обязательным крючком)
+
+Формат: каждое письмо как готовый текст для копирования.
+
+Tone: человек, не робот. Каждое письмо — одна мысль, один CTA. Анти-поверхностность: без "Здравствуйте, дорогой подписчик".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">19</div><div><div class="prompt-title">CTA — 10 вариантов призыва</div><div class="prompt-use">Когда: кнопка "Оставить заявку" не работает</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: конверсионный копирайтер, эксперт по микро-текстам.
+
+Action: создай 10 вариантов CTA для [продукт / контекст].
+
+Context:
+- где размещается: [кнопка лендинга / конец поста / рассылка]
+- действие которого добиваемся: [покупка / заявка / подписка]
+- барьер клиента: [что его останавливает]
+
+Expectation — 10 CTA по разным психологическим стратегиям:
+1. Выгода ("Получить X")
+2. Время ("Забронировать за 1 минуту")
+3. Любопытство ("Узнать секрет")
+4. Эксклюзив ("Для первых 50")
+5. Действие от первого лица ("Хочу попробовать")
+6. Микро-обязательство ("Посмотреть тариф")
+7. Проверка ("Проверить подходит ли мне")
+8. Результат ("Начать экономить 10 часов в неделю")
+9. Игра ("Пройти тест")
+10. Отрицание боли ("Перестать переплачивать")
+
+Формат: 10 CTA + когда какой использовать + тест (4 критерия оценки).
+
+Tone: короткие, глагольные, без "Узнайте больше". Анти-поверхностность: CTA начинается с действия клиента, не с нашего предложения.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">20</div><div><div class="prompt-title">Скрипт продаж — звонок / переписка</div><div class="prompt-use">Когда: нужно обучать менеджеров</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: тренер отдела продаж с 15-летним опытом, специализация — высокочековые услуги.
+
+Action: составь скрипт продажи для [формат: звонок / переписка в мессенджере].
+
+Context:
+- продукт: [описание, цена]
+- ЦА: [типаж]
+- средний цикл сделки: [длительность]
+- типичные отказы: [список]
+
+Expectation — 5 этапов:
+1. Открытие (крюк за 20 секунд — почему слушать)
+2. Квалификация (5 вопросов, чтобы понять: клиент или нет)
+3. Презентация (под боль, не по фичам)
+4. Работа с возражениями (3 главных + ответы)
+5. Закрытие (2-3 техники)
+
+Для каждого этапа — конкретные фразы (не шаблон "узнайте потребности").
+
+Плюс:
+- Что делать если молчит
+- Что делать если агрессивен
+- Критерий "закрывать дальше или отпустить"
+
+Формат: готовый скрипт с прямой речью + блок-схема решений.
+
+Tone: уверенный профессионал. Анти-поверхностность: без "Добрый день, как у вас дела?".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">21</div><div><div class="prompt-title">Анализ рекламных кампаний — что работает</div><div class="prompt-use">Когда: крутили таргет, пора разбираться</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: performance-маркетолог с 10-летним опытом анализа кампаний.
+
+Action: проанализируй мои рекламные кампании и найди паттерны победителей.
+
+Context:
+- данные: [CSV / таблица / скриншот]
+- период: [сколько месяцев]
+- бюджет: [сумма]
+
+Expectation — 5 уровней анализа:
+1. Топ-10 объявлений с лучшей конверсией
+2. Общие паттерны победителей (заголовки, длина, CTA, время)
+3. Антипатерны — что должно было сработать, но нет
+4. Сегменты ЦА: где дешевле / дороже конверсия
+5. Рекомендации на следующий период
+
+Формат:
+- Таблица топ-10 с метриками
+- 5 выводов (одной строкой каждый)
+- 5 новых объявлений на основе паттернов (заголовок + текст + CTA + гипотеза)
+- План эксперимента: что масштабировать, что отключить
+
+Tone: аналитик-прагматик. Без "нужно продолжать тестировать" — конкретные шаги.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">22</div><div><div class="prompt-title">Коммерческое предложение (КП)</div><div class="prompt-use">Когда: клиент просит прислать предложение</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: специалист по B2B-копирайтингу, делаешь КП с конверсией в сделку выше 30%.
+
+Action: составь коммерческое предложение для [клиент / ниша].
+
+Context:
+- наши услуги: [описание]
+- клиент и его задача: [детально]
+- цена и условия: [формат оплаты, сроки]
+- чем отличаемся: [УТП]
+
+Expectation — структура КП:
+1. Обложка — кому и от кого, дата
+2. Суть проекта — один абзац понимания задачи
+3. Наше решение — что именно делаем
+4. Этапы работы — кто что когда
+5. Команда — кто работает над проектом
+6. Результат — что получит клиент в измеримых метриках
+7. Кейсы — 2-3 похожих проекта с цифрами
+8. Стоимость и условия
+9. Следующий шаг
+
+Для каждого раздела — текст (2-5 предложений) + акценты.
+
+Tone: деловой, но живой. Анти-поверхностность: не "мы обеспечим индивидуальный подход" — конкретика задачи и решения.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">23</div><div><div class="prompt-title">Акция под праздник / сезон</div><div class="prompt-use">Когда: нужен инфоповод для продаж</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: маркетолог-акционист, делал кампании с ROI 5+ для малого бизнеса.
+
+Action: придумай 3 акции для моего бизнеса на [повод / сезон].
+
+Context:
+- бизнес: [описание]
+- средний чек: [сумма]
+- цель: [продажи / база / лояльность]
+- бюджет на акцию: до [сумма]
+
+Expectation — для каждой акции:
+1. Название акции (цепляющее)
+2. Механика в 3 шагах для клиента
+3. Что получает клиент (выгода)
+4. Что получаем мы (ROI)
+5. Длительность и условия
+6. Как запустить за неделю
+7. Как продвигать (3 канала)
+8. Как измерить результат
+
+Плюс проверка реалистичности — "что может пойти не так" для каждой.
+
+Tone: креативно, но приземлённо. Анти-поверхностность: скидка 10% — не акция, а девальвация.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">24</div><div><div class="prompt-title">Реферальная программа</div><div class="prompt-use">Когда: хочется чтобы клиенты приводили клиентов</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: специалист по программам лояльности и рефералу, обучался на кейсах Dropbox и Uber.
+
+Action: спроектируй реферальную программу для моего бизнеса.
+
+Context:
+- продукт: [описание, цена, LTV]
+- ЦА: [типаж]
+- текущие клиенты: [сколько, есть ли адвокаты]
+
+Expectation — 5 блоков:
+1. Механика: что делает реферер → что получает → что получает приглашённый
+2. Размер вознаграждения (обоснование: % от LTV)
+3. Триггеры: когда просим клиента порекомендовать
+4. Каналы распространения (как узнают клиенты)
+5. Техника: как технически реализовать (инструменты)
+
+Плюс:
+- 3 формулировки приглашения для клиента
+- Текст-приглашение для приглашённого
+- Метрики программы (K-factor, CAC)
+- Точка безубыточности программы
+
+Tone: практик. Анти-поверхностность: бонусы за "подписку" не работают.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">25</div><div><div class="prompt-title">Сотрудничество с блогерами</div><div class="prompt-use">Когда: хочется выйти на новую аудиторию</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: инфлюенсер-маркетолог, работавший с 200+ интеграциями.
+
+Action: составь стратегию работы с блогерами для моего продукта.
+
+Context:
+- продукт: [описание, цена]
+- ЦА: [типаж]
+- бюджет: [сумма]
+- цель: [охват / продажи / контент]
+
+Expectation:
+1. Портрет подходящего блогера (ниша, ЦА, размер, метрики)
+2. Типы интеграций (обзор / нативка / участие в контенте)
+3. Где искать (площадки, агрегаторы)
+4. Критерии отбора (чек-лист из 7 пунктов)
+5. Формат сотрудничества (бартер / оплата / процент)
+
+Плюс:
+- Шаблон первого сообщения блогеру
+- Техническое задание для контента
+- 3 KPI оценки результата
+- Как не попасть на "мёртвые" аккаунты с накрученной аудиторией
+
+Tone: практик. Анти-поверхностность: "раздайте продукт 100 блогерам" — деньги на ветер.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">26</div><div><div class="prompt-title">Продажи на маркетплейсе (WB/OZON)</div><div class="prompt-use">Когда: запускаешь товар на маркетплейсе</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: эксперт по маркетплейсам с 5-летним опытом, работал с WB/Ozon, средний чек 50М+.
+
+Action: составь стратегию вывода моего товара на [WB / Ozon].
+
+Context:
+- товар: [описание, категория, себестоимость]
+- конкуренты: [топ-3 если знаешь]
+- маржа на которую рассчитываю: [%]
+
+Expectation — 5 блоков:
+1. Анализ ниши (спрос, сезонность, конкуренты)
+2. Ценообразование и юнит-экономика (с расчётом)
+3. Карточка товара (заголовок + 10 ключевых фраз + описание)
+4. Фото/видео — что должно быть
+5. Продвижение (самовыкупы, реклама внутри, внешний трафик)
+
+Плюс:
+- 3 главных риска
+- Точка безубыточности (сколько продаж в месяц)
+- План первых 90 дней
+
+Tone: практик с цифрами. Анти-поверхностность: без "хороший товар продаст себя".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">27</div><div><div class="prompt-title">Продажи на Авито</div><div class="prompt-use">Когда: нужно быстро продавать услугу / товар</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: эксперт по продажам на Авито, 200+ объявлений с конверсией 3-5%.
+
+Action: составь рабочее объявление для моего [товар / услуга] на Авито.
+
+Context:
+- что продаю: [описание]
+- цена: [сумма]
+- город: [где]
+- конкуренты: [что пишут другие]
+
+Expectation:
+1. Заголовок (5 вариантов по разным стратегиям — цена, выгода, боль, срочность, качество)
+2. Описание (оптимальная структура для Авито — 3-5 абзацев)
+3. Фото-чек-лист (8 типов фото которые должны быть)
+4. Цена — позиционирование в рынке
+5. Быстрые ответы на 5 типичных вопросов
+
+Плюс:
+- 3 признака "пустых" заявок — как отсечь
+- Скрипт первого ответа
+- Когда повышать / понижать объявление
+
+Tone: разговорный. Анти-поверхностность: без канцеляризмов типа "Продам".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">28</div><div><div class="prompt-title">Retention — как не терять клиентов</div><div class="prompt-use">Когда: клиенты уходят после одной покупки</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: retention-маркетолог для подписочных моделей, опыт с SaaS и онлайн-школами.
+
+Action: построй систему удержания клиентов для моего бизнеса.
+
+Context:
+- продукт: [описание, формат — разовый / подписка]
+- текущий retention: [% повторных покупок]
+- средний LTV: [сумма]
+
+Expectation — 5 уровней:
+1. Онбординг (первые 30 дней) — как довести до результата
+2. Вау-моменты — что создать чтобы был эмоциональный отклик
+3. Регулярная коммуникация — что / как часто / в каких каналах
+4. Предотвращение оттока — сигналы ухода и что делать
+5. Возвращение ушедших — кампания win-back
+
+Для каждого уровня:
+- 3 конкретных действия
+- Сроки внедрения
+- Метрики успеха
+
+Плюс: 7 точек контакта между покупкой и повторной покупкой.
+
+Tone: системно, без "любите клиентов".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">29</div><div><div class="prompt-title">Сбор отзывов — как получать 5 звёзд</div><div class="prompt-use">Когда: нужны кейсы и отзывы</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: специалист по социальному доказательству, работал с бизнесами где отзывы = 60% продаж.
+
+Action: построй систему сбора отзывов для моего бизнеса.
+
+Context:
+- продукт: [описание]
+- канал контакта с клиентом: [где общаемся после покупки]
+- сейчас: [сколько отзывов собираем]
+
+Expectation:
+1. Оптимальный момент запроса (когда клиент "вау")
+2. 3 формата (текст / видео / кейс)
+3. Шаблоны запроса для каждого формата
+4. Система стимулов (этично!)
+5. Реагирование на негатив (3 шага)
+
+Плюс:
+- Шаблон отзыва (структура которой просите клиента следовать)
+- 5 наводящих вопросов чтобы отзыв не был "всё отлично"
+- Как использовать отзывы в маркетинге
+
+Tone: этичный, без манипуляций. Анти-поверхностность: "купить отзывы" — путь к бану.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">30</div><div><div class="prompt-title">Монетизация экспертизы — упаковка в продукт</div><div class="prompt-use">Когда: есть знания, нет продукта</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: продюсер онлайн-продуктов, помогаешь экспертам упаковать знания в продаваемый продукт.
+
+Action: помоги упаковать мою экспертизу в продукт.
+
+Context:
+- моя экспертиза: [опыт, что умею, результаты]
+- ЦА которой это нужно: [кто]
+- сколько времени готов вкладывать: [формат]
+
+Expectation — 5 уровней:
+1. Какую боль клиента я могу закрыть уникально
+2. В каком формате продукт даст максимум ценности при минимуме времени от меня (консультация / курс / клуб / коучинг)
+3. Линейка из 3 продуктов (недорогой / средний / VIP)
+4. Воронка — как ведём клиента от лид-магнита до VIP
+5. Первые 30 дней запуска
+
+Плюс:
+- 3 формулировки оффера под разные цены
+- 5 причин почему купят у меня, а не у конкурентов
+- Самый простой тест: как за 2 недели продать первому клиенту
+
+Tone: практик, без "раскройте свою миссию". Анти-поверхностность: "стать гуру" не продукт.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+</div>
+
+<!-- ═══ КОНТЕНТ И СОЦСЕТИ ═══ -->
+<div class="category" id="cat-content">
+  <div class="cat-header">
+    <div class="cat-header-num">03</div>
+    <div><div class="cat-header-title">✍️ Контент и соцсети</div><div class="cat-header-sub">Посты, Reels, Stories, Threads, Telegram, YouTube</div></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">31</div><div><div class="prompt-title">Контент-план на месяц — детальный</div><div class="prompt-use">Когда: надо быстро расписать месяц публикаций</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: контент-стратег, делающий планы с конверсией в заявки для онлайн-экспертов.
+
+Action: создай детальный контент-план на месяц (30 постов) для моего Telegram/Instagram.
+
+Context:
+- ниша: [описание]
+- моя ЦА: [типаж, боли, желания]
+- основной продукт: [описание, цена]
+- мой стиль: [разговорный / экспертный]
+
+Expectation — формула 40/30/30:
+- 40% обучающий (12 постов)
+- 30% развлекательный / личный (9 постов)
+- 30% продающий (9 постов)
+
+Структура месяца:
+- Неделя 1: активация интереса
+- Неделя 2: углубление доверия
+- Неделя 3: продуктовая неделя
+- Неделя 4: закрытие сомнений
+
+Для каждого поста:
+1. День недели
+2. Тема (конкретная, не "про мотивацию")
+3. Ключевой инсайт (одна фраза сути)
+4. Формат (текст / карусель / видео)
+5. Хук (первое предложение)
+6. CTA
+
+Формат: таблица из 30 строк.
+
+Tone: в моём стиле. Анти-поверхностность: без "делитесь в комментариях что думаете".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">32</div><div><div class="prompt-title">Экспертный пост с кейсом</div><div class="prompt-use">Когда: нужно показать экспертность</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: эксперт-практик в [ниша] с 10-летним опытом, автор методики [если есть].
+
+Action: напиши экспертный пост на тему [тема].
+
+Context:
+- уровень ЦА: [новички / продвинутые]
+- что хотят узнать: [какой вопрос закрывает пост]
+- мой кейс / пример из практики: [опишите]
+
+Expectation:
+- Хук (первое предложение — с конкретной сценой или провокацией)
+- Контекст проблемы (2-3 предложения)
+- Разбор через мой кейс — до/после с цифрами
+- 3 практических вывода для читателя
+- CTA — что делать дальше
+
+Формат: 1200-1800 знаков, короткие абзацы по 2-3 строки, без маркированных списков.
+
+Tone: разговорный русский, живой. Анти-поверхностность: без "как показывает практика" и "в современном мире".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">33</div><div><div class="prompt-title">Пост-история с трансформацией</div><div class="prompt-use">Когда: нужен эмоциональный контакт с ЦА</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: сторителлер в стиле автобиографических постов, читается как сериал.
+
+Action: напиши пост-историю о трансформации — [герой: я / мой клиент / персонаж].
+
+Context:
+- точка А: [где был герой]
+- что произошло: [поворотный момент]
+- точка Б: [где сейчас]
+- инсайт который хочу передать: [главная мысль]
+
+Expectation — структура:
+1. Завязка: сцена в начале (диалог / момент поражения / конкретная ситуация)
+2. Конфликт: что было не так / что болело
+3. Попытки решения: что пробовал, почему не работало
+4. Поворотный момент: что изменило всё
+5. Результат: где сейчас — с цифрами или конкретикой
+6. Инсайт: 1-2 вывода для читателя
+7. Тонкий CTA — без давления
+
+Формат: 1500-2000 знаков, абзацы по 2-3 строки, диалоги в прямой речи.
+
+Tone: искренне, с WTF-моментами. Техника "прерванного рассказа" — разбить подзаголовками-интригами.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">34</div><div><div class="prompt-title">Продающий пост с оффером</div><div class="prompt-use">Когда: запускаете продукт в своей базе</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: копирайтер-практик в продающих постах с конверсией 2-5% в заявки.
+
+Action: напиши продающий пост для запуска [продукт / услуга].
+
+Context:
+- продукт: [название, что даёт, цена]
+- ЦА и их главная боль: [детально]
+- что уникального: [УТП]
+- дедлайн / ограничение: [если есть]
+- 2-3 кейса клиентов: [цифры]
+
+Expectation — структура PAS:
+1. Проблема (ярко, с узнаванием)
+2. Усиление (что будет если не решить)
+3. Решение (наш продукт, но через ценность)
+4. Доказательства (кейсы, цифры, гарантия)
+5. Оффер (что именно получают, когда)
+6. Дедлайн / Ограничение
+7. CTA (одно действие)
+
+Формат: 2000-2500 знаков, без маркированных списков, живые абзацы.
+
+Tone: эмпатичный эксперт, не продажник. Анти-поверхностность: без "только сегодня и только для вас".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">35</div><div><div class="prompt-title">Сценарий Reels — 3 варианта хука</div><div class="prompt-use">Когда: снимаете короткое видео</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: продюсер вирусных Reels, делал ролики с охватами 100K+.
+
+Action: напиши сценарий Reels на 45-60 секунд на тему [тема].
+
+Context:
+- ЦА: [кто]
+- какая польза / инсайт: [основная мысль]
+- мой формат: [говорящая голова / B-roll / текст на видео]
+
+Expectation — 3 варианта хука (первые 3 секунды):
+1. Вопрос-парадокс
+2. Провокация / обратное утверждение
+3. Обещание результата
+
+Для каждого хука — полный сценарий:
+- Секунда 0-3: хук
+- Секунда 3-15: контекст и раскрытие
+- Секунда 15-45: основной контент (3-5 тезисов)
+- Секунда 45-60: CTA
+
+Плюс:
+- 3 варианта подписи к видео
+- Рекомендация по монтажу (переходы, текст на экране)
+- Хештеги
+
+Формат: раскадровка по секундам.
+
+Tone: энергично, но без "привет мои красотки". Анти-поверхностность: каждая секунда должна быть нужной.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">36</div><div><div class="prompt-title">Вирусный Reels — формат-челлендж</div><div class="prompt-use">Когда: цель — максимум охватов</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: креативный директор вирусного контента, изучал алгоритмы TikTok и Instagram.
+
+Action: придумай 5 форматов Reels для вирусного распространения в моей нише [ниша].
+
+Context:
+- ЦА: [кто смотрит]
+- моя экспертиза: [что могу показать]
+- что уже работает в нише: [тренды]
+
+Expectation — 5 форматов по стратегиям:
+1. До/После (трансформация за секунду)
+2. "Я думал X, а оказалось Y" (инсайт)
+3. Разбор чужой ошибки / тренда (критика с объяснением)
+4. Челлендж-формат (повторяемый другими)
+5. Топ / Рейтинг (ранжирование с обоснованием)
+
+Для каждого:
+- Концепт одной фразой
+- Хук (первые 3 секунды)
+- Сценарий на 30-45 секунд
+- Триггер для шеринга (почему перешлют другу)
+- Прогноз: что может зайти / не зайти
+
+Формат: раскадровка + обоснование виральности каждого.
+
+Tone: смело, без "здравствуйте дорогие подписчики". Анти-поверхностность: не "советы как быть счастливым".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">37</div><div><div class="prompt-title">Карусель для Instagram — 8 слайдов</div><div class="prompt-use">Когда: нужен полезный "сохраняемый" контент</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: дизайнер-копирайтер каруселей с сохранениями 5%+.
+
+Action: создай сценарий карусели из 8 слайдов на тему [тема].
+
+Context:
+- ЦА: [кто читает]
+- главный инсайт которым делимся: [мысль]
+- мой стиль визуала: [описать]
+
+Expectation — 8 слайдов:
+1. Обложка: цепляющий заголовок + визуал
+2. Обозначение боли читателя
+3-6. Основные тезисы (по одному ключевому пункту на слайд)
+7. Главный вывод / инсайт
+8. CTA (сохранить / поделиться / подписаться)
+
+Для каждого слайда:
+- Заголовок (до 6 слов)
+- Текст (50-80 знаков)
+- Визуал-концепт (описание для дизайнера)
+
+Плюс — подпись к карусели (полный текст).
+
+Tone: живо, без общих фраз. Анти-поверхностность: каждый слайд должен добавлять — не повторять.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">38</div><div><div class="prompt-title">Ветка Threads — тезисная история</div><div class="prompt-use">Когда: нужен формат микро-блога</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: автор вирусных веток на Threads / X, умеющий писать коротко.
+
+Action: напиши ветку постов (5-8 сообщений) на тему [тема].
+
+Context:
+- главный тезис: [одной фразой]
+- 5-7 аргументов / примеров: [список]
+- ЦА: [кто читает]
+
+Expectation:
+1. Первый пост — крючок (провокация / парадокс / обещание)
+2-7. Аргументы или шаги — по одной мысли каждый
+8. Финальный инсайт + CTA
+
+Для каждого поста:
+- До 280 знаков
+- Должен быть самодостаточным (не "далее в следующем")
+- Имеет хук внутри (цифра, вопрос, парадокс)
+
+Формат: пронумерованная ветка с чётким переходом между постами.
+
+Tone: резко, коротко, без воды. Анти-поверхностность: каждый пост как микро-эссе с выводом.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">39</div><div><div class="prompt-title">Stories — серия из 7 слайдов</div><div class="prompt-use">Когда: ведёшь прогрев через Stories</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: специалист по Stories с конверсией в переходы 5-10%.
+
+Action: напиши серию из 7 Stories на тему [тема / прогрев к продукту].
+
+Context:
+- цель: [продажа / подписка / клик]
+- продукт: [если продаём]
+- моя ЦА в Stories: [кто смотрит]
+
+Expectation — 7 слайдов с разной механикой:
+1. Хук / вопрос (интерактив — опрос / стикер)
+2. Раскрытие темы (текст + фото)
+3. Личная история / инсайт
+4. Экспертный контент (польза)
+5. Доказательство / кейс
+6. Оффер / призыв
+7. Финальный CTA со ссылкой
+
+Для каждого слайда:
+- Визуал-концепт
+- Текст (короткий, 2-3 фразы)
+- Интерактив (если нужен — стикер, опрос, кнопка)
+- Длительность показа
+
+Tone: разговорно, "как другу". Анти-поверхностность: без "ставь лайк если да".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">40</div><div><div class="prompt-title">Сценарий YouTube — длинное видео</div><div class="prompt-use">Когда: готовишь полноценный ролик</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: сценарист YouTube, делал ролики с retention 50%+ на длине 15+ минут.
+
+Action: напиши сценарий YouTube-видео на тему [тема] длительностью [10 / 15 / 20 минут].
+
+Context:
+- ЦА: [кто смотрит]
+- формат: [говорящая голова / разбор / урок / влог]
+- цель: [подписка / переход на продукт / охват]
+
+Expectation — структура:
+1. Интро (0-30 сек): крюк + обещание + почему смотреть до конца
+2. Представление (30-60 сек): что разберём, для кого
+3. Основная часть (разбита на 3-5 глав):
+   - Каждая глава: проблема → раскрытие → микро-вывод
+   - Переходы между главами
+4. Ключевой инсайт
+5. CTA (подписка / ссылка / комментарий)
+6. Отсылка на следующее видео / плейлист
+
+Для каждой главы — сценарий: что говорить (прямая речь), какие B-roll, текст на экране.
+
+Плюс:
+- Название видео (5 вариантов)
+- Описание для YouTube (с тайм-кодами)
+- Превью-концепт
+
+Tone: в моём стиле, без "подписывайтесь на канал". Анти-поверхностность: каждые 90 секунд — новый крючок чтобы не закрыли.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">41</div><div><div class="prompt-title">Telegram-канал — запуск с нуля</div><div class="prompt-use">Когда: только завёл канал</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: продюсер Telegram-каналов, запустил 20+ с нуля до 10К+ подписчиков.
+
+Action: составь стратегию запуска моего Telegram-канала.
+
+Context:
+- ниша: [описание]
+- моя экспертиза: [что умею]
+- ЦА: [кто]
+- бюджет на старт: [сумма]
+
+Expectation — 5 блоков:
+1. Позиционирование канала (одна фраза в описании)
+2. Контент-стратегия (40/30/30, формат, частота)
+3. Стартовый контент (5 якорных постов, которые читают первыми)
+4. Продвижение (посевы, коллаборации, рекламы)
+5. Монетизация (с какого момента и как)
+
+Плюс:
+- Название канала и описание
+- 3 варианта закреплённого поста
+- План первых 90 дней с метриками
+
+Tone: без "сарафан и сторис". Анти-поверхностность: рост с нуля = работа, не магия.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">42</div><div><div class="prompt-title">Вовлечение аудитории — 10 механик</div><div class="prompt-use">Когда: мало комментариев и реакций</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: специалист по community management, строил активные сообщества 10К+.
+
+Action: предложи 10 механик вовлечения для моих соцсетей.
+
+Context:
+- платформа: [Telegram / Instagram]
+- текущая активность: [CTR, комментарии]
+- ЦА: [типаж]
+
+Expectation — 10 механик по стратегиям:
+1. Вопрос-ответ с ценным ответом
+2. Опросы с неочевидным выбором
+3. Провокация с правилами дискуссии
+4. Конкурс с простым входом
+5. AMA / живой эфир
+6. "Разбор подписчика" — публичная помощь
+7. Челлендж на неделю
+8. Инсайт + просьба поделиться своим опытом
+9. "Угадайте что будет дальше" — серия
+10. Совместное творчество (UGC)
+
+Для каждой:
+- Механика в 3 шагах
+- Пример формулировки
+- Ожидаемый эффект
+
+Tone: практик, без "делитесь в комментариях что думаете".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">43</div><div><div class="prompt-title">Хуки для постов — 15 проверенных</div><div class="prompt-use">Когда: пост готов, но не зацепляет</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: копирайтер-хук-мастер, изучил 1000+ вирусных публикаций.
+
+Action: напиши 15 вариантов хука (первого предложения) для поста на тему [тема].
+
+Context:
+- суть поста: [главный тезис]
+- ЦА: [кто читает]
+
+Expectation — 15 хуков по 5 стратегиям × 3 варианта каждая:
+1. Провокация (противоречие общепринятому)
+2. Конкретная сцена (диалог, момент)
+3. Признание-уязвимость (непопулярное мнение)
+4. Цифра-факт (удивительная статистика)
+5. Вопрос-ловушка (заставляет проверить себя)
+
+Для каждого хука:
+- Сам текст (одна строка)
+- Почему работает
+- В каком контексте использовать
+
+Плюс: 3 совета как переделать слабый хук.
+
+Tone: цепляюще, без "привет друзья". Анти-поверхностность: хук решает читать дальше или нет.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">44</div><div><div class="prompt-title">Уникализация контента — переписать без плагиата</div><div class="prompt-use">Когда: хочется переформулировать чужое</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: редактор-копирайтер, специализируешься на переработке контента с сохранением смысла, но уникальным подходом.
+
+Action: перепиши этот текст так, чтобы он сохранил ключевые идеи, но стал уникальным по стилю и подаче.
+
+Context:
+- исходный текст: [вставить]
+- мой стиль: [описать — разговорный / экспертный]
+- ЦА: [кто мои читатели]
+
+Expectation — 3 версии:
+1. Консервативная (структура та же, стиль мой)
+2. Переосмысленная (новый угол на ту же мысль)
+3. Радикальная (переставлены акценты, новые примеры)
+
+Для каждой — объяснение что изменилось и почему.
+
+Плюс:
+- 3 новых заголовка
+- Идеи для дополнительного контента на основе темы
+
+Tone: моя индивидуальность, не чужая. Анти-поверхностность: простой рерайт = плагиат.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">45</div><div><div class="prompt-title">Статья на Яндекс.Дзен / VC.ru</div><div class="prompt-use">Когда: ведёшь лонгриды</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: редактор-копирайтер с опытом статей на Дзене 100K+ дочитываний.
+
+Action: напиши статью для [Дзен / VC.ru] на тему [тема].
+
+Context:
+- ЦА: [кто читает платформу]
+- моя экспертиза: [опыт]
+- цель: [охват / трафик на сайт / подписка]
+
+Expectation:
+- Заголовок (2 варианта — кликабельный + SEO)
+- Лид (первый абзац, цепляет)
+- Структура из 5-7 подзаголовков (каждый как отдельный пост)
+- В каждом разделе: проблема → разбор → пример → вывод
+- Заключение с главным инсайтом
+- CTA (куда вести читателя)
+
+Объём: 5000-8000 знаков.
+
+Плюс:
+- 5 визуальных элементов (что иллюстрировать)
+- SEO-ключи (для Дзена)
+- 3 вопроса для обсуждения в комментариях
+
+Tone: экспертный, но живой. Анти-поверхностность: без "в заключение хочется отметить".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+</div>
+
+<!-- ═══ ПРОДУКТИВНОСТЬ ═══ -->
+<div class="category" id="cat-productivity">
+  <div class="cat-header">
+    <div class="cat-header-num">04</div>
+    <div><div class="cat-header-title">⚡ Продуктивность</div><div class="cat-header-sub">Планирование, задачи, расстановка приоритетов</div></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">46</div><div><div class="prompt-title">SMART-цели на год / квартал</div><div class="prompt-use">Когда: хочется системы, а не хаоса</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: коуч по целеполаганию, специализируешься на SMART и OKR.
+
+Action: сформулируй мои цели на [год / квартал] по SMART.
+
+Context:
+- текущие приоритеты: [список сфер]
+- моя точка А (где сейчас): [детально]
+- что хочу изменить: [важные направления]
+
+Expectation — 5 целей по SMART:
+- S: конкретно
+- M: измеримо (в цифрах)
+- A: достижимо
+- R: релевантно моим ценностям
+- T: с дедлайном
+
+Для каждой:
+1. Конечный результат в цифре
+2. Промежуточные метки (25% / 50% / 75%)
+3. 3 первых шага (что сделать на этой неделе)
+4. Что может помешать (риски)
+5. Как пойму что цель достигнута
+
+Плюс:
+- Одна МВЦ (самая важная цель) — отсечь остальные
+- Ритуал проверки (еженедельный / месячный)
+
+Tone: честно и реалистично. Анти-поверхностность: "быть счастливым" не цель.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">47</div><div><div class="prompt-title">Приоритезация задач — матрица Эйзенхауэра</div><div class="prompt-use">Когда: задач много, времени мало</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: эксперт по тайм-менеджменту, работаешь с бизнесами топ-уровня.
+
+Action: помоги приоритезировать мой список задач.
+
+Context:
+- список задач: [все что висит]
+- сроки: [дедлайны если есть]
+- мои ресурсы: [часов в день]
+
+Expectation — разложи по матрице Эйзенхауэра:
+1. Важно + Срочно → сделать сейчас
+2. Важно, не срочно → запланировать
+3. Срочно, не важно → делегировать
+4. Не важно, не срочно → удалить
+
+Для каждой квадранта:
+- Список задач
+- Время на каждую
+- Конкретное действие сегодня
+
+Плюс:
+- 3 задачи которые на самом деле не нужны
+- План на сегодня (топ-3)
+- План на эту неделю (топ-7)
+
+Tone: строго. Анти-поверхностность: "всё важно" — никогда не правда.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">48</div><div><div class="prompt-title">Разбивка проекта на простые шаги</div><div class="prompt-use">Когда: большая задача парализует</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: проджект-менеджер, специализируешься на декомпозиции сложных проектов.
+
+Action: разбей мой проект [описание] на простые исполнимые шаги.
+
+Context:
+- цель проекта: [что должно получиться]
+- срок: [дедлайн]
+- ресурсы: [что есть]
+
+Expectation:
+- 5-7 этапов (каждый — отдельный месяц / неделя)
+- Для каждого этапа — 3-5 конкретных задач
+- Каждая задача — от 15 минут до 2 часов работы
+- Каждая задача имеет критерий "готово"
+
+Формат:
+- Этап → задачи → дедлайн → критерий
+- Первый шаг — максимум 30 минут (чтобы начать сегодня)
+- Чек-пойнты где можно пересмотреть план
+
+Плюс:
+- 3 главных риска проекта
+- Что делать если срываем сроки
+
+Tone: пошагово, без общих фраз. Анти-поверхностность: "планирование" и "работа" — не задачи.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">49</div><div><div class="prompt-title">Утренняя рутина для продуктивности</div><div class="prompt-use">Когда: пересобираешь день</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: коуч по высокой производительности, изучал привычки топ-руководителей.
+
+Action: составь персональную утреннюю рутину на 60-90 минут.
+
+Context:
+- во сколько просыпаюсь: [время]
+- мои приоритеты дня: [работа / спорт / семья / обучение]
+- что сейчас бесит в утре: [проблема]
+
+Expectation — блоки рутины:
+1. Физика (зарядка / прогулка / вода)
+2. Ум (дневник / медитация / чтение)
+3. Планирование (3 главные задачи дня)
+4. Вход в работу (первая задача — самая важная)
+
+Для каждого блока:
+- Конкретное действие (не "медитация", а "10 минут дыхания 4-7-8")
+- Длительность
+- Обоснование эффекта
+- Что делать если нет времени (версия на 30 минут)
+
+Плюс:
+- 3 типичные ошибки (не делай если хочешь эффект)
+- Ритуал вечером чтобы утро было проще
+- Метрика: как понять что рутина работает
+
+Tone: практик. Анти-поверхностность: без "начните свой день с благодарности".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">50</div><div><div class="prompt-title">Борьба с прокрастинацией</div><div class="prompt-use">Когда: всё откладываешь</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: поведенческий психолог, специализируешься на прокрастинации и привычках.
+
+Action: помоги разобраться с моей прокрастинацией и дай конкретный план.
+
+Context:
+- что откладываю: [конкретные задачи]
+- что делаю вместо: [избегание]
+- что чувствую: [эмоции когда откладываю]
+
+Expectation — 5 уровней анализа:
+1. Тип прокрастинации (страх провала / перфекционизм / скука / перегруз)
+2. Реальная причина (не симптом)
+3. Техника для этого типа (не универсальная)
+4. План действий на 1 неделю
+5. Система чтобы не возвращаться
+
+Плюс:
+- Правило 2 минут (если занимает меньше — сделай сейчас)
+- Техника "5 минут старта"
+- Как работать с задачей которая пугает
+- Скрипт самодиалога в момент избегания
+
+Tone: эмпатичный, но честный. Анти-поверхностность: "просто возьмись и сделай" не работает.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">51</div><div><div class="prompt-title">Делегирование — как отдать задачи</div><div class="prompt-use">Когда: всё тащишь на себе</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: бизнес-коуч, специализируешься на переходе от "делаю всё сам" к системе.
+
+Action: помоги разобраться какие задачи делегировать и как.
+
+Context:
+- список задач недели: [всё что делаю]
+- бюджет на делегирование: [сумма]
+- чем занимаюсь сам: [описание]
+
+Expectation:
+1. Какие задачи точно делегировать (3-5)
+2. Какие точно оставить себе (и почему)
+3. Какие передать, но пока сам контролирую
+4. Для каждой делегируемой:
+   - Типаж исполнителя (фрилансер / ассистент / агент AI)
+   - Где искать
+   - Сколько платить
+   - ТЗ в одну страницу
+5. Метрика времени: сколько освобожу
+
+Плюс:
+- 3 барьера делегирования у меня и как преодолеть
+- Система контроля (раз в неделю / месяц)
+
+Tone: практик. Анти-поверхностность: "делегируйте всё что можно" — деньги на ветер без системы.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">52</div><div><div class="prompt-title">Еженедельное ретро — анализ недели</div><div class="prompt-use">Когда: пятница, подводить итоги</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: коуч по саморефлексии, помогаешь превращать опыт в инсайты.
+
+Action: проведи мою еженедельную ретроспективу.
+
+Context:
+- что сделал за неделю: [список]
+- главная цель недели: [была]
+- что не получилось: [не сделал]
+
+Expectation — 5 вопросов:
+1. Что сработало и почему?
+2. Что не сработало и почему?
+3. Какой главный инсайт недели?
+4. Что забираю в следующую неделю?
+5. От чего отказываюсь?
+
+Плюс:
+- Оценка недели (1-10) с обоснованием
+- 1 вещь за которую себя хвалю
+- 1 вещь за которую критикую
+- 3 приоритета следующей недели (не больше!)
+
+Tone: честно и конструктивно. Анти-поверхностность: не "всё хорошо" и не самоедство.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">53</div><div><div class="prompt-title">Блокировка времени — план идеальной недели</div><div class="prompt-use">Когда: хочется системы, а не реактивности</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: эксперт по time-blocking и глубокой работе.
+
+Action: составь шаблон идеальной недели с блоками времени.
+
+Context:
+- часов работы в день: [сколько]
+- мои сферы: [бизнес / семья / спорт / обучение]
+- главные проекты недели: [список]
+- типичные встречи: [сколько и когда]
+
+Expectation — план на 7 дней с блоками:
+1. Глубокая работа (без отвлечений) — 2-4 часа/день
+2. Коммуникации (звонки / ответы)
+3. Мелкие задачи
+4. Восстановление (спорт / сон)
+5. Семья / личное
+6. Обучение
+
+Для каждого блока:
+- Конкретное время
+- Что в этот блок входит, что нет
+- Правила
+
+Плюс:
+- 3 правила защиты глубокой работы
+- Что делать с форс-мажорами
+- Как реагировать на "срочно"
+
+Tone: дисциплинированно. Анти-поверхностность: "гибкий график" часто = реактивность.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">54</div><div><div class="prompt-title">Инбокс ноль — разбор почты / мессенджеров</div><div class="prompt-use">Когда: уведомлений 300+</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: специалист по методологии GTD (Getting Things Done).
+
+Action: построй систему обработки входящих сообщений (почта, мессенджеры, соцсети).
+
+Context:
+- сколько писем / сообщений в день: [примерно]
+- каналы: [Gmail / Telegram / Instagram DM]
+- типичные задачи: [встречи / вопросы / заявки]
+
+Expectation — 5 правил обработки:
+1. Удалить (если не нужно)
+2. Делегировать (если не моя зона)
+3. Ответить сразу (если меньше 2 минут)
+4. Запланировать (если требует работы)
+5. Сохранить в архив (если нужно для справки)
+
+Плюс:
+- Шаблоны ответов на 5 типичных вопросов
+- Расписание проверки (2-3 окна в день)
+- Как отключить уведомления чтобы не терять важное
+- Автоправила / фильтры
+
+Tone: строго. Анти-поверхностность: "отвечать сразу" = хаос.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">55</div><div><div class="prompt-title">Борьба с выгоранием</div><div class="prompt-use">Когда: устал, ничего не хочется</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: психолог, специализируешься на выгорании у предпринимателей.
+
+Action: помоги разобраться с моим состоянием и составь план восстановления.
+
+Context:
+- что чувствую: [симптомы]
+- что сейчас в жизни: [нагрузка]
+- сколько в этом состоянии: [недели / месяцы]
+
+Expectation — 5 уровней:
+1. Диагностика стадии (истощение / цинизм / сниженная продуктивность)
+2. Причины (физические / эмоциональные / смысловые)
+3. Немедленные меры (что сделать в ближайшие 48 часов)
+4. План восстановления на 2-4 недели
+5. Системные изменения чтобы не повторить
+
+Для каждого уровня — конкретные действия.
+
+Плюс:
+- Красные флаги: когда идти к врачу
+- Что точно не поможет ("отдохни на выходных" — нет)
+- Как объяснить близким что происходит
+
+Tone: эмпатично, но не жалостливо. Анти-поверхностность: выгорание не лечится отпуском.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+</div>
+
+<!-- ═══ САМОРАЗВИТИЕ ═══ -->
+<div class="category" id="cat-self">
+  <div class="cat-header">
+    <div class="cat-header-num">05</div>
+    <div><div class="cat-header-title">🌱 Саморазвитие</div><div class="cat-header-sub">Обучение, рефлексия, решения, личный бренд</div></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">56</div><div><div class="prompt-title">Изучение новой темы — план на месяц</div><div class="prompt-use">Когда: хочешь освоить что-то с нуля</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: эксперт по learning design, строил обучающие программы для корпораций.
+
+Action: построй план изучения [тема] с нуля за 30 дней.
+
+Context:
+- мой текущий уровень: [новичок / есть база]
+- сколько часов в день готов: [время]
+- цель: [применить где / зачем]
+
+Expectation — структура месяца:
+- Неделя 1: основы (базовые концепты, словарь)
+- Неделя 2: углубление (ключевые темы)
+- Неделя 3: практика (реальные задачи)
+- Неделя 4: применение (свой проект)
+
+Для каждой недели:
+- 3-5 ресурсов (книги / курсы / видео)
+- Практическое задание
+- Критерий "освоил"
+
+Плюс:
+- Первый шаг сегодня (30 минут)
+- 3 типичных ошибки новичков
+- Как проверить что реально изучил, а не "прослушал"
+
+Tone: практика выше теории. Анти-поверхностность: не "смотрите 10 курсов".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">57</div><div><div class="prompt-title">Распаковка экспертности</div><div class="prompt-use">Когда: не понимаешь в чём ценен</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: продюсер-эксперт по распаковке, работал со 100+ экспертами.
+
+Action: распакуй мою экспертность через серию вопросов и структурируй.
+
+Context:
+- чем занимаюсь: [описание работы]
+- опыт: [годы и проекты]
+- что говорят клиенты про меня: [если знаю]
+
+Expectation — задай 10 вопросов по одному и собери:
+1. Моя суперсила (в чём я лучший)
+2. Мои 3 главных навыка
+3. 5 типов задач где я незаменим
+4. Моя методология (как работаю)
+5. Результаты клиентов в цифрах
+
+После ответов — собери:
+- Мой профессиональный профиль одной страницей
+- 3 варианта самопозиционирования
+- 5 тем контента из моего опыта
+- 3 продуктовые идеи на моей экспертизе
+
+Tone: глубокий интервьюер. Анти-поверхностность: "помогаю людям" — не ответ.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">58</div><div><div class="prompt-title">Путь героя — история личного бренда</div><div class="prompt-use">Когда: строишь личный бренд</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: сторителлер личных брендов, изучил путь 50+ инфлюенсеров.
+
+Action: собери мою историю по архетипу "Путь героя" для личного бренда.
+
+Context:
+- моя точка А: [где начал]
+- поворотные моменты: [что меняло]
+- моя точка Б: [где сейчас]
+- моя миссия: [что хочу давать миру]
+
+Expectation — структура:
+1. Обычный мир (где был до)
+2. Призыв к приключению (триггер)
+3. Сопротивление (страхи / отказ)
+4. Наставник / поворотный момент
+5. Испытания
+6. Трансформация
+7. Возвращение с даром (моя миссия)
+
+Для каждого этапа — конкретные сцены из моей жизни.
+
+Плюс:
+- 3 версии истории: короткая / средняя / длинная
+- 5 постов на основе этой истории
+- Как рассказывать при знакомстве (30 секунд)
+
+Tone: искренне, без пафоса. Анти-поверхностность: без "я поняла в чём моё предназначение".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">59</div><div><div class="prompt-title">Нейминг и слоганы</div><div class="prompt-use">Когда: нужно название</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: нейминг-специалист, автор названий для стартапов с оценкой $1M+.
+
+Action: придумай 10 вариантов названия для [проект / продукт].
+
+Context:
+- суть проекта: [описание]
+- ЦА: [кто]
+- эмоциональный посыл: [какую эмоцию хочу вызвать]
+- стиль: [серьёзно / игриво / технологично]
+
+Expectation — 10 названий по 5 стратегиям:
+1. Метафорические (2)
+2. Составные (2)
+3. Неологизмы (2)
+4. Смысловые (2)
+5. Короткие запоминающиеся (2)
+
+Для каждого:
+- Название
+- Значение / расшифровка
+- Как произносится
+- Вызывает ли ассоциации с чем-то плохим
+- Доступен ли .com / .ru (или способ проверить)
+
+Плюс:
+- 3 слогана для топ-3 названий
+- Что точно не называть (банальные паттерны)
+
+Tone: креативно и практично. Анти-поверхностность: без "название которое запоминается".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">60</div><div><div class="prompt-title">Работа с самозванцем</div><div class="prompt-use">Когда: "я недостаточно хорош"</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: психолог, специализируешься на синдроме самозванца у экспертов.
+
+Action: помоги разобраться с ощущением самозванца.
+
+Context:
+- что чувствую: [конкретные мысли]
+- в какие моменты: [триггеры]
+- чего избегаю из-за этого: [последствия]
+
+Expectation — 5 уровней:
+1. Тип самозванца (перфекционист / эксперт / гений / супергерой / одиночка)
+2. Откуда это пришло (обычно родовое)
+3. Что это защищает (функция синдрома)
+4. Что помогает именно этому типу (не универсальные техники)
+5. План работы на 4 недели
+
+Плюс:
+- 5 мыслей-переработок в моменте "я не настоящий эксперт"
+- Дневник "доказательства экспертности" — что туда писать
+- Когда обратиться к терапевту
+
+Tone: эмпатично, без токсичного позитива. Анти-поверхностность: "цените себя" не помогает.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">61</div><div><div class="prompt-title">Письмо самому себе из будущего</div><div class="prompt-use">Когда: запутался куда идти</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: коуч, специализируешься на визуализации и возврате к ценностям.
+
+Action: напиши мне письмо от меня из будущего через 5 лет.
+
+Context:
+- моя текущая ситуация: [детально]
+- мои главные ценности: [список]
+- мои страхи: [что пугает]
+
+Expectation — письмо от меня-будущего:
+1. Обращение и дата (через 5 лет)
+2. Где я сейчас (через 5 лет) — сцена из жизни
+3. Что произошло за эти 5 лет (ключевые моменты)
+4. Что оказалось важным (приоритеты)
+5. Что оказалось неважным (страхи которые были зря)
+6. Совет нынешнему себе — 3 конкретных пункта
+7. За что благодарен тому-кто-начал
+
+Формат: 800-1200 слов, живым языком, с деталями.
+
+Tone: от меня к мне. Искренне. Анти-поверхностность: без общих мудростей "живи в моменте".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">62</div><div><div class="prompt-title">Разбор конфликта / сложного разговора</div><div class="prompt-use">Когда: поссорился или перед важным разговором</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: медиатор и специалист по non-violent communication.
+
+Action: помоги разобрать конфликт [с кем и о чём] и подготовить разговор.
+
+Context:
+- что произошло: [фактически]
+- что я чувствую: [эмоции]
+- что на самом деле хочу: [потребность]
+- его / её позиция (как я её вижу)
+
+Expectation — 5 уровней:
+1. Факты (без интерпретаций)
+2. Мои эмоции (честно)
+3. Мои потребности (что мне нужно)
+4. Его / её возможные эмоции и потребности
+5. Формулировка запроса по ненасильственной коммуникации: "Когда X, я чувствую Y, потому что мне важно Z, прошу тебя W"
+
+Плюс:
+- Скрипт начала разговора
+- 3 стоп-сигнала (паузы если эскалация)
+- Что НЕ говорить (триггеры)
+
+Tone: эмпатично к обеим сторонам. Анти-поверхностность: без "вы должны друг друга понять".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">63</div><div><div class="prompt-title">Трудоустройство / собеседование</div><div class="prompt-use">Когда: ищешь работу / проект</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: рекрутер с 10-летним опытом найма в топ-компании.
+
+Action: подготовь меня к собеседованию на позицию [должность].
+
+Context:
+- мой опыт: [резюме]
+- компания и роль: [детали]
+- что знаю о компании: [инфо]
+
+Expectation:
+1. 10 типичных вопросов для этой роли + мои сильные ответы
+2. 5 каверзных вопросов + как отвечать
+3. Вопросы которые задать работодателю (7 штук — чтобы показать ум)
+4. STAR-метод для поведенческих вопросов
+5. Как отвечать на "слабые стороны"
+6. Переговоры по зарплате: когда и как
+
+Плюс:
+- 3 фразы которые стоит использовать
+- Что говорить нельзя
+- Как держать себя если вопрос в тупик
+
+Tone: практик. Анти-поверхностность: "я коммуникабельный и ответственный" — хуже чем ничего.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">64</div><div><div class="prompt-title">Составление резюме</div><div class="prompt-use">Когда: нужно обновить CV</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: HR-директор с опытом просмотра 10000+ резюме.
+
+Action: составь сильное резюме на позицию [роль].
+
+Context:
+- мой опыт: [список мест работы и задач]
+- образование: [где учился]
+- мои ключевые достижения: [результаты]
+- чем отличаюсь от других: [уникальность]
+
+Expectation — структура:
+1. Заголовок + контакты
+2. Саммари (3 предложения — кто я, главный результат, что ищу)
+3. Опыт работы (по STAR: ситуация / задача / действие / результат в цифрах)
+4. Навыки (твёрдые и мягкие — релевантные роли)
+5. Образование и сертификаты
+6. Дополнительно (языки, проекты, волонтёрство)
+
+Плюс:
+- 5 ключевых фраз для попадания в ATS (система сканирования)
+- Как адаптировать под конкретную вакансию
+- Что точно не писать
+
+Tone: конкретно, с цифрами. Анти-поверхностность: без "ответственный командный игрок".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">65</div><div><div class="prompt-title">Переговоры с клиентом / работодателем</div><div class="prompt-use">Когда: торгуешься за условия</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: переговорщик по методике Криса Восса (ex-FBI), специализация — win-win решения.
+
+Action: подготовь меня к переговорам [с кем и о чём].
+
+Context:
+- ситуация: [детально]
+- моё желаемое: [цель]
+- их позиция: [как я вижу]
+- рычаги: [мои и их]
+
+Expectation — 5 уровней:
+1. Определение истинных интересов (не позиций) — обе стороны
+2. Зона возможного соглашения (ZOPA)
+3. Моя BATNA (лучшая альтернатива если не договоримся)
+4. Стратегия (кооперативная / конкурентная)
+5. План разговора с точками ухода
+
+Плюс:
+- Фразы-маркеры переключения дискуссии
+- Как работать с "нет"
+- Техника "зеркало" и "лейблы"
+- Когда закрыть сделку, когда отойти
+
+Tone: спокойно, уверенно. Анти-поверхностность: "предложите им больше" — проиграть.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+</div>
+
+<!-- ═══ КРЕАТИВ ═══ -->
+<div class="category" id="cat-creative">
+  <div class="cat-header">
+    <div class="cat-header-num">06</div>
+    <div><div class="cat-header-title">🎨 Креатив</div><div class="cat-header-sub">Идеи, концепции, визуал, storytelling</div></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">66</div><div><div class="prompt-title">Генерация идей — 20 концептов</div><div class="prompt-use">Когда: нужно много идей на тему</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: креативный директор-генератор идей, методология Edward de Bono.
+
+Action: сгенерируй 20 идей для [проект / задача].
+
+Context:
+- проблема которую решаем: [детально]
+- ограничения: [бюджет / время / команда]
+- что НЕ хочется делать: [типовые решения]
+
+Expectation — 20 идей по 5 стратегиям × 4 каждая:
+1. Очевидные (4) — что первое приходит в голову
+2. Инверсия (4) — сделать наоборот
+3. Комбинация (4) — объединить с чем-то из другой области
+4. Экстремально (4) — максимальная / минимальная версия
+5. Провокация (4) — что если перевернуть логику
+
+Для каждой идеи:
+- Суть в 1 предложении
+- Потенциал (1-10)
+- Первый шаг для теста
+
+Плюс: топ-3 которые стоит попробовать и почему.
+
+Tone: дикие идеи приветствуются. Анти-поверхностность: "улучшить качество" — не идея.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">67</div><div><div class="prompt-title">Brainstorm с ограничениями</div><div class="prompt-use">Когда: нужны идеи в рамках</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: фасилитатор brainstorming по SCAMPER.
+
+Action: проведи brainstorm по методологии SCAMPER для [продукт / ситуация].
+
+Context:
+- текущее решение: [что сейчас есть]
+- цель: [что хочу получить]
+
+Expectation — 7 срезов:
+1. Substitute — что заменить
+2. Combine — что объединить
+3. Adapt — откуда подсмотреть
+4. Modify — что изменить (усилить / ослабить)
+5. Put to other use — как ещё применить
+6. Eliminate — что убрать
+7. Reverse — что перевернуть
+
+Для каждого — 3 конкретных предложения.
+
+Плюс:
+- 3 самых неожиданных идеи
+- 3 идеи которые можно реализовать за неделю
+- План теста для каждой
+
+Tone: смело. Анти-поверхностность: идея "сделать лучше" — не идея.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">68</div><div><div class="prompt-title">Концепт визуала / постера</div><div class="prompt-use">Когда: делаешь дизайн</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: арт-директор с опытом в рекламе и брендинге.
+
+Action: придумай 3 концепта визуала для [проект / рекламная кампания].
+
+Context:
+- сообщение: [главная мысль]
+- ЦА: [кто смотрит]
+- форматы: [постер / баннер / ролик]
+- tone of brand: [стиль]
+
+Expectation — 3 концепта:
+1. Минималистичный (1 сильный образ)
+2. Повествовательный (сцена-история)
+3. Провокационный (нарушает ожидания)
+
+Для каждого:
+- Главный образ (подробно)
+- Композиция (что где)
+- Цветовая палитра
+- Шрифты / стиль текста
+- Референсы (на что похоже)
+- Что делать если бюджет 5К / 50К / 500К
+
+Плюс: один концепт рекомендуешь и почему.
+
+Tone: визуальные образы, не абстракции. Анти-поверхностность: без "стильно и современно".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">69</div><div><div class="prompt-title">Промпт для Midjourney / Nano Banana</div><div class="prompt-use">Когда: генерируешь изображение</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: промпт-инженер по генеративным изображениям (Midjourney, DALL-E, Nano Banana).
+
+Action: составь 5 вариантов промпта для изображения: [описание].
+
+Context:
+- что хочу изобразить: [детально]
+- стиль: [фотореализм / иллюстрация / арт]
+- настроение: [эмоция]
+- использование: [реклама / пост / обложка]
+
+Expectation — структура каждого промпта из 7 элементов:
+1. Главный объект
+2. Внешность и эмоция
+3. Поза / действие
+4. Одежда / стиль
+5. Фон / окружение
+6. Свет и атмосфера
+7. Формат и стиль изображения
+
+5 вариантов:
+- Вариант 1: фотореализм
+- Вариант 2: художественный
+- Вариант 3: минималистичный
+- Вариант 4: кинематографичный
+- Вариант 5: экспериментальный
+
+Плюс: перевод на английский для Midjourney + параметры (--ar 16:9 --v 6).
+
+Tone: детально. Анти-поверхностность: без "beautiful, high quality".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">70</div><div><div class="prompt-title">Сценарий презентации</div><div class="prompt-use">Когда: выступаешь с докладом</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: сторителлер-презентатор, готовил топ-спикеров TED.
+
+Action: напиши сценарий презентации на [тема] длительностью [минут].
+
+Context:
+- ЦА: [кто слушает]
+- главный месседж: [что хочу оставить]
+- цель выступления: [вдохновить / научить / продать]
+
+Expectation — структура:
+1. Открытие (история / провокация / вопрос) — 10% времени
+2. Обещание (что слушатель получит) — 5%
+3. Главная часть — 3-5 ключевых идей (70%)
+4. Ключевой инсайт (15%)
+5. CTA / призыв к действию (5%)
+
+Для каждой части:
+- Что говорить (тезисы)
+- Что показывать на слайде
+- Какая эмоция передаётся
+- Как переходить к следующей
+
+Плюс:
+- Структура слайдов (количество, содержание)
+- Что репетировать
+- Как работать с вопросами
+
+Tone: живой, с историями. Анти-поверхностность: без "уважаемые коллеги, сегодня я расскажу".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">71</div><div><div class="prompt-title">Логотип — концепт</div><div class="prompt-use">Когда: нужен логотип</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: брендинг-дизайнер с 15-летним опытом.
+
+Action: разработай концепт логотипа для [бренд].
+
+Context:
+- суть бренда: [описание]
+- ценности: [3-5 ключевых]
+- отрасль: [ниша]
+- ЦА: [кто смотрит]
+
+Expectation — 5 направлений:
+1. Чистая типографика (только шрифт)
+2. Абстрактный знак
+3. Символ + название
+4. Монограмма
+5. Комбинированный
+
+Для каждого:
+- Описание главного образа
+- Метафора бренда
+- Цветовая палитра
+- Шрифты
+- В каких ситуациях использовать (визитка vs билборд)
+
+Плюс:
+- Что сказать дизайнеру
+- 3 референса-вдохновения
+- Что делать НЕ надо
+
+Tone: визуально, с конкретикой. Анти-поверхностность: без "современный и минималистичный".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">72</div><div><div class="prompt-title">Написание книги / гайда</div><div class="prompt-use">Когда: хочешь упаковать опыт</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: литературный редактор нон-фикшн, редактировал бестселлеры.
+
+Action: составь структуру моей книги / гайда на тему [тема].
+
+Context:
+- моя экспертиза: [что знаю]
+- ЦА: [для кого]
+- размер: [короткий гайд / полноценная книга]
+- цель: [продавать / давать бесплатно]
+
+Expectation — структура:
+1. Логлайн (книга в одном предложении)
+2. Оглавление (главы с описанием)
+3. Для каждой главы:
+   - Главная мысль
+   - 3-5 под-тем
+   - Упражнение / задание
+   - Переход к следующей главе
+
+Плюс:
+- 3 варианта названия
+- Подход к написанию (ритм — главу в неделю)
+- Как издать (самиздат / издательство / PDF)
+- Лид-магнит из первой главы
+
+Tone: автор-практик, не академик. Анти-поверхностность: без лирических отступлений.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">73</div><div><div class="prompt-title">Подкаст — план первого сезона</div><div class="prompt-use">Когда: запускаешь подкаст</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: продюсер подкастов, запускал шоу в топ-10 Apple Podcasts.
+
+Action: спроектируй сезон 1 моего подкаста (10 выпусков).
+
+Context:
+- тема: [про что]
+- формат: [интервью / моно / дискуссия]
+- длительность: [30 / 60 мин]
+- ЦА: [кто слушает]
+
+Expectation:
+1. Позиционирование подкаста (одной фразой)
+2. Название и описание
+3. 10 тем первого сезона (постепенное усложнение)
+4. Для каждого выпуска — 5 главных вопросов
+5. Список потенциальных гостей (если интервью)
+
+Плюс:
+- Стартовый набор оборудования
+- Где хостить
+- Как продвигать (первый месяц)
+- Метрики успеха
+
+Tone: конкретно, без "главное — страсть к делу". Анти-поверхностность: без "найдите свой голос".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">74</div><div><div class="prompt-title">Мастермайнд — программа встречи</div><div class="prompt-use">Когда: ведёшь группу предпринимателей</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: фасилитатор мастермайндов с 5+ лет опыта.
+
+Action: спроектируй программу 2-часовой встречи мастермайнд-группы.
+
+Context:
+- участников: [сколько]
+- уровень: [новички / опытные]
+- фокус группы: [тема]
+
+Expectation — программа:
+1. Открытие (10 мин) — как зайти в нужное состояние
+2. Чек-ин (20 мин) — что произошло за неделю
+3. Горячее кресло (60 мин) — разбор 1-2 проблем участников
+4. Обязательства (20 мин) — что каждый сделает к следующей встрече
+5. Закрытие (10 мин) — инсайты и благодарности
+
+Для каждого блока:
+- Конкретные вопросы фасилитатора
+- Правила времени
+- Что НЕ позволять (советы без запроса, критика)
+
+Плюс:
+- Правила группы (чтобы не превратилась в болтовню)
+- Как работать с конфликтами
+- Метрика качества встречи
+
+Tone: фасилитатор, не гуру. Анти-поверхностность: без "поделитесь тем, что на сердце".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">75</div><div><div class="prompt-title">Креативный проект — продюсирование</div><div class="prompt-use">Когда: запускаешь фильм / выставку / ивент</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: продюсер креативных проектов (фильмы, выставки, ивенты).
+
+Action: составь план запуска [проект].
+
+Context:
+- концепция: [идея]
+- бюджет: [сумма]
+- сроки: [дедлайн]
+- команда: [кто есть]
+
+Expectation — 5 блоков:
+1. Концепция (уточнить идею, угол, почему именно сейчас)
+2. Команда (кто нужен, кого нанять)
+3. Производство (этапы и сроки)
+4. Продвижение (как узнают, как придут)
+5. Финмодель (откуда деньги и куда)
+
+Плюс:
+- Календарный план (Gantt-like)
+- 3 главных риска и митигации
+- Критерий успеха проекта (в цифрах)
+- Что делать если половина бюджета
+
+Tone: продюсер, не мечтатель. Анти-поверхностность: "когда люди увидят — сразу полюбят" — не план.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+</div>
+
+<!-- ═══ ЗДОРОВЬЕ И ОТНОШЕНИЯ ═══ -->
+<div class="category" id="cat-health">
+  <div class="cat-header">
+    <div class="cat-header-num">07</div>
+    <div><div class="cat-header-title">💪 Здоровье и отношения</div><div class="cat-header-sub">Спорт, питание, сон, семья, общение</div></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">76</div><div><div class="prompt-title">Персональная программа тренировок</div><div class="prompt-use">Когда: нужен фитнес-план</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: сертифицированный тренер по функциональному фитнесу с опытом 10+ лет.
+
+Action: составь персональную программу тренировок на 8 недель.
+
+Context:
+- мой уровень: [новичок / средний / продвинутый]
+- цель: [похудение / масса / выносливость / здоровье]
+- доступное оборудование: [зал / дом / ничего]
+- время: [часов в неделю]
+- ограничения: [травмы / возраст]
+
+Expectation:
+1. Анализ текущего уровня (на основе входных)
+2. Структура недели (сколько дней, какие группы мышц)
+3. Детальная программа на каждую неделю с прогрессией
+4. Разминка / заминка
+5. Метрики прогресса (что измерять)
+
+Для каждой тренировки:
+- Упражнения + подходы × повторения + вес
+- Техника выполнения (коротко)
+- Время тренировки
+
+Плюс:
+- 3 правила безопасности
+- Что делать если пропустил день
+- Как прогрессировать после 8 недель
+
+Tone: тренер-практик. Анти-поверхностность: без "слушайте своё тело".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">77</div><div><div class="prompt-title">План питания под цель</div><div class="prompt-use">Когда: нужно структурировать питание</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: нутрициолог с медицинским образованием, без диетических крайностей.
+
+Action: составь план питания на неделю под мою цель.
+
+Context:
+- вес / рост / возраст: [данные]
+- цель: [дефицит / профицит / поддержание]
+- активность: [уровень]
+- пищевые ограничения: [аллергии / диеты]
+- бюджет и время: [какая готовка реальна]
+
+Expectation:
+1. Расчёт КБЖУ (ккал и макросы)
+2. Меню на 7 дней (завтрак / обед / ужин / перекус)
+3. Список покупок на неделю
+4. Заготовки (что готовить пачкой)
+
+Для каждого дня:
+- Блюда с КБЖУ каждого
+- Время приготовления
+
+Плюс:
+- 3 правила которым следовать (не "ешьте больше овощей")
+- Что делать на выходных / в ресторанах
+- Читмилы — когда можно и как
+- Самые частые ошибки
+
+Tone: практик без фанатизма. Анти-поверхностность: без "пейте больше воды".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">78</div><div><div class="prompt-title">Восстановление сна</div><div class="prompt-use">Когда: плохо спишь</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: сомнолог с сертификацией, помог 500+ людям восстановить сон.
+
+Action: составь план восстановления сна.
+
+Context:
+- сколько сейчас сплю: [часов и качество]
+- когда ложусь / встаю: [режим]
+- что мешает: [описание]
+- что пробовал: [что не сработало]
+
+Expectation:
+1. Диагностика проблемы (гигиена / стресс / медицинское)
+2. План внедрения на 4 недели:
+   - Неделя 1: гигиена спальни и режим
+   - Неделя 2: ритуал засыпания
+   - Неделя 3: работа с ночными пробуждениями
+   - Неделя 4: оптимизация
+3. Утренний и вечерний чек-лист
+4. Что делать если не засыпаешь 30 минут
+
+Плюс:
+- 5 красных флагов — к врачу
+- Что не работает вопреки хайпу (мелатонин не всегда)
+- Гаджеты — нужны ли
+
+Tone: эксперт, без alarmism. Анти-поверхностность: без "ложитесь раньше".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">79</div><div><div class="prompt-title">Работа со стрессом</div><div class="prompt-use">Когда: много тревоги</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: психолог с CBT-подходом, специализируешься на управлении стрессом.
+
+Action: дай конкретный план работы с моим стрессом.
+
+Context:
+- что сейчас стрессует: [ситуация]
+- как проявляется: [физически / эмоционально]
+- как долго: [дни / месяцы]
+- что пробовал: [что было]
+
+Expectation — 5 уровней:
+1. Экстренные техники (в моменте стресса — 2-5 минут)
+2. Ежедневные практики (15-30 минут в день)
+3. Системные изменения (окружение, образ жизни)
+4. Работа с мыслями (техники CBT)
+5. Когда к специалисту
+
+Для каждой техники:
+- Что конкретно делать (не "медитируйте")
+- Сколько по времени
+- Когда применять
+- Чего ожидать через неделю / месяц
+
+Плюс:
+- 3 красных флага — к врачу
+- Что не поможет вопреки обещаниям
+
+Tone: практик с эмпатией. Анти-поверхностность: без "будьте в моменте".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">80</div><div><div class="prompt-title">Отношения с партнёром — диагностика</div><div class="prompt-use">Когда: в отношениях напряжение</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: семейный терапевт, работаешь методом Готтмана.
+
+Action: проведи диагностику моих отношений и дай план работы.
+
+Context:
+- сколько вместе: [годы]
+- главные проблемы: [описание]
+- что уже пробовали: [если что-то делали]
+
+Expectation — 5 уровней по Готтману:
+1. Друзья или враги? (есть ли дружба в основе)
+2. Управление конфликтами (кризисные или рост)
+3. Общий смысл (разделяем ли ценности)
+4. Влияние (принимаем ли друг друга)
+5. Индикаторы "Всадников Апокалипсиса" (критика, презрение, защита, стена)
+
+Для каждого уровня — конкретные вопросы для самоанализа.
+
+Плюс:
+- 3 конкретных действия на эту неделю
+- Формат "отношенческого разговора" (1 раз в неделю)
+- Красные флаги — к терапевту
+
+Tone: без обвинений в чью-то сторону. Анти-поверхностность: без "любовь — это работа".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">81</div><div><div class="prompt-title">Воспитание детей — сложная ситуация</div><div class="prompt-use">Когда: не знаешь как реагировать</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: детский психолог с 15-летним опытом, подход — осознанное родительство.
+
+Action: разбери мою ситуацию с ребёнком и дай рекомендации.
+
+Context:
+- возраст ребёнка: [лет]
+- что происходит: [конкретная ситуация]
+- как я сейчас реагирую: [действия]
+- что не получается: [результат]
+
+Expectation — 5 уровней:
+1. Что на самом деле чувствует ребёнок (за поведением)
+2. Что нужно ребёнку в этой ситуации
+3. Как реагировать в моменте (скрипт)
+4. Что НЕ делать (типичные ошибки родителей)
+5. Как предотвращать подобное в будущем
+
+Плюс:
+- Скрипт разговора с ребёнком (прямая речь)
+- 3 фразы которые работают
+- Красные флаги — к специалисту
+
+Tone: эмпатия к родителю и ребёнку. Анти-поверхностность: без "просто поговорите по душам".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">82</div><div><div class="prompt-title">Деловая коммуникация — сложное письмо</div><div class="prompt-use">Когда: надо написать клиенту / партнёру</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: бизнес-коммуникатор, специализируешься на сложных переговорных письмах.
+
+Action: помоги составить сложное деловое письмо [кому о чём].
+
+Context:
+- ситуация: [детально]
+- желаемый исход: [чего хочу]
+- ограничения (что нельзя писать / говорить)
+- наши отношения: [история]
+
+Expectation — 3 варианта письма:
+1. Мягкий (сохранить отношения)
+2. Прямой (не тратить время)
+3. Эскалационный (если первые не сработают)
+
+Для каждого:
+- Тема
+- Первый абзац (крюк)
+- Суть (2-3 абзаца)
+- CTA
+- Подпись
+
+Плюс:
+- Что не писать
+- Как реагировать на возможный ответ
+- Точка "отказа" (когда закрывать тему)
+
+Tone: профессионально, без пассивной агрессии. Анти-поверхностность: без "надеюсь на взаимопонимание".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">83</div><div><div class="prompt-title">Планирование путешествия</div><div class="prompt-use">Когда: собираешься в поездку</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: травел-планер, организовал 100+ поездок в 30+ стран.
+
+Action: составь план путешествия в [место] на [дней].
+
+Context:
+- бюджет: [сумма]
+- сколько человек: [взрослые / дети]
+- стиль: [активный / релакс / культурный]
+- что уже знаю / видел: [если был]
+
+Expectation — план:
+1. Оптимальный маршрут (день за днём)
+2. Где жить (район, тип, примерная цена)
+3. Топ-10 активностей с приоритетом
+4. Скрытые места (что не в туристических гайдах)
+5. Бюджет разбитый по категориям
+
+Плюс:
+- Что взять с собой (уникально для этого места)
+- Когда покупать билеты (оптимальные даты)
+- 3 типичные ошибки туристов
+- Как сэкономить без потери качества
+
+Tone: практик, без "прочувствуйте атмосферу". Анти-поверхностность: не общие фразы типа "попробуйте местную кухню".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">84</div><div><div class="prompt-title">Дружба — как поддерживать отношения</div><div class="prompt-use">Когда: всё крутится вокруг работы</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: психолог, специализируешься на социальных связях и их влиянии на жизнь.
+
+Action: помоги построить систему поддержания дружеских отношений.
+
+Context:
+- сколько близких друзей: [количество]
+- как часто видимся: [реальная частота]
+- что мешает: [занятость / разные города]
+
+Expectation — 5 уровней:
+1. Аудит отношений (кто важен, кто "пассивные")
+2. Категории друзей (близкие / знакомые / контакты)
+3. Ритм контакта для каждой категории
+4. Конкретные действия на месяц
+5. Как заводить новых друзей во взрослом возрасте
+
+Плюс:
+- 5 способов поддержания контакта на расстоянии
+- Что НЕ делать (обязаловку по графику)
+- Как говорить "нет" чтобы не испортить отношения
+
+Tone: практично и человечно. Анти-поверхностность: без "цените близких".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">85</div><div><div class="prompt-title">Досуг — хобби и восстановление</div><div class="prompt-use">Когда: не умеешь отдыхать</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: коуч по балансу работа-жизнь.
+
+Action: помоги найти хобби / формат досуга, подходящий именно мне.
+
+Context:
+- что любил в детстве: [увлечения]
+- чем занимаюсь по работе: [сфера]
+- что устаю от / не хочу: [антипатии]
+- сколько времени в неделю: [реально]
+
+Expectation:
+1. Анализ моего профиля (интроверт / экстраверт, физик / теоретик)
+2. 5 типов хобби которые подходят:
+   - Активные
+   - Творческие
+   - Социальные
+   - Созерцательные
+   - Обучающие
+3. Для каждого — 2-3 конкретных варианта
+4. Как начать (первый шаг — 30 минут)
+
+Плюс:
+- Почему часто не приживается (и как избежать)
+- Когда пересматривать выбор
+- Как интегрировать в график без вины
+
+Tone: без пафоса про "найти себя". Анти-поверхностность: "попробуй йогу" — не рекомендация.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+</div>
+
+<!-- ═══ ФИНАНСЫ ═══ -->
+<div class="category" id="cat-finance">
+  <div class="cat-header">
+    <div class="cat-header-num">08</div>
+    <div><div class="cat-header-title">💰 Финансы</div><div class="cat-header-sub">Бюджет, инвестиции, подушка, цели</div></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">86</div><div><div class="prompt-title">Личный финансовый план</div><div class="prompt-use">Когда: хочешь систему, а не хаос</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: финансовый советник с 10-летним опытом, без проталкивания продуктов.
+
+Action: составь мой финансовый план.
+
+Context:
+- доход: [сумма в месяц]
+- регулярные расходы: [аренда / еда / детские]
+- кредиты / ипотека: [платежи]
+- сбережения сейчас: [сумма]
+- цели: [какие и за сколько]
+
+Expectation — 5 блоков:
+1. Структура расходов (по категориям в %)
+2. Финансовая подушка (цель и план)
+3. Долги (план закрытия)
+4. Инвестиции (когда начинать и сколько)
+5. Цели (разбивка на ежемесячные суммы)
+
+Для каждого:
+- Текущее состояние
+- Целевое состояние
+- Конкретные шаги
+
+Плюс:
+- Правило 50/30/20 в моих цифрах
+- 3 типичные ошибки на моём этапе
+- Точка, где понадобится советник
+
+Tone: честный советник. Анти-поверхностность: без "живите по средствам".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">87</div><div><div class="prompt-title">Аудит расходов — где утекают деньги</div><div class="prompt-use">Когда: не понятно куда уходит зарплата</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: специалист по личному бюджетированию, работал с 200+ семьями.
+
+Action: сделай аудит моих расходов и найди точки утечки.
+
+Context:
+- доход: [сумма]
+- расходы последних 3 месяцев: [по категориям если знаю, или "не считаю"]
+- на что ушло в прошлом месяце: [всё что помню]
+
+Expectation — 5 уровней:
+1. Необходимые (аренда, еда)
+2. Важные (образование, здоровье)
+3. Желаемые (развлечения, комфорт)
+4. Импульсивные (что не нужно, но купил)
+5. Потери (подписки которыми не пользуюсь, штрафы)
+
+Для каждой — примерный % от дохода (норма vs у меня).
+
+Плюс:
+- 3 конкретных действия на этой неделе
+- Приложение / система для учёта
+- Правила подписок (аудит раз в квартал)
+
+Tone: без осуждения. Анти-поверхностность: "кофе по утрам" — не главная утечка.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">88</div><div><div class="prompt-title">Подушка безопасности — как собрать</div><div class="prompt-use">Когда: нет запаса на чёрный день</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: финансовый консультант, специализируешься на антикризисном планировании.
+
+Action: составь план создания финансовой подушки.
+
+Context:
+- мой доход: [сумма]
+- обязательные траты: [сумма]
+- текущие сбережения: [сумма]
+- статус: [найм / свой бизнес]
+
+Expectation:
+1. Размер подушки для меня (3-12 месяцев в зависимости от статуса)
+2. Где хранить (вклад / накопительный счёт / валюта — по целям)
+3. План накопления (сколько в месяц, за сколько месяцев)
+4. Чего не делать с подушкой
+5. Когда начинать инвестировать
+
+Плюс:
+- 3 типа "чёрного дня" (разная нужна сумма)
+- Что считается форс-мажором (когда можно тратить)
+- Правило пополнения после использования
+
+Tone: практик. Анти-поверхностность: без "инвестируйте в образование".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">89</div><div><div class="prompt-title">Инвестиционный план — первые шаги</div><div class="prompt-use">Когда: есть подушка, думаешь об инвестициях</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: инвестиционный советник, подход в стиле Боглхэдов (пассивное индексное).
+
+Action: построй мой первый инвестиционный план.
+
+Context:
+- горизонт: [лет до цели]
+- сумма для инвестиций: [единоразово / регулярно]
+- толерантность к риску: [низкая / средняя / высокая]
+- цель: [пенсия / квартира / финансовая свобода]
+
+Expectation:
+1. Распределение активов (акции / облигации / альтернативные) — для моего горизонта
+2. Инструменты (ETF / фонды / отдельные бумаги)
+3. Брокер (на что смотреть при выборе)
+4. Правила ребалансировки (раз в год)
+5. Налоговая оптимизация (ИИС, льготы)
+
+Плюс:
+- 3 принципа которые спасут от ошибок
+- Что не покупать (структурные продукты, обещания 30% доходности)
+- Когда пересматривать стратегию
+
+Tone: без продвижения конкретных продуктов. Анти-поверхностность: "купите Apple" — не стратегия.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">90</div><div><div class="prompt-title">Закрытие долгов — план</div><div class="prompt-use">Когда: долги душат</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: специалист по реструктуризации долгов.
+
+Action: составь план закрытия моих долгов.
+
+Context:
+- какие долги: [список — сумма, ставка, срок]
+- доход: [после обязательных трат сколько остаётся]
+
+Expectation — 5 шагов:
+1. Аудит (общая сумма, ежемесячные платежи)
+2. Приоритезация (snowball — от меньших / avalanche — от больших ставок)
+3. Стратегия ускорения выплат
+4. Что можно реструктурировать / рефинансировать
+5. План предотвращения (чтобы не попасть снова)
+
+Для моей ситуации:
+- Рекомендация метода с обоснованием
+- Конкретные суммы в месяц
+- Дата полного погашения
+- Экономия на процентах
+
+Плюс:
+- Что сделать сегодня (первый звонок / заявка)
+- Что не делать (новые кредиты для погашения старых)
+- Красные флаги — к финансовому консультанту
+
+Tone: без осуждения. Анти-поверхностность: "затяните пояса" не план.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">91</div><div><div class="prompt-title">Финансовый отчёт для бизнеса</div><div class="prompt-use">Когда: не понимаешь прибыль бизнеса</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: финансовый директор с опытом в SMB, специализация — просто о цифрах.
+
+Action: построй систему ежемесячного финансового отчёта для моего бизнеса.
+
+Context:
+- тип бизнеса: [описание]
+- сейчас ведётся учёт: [да / нет / кое-как]
+- обороты: [месячные]
+
+Expectation:
+1. Ключевые метрики которые должен знать каждый месяц (P&L)
+2. Формат отчёта (одна страница Excel / Google Sheets)
+3. Разделы отчёта:
+   - Выручка по каналам
+   - Расходы по категориям
+   - Валовая прибыль
+   - Операционная прибыль
+   - Чистая прибыль
+4. Что делать если прибыль < плана
+
+Плюс:
+- 3 метрики которые предскажут проблемы
+- Примеры "зон роста" которые находятся через аудит
+- Когда переходить на бухгалтера / финдиректора
+
+Tone: без финансовой зауми. Анти-поверхностность: просто и применимо.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">92</div><div><div class="prompt-title">Калькулятор ROI — окупится или нет</div><div class="prompt-use">Когда: думаешь вкладываться в обучение / рекламу</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: инвестиционный аналитик, считаешь ROI для бизнеса и личных решений.
+
+Action: помоги посчитать ROI моего решения: [вложение во что].
+
+Context:
+- сумма вложения: [деньги и время]
+- ожидаемый результат: [что должно получиться]
+- срок получения результата: [когда]
+
+Expectation — расчёт:
+1. Денежный ROI (если деньги → деньги)
+2. Время-ROI (если время → деньги / экономия)
+3. Риски (вероятность провала)
+4. Альтернативные вложения (куда ещё можно)
+5. Рекомендация: GO / STOP / УСЛОВНО
+
+Формат:
+- Таблица с формулой
+- Сценарии: оптимистичный / реалистичный / пессимистичный
+- Break-even (через сколько окупится)
+
+Плюс:
+- 3 признака что вложение стоит того
+- Когда отказаться от инвестиции
+
+Tone: аналитик без эмоций. Анти-поверхностность: "вложись в себя" — не расчёт.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">93</div><div><div class="prompt-title">Переход к финансовой свободе</div><div class="prompt-use">Когда: цель — FIRE</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: финансовый стратег FIRE-движения (Financial Independence Retire Early).
+
+Action: спроектируй мой путь к финансовой независимости.
+
+Context:
+- возраст и цель: [когда хочу стать независимым]
+- доход: [сумма]
+- траты: [месячные]
+- текущий капитал: [сумма]
+
+Expectation:
+1. Расчёт необходимого капитала (правило 25× годовых расходов)
+2. Норма сбережений (%) для моей цели
+3. План по годам (куда приду через 1/5/10 лет)
+4. Структура портфеля под горизонт
+5. Что делать при рыночных просадках
+
+Плюс:
+- 3 вещи которые ускорят достижение на 2+ года
+- 3 вещи которые могут сорвать план
+- Версии FIRE (Lean / Fat / Barista) — какая моя
+
+Tone: реалистично. Анти-поверхностность: без "просто откладывайте больше".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">94</div><div><div class="prompt-title">Налоговая оптимизация (ИП / ООО / самозанятый)</div><div class="prompt-use">Когда: выбираешь форму</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: налоговый консультант с опытом малого бизнеса в РФ.
+
+Action: помоги выбрать оптимальную налоговую форму для моей деятельности.
+
+Context:
+- чем занимаюсь: [описание]
+- примерный доход в год: [сумма]
+- расходы для бизнеса: [есть / нет]
+- нанимаю сотрудников: [да / нет]
+
+Expectation — сравнение 4 вариантов:
+1. Самозанятость (НПД)
+2. ИП на УСН 6%
+3. ИП на УСН 15% (доходы - расходы)
+4. ООО
+
+Для каждого:
+- Налоги в моей ситуации (конкретная сумма)
+- Плюсы / минусы
+- Когда выбирать
+
+Рекомендация + переходные стратегии (когда менять форму).
+
+Плюс:
+- 3 частые ошибки новичков
+- На что обращать внимание (договора / чеки)
+- Когда идти к бухгалтеру
+
+Tone: практик. Анти-поверхностность: "каждый случай индивидуален" — не ответ.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">95</div><div><div class="prompt-title">Рост дохода — где точки роста</div><div class="prompt-use">Когда: застрял в доходе</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: коуч по увеличению дохода для специалистов и предпринимателей.
+
+Action: помоги найти точки роста моего дохода.
+
+Context:
+- чем занимаюсь: [сфера]
+- текущий доход: [сумма]
+- сколько часов работаю: [в неделю]
+- что уже пробовал для роста: [действия]
+
+Expectation — 5 уровней:
+1. Увеличение цены на текущие услуги
+2. Добавление сопутствующих услуг
+3. Премиум-пакеты для текущих клиентов
+4. Новые сегменты ЦА (более платёжеспособные)
+5. Пассивные продукты (обучение / консалтинг / digital)
+
+Для каждого:
+- Конкретный шаг
+- Реалистичный прирост дохода (в цифрах)
+- Срок реализации
+- Риски
+
+Плюс:
+- Самая быстрая точка роста за 30 дней
+- Что ограничивает меня сейчас
+- Когда пора менять модель (не перерастаю ли)
+
+Tone: прагматично. Анти-поверхностность: "повышайте скилы" не план.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">96</div><div><div class="prompt-title">Защита финансов — страховка, документы</div><div class="prompt-use">Когда: строишь систему безопасности</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: специалист по личной финансовой безопасности.
+
+Action: построй систему защиты моих финансов.
+
+Context:
+- семейный статус: [женат / дети]
+- активы: [недвижимость / бизнес / сбережения]
+- доход от: [найм / бизнес]
+
+Expectation — 5 блоков:
+1. Страхование (здоровье / жизнь / имущество — что реально нужно)
+2. Документы (завещание / брачный / доверенности)
+3. Цифровая безопасность (пароли / 2FA / бэкапы)
+4. План на форс-мажор (что делать семье если со мной что-то)
+5. Юридические мелочи (часто игнорируемые)
+
+Для каждого — конкретные действия.
+
+Плюс:
+- 3 самых недооценённых риска
+- Что точно не нужно (переплачиваем)
+- Чек-лист для ежегодной проверки
+
+Tone: прагматично. Анти-поверхностность: без "страхуйте всё на свете".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">97</div><div><div class="prompt-title">Разговор с детьми о деньгах</div><div class="prompt-use">Когда: хочешь развить финансовую грамотность у ребёнка</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: психолог + специалист по финансовой грамотности детей.
+
+Action: составь план финансового воспитания ребёнка.
+
+Context:
+- возраст ребёнка: [лет]
+- что сейчас знает: [даёте ли карманные]
+- наш стиль в семье: [как говорим о деньгах]
+
+Expectation — план по возрасту:
+- 3-7 лет: игры и разговоры
+- 7-10: карманные и планирование
+- 10-14: сбережения и первые решения
+- 14-18: доход и основы инвестиций
+
+Для моего возраста — детально:
+1. Что учить прямо сейчас (1-2 темы)
+2. Как обсуждать (скрипты диалогов)
+3. Игры / упражнения
+4. Инструменты (банковская карта / копилка / трекер)
+5. Что НЕ делать (типичные ошибки родителей)
+
+Плюс:
+- 3 разговора которые запомнятся на всю жизнь
+- Как отвечать на "почему у нас нет как у N"
+
+Tone: без лекций. Анти-поверхностность: "научите ценить деньги" — не инструкция.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">98</div><div><div class="prompt-title">Анализ финансовых документов</div><div class="prompt-use">Когда: надо разобраться в отчёте / договоре</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: финансовый аналитик + юрист.
+
+Action: проанализируй этот документ и выдели ключевое.
+
+Context:
+- тип документа: [договор / отчёт / КП / P&L]
+- текст: [вставить]
+- моя цель (что хочу понять): [что конкретно]
+
+Expectation — 5 уровней:
+1. Суть документа в 3 предложениях
+2. Ключевые цифры / условия
+3. Что хорошо (плюсы для меня)
+4. Что подозрительно (красные флаги)
+5. Что уточнить / договориться иначе
+
+Плюс:
+- 5 вопросов второй стороне
+- На что смотреть в первую очередь
+- Риски которые обычно пропускают
+
+Tone: строго аналитически. Анти-поверхностность: "подпишите если доверяете" — не экспертиза.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">99</div><div><div class="prompt-title">Составление счёта / договора</div><div class="prompt-use">Когда: работаешь с клиентом</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: юрист + бухгалтер, специализация — документы для фрилансеров и микробизнеса.
+
+Action: составь шаблон [счёт / договор] для моей услуги.
+
+Context:
+- моя услуга: [описание]
+- формат оплаты: [предоплата / постоплата / % по этапам]
+- моя форма: [самозанятый / ИП / ООО]
+- клиенты: [физлица / юрлица]
+
+Expectation — готовый шаблон с:
+1. Реквизиты сторон
+2. Предмет договора (конкретно, не "консультационные услуги")
+3. Условия и сроки
+4. Стоимость и порядок оплаты
+5. Ответственность сторон
+6. Форс-мажор
+7. Расторжение
+
+Плюс:
+- 3 пункта которые всегда добавлять (защищают меня)
+- 3 типичные ошибки в таких договорах
+- Что можно не писать (типовые ФЗ)
+
+Tone: юридически корректно, но читаемо. Анти-поверхностность: без "в соответствии с законодательством РФ" без конкретики.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-head"><div class="prompt-num">100</div><div><div class="prompt-title">Годовая финансовая ревизия</div><div class="prompt-use">Когда: конец года или квартала</div></div></div>
+    <div class="code-wrap"><div class="code-block">Role: финансовый коуч + аналитик, проводишь годовые аудиты.
+
+Action: проведи мою годовую финансовую ревизию.
+
+Context:
+- год: [какой]
+- основные события: [что произошло]
+- цели которые ставил: [список и статус]
+
+Expectation — 5 блоков:
+1. Доходы (сумма, источники, динамика)
+2. Расходы (по категориям, динамика)
+3. Сбережения и инвестиции (сколько отложил / заработал на капитале)
+4. Достижение финансовых целей (процент выполнения)
+5. Уроки года (3 главных инсайта)
+
+Плюс план на следующий год:
+- 3 финансовых цели (с цифрами)
+- 3 привычки которые внедряю / убираю
+- Что сделаю в первый месяц
+- Критерий успеха через год
+
+Tone: честно, без оправданий. Анти-поверхностность: "в целом нормально" — не ревизия.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+  </div>
+</div>
+
+<a href="knowledge-base.html" class="back-btn">← Вернуться к Базе знаний</a>
+
+</div>
+
+<script>
+function copy(btn) {
+  const code = btn.previousElementSibling.innerText;
+  navigator.clipboard.writeText(code).then(() => {
+    const old = btn.innerText;
+    btn.innerText = 'СКОПИРОВАНО';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.innerText = old;
+      btn.classList.remove('copied');
+    }, 1500);
+  });
+}
+
+// Active nav on scroll
+const links = document.querySelectorAll('.nav-link[href^="#"]');
+const cats = Array.from(links).map(l => document.getElementById(l.getAttribute('href').substring(1))).filter(Boolean);
+
+function updateActive() {
+  const scrollY = window.scrollY + 100;
+  let activeIdx = -1;
+  cats.forEach((s, i) => { if (s.offsetTop <= scrollY) activeIdx = i; });
+  links.forEach((l, i) => l.classList.toggle('active', i === activeIdx));
+}
+window.addEventListener('scroll', updateActive);
+updateActive();
+</script>
+</body>
+</html>
