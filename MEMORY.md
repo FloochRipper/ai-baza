@@ -20,6 +20,8 @@
 ## Стиль
 - [Что НЕ писать от лица Никиты](../kontent-zavod-nikita/memory/feedback_style.md) — общий стиль для всего
 - Короткое тире, без жирного, без списков в статьях
+- [Единый стиль в блоке - карточки ИЛИ аккордеоны, не смешивать](memory/feedback_single_style.md)
+- Статьи от лица Никиты - первое лицо (я, мне), не "Никита делает"
 
 ## Концепция лид-магнита
 - [Система AI-агентов, не промпты](memory/feedback_lead_magnet_agents.md) — двухуровневый подход
@@ -28,6 +30,8 @@
 - Claude-Code-Starter-Kit.html — эталон формата (10 блоков, промпты внутри)
 - mavgpt.ai — модель Resource Hub, единая точка входа
 - @anjela_p — Notion-база промптов, частично открытая/закрытая
+- [@dulmabuyantueva PDF-гайд по установке Claude](references/competitor-guide-claude-install.md) — взяли идею раздела "из России" (VPN + номер) и структуру 6-шаговой регистрации
+- [VPN для раздела установки — Happ / Dino VPN](../../../.claude/projects/-Users-mac-Documents-Projects-baza-znaniy/memory/project_recommended_vpn.md)
 
 ## Визуальная айдентика
 - Тёмный фон #0a0a0a, светлый #f4f4ef, акцент #F5521A (оранжевый)

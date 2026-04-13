@@ -1,0 +1,5 @@
+# Сюда клади ссылки на Reels конкурентов, по одной на строку.
+# Можно комментировать строки через #.
+# Пример:
+# https://www.instagram.com/reel/DXB7IBtDYXm/
+# https://www.instagram.com/reel/DWPGBIKCYZv/

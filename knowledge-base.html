@@ -303,8 +303,8 @@ a { color: var(--accent); }
     <a href="#block0" class="nav-link">Блок 0 — Мышление</a>
     <a href="#block1" class="nav-link">Блок 1 — Основы</a>
     <a href="#block2" class="nav-link">Блок 2 — Claude Code</a>
+    <a href="#tools" class="nav-link">Инструменты</a>
     <a href="#glossary" class="nav-link">Словарь</a>
-    <a href="100-prompts-pro.html" class="nav-link">+100 промптов</a>
   </div>
 </nav>
 
@@ -334,6 +334,32 @@ a { color: var(--accent); }
     <div class="block-title">Claude Code</div>
     <div class="block-desc">Установка, команды, структура проекта, скиллы, память между сессиями</div>
     <div class="block-tags"><span class="tag">VS Code</span><span class="tag">Команды</span><span class="tag">Скиллы</span></div>
+  </a>
+</div>
+
+<!-- TOOLS / DOWNLOADS -->
+<div id="tools" class="block-divider">
+  <div class="block-label">
+    <div class="block-num-label">↓</div>
+    <div>
+      <div class="block-title-label">Инструменты</div>
+      <div class="block-desc-label">Готовые материалы и скиллы — забирай и применяй</div>
+    </div>
+  </div>
+</div>
+
+<div class="blocks-grid">
+  <a href="100-prompts-pro.html" class="block-card">
+    <div class="block-num">01</div>
+    <div class="block-title">100 промптов PRO</div>
+    <div class="block-desc">Коллекция промптов по формуле R.A.C.E.T. по 8 сферам: бизнес, маркетинг, контент, продуктивность, саморазвитие, креатив, здоровье, финансы</div>
+    <div class="block-tags"><span class="tag">Бесплатно</span><span class="tag">R.A.C.E.T.</span><span class="tag">HTML</span></div>
+  </a>
+  <a href="content-zavod-starter/" class="block-card">
+    <div class="block-num">02</div>
+    <div class="block-title">Контент-завод 1.0</div>
+    <div class="block-desc">Claude Code скилл, который разбирает Reels конкурентов за 10 минут. Скачивает, транскрибирует локально, складывает в корпус для анализа</div>
+    <div class="block-tags"><span class="tag">Бесплатно</span><span class="tag">Claude Code</span><span class="tag">Скилл</span></div>
   </a>
 </div>
 
@@ -785,65 +811,210 @@ HIDDEN-END -->
   </div>
 </div>
 
-<div class="section" id="install">
+<div class="section" id="what-is-claude-code">
   <div class="section-header" onclick="toggle(this)">
-    <span class="section-icon">⚙️</span>
-    <span class="section-name">Установка за 5 минут</span>
+    <span class="section-icon">🤖</span>
+    <span class="section-name">Что такое Claude Code - и чем он отличается от просто Claude</span>
     <span class="section-chevron">▼</span>
   </div>
   <div class="section-body">
-    <h3>Что понадобится</h3>
-    <ul>
-      <li><strong>VS Code</strong> — бесплатный редактор, внутри которого будет жить Claude Code</li>
-      <li><strong>Claude Pro или Max</strong> — подписка, $20 или $100-200/мес</li>
-      <li><strong>Аккаунт GitHub</strong> — для сохранений проектов в облако (позже)</li>
-    </ul>
+    <p>Ты открываешь claude.ai, пишешь запрос, получаешь ответ. Скопировал код - вставил в редактор. Снова скопировал. Снова вставил. Через час понимаешь: ты не программируешь, ты работаешь курьером между двумя окнами.</p>
+    <p>Claude Code устроен иначе. Это не чат. Это агент, которого ты запускаешь прямо в своём проекте. Он видит твои файлы, читает код, вносит правки сам, запускает команды в терминале, проверяет результат. Ты ставишь задачу - он делает.</p>
+    <div class="callout">
+      <div class="callout-label">Главная разница</div>
+      <p>Claude в браузере - это умный советник, которому ты диктуешь по телефону. Claude Code - это тот же советник, но он сидит рядом за компьютером и сам набирает.</p>
+    </div>
+    <h3>Как это работает внутри</h3>
+    <p>Три вещи делают Claude Code агентом, а не просто чатом.</p>
+    <p><strong>Контекстное окно</strong> - то что он держит в голове в процессе работы: твои файлы, историю изменений, задачу. Как рабочая память.</p>
+    <p><strong>Инструменты</strong> - читать файлы, писать в файлы, запускать команды в терминале. Это не метафора - он буквально вызывает команды и видит их результат.</p>
+    <p><strong>Цикл агента</strong> - сделал шаг, проверил что получилось, сделал следующий. Сам. Без того чтобы ты каждый раз жал кнопку.</p>
+    <h3>Claude vs Claude Code - на практике</h3>
+    <table class="compare">
+      <tr><th>Ситуация</th><th>Claude (браузер)</th><th>Claude Code</th></tr>
+      <tr><td>Написать функцию</td><td>Даёт код - ты копируешь</td><td>Сам вписывает в нужный файл</td></tr>
+      <tr><td>Исправить баг</td><td>Объясняет где искать</td><td>Находит, правит, проверяет</td></tr>
+      <tr><td>Создать страницу</td><td>Генерирует HTML - ты сохраняешь</td><td>Создаёт файл, открывает в браузере</td></tr>
+      <tr><td>Рефакторинг</td><td>Показывает как надо</td><td>Переписывает сам</td></tr>
+    </table>
+    <h3>Кому это нужно</h3>
+    <p>Если ты не программист - это именно тот инструмент который позволяет делать продукты самому. Не изучая синтаксис, не гуглия каждую строку. Ты описываешь что хочешь на человеческом языке - Claude Code разбирается как это сделать технически.</p>
+    <p>Эту платформу я делаю именно через Claude Code. То что ты сейчас читаешь - сделано вайбкодингом, а не классической разработкой.</p>
+  </div>
+</div>
+
+<div class="section" id="install">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">⚙️</span>
+    <span class="section-name">Установка - пошагово</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Скачиваешь VS Code, устанавливаешь два расширения, авторизуешься. Минут пять и всё готово.</p>
+    <div class="callout" style="background:rgba(248,113,113,0.1);border-left:3px solid #f87171;padding:1rem 1.2rem;border-radius:0 8px 8px 0;margin:1rem 0;">
+      <div class="callout-label" style="color:#f87171;font-weight:700;margin-bottom:.3rem;">Если ты из России — обязательно под VPN</div>
+      <p>Весь процесс установки и работы делай <strong>под VPN</strong>. Без него не откроется claude.ai, не пройдёт логин через Anthropic, и Claude Code не получит доступ к API. VPN нужен и при первой настройке, и каждый раз когда работаешь с Claude.</p>
+    </div>
     <h3>Шаги</h3>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-text">Скачать VS Code: <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Для Windows:</strong> при установке поставить галку "Добавить в PATH". Без неё Claude не запустится</div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-text">Открыть VS Code → иконка расширений слева (Cmd/Ctrl+Shift+X) → в поиске "Claude Code" от Anthropic → Install</div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-text">Нажать иконку Claude в верхней панели → команда /login → авторизоваться через браузер</div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Скачай VS Code: <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a>. Бесплатный редактор от Microsoft под Mac, Windows, Linux.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Для Windows важно:</strong> при установке поставь галку "Add to PATH". Без неё Claude Code не запустится.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Открой VS Code, слева иконка расширений (Cmd/Ctrl+Shift+X). В поиске введи <code>russian</code>, поставь "Russian Language Pack" от Microsoft. Перезапусти - всё станет по-русски.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Снова в расширения, в поиске <code>claude code</code>. Поставь "Claude Code" от Anthropic.</div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-text">Иконка Claude в боковой панели. Откроется браузер для авторизации - войди через свой аккаунт Anthropic (тот же что на claude.ai).</div></div>
     </div>
-    <div class="code-wrap">
-      <div class="code-label">Альтернатива — через терминал</div>
-      <div class="code-block bash">npm install -g @anthropic-ai/claude-code</div>
-      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    <div class="callout green">
+      <div class="callout-label">Аккаунта нет?</div>
+      <p>Регистрируйся на claude.ai - бесплатно. Потом возвращайся к шагу 5.</p>
     </div>
+    <h3>Что понадобится по деньгам</h3>
+    <ul>
+      <li><strong>Claude Pro или Max</strong> - подписка $20 или $100-200/мес. На Pro можно начать, для серьёзной работы лучше Max.</li>
+      <li><strong>Аккаунт GitHub</strong> - бесплатный. Для сохранений проектов в облако (позже).</li>
+    </ul>
     <h3>Проверка что всё работает</h3>
-    <p>Создайте папку в <code>Documents/Projects</code>, откройте её в VS Code (File → Open Folder), запустите Claude Code и напишите:</p>
+    <p>Создай папку <code>Documents/Projects/test</code>, открой её в VS Code (File → Open Folder), запусти Claude Code и напиши:</p>
     <div class="code-wrap">
       <div class="code-label">Первый тест</div>
       <div class="code-block prompt">Создай файл test.md с текстом "Claude работает". Потом прочитай его и подтверди.</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
-    <p>Если файл появился и Claude ответил — всё готово.</p>
+    <p>Если файл появился и Claude ответил - всё готово.</p>
+    <h3>Через терминал (альтернатива)</h3>
+    <p>Для тех кто уже работает с командной строкой:</p>
+    <div class="code-wrap">
+      <div class="code-label">Установка глобально</div>
+      <div class="code-block bash">npm install -g @anthropic-ai/claude-code</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <p>Потом переходишь в папку проекта и запускаешь командой <code>claude</code>. Нужен Node.js - если нет, скачай с nodejs.org.</p>
   </div>
 </div>
 
-<div class="section" id="concepts">
+<div class="section" id="first-project">
   <div class="section-header" onclick="toggle(this)">
-    <span class="section-icon">📚</span>
-    <span class="section-name">Базовые понятия — скиллы, плагины, MCP, агенты</span>
+    <span class="section-icon">🚀</span>
+    <span class="section-name">Первый проект с нуля</span>
     <span class="section-chevron">▼</span>
   </div>
   <div class="section-body">
-    <p>Прежде чем лезть в фишки и трюки — нужно понять из чего состоит экосистема Claude Code. Четыре понятия, которые путают новички.</p>
-    <h3>Скилл</h3>
-    <p><strong>Это готовая инструкция для Claude на конкретную задачу.</strong> Пишете в чате <code>/carousel</code> — Claude уже знает как делать карусель для Instagram: сколько слайдов, какая структура, какие хуки.</p>
-    <p>Скилл — это не плагин. Это файл с правилами, который Claude читает, когда вы вызываете команду. Можете написать свой скилл за 10 минут. В моём случае скиллы живут в папке <code>.claude/skills/</code> — <code>/telegram</code>, <code>/reels-tiktok</code>, <code>/lead-magnet</code> и т.д.</p>
-    <h3>Плагин</h3>
-    <p><strong>Это расширение самого Claude Code.</strong> Добавляет новые возможности: работу с браузером, доступ к свежей документации, память между сессиями. Устанавливается один раз командой, работает фоном.</p>
-    <p>Например <code>Superpowers</code> — плагин, внутри которого живёт целая библиотека скиллов. Без него многие команды не заработают.</p>
-    <h3>MCP — Model Context Protocol</h3>
-    <p><strong>Это способ подключать к Claude внешние инструменты.</strong> Браузер, файловую систему, базы данных, сторонние API. MCP — как USB-порт: один стандарт подключения для разных устройств.</p>
-    <p>Пример: <code>Playwright MCP</code> даёт Claude возможность открывать сайты и кликать на кнопки. Без MCP Claude не может работать с внешним миром — только с файлами внутри проекта.</p>
-    <h3>Агент</h3>
-    <p><strong>Это Claude со специализацией и автономией.</strong> Получает задачу — сам ищет информацию, создаёт файлы, проверяет результат, отчитывается. В отличие от обычного чата, агент делает цепочку шагов без промежуточных вопросов.</p>
-    <p>Простой пример: агент "ресёрчер" получает тему → сам ищет материалы → анализирует → делает отчёт. Не надо каждый раз говорить "дальше".</p>
+    <p>Открываешь папку, пишешь задачу, смотришь как Claude Code делает всё сам. Первый раз это немного магия.</p>
+    <h3>Открыть проект</h3>
+    <p>Создай на компьютере пустую папку. Например, на рабочем столе - назови как хочешь, хоть <code>my-project</code>.</p>
+    <p>В VS Code нажми "Открыть папку" (File → Open Folder) и выбери её. Всё - ты в проекте. Папка пустая, файлов нет. Это нормально.</p>
+    <h3>Первая задача</h3>
+    <p>Открывай Claude Code - иконка в левой панели VS Code. Видишь поле для ввода. Пиши первую задачу. Для старта подойдёт что-то простое:</p>
+    <div class="code-wrap">
+      <div class="code-label">Варианты первого промпта</div>
+      <div class="code-block prompt">Создай простую HTML-страницу с заголовком и коротким текстом о себе</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="code-wrap">
+      <div class="code-label">Или</div>
+      <div class="code-block prompt">Сделай страницу с тёмным фоном, белым текстом и моим именем по центру</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <h3>Claude Code спросит разрешение</h3>
+    <p>Перед тем как что-то делать - он покажет план и попросит подтвердить. Напишет что именно хочет создать. Нажимай "Yes" или "Allow".</p>
+    <div class="callout blue">
+      <div class="callout-label">Почему он спрашивает</div>
+      <p>Это встроенная защита - чтобы он не делал ничего без твоего ведома. Потом можно настроить режим когда он действует сам, но на старте лучше так - видишь каждый шаг.</p>
+    </div>
+    <p>Через несколько секунд в папке появится файл. Открой его двойным кликом в браузере - увидишь результат.</p>
+    <h3>Дальше - усложняй</h3>
+    <p>Теперь можно давать следующие задачи прямо в том же диалоге, один за другим:</p>
+    <div class="code-wrap">
+      <div class="code-label">Добавить интерактивность</div>
+      <div class="code-block prompt">Добавь кнопку которая меняет цвет фона при нажатии</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Один совет</div>
+      <p>Чем конкретнее задача - тем точнее результат. "Сделай красиво" работает хуже чем "тёмный фон, белый текст, заголовок по центру, размер 48px". Claude Code понимает человеческий язык, но конкретика помогает.</p>
+    </div>
     <div class="callout green">
-      <div class="callout-label">Как запомнить</div>
-      <p>Скилл — инструкция. Плагин — расширение. MCP — способ подключения. Агент — автономный Claude.</p>
+      <div class="callout-label">Это и есть вайбкодинг</div>
+      <p>Ты описываешь что хочешь - он делает. Дальше будет сложнее и интереснее: многостраничные проекты, логика, база данных. Но принцип тот же.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="claude-md">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🧠</span>
+    <span class="section-name">CLAUDE.md и память между сессиями</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Каждый раз объяснять Claude Code кто ты и что за проект - утомляет. CLAUDE.md решает это раз и навсегда.</p>
+    <p>Представь: ты начинаешь новый диалог с Claude Code. Он не помнит прошлый разговор. Не знает как называется проект, на каком языке пишем, какие правила соблюдаем. Нужно объяснять заново.</p>
+    <p>CLAUDE.md - это файл в корне твоего проекта. Обычный текстовый файл. Но Claude Code читает его автоматически при каждом запуске. Всё что там написано - он держит в голове на протяжении всей работы.</p>
+    <div class="callout">
+      <div class="callout-label">Аналогия</div>
+      <p>Это как инструктаж нового сотрудника который он перечитывает каждое утро. Один раз написал правила - он их помнит всегда.</p>
+    </div>
+    <h3>Что туда писать</h3>
+    <table class="compare">
+      <tr><th>Что писать</th><th>Пример</th></tr>
+      <tr><td>Что за проект</td><td>Платформа-база знаний по AI</td></tr>
+      <tr><td>Стек и файлы</td><td>Чистый HTML/CSS/JS. Главный - knowledge-base.html</td></tr>
+      <tr><td>Правила стиля</td><td>Короткое тире, без жирного, без списков в статьях</td></tr>
+      <tr><td>Что нельзя делать</td><td>Не использовать слова "уникальная методика", "пассивный доход"</td></tr>
+      <tr><td>Как называть вещи</td><td>Блок 1 - БАЗА, Блок 2 - ИНСТРУМЕНТЫ</td></tr>
+    </table>
+    <h3>Память между сессиями</h3>
+    <p>Закрыл чат - Claude забыл. Новая сессия - как новый сотрудник в первый день. Чтобы этого не было, в CLAUDE.md прописывают протокол памяти - список файлов которые Claude читает при старте.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text">Прочитать MEMORY.md - долгосрочный контекст</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Прочитать memory/ за последние 3 дня - что обсуждали недавно</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Создать memory/YYYY-MM-DD.md - файл сегодняшней сессии</div></div>
+    </div>
+    <h3>Правила во время работы</h3>
+    <ul>
+      <li>Каждые 5 сообщений - итог в memory/YYYY-MM-DD.md</li>
+      <li>Новый долгосрочный факт → в MEMORY.md</li>
+      <li>Правка пользователя → memory/feedback_тема.md</li>
+      <li>Одинаковый вопрос возник 2+ раза → в knowledge/</li>
+    </ul>
+    <h3>Шаблон CLAUDE.md</h3>
+    <div class="code-wrap">
+      <div class="code-label">CLAUDE.md - базовый шаблон</div>
+      <div class="code-block prompt"># CLAUDE.md - правила работы
+
+## Что это за проект
+[Название и суть в одном предложении]
+
+## Стек и файлы
+- Чистый HTML/CSS/JS
+- Главный файл - index.html
+- Перед созданием нового файла - сначала расскажи что планируешь
+
+## Визуал
+- Тёмный фон #0a0a0a
+- Акцент #F5521A
+- Шрифты Bebas Neue + Montserrat
+
+## Стиль текста
+- Разговорный русский, короткие абзацы
+- Тире только короткое (-)
+- Без жирного и маркированных списков
+- Запрещённые слова: [перечисли свои]
+
+## Память - ОБЯЗАТЕЛЬНО
+При старте сессии:
+1. Прочитай MEMORY.md
+2. Прочитай memory/ за 3 дня
+3. Создай memory/YYYY-MM-DD.md
+
+Во время работы:
+- Каждые 5 сообщений - итог в memory/
+- Новый факт → MEMORY.md
+- Моя правка → memory/feedback_тема.md</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="callout green">
+      <div class="callout-label">Тест что работает</div>
+      <p>Открой новый чат, дай короткую задачу без упоминания правил. Если Claude сам применил твой стиль - CLAUDE.md читается.</p>
     </div>
   </div>
 </div>
@@ -857,33 +1028,15 @@ HIDDEN-END -->
   <div class="section-body">
     <p>Команды начинаются со слэша <code>/</code>. Вводятся прямо в чате Claude.</p>
     <h3>Системные</h3>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/login</span>
-      <span class="cmd-hint">Авторизация через браузер</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/logout</span>
-      <span class="cmd-hint">Выйти из аккаунта</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/model</span>
-      <span class="cmd-hint">Переключить модель (Sonnet, Opus, Haiku)</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/clear</span>
-      <span class="cmd-hint">Очистить чат и начать заново</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/help</span>
-      <span class="cmd-hint">Список всех команд</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/login</span><span class="cmd-hint">Авторизация через браузер</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/logout</span><span class="cmd-hint">Выйти из аккаунта</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/model</span><span class="cmd-hint">Переключить модель (Sonnet, Opus, Haiku)</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/clear</span><span class="cmd-hint">Очистить чат и начать заново</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/compact</span><span class="cmd-hint">Сжать контекст - оставить только важное</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/context</span><span class="cmd-hint">Показать что Claude держит в памяти сейчас</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/help</span><span class="cmd-hint">Список всех команд</span><span class="cmd-copy">Копировать</span></div>
     <h3>Работа с Git</h3>
-    <p>Claude умеет сам делать git-операции. Команды работают как обычные вопросы — просто просите.</p>
+    <p>Claude умеет сам делать git-операции. Команды работают как обычные просьбы - просто просишь:</p>
     <div class="code-wrap">
       <div class="code-label">Сохранить текущее состояние</div>
       <div class="code-block cmd">Сделай коммит с сообщением: "Добавил визитку"</div>
@@ -899,15 +1052,15 @@ HIDDEN-END -->
       <div class="code-block cmd">Покажи историю коммитов и верни проект к версии "Добавил визитку"</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
-    <h3>Зачем вообще коммиты — объяснение на пальцах</h3>
-    <p>Коммит — это как сохранение в видеоигре. Прошли уровень, что-то получилось — сохранились. Дальше что-то сломалось? Не страшно, грузитесь с последнего коммита.</p>
+    <h3>Зачем вообще коммиты - на пальцах</h3>
+    <p>Коммит - это как сохранение в видеоигре. Прошёл уровень, что-то получилось - сохранился. Дальше что-то сломалось? Не страшно, грузишься с последнего коммита.</p>
     <p><strong>Важно: коммит ≠ пуш.</strong> Это две разные операции:</p>
     <ul>
-      <li><strong>Коммит</strong> — сохранил версию на своём компьютере. Только локально</li>
-      <li><strong>Пуш</strong> — отправил сохранения в облако (GitHub). Теперь можно открыть с другого компа или восстановить, если комп сломается</li>
+      <li><strong>Коммит</strong> - сохранил версию на своём компьютере. Только локально</li>
+      <li><strong>Пуш</strong> - отправил сохранения в облако (GitHub). Теперь можно открыть с другого компа или восстановить, если комп сломается</li>
     </ul>
-    <h3>Правило коммитов — всегда с комментарием</h3>
-    <p>Коммит без комментария — как сохранение без даты. Когда через месяц захотите откатиться, не поймёте куда. Поэтому:</p>
+    <h3>Правило коммитов - всегда с комментарием</h3>
+    <p>Коммит без комментария - как сохранение без даты. Когда через месяц захочешь откатиться, не поймёшь куда.</p>
     <ul>
       <li><strong>Плохо:</strong> "сделай коммит"</li>
       <li><strong>Хорошо:</strong> "сделай коммит с сообщением: подключил интеграцию со Stripe для оплаты"</li>
@@ -915,11 +1068,11 @@ HIDDEN-END -->
     <h3>Ритм работы</h3>
     <table class="compare">
       <tr><th>Когда</th><th>Что делать</th></tr>
-      <tr><td>Сделали что-то, что работает</td><td>Коммит с описанием что изменили</td></tr>
+      <tr><td>Сделали что-то что работает</td><td>Коммит с описанием</td></tr>
       <tr><td>2-3 коммита накопилось</td><td>Пуш в облако</td></tr>
       <tr><td>Прошло 30 минут работы</td><td>Коммит + пуш по рефлексу</td></tr>
-      <tr><td>Закрываете проект на день</td><td>Коммит + пуш — обязательно</td></tr>
-      <tr><td>Что-то сломалось после последних изменений</td><td>Откат к предыдущему коммиту</td></tr>
+      <tr><td>Закрываешь проект на день</td><td>Коммит + пуш - обязательно</td></tr>
+      <tr><td>Что-то сломалось</td><td>Откат к предыдущему коммиту</td></tr>
     </table>
     <h3>Быстрое подключение GitHub</h3>
     <div class="code-wrap">
@@ -930,21 +1083,75 @@ HIDDEN-END -->
   </div>
 </div>
 
+<div class="section" id="concepts">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">📚</span>
+    <span class="section-name">Скиллы, плагины, MCP, агенты - что это и что установить</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Прежде чем лезть в фишки и трюки - нужно понять из чего состоит экосистема Claude Code. Четыре понятия которые путают новичков.</p>
+    <h3>Скилл</h3>
+    <p><strong>Готовая инструкция для Claude на конкретную задачу.</strong> Пишешь <code>/carousel</code> - Claude уже знает как делать карусель для Instagram: сколько слайдов, какая структура, какие хуки.</p>
+    <p>Скилл - это не плагин. Это просто .md файл с правилами, который Claude читает когда вызываешь команду. Свой скилл можно написать за 10 минут.</p>
+    <h3>Плагин</h3>
+    <p><strong>Расширение самого Claude Code.</strong> Добавляет новые возможности - работу с браузером, доступ к свежей документации, память между сессиями. Устанавливается один раз, работает фоном.</p>
+    <p>Например Superpowers - плагин внутри которого живёт целая библиотека скиллов.</p>
+    <h3>MCP - Model Context Protocol</h3>
+    <p><strong>Способ подключать к Claude внешние инструменты.</strong> Браузер, файловую систему, базы данных, сторонние API. MCP как USB-порт - один стандарт подключения для разных устройств.</p>
+    <p>Пример: Playwright MCP даёт Claude возможность открывать сайты и кликать на кнопки.</p>
+    <h3>Агент</h3>
+    <p><strong>Claude со специализацией и автономией.</strong> Получает задачу - сам ищет информацию, создаёт файлы, проверяет результат, отчитывается. В отличие от обычного чата, агент делает цепочку шагов без промежуточных вопросов.</p>
+    <div class="callout green">
+      <div class="callout-label">Как запомнить</div>
+      <p>Скилл - инструкция. Плагин - расширение. MCP - способ подключения. Агент - автономный Claude.</p>
+    </div>
+    <h3>Обязательные плагины - что установить</h3>
+    <p>Три плагина закрывают 90% задач. Ставятся один раз в терминале VS Code. После установки - перезапустить Claude.</p>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/install superpowers</span><span class="cmd-hint">Главный плагин. Внутри - библиотека скиллов</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/install context7</span><span class="cmd-hint">Автоподгрузка свежей документации</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">npm install -g @playwright/mcp@latest</span><span class="cmd-hint">Браузер для Claude</span><span class="cmd-copy">Копировать</span></div>
+    <h3>Скиллы для контента (в Superpowers)</h3>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/telegram</span><span class="cmd-hint">Пост для Telegram-канала</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/carousel</span><span class="cmd-hint">Карусель из 7-10 слайдов для Instagram</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/reels-tiktok</span><span class="cmd-hint">Сценарий короткого видео</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/threads</span><span class="cmd-hint">Ветка постов-тезисов</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/copywriter</span><span class="cmd-hint">Усилить текст, хук, призыв к действию</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/content-strategist</span><span class="cmd-hint">Контент-план на неделю или месяц</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/lead-magnet</span><span class="cmd-hint">Структура и контент лид-магнита</span><span class="cmd-copy">Копировать</span></div>
+    <h3>Скиллы для работы с файлами</h3>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/pdf</span><span class="cmd-hint">Читать, объединять, разбивать PDF</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/docx</span><span class="cmd-hint">Работа с Word-документами</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/xlsx</span><span class="cmd-hint">Excel / CSV таблицы</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/pptx</span><span class="cmd-hint">Презентации PowerPoint</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/frontend-design</span><span class="cmd-hint">Сайты, лендинги, интерфейсы</span><span class="cmd-copy">Копировать</span></div>
+    <div class="cmd-row" onclick="copyRow(this)"><span class="cmd-text">/canvas-design</span><span class="cmd-hint">Постеры, визуальный дизайн</span><span class="cmd-copy">Копировать</span></div>
+    <h3>Создаёшь свои скиллы</h3>
+    <p>Скилл - просто .md файл в папке <code>.claude/skills/</code>. Там описывается что Claude делает при вызове команды.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text">Берёшь промпт который часто используешь</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Сохраняешь в <code>.claude/skills/твоё-имя/SKILL.md</code></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Вызываешь командой <code>/твоё-имя</code> - Claude читает инструкцию и выполняет</div></div>
+    </div>
+  </div>
+</div>
+
 <div class="section" id="project-structure">
   <div class="section-header" onclick="toggle(this)">
-    <span class="section-icon">📁</span>
+    <span class="section-icon">📂</span>
     <span class="section-name">Структура папки проекта</span>
     <span class="section-chevron">▼</span>
   </div>
   <div class="section-body">
-    <p>Каждый проект живёт в своей папке. Без папки Claude не знает куда сохранять файлы.</p>
+    <p>Каждый проект живёт в своей папке. Без правильной структуры Claude теряется, с правильной - всё под рукой.</p>
     <h3>Правила имени папки</h3>
     <ul>
       <li>Только латиница: <code>kontent-zavod</code>, не "контент-завод"</li>
-      <li>Без пробелов — дефис между словами</li>
-      <li>Без спецсимволов (! @ # и т.п.)</li>
-      <li>Строчные буквы</li>
+      <li>Без пробелов - дефис между словами</li>
+      <li>Без спецсимволов (! @ # и подобное)</li>
+      <li>Только строчные буквы</li>
     </ul>
+    <p>Эти правила не прихоть. VS Code и git плохо работают с кириллицей и пробелами в именах.</p>
     <h3>Что внутри папки</h3>
     <div class="code-wrap">
       <div class="code-label">Рабочая структура</div>
@@ -955,261 +1162,57 @@ HIDDEN-END -->
     ├── MEMORY.md          ← долгосрочная память
     ├── memory/
     │   ├── 2026-04-12.md  ← дневники сессий
-    │   └── feedback_*.md  ← правки пользователя
+    │   └── feedback_*.md  ← твои правки
     ├── knowledge/         ← база знаний проекта
     └── [рабочие файлы]</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
-    <h3>Что в каком файле — чтобы не путаться</h3>
-    <div class="files-table">
-      <div class="file-row">
-        <div class="file-name">CLAUDE.md</div>
-        <div class="file-desc"><strong>Правила работы в проекте.</strong> Стиль, запреты, визуал, технологии, протокол памяти. Claude читает <em>при каждом запуске</em> — поэтому здесь только то, что должно применяться <em>всегда</em>. Не складываем сюда задачи или временные факты.</div>
-      </div>
-      <div class="file-row">
-        <div class="file-name">PLAN.md</div>
-        <div class="file-desc"><strong>Чек-лист задач проекта.</strong> Что сделано, что в работе, что впереди. Обновляется каждый раз когда появляется или закрывается задача. Не смешивать с правилами — это динамический файл.</div>
-      </div>
-      <div class="file-row">
-        <div class="file-name">MEMORY.md</div>
-        <div class="file-desc"><strong>Долгосрочная память.</strong> Важные факты, принятые решения, ссылки на источники, стратегия. Что не должно теряться между сессиями. Максимум 200 строк — если больше, убираем устаревшее.</div>
-      </div>
-      <div class="file-row">
-        <div class="file-name">memory/YYYY-MM-DD.md</div>
-        <div class="file-desc"><strong>Дневник конкретной сессии.</strong> Что обсуждали, какие решения приняли. Создаётся в начале каждой новой сессии.</div>
-      </div>
-      <div class="file-row">
-        <div class="file-name">memory/feedback_тема.md</div>
-        <div class="file-desc"><strong>Ваши правки и замечания.</strong> Чтобы не повторять одно и то же. Например feedback_style.md — правки по стилю текста.</div>
-      </div>
-      <div class="file-row">
-        <div class="file-name">knowledge/</div>
-        <div class="file-desc"><strong>База знаний проекта.</strong> Архитектура, чеклисты, решения типовых багов, материалы по конкурентам. То что нужно держать под рукой, но читать только когда потребуется.</div>
-      </div>
-      <div class="file-row">
-        <div class="file-name">project.md <span style="color:var(--muted); font-weight:400;">(опционально)</span></div>
-        <div class="file-desc"><strong>Паспорт большого проекта.</strong> Для сложных продуктов с целевой аудиторией, оффером, конкурентами, воронкой. Для контент-завода или небольшого сайта — избыточно. Используйте когда проект выходит за рамки "пишу себе контент" и становится полноценным продуктом с клиентами.</div>
-      </div>
-    </div>
-    <div class="callout blue">
-      <div class="callout-label">Практика Никиты</div>
-      <p>В этом проекте (Контент-завод) используются только <code>CLAUDE.md</code>, <code>PLAN.md</code>, <code>MEMORY.md</code> плюс папки <code>memory/</code> и <code>knowledge/</code>. <code>project.md</code> не заведён — потому что проект не требует паспорта клиентского продукта. Это мой личный контент-инструмент, не сервис на продажу.</p>
-    </div>
-  </div>
-</div>
-
-<div class="section" id="memory-system">
-  <div class="section-header" onclick="toggle(this)">
-    <span class="section-icon">🧠</span>
-    <span class="section-name">CLAUDE.md и память между сессиями</span>
-    <span class="section-chevron">▼</span>
-  </div>
-  <div class="section-body">
-    <p>Закрыли чат — Claude всё забыл. Каждый новый чат как новый сотрудник в первый день. Решение — правила и протокол памяти в файлах, которые Claude читает при старте.</p>
-    <h3>Протокол старта сессии</h3>
-    <p>Прописывается в CLAUDE.md. Claude выполняет автоматически при первом сообщении в новой сессии:</p>
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-text">Прочитать MEMORY.md — долгосрочный контекст</div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-text">Прочитать memory/ за последние 3 дня — что обсуждали недавно</div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-text">Создать memory/YYYY-MM-DD.md — файл сегодняшней сессии</div></div>
-    </div>
-    <h3>Правила во время работы</h3>
-    <ul>
-      <li>Каждые 5 сообщений — итог в memory/YYYY-MM-DD.md</li>
-      <li>Новый долгосрочный факт → в MEMORY.md</li>
-      <li>Правка пользователя → memory/feedback_тема.md</li>
-      <li>Одинаковый вопрос возник 2+ раза → в knowledge/</li>
-    </ul>
-    <h3>Шаблон CLAUDE.md — копируйте к себе</h3>
+    <h3>Что в каком файле</h3>
+    <table class="compare">
+      <tr><th>Файл</th><th>Что внутри</th></tr>
+      <tr><td>CLAUDE.md</td><td>Правила работы. Claude читает при каждом запуске. Здесь только то что применяется всегда.</td></tr>
+      <tr><td>PLAN.md</td><td>Чек-лист задач. Что сделано, что в работе. Динамический файл.</td></tr>
+      <tr><td>MEMORY.md</td><td>Долгосрочная память. Решения, факты, стратегия. До 200 строк.</td></tr>
+      <tr><td>memory/YYYY-MM-DD.md</td><td>Дневник конкретной сессии. Что обсуждали, что решили.</td></tr>
+      <tr><td>memory/feedback_тема.md</td><td>Твои правки - чтобы не повторять одно и то же.</td></tr>
+      <tr><td>knowledge/</td><td>База знаний проекта. Архитектура, чеклисты, материалы.</td></tr>
+    </table>
+    <h3>Как создать всю структуру разом</h3>
+    <p>Не нужно делать вручную. Открой новую папку в VS Code и скажи Claude:</p>
     <div class="code-wrap">
-      <div class="code-label">CLAUDE.md — базовый</div>
-      <div class="code-block prompt"># CLAUDE.md — правила работы
-
-## Стиль кода
-- Всё в одном HTML-файле, без внешних библиотек
-- Адаптивная вёрстка, mobile-first
-- Перед созданием файла — расскажи что планируешь
-
-## Визуал
-- Тёмный фон #0a0a0a
-- Акцент #F5521A
-- Шрифты Bebas Neue + Montserrat
-- Минимальный размер текста 38px
-
-## Стиль текста
-- Разговорный русский, короткие абзацы
-- Тире только короткое (-), не длинное
-- Без жирного и маркированных списков в постах
-- Запрещённые слова: погружение, на стыке, уникальная методика, пассивный доход
-
-## Память — ОБЯЗАТЕЛЬНО
-При старте сессии:
-1. Прочитай MEMORY.md
-2. Прочитай memory/ за 3 дня
-3. Создай memory/YYYY-MM-DD.md
-
-Во время работы:
-- Каждые 5 сообщений — итог в memory/
-- Новый факт → MEMORY.md
-- Моя правка → memory/feedback_тема.md
-
-Самопроверка: 10+ сообщений без записи в memory/ = нарушение, запиши сейчас.</div>
+      <div class="code-label">Одной командой</div>
+      <div class="code-block cmd">Создай в этой папке структуру проекта: CLAUDE.md с правилами работы, PLAN.md для задач, MEMORY.md для долгосрочной памяти и папку memory/ для дневников сессий.</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
-    <div class="callout green">
-      <div class="callout-label">Тест что работает</div>
-      <p>Откройте новый чат, дайте короткую задачу без упоминания правил. Если Claude сам применил ваш стиль — CLAUDE.md читается.</p>
-    </div>
-  </div>
-</div>
-
-<!-- SKRITO: Tone of Voice (#29) — переедет в блок про контент-завод -->
-<!-- HIDDEN-START: tone-of-voice
-Раздел про Tone of Voice скрыт. Переедет в будущий блок про контент-завод (это не тема Claude Code). Сохранено для будущего переноса.
-HIDDEN-END -->
-
-<div class="section" id="skills">
-  <div class="section-header" onclick="toggle(this)">
-    <span class="section-icon">⚡</span>
-    <span class="section-name">Скиллы и плагины — что установить</span>
-    <span class="section-chevron">▼</span>
-  </div>
-  <div class="section-body">
-    <p>Напомню: <strong>скилл</strong> — инструкция на задачу (вызывается через /команду), <strong>плагин</strong> — расширение самого Claude Code.</p>
-    <h3>Обязательные плагины</h3>
-    <p>Ставятся один раз в терминале VS Code. После установки — перезапустить Claude.</p>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/install superpowers</span>
-      <span class="cmd-hint">Главный плагин. Внутри — библиотека скиллов для контента и работы с файлами</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/install context7</span>
-      <span class="cmd-hint">Автоподгрузка свежей документации инструментов</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">npm install -g @playwright/mcp@latest</span>
-      <span class="cmd-hint">Браузер для Claude — открывать сайты, кликать, заполнять формы</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <h3>Скиллы для контента (входят в Superpowers)</h3>
-    <p>После установки Superpowers — работают сразу. Просто вызываете /команду.</p>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/telegram</span>
-      <span class="cmd-hint">Пост для Telegram-канала</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/carousel</span>
-      <span class="cmd-hint">Карусель из 7-10 слайдов для Instagram</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/reels-tiktok</span>
-      <span class="cmd-hint">Сценарий короткого видео — 3 варианта хука</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/threads</span>
-      <span class="cmd-hint">Ветка постов-тезисов</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/copywriter</span>
-      <span class="cmd-hint">Усилить текст, хук, призыв к действию</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/content-strategist</span>
-      <span class="cmd-hint">Контент-план на неделю или месяц</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/lead-magnet</span>
-      <span class="cmd-hint">Структура и контент лид-магнита</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/competitor-analysis</span>
-      <span class="cmd-hint">Разбор чужого контента</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/product-strategist</span>
-      <span class="cmd-hint">Анализ ЦА, воронки, сегменты</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <h3>Скиллы для работы с файлами</h3>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/pdf</span>
-      <span class="cmd-hint">Читать, объединять, разбивать PDF</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/docx</span>
-      <span class="cmd-hint">Работа с Word-документами</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/xlsx</span>
-      <span class="cmd-hint">Excel / CSV таблицы</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/pptx</span>
-      <span class="cmd-hint">Презентации PowerPoint</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/frontend-design</span>
-      <span class="cmd-hint">Сайты, лендинги, интерфейсы</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <div class="cmd-row" onclick="copyRow(this)">
-      <span class="cmd-text">/canvas-design</span>
-      <span class="cmd-hint">Постеры, визуальный дизайн</span>
-      <span class="cmd-copy">Копировать</span>
-    </div>
-    <h3>Создаёте свои скиллы</h3>
-    <p>Скилл — это просто .md файл в папке <code>.claude/skills/</code>. Там описывается, что Claude должен делать при вызове команды.</p>
-    <p>Помните <a href="100-prompts-pro.html">100 промптов по R.A.C.E.T.</a> из первого блока? Каждый из них можно превратить в свой скилл. Схема простая:</p>
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-text">Берёте промпт, который часто используете</div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-text">Сохраняете его в <code>.claude/skills/ваше-имя/SKILL.md</code></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-text">Вызываете командой <code>/ваше-имя</code> — Claude читает инструкцию и выполняет</div></div>
-    </div>
-    <p>Так из промпта "Анализ ЦА с 5 уровнями глубины" делается скилл <code>/ca-deep</code>. Из "Продающий пост по PAS" — <code>/pas-post</code>. Применяете раз в неделю вместо того чтобы каждый раз копировать длинный промпт.</p>
   </div>
 </div>
 
 <div class="section" id="github-repos">
   <div class="section-header" onclick="toggle(this)">
     <span class="section-icon">📦</span>
-    <span class="section-name">Полезные GitHub-репозитории и как их использовать</span>
+    <span class="section-name">Полезные GitHub-репозитории</span>
     <span class="section-chevron">▼</span>
   </div>
   <div class="section-body">
-    <p>На GitHub выложены сотни готовых наработок — скиллов, примеров, библиотек. Вот те, которые реально пригодятся.</p>
-    <h3>Список</h3>
+    <p>На GitHub выложены сотни готовых наработок - скиллов, примеров, библиотек. Вот те которые реально пригодятся.</p>
     <div class="links-grid">
-      <a class="link-item" href="https://github.com/anthropics/claude-code" target="_blank"><span class="li-title">anthropics/claude-code</span><span class="li-sub">Официальный репозиторий Claude Code. Документация, примеры использования</span></a>
+      <a class="link-item" href="https://github.com/anthropics/claude-code" target="_blank"><span class="li-title">anthropics/claude-code</span><span class="li-sub">Официальный репозиторий. Документация, примеры использования</span></a>
       <a class="link-item" href="https://github.com/anthropics/claude-cookbooks" target="_blank"><span class="li-title">anthropics/claude-cookbooks</span><span class="li-sub">Библиотека готовых промптов и примеров для разных задач</span></a>
-      <a class="link-item" href="https://github.com/anthropics/claude-quickstarts" target="_blank"><span class="li-title">anthropics/claude-quickstarts</span><span class="li-sub">Шаблоны интеграций — от чатбота до поиска по документам</span></a>
-      <a class="link-item" href="https://github.com/obra/superpowers" target="_blank"><span class="li-title">obra/superpowers</span><span class="li-sub">Фреймворк скиллов — основной плагин для расширения Claude</span></a>
+      <a class="link-item" href="https://github.com/anthropics/claude-quickstarts" target="_blank"><span class="li-title">anthropics/claude-quickstarts</span><span class="li-sub">Шаблоны интеграций - от чатбота до поиска по документам</span></a>
+      <a class="link-item" href="https://github.com/obra/superpowers" target="_blank"><span class="li-title">obra/superpowers</span><span class="li-sub">Фреймворк скиллов - основной плагин для расширения Claude</span></a>
       <a class="link-item" href="https://github.com/datalab-to/marker" target="_blank"><span class="li-title">datalab-to/marker</span><span class="li-sub">Конвертер PDF в чистый Markdown. Экономит токены на 30-40%</span></a>
     </div>
     <h3>Как перенести репозиторий к себе</h3>
-    <p>Два варианта — смотря зачем он нужен.</p>
+    <p>Два варианта - смотря зачем нужен репозиторий.</p>
     <h4>Вариант 1. Просто использовать готовое</h4>
-    <p>Если это плагин или инструмент, который ставится командой — обычно инструкция в README репозитория. Скажите Claude:</p>
+    <p>Если это плагин - обычно инструкция в README репозитория. Скажи Claude:</p>
     <div class="code-wrap">
-      <div class="code-label">Один промпт</div>
+      <div class="code-label">Установка одним промптом</div>
       <div class="code-block cmd">Установи плагин из репозитория github.com/obra/superpowers по инструкции из README. Проверь что работает.</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
     <h4>Вариант 2. Скопировать к себе и модифицировать</h4>
-    <p>Если хотите изучить или доработать под себя — клонируете репозиторий в свою папку:</p>
+    <p>Клонируешь репозиторий в свою папку:</p>
     <div class="code-wrap">
       <div class="code-label">В терминале VS Code</div>
       <div class="code-block bash">cd Documents/Projects
@@ -1217,11 +1220,15 @@ git clone https://github.com/НАЗВАНИЕ/РЕПОЗИТОРИЙ.git
 cd РЕПОЗИТОРИЙ</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
-    <p>Дальше открываете папку в VS Code (File → Open Folder) и просите Claude объяснить что внутри:</p>
+    <p>Дальше открываешь папку в VS Code и просишь Claude объяснить что внутри:</p>
     <div class="code-wrap">
       <div class="code-label">Изучение</div>
       <div class="code-block cmd">Я только что склонировал этот репозиторий. Изучи структуру и объясни простыми словами: что это делает, как этим пользоваться, что можно применить для моих задач.</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Про безопасность</div>
+      <p>Не устанавливай что попало. Открывай репозиторий, смотри авторов, читай код. Claude может объяснить любой репозиторий простыми словами - попроси разобрать перед установкой.</p>
     </div>
   </div>
 </div>
@@ -1229,33 +1236,86 @@ cd РЕПОЗИТОРИЙ</div>
 <div class="section" id="token-tricks">
   <div class="section-header" onclick="toggle(this)">
     <span class="section-icon">💰</span>
-    <span class="section-name">Экономия токенов — фишки и подводные камни</span>
+    <span class="section-name">Экономия токенов - фишки и подводные камни</span>
     <span class="section-chevron">▼</span>
   </div>
   <div class="section-body">
-    <p>За каждый символ в чате вы платите. На мелких задачах это копейки, на больших — заметно. Два места, где деньги утекают без надобности.</p>
-    <h3>Фишка 1. Playwright — fetch вместо скриншотов</h3>
-    <p>Playwright MCP нужен, когда Claude должен работать с сайтами — кликать, логиниться, заполнять формы. Но по умолчанию он делает скриншот на каждый шаг. 10 шагов = 10 скриншотов = серьёзные траты.</p>
+    <p>За каждый символ в чате ты платишь. На мелких задачах это копейки, на больших - заметно. Две фишки где деньги утекают без надобности.</p>
+    <h3>Фишка 1. Playwright - fetch вместо скриншотов</h3>
+    <p>Playwright MCP нужен когда Claude работает с сайтами - кликает, логинится, заполняет формы. Но по умолчанию он делает скриншот на каждый шаг. 10 шагов = 10 скриншотов = серьёзные траты.</p>
     <div class="callout">
-      <div class="callout-label">Когда нужен MCP реально</div>
-      <p>Когда требуется интерактив — нажать на кнопку, ввести данные, пройти по сайту как пользователь. Без MCP этого не сделать.</p>
+      <div class="callout-label">Когда MCP реально нужен</div>
+      <p>Когда требуется интерактив - нажать на кнопку, ввести данные, пройти по сайту как пользователь. Без MCP этого не сделать.</p>
     </div>
-    <p>Но если задача — <strong>просто собрать данные</strong> с 20-100 страниц (например, спарсить статьи конкурента), есть способ без скриншотов:</p>
+    <p>Но если задача <strong>просто собрать данные</strong> с 20-100 страниц (например, спарсить статьи конкурента), есть способ без скриншотов:</p>
     <div class="code-wrap">
       <div class="code-label">Промпт экономии</div>
       <div class="code-block cmd">Используй fetch() внутри браузера чтобы загрузить все страницы параллельно и сохрани результаты в файл. Без скриншотов.</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
-    <p>Claude загружает десятки страниц за один вызов, сразу пишет на диск. Без визуализации каждого шага. На задаче парсинга экономится до 90% токенов.</p>
-    <h3>Фишка 2. Marker — PDF в Markdown</h3>
-    <p>PDF — формат для печати. В нём колонки, таблицы-картинки, разорванные строки. Claude тратит токены на разбор визуала вместо содержания. Marker превращает PDF в чистый Markdown — в котором Claude и "думает".</p>
+    <p>Claude загружает десятки страниц за один вызов, сразу пишет на диск. На задаче парсинга экономится до 90% токенов.</p>
+    <h3>Фишка 2. Marker - PDF в Markdown</h3>
+    <p>PDF - формат для печати. В нём колонки, таблицы-картинки, разорванные строки. Claude тратит токены на разбор визуала вместо содержания. Marker превращает PDF в чистый Markdown - в котором Claude и "думает".</p>
     <div class="code-wrap">
       <div class="code-label">Установка и использование</div>
       <div class="code-block bash">pip install marker-pdf
 marker_single документ.pdf output/</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
-    <p>Потом даёте Claude получившийся .md файл — обработка в разы дешевле и точнее.</p>
+    <p>Потом даёшь Claude получившийся .md файл - обработка в разы дешевле и точнее.</p>
+    <div class="callout green">
+      <div class="callout-label">Правило</div>
+      <p>Не оптимизируй заранее. Делай как проще, пока работает. Когда упрёшься в лимит - возвращайся к этой секции.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="my-case">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">⭐</span>
+    <span class="section-name">Как я делаю эту платформу - реальный кейс</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>То что ты читаешь прямо сейчас - сделано через Claude Code. Без команды разработчиков, без знания синтаксиса, без классической разработки.</p>
+    <p>У меня нет технического образования. Я предприниматель - строю бизнесы 15 лет. Два года назад начал разбираться в AI, год назад - в вайбкодинге. Сейчас делаю эту платформу сам, в реальном времени.</p>
+    <p>Это не история успеха в конце пути. Это документация процесса. Платформа растёт вместе с тем как я учусь - и это и есть демонстрация навыка.</p>
+    <h3>Два проекта, один стек</h3>
+    <table class="compare">
+      <tr><th>Проект</th><th>Что это</th></tr>
+      <tr><td>База знаний</td><td>Платформа которую ты читаешь. Лид-магнит + трипвайер. Статичный HTML.</td></tr>
+      <tr><td>Контент-завод</td><td>Система создания контента для Instagram, Telegram, Threads.</td></tr>
+    </table>
+    <p>Оба проекта живут на компьютере как обычные папки с файлами. Никакого хостинга, никаких серверов. Просто HTML и Claude Code рядом.</p>
+    <h3>Как выглядит рабочий процесс</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Формулирую задачу словами.</strong> Например: "Нужна статья про установку Claude Code. Аудитория - не разработчики. Путь через VS Code, не терминал."</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Claude Code пишет черновик.</strong> Показывает текст в чате. Я читаю, говорю что поправить. Иногда один проход, иногда два-три.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Создаёт HTML-файл.</strong> Сам оформляет в дизайн платформы, подключает шрифты, ставит правильные стили.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Связывает страницы.</strong> Обновляет ссылки между статьями, следит за навигацией.</div></div>
+    </div>
+    <h3>Что я не делаю руками</h3>
+    <p>Не пишу HTML. Не пишу CSS. Не правлю отступы, не выбираю размер шрифта, не делаю адаптив. Не ищу в Google как сделать таблицу или анимацию.</p>
+    <p>Я принимаю решения - о структуре, о содержании, о том что правильно для аудитории. Claude Code переводит эти решения в код.</p>
+    <div class="callout">
+      <div class="callout-label">Разделение труда</div>
+      <p>Я думаю о продукте. Claude Code думает о технической реализации. Это и есть вайбкодинг - не "я пишу код с AI-подсказками", а "я управляю AI который пишет код".</p>
+    </div>
+    <h3>Реальные промпты из этого проекта</h3>
+    <div class="code-wrap">
+      <div class="code-label">Пример 1</div>
+      <div class="code-block prompt">Создай статью "Что такое Claude Code". Аудитория - предприниматели без технического опыта. Начни с конкретной сцены, не с определения.</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="code-wrap">
+      <div class="code-label">Пример 2</div>
+      <div class="code-block prompt">Сделай дизайн статьи в стиле knowledge-base.html - тот же тёмный фон, те же шрифты, те же карточки</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="callout green">
+      <div class="callout-label">Что это значит для тебя</div>
+      <p>Если я сделал эту платформу - ты можешь сделать свою. Любую. Лендинг, портфолио, инструмент для клиентов, внутренний дашборд для бизнеса. Единственное что нужно - уметь чётко формулировать задачи.</p>
+    </div>
   </div>
 </div>
 
