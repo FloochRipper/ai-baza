@@ -282,6 +282,37 @@ section p {
   background: var(--accent); color: #fff;
 }
 
+/* TOPNAV */
+.topnav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2rem;
+  background: rgba(10,10,10,0.85); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.topnav a { color: var(--text); }
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: .08em;
+}
+.nav-back {
+  font-size: 0.82rem; color: var(--muted); text-decoration: none;
+  transition: color .2s;
+}
+.nav-back:hover { color: var(--accent); }
+
+/* BACK BUTTON */
+.back-btn {
+  display: inline-block;
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text); font-size: 0.82rem;
+  padding: 0.6rem 1.2rem; border-radius: 8px;
+  text-decoration: none;
+  margin: 2rem auto;
+  transition: border-color .2s;
+}
+.back-btn:hover { border-color: var(--accent); color: var(--accent); }
+.back-wrap { text-align: center; }
+
 /* FOOTER */
 footer {
   text-align: center;
@@ -304,6 +335,12 @@ footer a { color: var(--accent); }
 </style>
 </head>
 <body>
+
+<!-- TOPNAV -->
+<nav class="topnav">
+  <a href="/" class="nav-logo">AI База</a>
+  <a href="/" class="nav-back">← к Базе знаний</a>
+</nav>
 
 <!-- HERO -->
 <section class="hero">
@@ -521,6 +558,10 @@ https://instagram.com/reel/GHI/</pre>
     ПОДПИСАТЬСЯ В TELEGRAM
   </a>
 </section>
+
+<div class="back-wrap">
+  <a href="/" class="back-btn">← Вернуться к Базе знаний</a>
+</div>
 
 <footer>
   Никита Шлык · <a href="https://instagram.com/nikitashlyk" target="_blank">@nikitashlyk</a> · Контент-завод 1.0
