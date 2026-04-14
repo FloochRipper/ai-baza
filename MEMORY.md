@@ -26,6 +26,12 @@
 ## Концепция лид-магнита
 - [Система AI-агентов, не промпты](memory/feedback_lead_magnet_agents.md) — двухуровневый подход
 
+## Архитектура проекта в контенте базы
+- [Третий файл минимума называем CONTEXT.md, не project.md](memory/project_file_naming_convention.md) — своя конвенция, не курсовая
+
+## Рабочий процесс (контент базы)
+- [Голосовой ввод — обязательный раздел](memory/project_voice_input.md) — Wispr Flow / AquaVoice, критичная фишка Никиты
+
 ## Референсы
 - Claude-Code-Starter-Kit.html — эталон формата (10 блоков, промпты внутри)
 - mavgpt.ai — модель Resource Hub, единая точка входа

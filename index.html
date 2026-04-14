@@ -497,6 +497,38 @@ HIDDEN-END -->
   </div>
 </div>
 
+<div class="section" id="ecosystem-claude">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🗺️</span>
+    <span class="section-name">Карта Claude - 4 продукта одной подписки</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Когда говорят "Claude" - обычно имеют в виду чат в браузере. Но Claude это не один продукт, а целая экосистема. Одна подписка - доступ ко всем. Это важно понять с самого начала, иначе будешь сравнивать яблоки с грушами.</p>
+    <div class="info-cards">
+      <div class="info-card"><div class="info-card-title">Claude AI (claude.ai)</div><div class="info-card-text">Веб-версия. Чаты, Projects, Artifacts, коннекторы (Google Drive, Gmail, Slack). То что видит 90% людей</div></div>
+      <div class="info-card"><div class="info-card-title">Claude Desktop</div><div class="info-card-text">Приложение на Mac и Windows. То же что веб, только быстрее плюс Computer Use - Claude может сам кликать по экрану</div></div>
+      <div class="info-card"><div class="info-card-title">Claude Code</div><div class="info-card-text">Живёт внутри VS Code или в терминале. Видит все файлы проекта, создаёт файлы сам, запускает команды, делает коммиты. Для разработки и автоматизации</div></div>
+      <div class="info-card"><div class="info-card-title">Claude Mobile</div><div class="info-card-text">iOS и Android. Быстрые запросы в дороге, голосовой ввод, синхронизируется с вебом и десктопом</div></div>
+    </div>
+    <h3>Что из этого нужно тебе</h3>
+    <p>Это не лестница "от простого к сложному". Это разные инструменты под разные задачи.</p>
+    <ul>
+      <li>Общаться, получать ответы, писать тексты, анализировать - <strong>Claude AI в браузере</strong></li>
+      <li>Чтобы AI сам делал файлы, запускал код, собирал сайты и автоматизации - <strong>Claude Code</strong></li>
+      <li>Много работаешь с документами локально на Mac или Windows - <strong>Claude Desktop</strong></li>
+      <li>Нужен AI в кармане, пока едешь в метро - <strong>Claude Mobile</strong></li>
+    </ul>
+    <div class="callout">
+      <div class="callout-label">Одна подписка - все четыре</div>
+      <p>Pro за $20/мес или Max за $100-200 открывает доступ ко всем четырём сразу. Не нужно платить отдельно. Залогинился в claude.ai - автоматически есть доступ в Desktop, Code и Mobile через тот же аккаунт.</p>
+    </div>
+    <h3>На чём сфокусируемся в этой базе</h3>
+    <p>Блок 1 - про <strong>Claude AI</strong> в браузере. Это то с чего ты реально начнёшь. Научишься промптить, работать с Projects, подключать коннекторы.</p>
+    <p>Блок 2 - про <strong>Claude Code</strong>. Когда освоил AI в браузере и хочется чтобы он не отвечал а делал - переходишь сюда. Проекты, CLAUDE.md, реальная разработка своих штук.</p>
+  </div>
+</div>
+
 <div class="section" id="chatgpt-vs-claude">
   <div class="section-header" onclick="toggle(this)">
     <span class="section-icon">⚡</span>
@@ -514,6 +546,125 @@ HIDDEN-END -->
       <tr><td>Образ</td><td>Универсальный помощник</td><td>Вдумчивый эксперт</td></tr>
     </table>
     <p>На практике полезно использовать оба. ChatGPT — для быстрого мозгового штурма, Claude — когда задача сложная или кода много.</p>
+  </div>
+</div>
+
+<div class="section" id="claude-philosophy">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🧠</span>
+    <span class="section-name">Философия проектов - главная разница с ChatGPT</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Я долго сидел на ChatGPT и мне казалось что Claude - это тот же чат, только от другой компании. Это не так. У них разная философия работы. Пока её не поймёшь - будешь недоиспользовать Claude как минимум на 80%.</p>
+    <h3>ChatGPT - это чаты</h3>
+    <p>Открыл, задал вопрос, получил ответ. Закрыл - забыл. Память есть, но она общая на весь аккаунт. Контекст своего проекта ты держишь в голове: "а, мы же делали лендинг для психолога" - и каждый новый чат начинаешь с объяснений.</p>
+    <h3>Claude - это проекты</h3>
+    <p>Любая серьёзная задача в Claude - это отдельный Project со своим контекстом, файлами и инструкциями. Project "Мой бренд", Project "Клиент Иван", Project "Лендинг для психолога". Зашёл в нужный - Claude уже знает кто ты, над чем вы работаете, какие правила. Объяснять с нуля не нужно.</p>
+    <table class="compare">
+      <tr><th></th><th>ChatGPT</th><th>Claude</th></tr>
+      <tr><td>Как мыслить о работе</td><td>Каждый разговор - новый запуск</td><td>Каждая задача - отдельный проект</td></tr>
+      <tr><td>Где хранится контекст</td><td>В твоей голове или в настройках аккаунта</td><td>Внутри Project - для всех чатов этого проекта</td></tr>
+      <tr><td>Файлы и инструкции</td><td>Загружаешь в каждый чат заново</td><td>Один раз в Project - работает везде внутри</td></tr>
+      <tr><td>Переключение между темами</td><td>Вкладки в истории чатов</td><td>Разные Projects в меню слева</td></tr>
+    </table>
+    <div class="callout">
+      <div class="callout-label">Смена мышления</div>
+      <p>Перестаёшь думать "сейчас задам вопрос AI". Начинаешь думать "работаю внутри проекта X - Claude уже в курсе". Это другая модель работы. И с неё вся польза от Claude начинается.</p>
+    </div>
+    <p>В Claude Code та же философия, только проект там - это физическая папка у тебя на компьютере. Про это подробнее в блоке 2.</p>
+  </div>
+</div>
+
+<div class="section" id="start-claude-ai">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🚀</span>
+    <span class="section-name">Старт на claude.ai - VPN, регистрация, тариф</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Если ты из России - Claude в лоб не откроется. Нужно три вещи: VPN, иностранный номер для регистрации, и выбрать подходящий тариф. Займёт минут 15-20 если делаешь впервые.</p>
+    <h3>1. VPN - без него никак</h3>
+    <p>Anthropic блокируют доступ с российских IP. Без VPN не откроется ни claude.ai, ни приложение, ни Claude Code. Проверено - не работает.</p>
+    <div class="info-cards">
+      <div class="info-card"><div class="info-card-title">Happ</div><div class="info-card-text">Бесплатный клиент под все платформы. Ключи подключения покупать отдельно у провайдеров</div></div>
+      <div class="info-card"><div class="info-card-title">Dino VPN</div><div class="info-card-text">Платный, работает стабильно, настраивается за 2 минуты. Хороший старт</div></div>
+      <div class="info-card"><div class="info-card-title">Mullvad</div><div class="info-card-text">Платный, анонимный (можно без привязки к карте), продвинутый вариант для параноиков</div></div>
+    </div>
+    <div class="callout blue">
+      <div class="callout-label">Какой страной подключаться</div>
+      <p>Любая Европа или США. Главное - стабильная скорость. Если VPN падает каждые 10 минут - Claude будет обрываться посреди ответа, это бесит. Не экономь на нормальном сервисе.</p>
+    </div>
+    <h3>2. Иностранный номер для регистрации</h3>
+    <p>Claude просит номер при регистрации, и российский не примет. Два варианта:</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Виртуальный номер</strong> - сервисы sms-activate.io или 5sim.biz. Снимаешь номер на приём одной SMS, стоит копейки (30-100 руб). Пришёл код - использовал - дальше номер не нужен</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>eSIM с иностранной симкой</strong> - через Airalo или Holafly. Ставишь на iPhone или Android свежий номер (казахстанский, турецкий, грузинский), он остаётся у тебя навсегда и пригодится для любых сервисов которым нужен иностранный номер</div></div>
+    </div>
+    <p>Для разового захода - хватит sms-activate. Если планируешь пользоваться ещё десятком подобных сервисов - сразу eSIM, окупится за первые пару регистраций.</p>
+    <h3>3. Регистрация за 6 шагов</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text">Включи VPN (Европа или США)</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Открой <a href="https://claude.ai" target="_blank">claude.ai</a> и нажми Sign up</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Заходи через Google - так быстрее. По email тоже можно, но Google-аккаунт экономит пару минут</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Введи иностранный номер - получи SMS-код - вставь</div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-text">Укажи имя и чем ты занимаешься (необязательно). Это повлияет на то как Claude будет с тобой общаться с первых запросов</div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-text">Отправь первый запрос чтобы проверить что всё работает. Любой - например "Привет, расскажи о себе в двух предложениях"</div></div>
+    </div>
+    <h3>4. Тариф - Free, Pro или Max</h3>
+    <table class="compare">
+      <tr><th></th><th>Free</th><th>Pro</th><th>Max</th></tr>
+      <tr><td>Цена</td><td>$0</td><td>$20/мес</td><td>$100 или $200/мес</td></tr>
+      <tr><td>Сообщений</td><td>Мало, быстро закончатся</td><td>Раз в 5 больше Free</td><td>В 5-20 раз больше Pro</td></tr>
+      <tr><td>Модели</td><td>Sonnet базовая</td><td>Sonnet + Opus (лучшая)</td><td>Всё что есть, плюс приоритет на серверах</td></tr>
+      <tr><td>Claude Code</td><td>Не включён</td><td>Включён, базовый лимит</td><td>Большой лимит токенов</td></tr>
+      <tr><td>Projects</td><td>До 5</td><td>Без ограничений</td><td>Без ограничений</td></tr>
+      <tr><td>Когда брать</td><td>Первые пару дней попробовать</td><td>Старт и обучение</td><td>Ежедневная активная работа</td></tr>
+    </table>
+    <div class="callout">
+      <div class="callout-label">Мой совет по выбору</div>
+      <p>Первый день - Free, просто попробовать интерфейс. Как только упрёшься в лимит (а это произойдёт быстро) - сразу Pro. Max берёшь когда реально работаешь с Claude часов 5+ в день и на Pro упираешься в суточные лимиты. Начинать с Max - выбрасывать деньги.</p>
+    </div>
+    <h3>5. Оплата - российская карта не подойдёт</h3>
+    <p>Anthropic не принимает российские карты. Варианты по возрастанию сложности:</p>
+    <ul>
+      <li><strong>Зарубежная карта друга или родственника</strong> - самый простой вариант если есть</li>
+      <li><strong>Виртуальная карта через посреднические сервисы</strong> - ищи свежие рабочие варианты, они часто меняются</li>
+      <li><strong>Карта иностранного банка</strong> - если планируешь долго пользоваться Claude и подобными сервисами, имеет смысл открыть по-настоящему</li>
+    </ul>
+    <div class="callout green">
+      <div class="callout-label">Проверь что оплата прошла</div>
+      <p>После оплаты перезагрузи страницу. В настройках (Settings → Account) должно быть написано Pro или Max. Если там Free - оплата не прошла, пиши в поддержку Anthropic.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="voice-input">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🎙️</span>
+    <span class="section-name">Общайся с Claude голосом - я сам так работаю</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Одна фишка которая подняла мою скорость работы с Claude в 3-4 раза. Не пиши пальцами - говори голосом. Печатаешь максимум 40 слов в минуту, говоришь 150. Разница чувствуется с первого запроса.</p>
+    <p>Внутри самого Claude есть встроенная кнопка микрофона, но она так себе. Гораздо удобнее - отдельное приложение которое работает в любом поле ввода на компьютере.</p>
+    <h3>Wispr Flow - чем пользуюсь я</h3>
+    <p>Ставишь приложение на Mac или Windows. В любом поле ввода (браузер, VS Code, мессенджер) зажимаешь горячую клавишу - говоришь вслух - отпускаешь - текст появляется сам. И он умный: убирает "э-э" и "ну", поправляет грамматику на лету, сам расставляет знаки препинания.</p>
+    <p>Работает и с русским, и с английским одновременно - можешь говорить на смеси, как в жизни. Для меня это критично, потому что технические термины всё равно проскакивают на английском.</p>
+    <div class="callout">
+      <div class="callout-label">Сколько стоит</div>
+      <p>Базовая версия бесплатная (до 2000 слов в неделю - этого хватит попробовать). Pro - $15/мес, без ограничений. Для активной работы с Claude - обязательная инвестиция, окупается в первый день экономией времени.</p>
+    </div>
+    <p>Скачать: <a href="https://wisprflow.ai" target="_blank">wisprflow.ai</a></p>
+    <h3>AquaVoice - альтернатива</h3>
+    <p>Если Wispr не понравился интерфейс или не подошёл - попробуй Aqua Voice. Похожая механика, немного другой движок транскрипции. Цена сравнимая.</p>
+    <p>Скачать: <a href="https://withaqua.com" target="_blank">withaqua.com</a></p>
+    <h3>Как это меняет работу с Claude</h3>
+    <p>Промпт перестаёт быть мучением. Открыл Claude, зажал кнопку, наговорил всё что в голове - Claude получает длинный подробный промпт с контекстом и деталями, которые ты бы руками не стал печатать. Ответы становятся в разы точнее просто потому что AI получает больше информации о задаче.</p>
+    <div class="callout green">
+      <div class="callout-label">Совет</div>
+      <p>Не стесняйся говорить как в жизни - с "ну", "короче", "типа". Wispr и Aqua всё это вычистят. Говори как думаешь, а не как пишешь. Через неделю печатать в поле ввода будет казаться странным.</p>
+    </div>
   </div>
 </div>
 
