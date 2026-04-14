@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Блок 01 — Основы AI | База знаний Никиты Шлыка</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- TOPNAV -->
+<nav class="topnav">
+  <a href="index.html" class="nav-logo" aria-label="AI База - на главную">
+    <span class="logo-dot" aria-hidden="true"></span><span>AI База</span>
+  </a>
+  <div class="nav-links">
+    <a href="block-01.html" class="nav-link" data-page="block-01.html">01 Основы AI</a>
+    <a href="block-02.html" class="nav-link" data-page="block-02.html">02 Claude Code</a>
+    <a href="index.html#glossary" class="nav-link">Словарь</a>
+    <a href="100-prompts-pro.html" class="nav-link">+100 промптов</a>
+    <a href="content-zavod-starter/" class="nav-link">Контент-завод</a>
+  </div>
+  <div class="nav-search" role="search">
+    <span class="search-icon" aria-hidden="true">⌕</span>
+    <input
+      id="searchInput"
+      type="search"
+      placeholder="Поиск по блоку..."
+      aria-label="Поиск по блоку"
+      autocomplete="off"
+    />
+    <button class="clear-btn" type="button" aria-label="Очистить поиск" onclick="clearSearch()">×</button>
+  </div>
+  <div class="nav-toolbar">
+    <button class="tool-btn" type="button" id="toggleAllBtn" onclick="toggleAll()" aria-label="Раскрыть или свернуть все секции">
+      <span class="tool-btn-label">Раскрыть всё</span>
+    </button>
+  </div>
+  <button class="burger" type="button" id="burgerBtn" aria-label="Меню" aria-expanded="false" onclick="toggleBurger()">
+    <span></span>
+  </button>
+</nav>
+
+<!-- MOBILE PANEL -->
+<div class="mobile-overlay" id="mobileOverlay" onclick="toggleBurger()"></div>
+<aside class="mobile-panel" id="mobilePanel" aria-label="Мобильное меню">
+  <div class="mp-section">База знаний</div>
+  <a href="index.html">← На главную</a>
+  <div class="mp-section">Блоки</div>
+  <a href="block-01.html">01 - Основы AI</a>
+  <a href="block-02.html">02 - Claude Code</a>
+  <a href="index.html#glossary">Словарь</a>
+  <div class="mp-section">Ресурсы</div>
+  <a href="100-prompts-pro.html">+100 промптов</a>
+  <a href="content-zavod-starter/">Контент-завод</a>
+  <div class="mp-section">Действия</div>
+  <a href="#" onclick="event.preventDefault(); toggleBurger(); toggleAll();" id="mobileToggleAll">Раскрыть всё</a>
+</aside>
+
+<!-- BLOCK HEADER -->
+<div class="block-divider" style="max-width:1100px;margin:0 auto;padding:3rem 2rem 1rem;">
+  <div class="block-label">
+    <div class="block-num-label">01</div>
+    <div>
+      <div class="block-title-label">Основы AI</div>
+      <div class="block-desc-label">Чем ChatGPT отличается от Claude, как устроены агенты и проекты, формула R.A.C.E.T.</div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYOUT WITH STICKY TOC -->
+<div class="layout">
+
+<!-- STICKY TOC (desktop only) -->
+<aside class="toc" id="toc" aria-label="Оглавление">
+  <div class="toc-title">Оглавление</div>
+  <a class="toc-link" href="#what-is-ai">Что такое нейросеть</a>
+  <a class="toc-link" href="#ecosystem-claude">Карта Claude</a>
+  <a class="toc-link" href="#chatgpt-vs-claude">ChatGPT vs Claude</a>
+  <a class="toc-link" href="#claude-philosophy">Философия проектов</a>
+  <a class="toc-link" href="#start-claude-ai">Старт на claude.ai</a>
+  <a class="toc-link" href="#voice-input">Голосовой ввод</a>
+  <a class="toc-link" href="#migrate-from-chatgpt">Переход с ChatGPT</a>
+  <a class="toc-link" href="#ai-capabilities">AI в бизнесе</a>
+  <a class="toc-link" href="#claude-interface">Интерфейс Claude.ai</a>
+  <a class="toc-link" href="#connectors">Коннекторы</a>
+  <a class="toc-link" href="#agents">Агенты</a>
+  <a class="toc-link" href="#prompting">R.A.C.E.T.</a>
+  <a class="toc-link" href="#prompting-techniques">Техники промптов</a>
+  <div style="margin-top:1.5rem;padding:0 0.6rem;">
+    <a href="index.html" style="font-size:0.75rem;color:var(--muted);text-decoration:none;">← Вернуться в базу</a>
+  </div>
+</aside>
+
+<div class="content-col">
+
+<!-- CONTENT -->
+<div class="content">
+
+<div class="section" id="what-is-ai">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🤖</span>
+    <span class="section-name">Что такое нейросеть простыми словами</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Нейросеть — это программа, которую обучили на огромном массиве текстов, картинок, кода. Она не "думает" — она предсказывает, какой ответ ожидается на ваш запрос.</p>
+    <p>Представьте помощника, который прочитал миллиарды страниц и теперь может ответить, сформулировать, разобрать задачу, написать код. Быстрый, но буквальный — что попросили, то и сделает.</p>
+    <div class="info-cards">
+      <div class="info-card"><div class="info-card-title">LLM</div><div class="info-card-text">Large Language Model. Работает с текстом — понимает и генерирует. Claude, ChatGPT, Gemini</div></div>
+      <div class="info-card"><div class="info-card-title">Токен</div><div class="info-card-text">Единица обработки. Примерно 1 слово = 1-2 токена. За них платят — чем меньше, тем дешевле</div></div>
+      <div class="info-card"><div class="info-card-title">Промпт</div><div class="info-card-text">Ваш запрос. Ключевой навык работы с AI — формулировать точно</div></div>
+      <div class="info-card"><div class="info-card-title">Агент</div><div class="info-card-text">AI с конкретной ролью и инструкцией, выполняющий цепочку задач без вашего участия</div></div>
+    </div>
+    <div class="callout green">
+      <div class="callout-label">Ключевой факт</div>
+      <p>AI не читает мысли. AI следует буквально. Качество результата = качество вашего запроса. Всё.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="ecosystem-claude">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🗺️</span>
+    <span class="section-name">Карта Claude - 4 продукта одной подписки</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Когда говорят "Claude" - обычно имеют в виду чат в браузере. Но Claude это не один продукт, а целая экосистема. Одна подписка - доступ ко всем. Это важно понять с самого начала, иначе будешь сравнивать яблоки с грушами.</p>
+    <div class="info-cards">
+      <div class="info-card"><div class="info-card-title">Claude AI (claude.ai)</div><div class="info-card-text">Веб-версия. Чаты, Projects, Artifacts, коннекторы (Google Drive, Gmail, Slack). То что видит 90% людей</div></div>
+      <div class="info-card"><div class="info-card-title">Claude Desktop</div><div class="info-card-text">Приложение на Mac и Windows. То же что веб, только быстрее плюс Computer Use - Claude может сам кликать по экрану</div></div>
+      <div class="info-card"><div class="info-card-title">Claude Code</div><div class="info-card-text">Живёт внутри VS Code или в терминале. Видит все файлы проекта, создаёт файлы сам, запускает команды, делает коммиты. Для разработки и автоматизации</div></div>
+      <div class="info-card"><div class="info-card-title">Claude Mobile</div><div class="info-card-text">iOS и Android. Быстрые запросы в дороге, голосовой ввод, синхронизируется с вебом и десктопом</div></div>
+    </div>
+    <h3>Что из этого нужно тебе</h3>
+    <p>Это не лестница "от простого к сложному". Это разные инструменты под разные задачи.</p>
+    <ul>
+      <li>Общаться, получать ответы, писать тексты, анализировать - <strong>Claude AI в браузере</strong></li>
+      <li>Чтобы AI сам делал файлы, запускал код, собирал сайты и автоматизации - <strong>Claude Code</strong></li>
+      <li>Много работаешь с документами локально на Mac или Windows - <strong>Claude Desktop</strong></li>
+      <li>Нужен AI в кармане, пока едешь в метро - <strong>Claude Mobile</strong></li>
+    </ul>
+    <div class="callout">
+      <div class="callout-label">Одна подписка - все четыре</div>
+      <p>Pro за $20/мес или Max за $100-200 открывает доступ ко всем четырём сразу. Не нужно платить отдельно. Залогинился в claude.ai - автоматически есть доступ в Desktop, Code и Mobile через тот же аккаунт.</p>
+    </div>
+    <h3>На чём сфокусируемся в этой базе</h3>
+    <p>Блок 1 - про <strong>Claude AI</strong> в браузере. Это то с чего ты реально начнёшь. Научишься промптить, работать с Projects, подключать коннекторы.</p>
+    <p>Блок 2 - про <strong>Claude Code</strong>. Когда освоил AI в браузере и хочется чтобы он не отвечал а делал - переходишь сюда. Проекты, CLAUDE.md, реальная разработка своих штук.</p>
+  </div>
+</div>
+
+<div class="section" id="chatgpt-vs-claude">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">⚡</span>
+    <span class="section-name">ChatGPT vs Claude — когда что выбирать</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Оба — нейросети. Оба отвечают на вопросы и пишут тексты. Разница проявляется на сложных задачах.</p>
+    <table class="compare">
+      <tr><th></th><th>ChatGPT</th><th>Claude</th></tr>
+      <tr><td>Разработчик</td><td>OpenAI</td><td>Anthropic</td></tr>
+      <tr><td>Сильная сторона</td><td>Быстрые ответы, широкий охват, маркетплейс готовых агентов</td><td>Глубокий анализ, длинные тексты, аккуратный код, работа с большим контекстом</td></tr>
+      <tr><td>Маркетплейс</td><td>GPT Store — тысячи готовых агентов</td><td>Нет маркетплейса. Свой агент = свой Project</td></tr>
+      <tr><td>Код</td><td>Хорош для быстрых скриптов</td><td>Для больших проектов — отдельный продукт Claude Code</td></tr>
+      <tr><td>Образ</td><td>Универсальный помощник</td><td>Вдумчивый эксперт</td></tr>
+    </table>
+    <p>На практике полезно использовать оба. ChatGPT — для быстрого мозгового штурма, Claude — когда задача сложная или кода много.</p>
+  </div>
+</div>
+
+<div class="section" id="claude-philosophy">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🧠</span>
+    <span class="section-name">Философия проектов - главная разница с ChatGPT</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Я долго сидел на ChatGPT и мне казалось что Claude - это тот же чат, только от другой компании. Это не так. У них разная философия работы. Пока её не поймёшь - будешь недоиспользовать Claude как минимум на 80%.</p>
+    <h3>ChatGPT - это чаты</h3>
+    <p>Открыл, задал вопрос, получил ответ. Закрыл - забыл. Память есть, но она общая на весь аккаунт. Контекст своего проекта ты держишь в голове: "а, мы же делали лендинг для психолога" - и каждый новый чат начинаешь с объяснений.</p>
+    <h3>Claude - это проекты</h3>
+    <p>Любая серьёзная задача в Claude - это отдельный Project со своим контекстом, файлами и инструкциями. Project "Мой бренд", Project "Клиент Иван", Project "Лендинг для психолога". Зашёл в нужный - Claude уже знает кто ты, над чем вы работаете, какие правила. Объяснять с нуля не нужно.</p>
+    <table class="compare">
+      <tr><th></th><th>ChatGPT</th><th>Claude</th></tr>
+      <tr><td>Как мыслить о работе</td><td>Каждый разговор - новый запуск</td><td>Каждая задача - отдельный проект</td></tr>
+      <tr><td>Где хранится контекст</td><td>В твоей голове или в настройках аккаунта</td><td>Внутри Project - для всех чатов этого проекта</td></tr>
+      <tr><td>Файлы и инструкции</td><td>Загружаешь в каждый чат заново</td><td>Один раз в Project - работает везде внутри</td></tr>
+      <tr><td>Переключение между темами</td><td>Вкладки в истории чатов</td><td>Разные Projects в меню слева</td></tr>
+    </table>
+    <div class="callout">
+      <div class="callout-label">Смена мышления</div>
+      <p>Перестаёшь думать "сейчас задам вопрос AI". Начинаешь думать "работаю внутри проекта X - Claude уже в курсе". Это другая модель работы. И с неё вся польза от Claude начинается.</p>
+    </div>
+    <p>В Claude Code та же философия, только проект там - это физическая папка у тебя на компьютере. Про это подробнее в блоке 2.</p>
+  </div>
+</div>
+
+<div class="section" id="start-claude-ai">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🚀</span>
+    <span class="section-name">Старт на claude.ai - VPN, регистрация, тариф</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Если ты из России - Claude в лоб не откроется. Нужно три вещи: VPN, иностранный номер для регистрации, и выбрать подходящий тариф. Займёт минут 15-20 если делаешь впервые.</p>
+    <h3>1. VPN - без него никак</h3>
+    <p>Anthropic блокируют доступ с российских IP. Без VPN не откроется ни claude.ai, ни приложение, ни Claude Code. Проверено - не работает.</p>
+    <div class="info-cards">
+      <div class="info-card"><div class="info-card-title">Happ</div><div class="info-card-text">Бесплатный клиент под все платформы. Ключи подключения покупать отдельно у провайдеров</div></div>
+      <div class="info-card"><div class="info-card-title">Dino VPN</div><div class="info-card-text">Платный, работает стабильно, настраивается за 2 минуты. Хороший старт</div></div>
+      <div class="info-card"><div class="info-card-title">Mullvad</div><div class="info-card-text">Платный, анонимный (можно без привязки к карте), продвинутый вариант для параноиков</div></div>
+    </div>
+    <div class="callout blue">
+      <div class="callout-label">Какой страной подключаться</div>
+      <p>Любая Европа или США. Главное - стабильная скорость. Если VPN падает каждые 10 минут - Claude будет обрываться посреди ответа, это бесит. Не экономь на нормальном сервисе.</p>
+    </div>
+    <h3>2. Иностранный номер для регистрации</h3>
+    <p>Claude просит номер при регистрации, и российский не примет. Два варианта:</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Виртуальный номер</strong> - сервисы sms-activate.io или 5sim.biz. Снимаешь номер на приём одной SMS, стоит копейки (30-100 руб). Пришёл код - использовал - дальше номер не нужен</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>eSIM с иностранной симкой</strong> - через Airalo или Holafly. Ставишь на iPhone или Android свежий номер (казахстанский, турецкий, грузинский), он остаётся у тебя навсегда и пригодится для любых сервисов которым нужен иностранный номер</div></div>
+    </div>
+    <p>Для разового захода - хватит sms-activate. Если планируешь пользоваться ещё десятком подобных сервисов - сразу eSIM, окупится за первые пару регистраций.</p>
+    <h3>3. Регистрация за 6 шагов</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text">Включи VPN (Европа или США)</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Открой <a href="https://claude.ai" target="_blank">claude.ai</a> и нажми Sign up</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Заходи через Google - так быстрее. По email тоже можно, но Google-аккаунт экономит пару минут</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Введи иностранный номер - получи SMS-код - вставь</div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-text">Укажи имя и чем ты занимаешься (необязательно). Это повлияет на то как Claude будет с тобой общаться с первых запросов</div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-text">Отправь первый запрос чтобы проверить что всё работает. Любой - например "Привет, расскажи о себе в двух предложениях"</div></div>
+    </div>
+    <h3>4. Тариф - Free, Pro или Max</h3>
+    <table class="compare">
+      <tr><th></th><th>Free</th><th>Pro</th><th>Max</th></tr>
+      <tr><td>Цена</td><td>$0</td><td>$20/мес</td><td>$100 или $200/мес</td></tr>
+      <tr><td>Сообщений</td><td>Мало, быстро закончатся</td><td>Раз в 5 больше Free</td><td>В 5-20 раз больше Pro</td></tr>
+      <tr><td>Модели</td><td>Sonnet базовая</td><td>Sonnet + Opus (лучшая)</td><td>Всё что есть, плюс приоритет на серверах</td></tr>
+      <tr><td>Claude Code</td><td>Не включён</td><td>Включён, базовый лимит</td><td>Большой лимит токенов</td></tr>
+      <tr><td>Projects</td><td>До 5</td><td>Без ограничений</td><td>Без ограничений</td></tr>
+      <tr><td>Когда брать</td><td>Первые пару дней попробовать</td><td>Старт и обучение</td><td>Ежедневная активная работа</td></tr>
+    </table>
+    <div class="callout">
+      <div class="callout-label">Мой совет по выбору</div>
+      <p>Первый день - Free, просто попробовать интерфейс. Как только упрёшься в лимит (а это произойдёт быстро) - сразу Pro. Max берёшь когда реально работаешь с Claude часов 5+ в день и на Pro упираешься в суточные лимиты. Начинать с Max - выбрасывать деньги.</p>
+    </div>
+    <h3>5. Оплата - российская карта не подойдёт</h3>
+    <p>Anthropic не принимает российские карты. Варианты по возрастанию сложности:</p>
+    <ul>
+      <li><strong>Зарубежная карта друга или родственника</strong> - самый простой вариант если есть</li>
+      <li><strong>Виртуальная карта через посреднические сервисы</strong> - ищи свежие рабочие варианты, они часто меняются</li>
+      <li><strong>Карта иностранного банка</strong> - если планируешь долго пользоваться Claude и подобными сервисами, имеет смысл открыть по-настоящему</li>
+    </ul>
+    <div class="callout green">
+      <div class="callout-label">Проверь что оплата прошла</div>
+      <p>После оплаты перезагрузи страницу. В настройках (Settings → Account) должно быть написано Pro или Max. Если там Free - оплата не прошла, пиши в поддержку Anthropic.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="voice-input">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🎙️</span>
+    <span class="section-name">Общайся с Claude голосом - я сам так работаю</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Одна фишка которая подняла мою скорость работы с Claude в 3-4 раза. Не пиши пальцами - говори голосом. Печатаешь максимум 40 слов в минуту, говоришь 150. Разница чувствуется с первого запроса.</p>
+    <p>Внутри самого Claude есть встроенная кнопка микрофона, но она так себе. Гораздо удобнее - отдельное приложение которое работает в любом поле ввода на компьютере.</p>
+    <h3>Wispr Flow - чем пользуюсь я</h3>
+    <p>Ставишь приложение на Mac или Windows. В любом поле ввода (браузер, VS Code, мессенджер) зажимаешь горячую клавишу - говоришь вслух - отпускаешь - текст появляется сам. И он умный: убирает "э-э" и "ну", поправляет грамматику на лету, сам расставляет знаки препинания.</p>
+    <p>Работает и с русским, и с английским одновременно - можешь говорить на смеси, как в жизни. Для меня это критично, потому что технические термины всё равно проскакивают на английском.</p>
+    <div class="callout">
+      <div class="callout-label">Сколько стоит</div>
+      <p>Базовая версия бесплатная (до 2000 слов в неделю - этого хватит попробовать). Pro - $15/мес, без ограничений. Для активной работы с Claude - обязательная инвестиция, окупается в первый день экономией времени.</p>
+    </div>
+    <p>Скачать: <a href="https://wisprflow.ai" target="_blank">wisprflow.ai</a></p>
+    <h3>AquaVoice - альтернатива</h3>
+    <p>Если Wispr не понравился интерфейс или не подошёл - попробуй Aqua Voice. Похожая механика, немного другой движок транскрипции. Цена сравнимая.</p>
+    <p>Скачать: <a href="https://withaqua.com" target="_blank">withaqua.com</a></p>
+    <h3>Как это меняет работу с Claude</h3>
+    <p>Промпт перестаёт быть мучением. Открыл Claude, зажал кнопку, наговорил всё что в голове - Claude получает длинный подробный промпт с контекстом и деталями, которые ты бы руками не стал печатать. Ответы становятся в разы точнее просто потому что AI получает больше информации о задаче.</p>
+    <div class="callout green">
+      <div class="callout-label">Совет</div>
+      <p>Не стесняйся говорить как в жизни - с "ну", "короче", "типа". Wispr и Aqua всё это вычистят. Говори как думаешь, а не как пишешь. Через неделю печатать в поле ввода будет казаться странным.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="migrate-from-chatgpt">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🔁</span>
+    <span class="section-name">Переход с ChatGPT — как перенести накопленный контекст</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Если долго работали с ChatGPT — у него накоплен ваш контекст: ваши предпочтения, стиль, часто задаваемые вопросы, правила поведения. Всё это можно одним махом перенести в Claude, чтобы не начинать заново.</p>
+    <p>Займёт 3 минуты. Делается через встроенный инструмент Claude — вручную ничего копировать из старых чатов не надо.</p>
+    <h3>Шаг 1. Открыть настройки Claude</h3>
+    <p>В Claude.ai нажмите на свой профиль в нижнем углу → Settings.</p>
+    <img src="screenshots/migration-1.png" alt="Settings в Claude.ai" class="shot small">
+    <h3>Шаг 2. Capabilities → Start import</h3>
+    <p>Слева в настройках — раздел Capabilities. Прокрутите до блока Memory → пункт "Import memory from other AI providers" → кнопка Start import.</p>
+    <img src="screenshots/migration-2.png" alt="Capabilities и Import memory" class="shot">
+    <h3>Шаг 3. Взять промпт у Claude и отдать ChatGPT</h3>
+    <p>Claude покажет готовый промпт — нажмите Copy.</p>
+    <img src="screenshots/migration-3.png" alt="Готовый промпт от Claude" class="shot small">
+    <p>Открываете ChatGPT, вставляете промпт. ChatGPT выдаст структурированное саммари всего что про вас знает.</p>
+    <img src="screenshots/migration-4.png" alt="Вставка промпта в ChatGPT" class="shot">
+    <h3>Шаг 4. Вернуть ответ в Claude</h3>
+    <p>Копируете ответ ChatGPT → вставляете в нижнее поле Claude → Add to memory.</p>
+    <p>Всё. Весь накопленный контекст из прошлых разговоров теперь у Claude — он знает ваш стиль, правила, предпочтения.</p>
+    <div class="callout green">
+      <div class="callout-label">Когда делать</div>
+      <p>Один раз, когда только начинаете пользоваться Claude. Если в ChatGPT давно не сидели — возможно нечего переносить, тогда просто настраиваете Claude с нуля через Projects.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="ai-capabilities">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🚀</span>
+    <span class="section-name">Что конкретно AI делает в бизнесе</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Нейросеть — это не Google. Google ищет уже существующее. AI создаёт новое, анализирует данные, принимает решения.</p>
+    <h3>AI-роли в малом бизнесе</h3>
+    <div class="info-cards">
+      <div class="info-card"><div class="info-card-title">AI-продавец</div><div class="info-card-text">Отвечает клиентам круглосуточно, ведёт до покупки</div></div>
+      <div class="info-card"><div class="info-card-title">Маркетолог</div><div class="info-card-text">Пишет посты и рекламу за минуты вместо часов</div></div>
+      <div class="info-card"><div class="info-card-title">Дизайнер</div><div class="info-card-text">Картинки для рекламы, презентации, карточки товаров</div></div>
+      <div class="info-card"><div class="info-card-title">Аналитик</div><div class="info-card-text">Разбирает данные, делает отчёты, ищет паттерны</div></div>
+      <div class="info-card"><div class="info-card-title">Разведчик</div><div class="info-card-text">Следит за конкурентами, находит их слабости</div></div>
+      <div class="info-card"><div class="info-card-title">Ассистент руководителя</div><div class="info-card-text">Письма, расписание, подготовка к встречам</div></div>
+      <div class="info-card"><div class="info-card-title">HR-помощник</div><div class="info-card-text">Первичная обработка откликов, тестовые задания</div></div>
+      <div class="info-card"><div class="info-card-title">Копирайтер</div><div class="info-card-text">Тексты для сайта, карточек, рассылок, скриптов</div></div>
+    </div>
+    <h3>Типы задач которые закрывает AI</h3>
+    <ul>
+      <li><strong>Тексты</strong> — продающие, статьи, письма, скрипты, резюме</li>
+      <li><strong>Визуал</strong> — картинки, логотипы, инфографика, презентации</li>
+      <li><strong>Аналитика</strong> — ЦА, конкуренты, продажи, поведение пользователей</li>
+      <li><strong>Код</strong> — сайты, боты, автоматизации, приложения (через Claude Code)</li>
+      <li><strong>Бизнес</strong> — финплан, юрдоки, ТЗ, отчёты, договоры</li>
+      <li><strong>Обучение</strong> — курсы, квизы, тесты, материалы для команды</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section" id="claude-interface">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">💬</span>
+    <span class="section-name">Интерфейс Claude.ai — Chat и Projects</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <h3>Chat — одноразовый разговор</h3>
+    <p>Открыли, написали вопрос, получили ответ. Каждый новый чат — с нуля. Claude не помнит, что вы обсуждали вчера. Подходит для разовых задач: быстро написать пост, сформулировать мысль, разобраться в теме.</p>
+    <h3>Projects — проект с постоянным контекстом</h3>
+    <p>Настроили один раз — и все чаты внутри проекта стартуют "в курсе дела". Не нужно каждый раз объяснять кто вы, чем занимаетесь, какая у вас аудитория.</p>
+    <h4>Пример: создаёте проект "Мой личный бренд"</h4>
+    <p>Вы эксперт, ведёте блог, хотите чтобы Claude помогал создавать контент в вашем стиле. Создаёте Project с этой целью и загружаете в него:</p>
+    <ul>
+      <li><strong>Описание вашей экспертизы</strong> — кто вы, сколько лет в теме, чем отличаетесь от других</li>
+      <li><strong>Описание целевой аудитории</strong> — для кого контент, их боли, желания, возражения</li>
+      <li><strong>Tone of Voice</strong> — как вы общаетесь: разговорно или экспертно, какие слова используете, какие — запрещены</li>
+      <li><strong>Воронку продаж</strong> — какие продукты, по какой цене, как они связаны</li>
+      <li><strong>Успешные примеры</strong> — 5-10 постов которые уже хорошо зашли</li>
+      <li><strong>Правила оформления</strong> — длина, эмодзи, разметка</li>
+    </ul>
+    <p>После этого любой чат в этом проекте — уже с контекстом. Пишете "Сделай пост про новый продукт" — Claude уже знает, как вы пишете и для кого.</p>
+    <div class="callout green">
+      <div class="callout-label">Практический совет</div>
+      <p>Начните с одного Project — под самую частую задачу (например, контент). Добавите остальные когда поймёте, как работает. Не нужно сразу создавать 10.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="connectors">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🔌</span>
+    <span class="section-name">Коннекторы claude.ai — подключаем Drive, Gmail, Calendar, Slack</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Коннекторы — это интеграции claude.ai с сервисами которыми ты уже пользуешься. Подключил один раз — и можешь прямо в чате попросить Claude прочитать письмо, найти файл в Drive или записать встречу в Calendar. Без лишних копирований.</p>
+    <div class="callout blue">
+      <div class="callout-label">Это только для веб-версии</div>
+      <p>Коннекторы работают в claude.ai в браузере и Claude Desktop. Claude Code в VS Code — это другое, он работает с файлами на твоём компьютере, а не с облачными сервисами.</p>
+    </div>
+    <h3>Какие коннекторы подключить в первую очередь</h3>
+    <div class="info-cards">
+      <div class="info-card"><div class="info-card-title">Google Drive</div><div class="info-card-text">Прикрепляй документы, PDF, таблицы прямо в чат. "Посмотри мой бриф в Drive и составь план" — без копипасты</div></div>
+      <div class="info-card"><div class="info-card-title">Gmail</div><div class="info-card-text">Claude читает письма и помогает отвечать. "Прочитай последнее письмо от клиента и напиши ответ в деловом тоне"</div></div>
+      <div class="info-card"><div class="info-card-title">Google Calendar</div><div class="info-card-text">Видит твоё расписание, добавляет встречи. "Найди окно на этой неделе для звонка на час и запиши"</div></div>
+      <div class="info-card"><div class="info-card-title">Slack</div><div class="info-card-text">Читает переписку в каналах, помогает отвечать на сообщения, делает саммари треда</div></div>
+    </div>
+    <h3>Как подключить</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text">Открой <a href="https://claude.ai" target="_blank">claude.ai</a> → нажми на иконку профиля → Settings</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Раздел Integrations (или Connectors) — список доступных сервисов</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Нажми Connect рядом с нужным сервисом — откроется окно авторизации Google/Slack</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Разреши доступ — и коннектор готов. В чате появится кнопка @ для вызова подключённых сервисов</div></div>
+    </div>
+    <h3>Как использовать в чате</h3>
+    <p>В поле ввода набери <code>@</code> — появится список подключённых коннекторов. Выбери нужный и Claude получит доступ к данным этого сервиса в рамках текущего разговора.</p>
+    <div class="code-wrap">
+      <div class="code-label">Примеры запросов с коннекторами</div>
+      <div class="code-block prompt">@GoogleDrive найди мой файл "бриф для лендинга" и составь структуру страницы по нему</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="code-wrap">
+      <div class="code-block prompt">@Gmail покажи последние 5 писем от клиентов и скажи какие требуют срочного ответа</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="callout green">
+      <div class="callout-label">Совет</div>
+      <p>Начни с Google Drive — это самый полезный коннектор для большинства задач. Когда перестанешь копировать куски документов в чат и начнёшь просто ссылаться на файлы — поймёшь насколько это удобнее.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="agents">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🤝</span>
+    <span class="section-name">Агенты — готовые и свои</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Агент — это AI с конкретной ролью и инструкцией. Не универсальный чат, а специалист: "копирайтер для соцсетей", "аналитик рекламы", "архитектор промптов".</p>
+    <h3>ChatGPT — GPT Store</h3>
+    <p>В ChatGPT есть магазин готовых агентов — тысячи штук по категориям: тексты, продуктивность, ресёрч, обучение, программирование. Зайти можно здесь: <a href="https://chatgpt.com/gpts" target="_blank">chatgpt.com/gpts</a></p>
+    <p>Если нашли нужного, но он на английском — первое же сообщение: "Общайся со мной на русском и кратко объясни что ты умеешь".</p>
+    <h3>Claude — свои через Projects</h3>
+    <p>У Claude нет публичного маркетплейса. Свой агент создаётся через Project с детальной инструкцией — функционально это и есть агент.</p>
+    <h3>Мой агент — Архитектор промптов</h3>
+    <div class="callout">
+      <div class="callout-label">Для вас</div>
+      <p>Я сделал своего GPT-агента, который превращает любой ваш запрос в структурированный промпт по формуле R.A.C.E.T. (про неё ниже). Сохраняйте в закладки:</p>
+      <p style="margin-top:0.5rem;"><a href="https://chatgpt.com/g/g-69d2644a22f48191896fa55e02cf8707-prompt-arkhitektor" target="_blank">→ Открыть Архитектор промптов</a></p>
+    </div>
+    <h3>Создать своего агента</h3>
+    <p>Если в магазине нет подходящего — делаете за 15 минут:</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Определите одну задачу</strong> — не "помогай во всём", а "пишу продающие посты для психологов"</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Настройте роль</strong> — имя агента, описание, кем он выступает</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Дайте базу знаний</strong> — документы, FAQ, примеры работы</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Протестируйте</strong> — задайте 5-10 типичных запросов и посмотрите, отвечает ли так, как нужно</div></div>
+    </div>
+    <p>По сути создание агента = грамотно составленный системный промпт. Формулу — ниже.</p>
+  </div>
+</div>
+
+<div class="section" id="prompting">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">📝</span>
+    <span class="section-name">R.A.C.E.T. — формула промпта</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>AI — талантливый, но очень буквальный исполнитель. Скажете "напиши пост" — получите пост, но не факт что ваш. Скажете по формуле — получите именно то, что нужно.</p>
+    <h3>5 элементов R.A.C.E.T.</h3>
+    <div class="racet">
+      <div class="racet-cell"><div class="racet-letter">R</div><div class="racet-name">Role</div><div class="racet-desc">Кем выступает AI</div></div>
+      <div class="racet-cell"><div class="racet-letter">A</div><div class="racet-name">Action</div><div class="racet-desc">Что сделать</div></div>
+      <div class="racet-cell"><div class="racet-letter">C</div><div class="racet-name">Context</div><div class="racet-desc">Ситуация, данные</div></div>
+      <div class="racet-cell"><div class="racet-letter">E</div><div class="racet-name">Expectation</div><div class="racet-desc">Каким будет результат</div></div>
+      <div class="racet-cell"><div class="racet-letter">T</div><div class="racet-name">Tone</div><div class="racet-desc">Как звучит</div></div>
+    </div>
+    <h3>Сравнение на одной задаче</h3>
+    <div class="code-wrap">
+      <div class="code-label">Плохой промпт</div>
+      <div class="code-block prompt">Напиши продающий текст о курсе по фотографии.</div>
+    </div>
+    <div class="code-wrap">
+      <div class="code-label">По R.A.C.E.T.</div>
+      <div class="code-block prompt">Role: фотограф-преподаватель с 10-летним опытом, автор методики "Первые красивые фото за 3 дня", обучил 1000+ новичков.
+
+Action: напиши продающий пост в Instagram, который:
+1. Разрушает миф о необходимости дорогой техники
+2. Показывает результаты учеников
+3. Ведёт на бесплатный мастер-класс
+
+Context:
+- Аудитория: новички 25-35 лет, мечтают о красивых фото
+- Главная боль: думают, что нужна дорогая камера и годы учёбы
+- Наше решение: результат на первом занятии, на любой технике
+- Цифра: 80% учеников делают продающие фото за 2 месяца
+
+Expectation:
+- Объём 1500 знаков
+- Структура: боль → миф → решение → доказательство → призыв
+- Эмодзи в меру, 1-2 на абзац
+- Обязательно: CTA с дедлайном
+
+Tone: вдохновляющий, но экспертный. Без пафоса. Акцент на простоте и достижимости.</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <h3>Приёмы усиления</h3>
+    <h4>Для Role — опиши экспертизу через "суперсилу"</h4>
+    <p>Не "диетолог", а "нутрициолог с 15 лет опыта, специализация — похудение без диет, автор книги о здоровом питании". Чем конкретнее — тем лучше отыгрывает.</p>
+    <h4>Для Tone — приём "персонаж или ситуация"</h4>
+    <ul>
+      <li>Персонаж: "Пиши как [известный блогер в нише] в его стиле"</li>
+      <li>Ситуация: "Представь, что мы сидим в кафе и обсуждаем это"</li>
+      <li>Метафора: "Как старший брат, который делится опытом"</li>
+    </ul>
+    <div class="callout blue">
+      <div class="callout-label">3 типичные ошибки</div>
+      <p>1. <strong>Размыто</strong> — "сделай сайт". 2. <strong>Много сразу</strong> — регистрация+каталог+корзина+оплата одним запросом. 3. <strong>Нет контекста</strong> — AI не читает мысли.</p>
+    </div>
+    <div class="callout green">
+      <div class="callout-label">100 готовых промптов</div>
+      <p>Собрал отдельный файл — 100 промптов PRO-уровня по формуле R.A.C.E.T. по 8 сферам жизни: бизнес, маркетинг, контент, продуктивность, саморазвитие, креатив, здоровье, финансы.</p>
+      <p style="margin-top:0.5rem;"><a href="100-prompts-pro.html">→ Открыть коллекцию 100 промптов</a></p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="prompting-techniques">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🔥</span>
+    <span class="section-name">Техники прокачки промптов</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <h3>Chain prompting — цепочка вместо одного запроса</h3>
+    <p>Вместо того чтобы грузить всё в один промпт — дробите на шаги:</p>
+    <div class="code-wrap">
+      <div class="code-label">3 шага вместо одного</div>
+      <div class="code-block prompt">Шаг 1: Назови 3 главных страха родителей при покупке детского самоката.
+
+Шаг 2: Как наш самокат решает каждый из этих страхов? Конкретно.
+
+Шаг 3: Собери продающий пост про самокат, начиная с главного страха.</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <h3>Инверсия — думай наоборот</h3>
+    <p>Вместо "как привлечь" — "почему уходят". Когда ищешь проблемы, решения всплывают сами.</p>
+    <ul>
+      <li>"Как сделать крутой сайт" → "5 причин, почему люди закрывают сайт в первые 3 секунды"</li>
+      <li>"Как поднять конверсию" → "Что в моей воронке отталкивает клиентов"</li>
+    </ul>
+    <h3>Итерации — первый результат это черновик</h3>
+    <p>Не бери первый ответ. Прогоняй через 2-3 итерации:</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Критика.</strong> "Проанализируй этот текст как маркетолог с 10-летним опытом. Что улучшить?"</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Переработка.</strong> "Применение замечаний. Сделай сильнее."</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Сравнение.</strong> "Сравни обе версии. Что стало лучше? Что ещё улучшить?"</div></div>
+    </div>
+    <h3>Усилители</h3>
+    <ul>
+      <li><strong>Шкала качества</strong> — "Оцени каждый абзац 1-10. Переписывай до 9"</li>
+      <li><strong>Критик наоборот</strong> — "Сначала найди все слабые места. Потом исправь"</li>
+      <li><strong>С примерами</strong> — вместо "напиши пост" покажи 2-3 успешных и скажи "в таком стиле"</li>
+      <li><strong>Поиск данных</strong> — "Перед написанием найди актуальные тренды на рынке X"</li>
+    </ul>
+    <h3>Специальные шаблоны</h3>
+    <h4>Для анализа данных</h4>
+    <div class="code-wrap">
+      <div class="code-block prompt">Анализ [чего]:
+- Что смотрим: [метрики]
+- Что ищем: аномалии, тренды, точки роста
+- Как показать: таблица + 3 главных вывода
+- Формат: маркированный список с цифрами</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <h4>Для принятия решений</h4>
+    <div class="code-wrap">
+      <div class="code-block prompt">Помоги принять решение: [вопрос]
+
+Критерии успеха:
+- [метрика 1]
+- [метрика 2]
+
+Формат ответа:
+✓ Плюсы
+✗ Минусы
+! Риски
+→ Рекомендация + обоснование</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+  </div>
+</div>
+
+<!-- NEXT BLOCK CTA -->
+<aside class="tripwire" data-no-search style="margin-top:4rem;">
+  <div class="tripwire-tag">Следующий блок</div>
+  <div class="tripwire-title">Готов превратить Claude из советника в исполнителя?</div>
+  <p class="tripwire-text">В блоке 02 - Claude Code. Установка, первый проект своими руками, CLAUDE.md и память, продвинутые фишки. Всё что превращает AI из "даёт советы" в "делает работу".</p>
+  <div class="tripwire-row">
+    <a href="block-02.html" class="tripwire-btn">Блок 02 - Claude Code →</a>
+  </div>
+</aside>
+
+<div class="no-results" id="noResults">
+  Ничего не нашлось. Попробуй другой запрос или
+  <a href="#" onclick="event.preventDefault(); clearSearch();" style="color:var(--accent);">сбрось поиск</a>.
+</div>
+
+</div><!-- /content -->
+
+</div><!-- /content-col -->
+</div><!-- /layout -->
+
+<script src="scripts.js"></script>
+</body>
+</html>
