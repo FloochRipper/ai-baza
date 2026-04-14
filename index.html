@@ -996,6 +996,50 @@ a { color: var(--accent); }
   </div>
 </div>
 
+<div class="section" id="connectors">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">🔌</span>
+    <span class="section-name">Коннекторы claude.ai — подключаем Drive, Gmail, Calendar, Slack</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Коннекторы — это интеграции claude.ai с сервисами которыми ты уже пользуешься. Подключил один раз — и можешь прямо в чате попросить Claude прочитать письмо, найти файл в Drive или записать встречу в Calendar. Без лишних копирований.</p>
+    <div class="callout blue">
+      <div class="callout-label">Это только для веб-версии</div>
+      <p>Коннекторы работают в claude.ai в браузере и Claude Desktop. Claude Code в VS Code — это другое, он работает с файлами на твоём компьютере, а не с облачными сервисами.</p>
+    </div>
+    <h3>Какие коннекторы подключить в первую очередь</h3>
+    <div class="info-cards">
+      <div class="info-card"><div class="info-card-title">Google Drive</div><div class="info-card-text">Прикрепляй документы, PDF, таблицы прямо в чат. "Посмотри мой бриф в Drive и составь план" — без копипасты</div></div>
+      <div class="info-card"><div class="info-card-title">Gmail</div><div class="info-card-text">Claude читает письма и помогает отвечать. "Прочитай последнее письмо от клиента и напиши ответ в деловом тоне"</div></div>
+      <div class="info-card"><div class="info-card-title">Google Calendar</div><div class="info-card-text">Видит твоё расписание, добавляет встречи. "Найди окно на этой неделе для звонка на час и запиши"</div></div>
+      <div class="info-card"><div class="info-card-title">Slack</div><div class="info-card-text">Читает переписку в каналах, помогает отвечать на сообщения, делает саммари треда</div></div>
+    </div>
+    <h3>Как подключить</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text">Открой <a href="https://claude.ai" target="_blank">claude.ai</a> → нажми на иконку профиля → Settings</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Раздел Integrations (или Connectors) — список доступных сервисов</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Нажми Connect рядом с нужным сервисом — откроется окно авторизации Google/Slack</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Разреши доступ — и коннектор готов. В чате появится кнопка @ для вызова подключённых сервисов</div></div>
+    </div>
+    <h3>Как использовать в чате</h3>
+    <p>В поле ввода набери <code>@</code> — появится список подключённых коннекторов. Выбери нужный и Claude получит доступ к данным этого сервиса в рамках текущего разговора.</p>
+    <div class="code-wrap">
+      <div class="code-label">Примеры запросов с коннекторами</div>
+      <div class="code-block prompt">@GoogleDrive найди мой файл "бриф для лендинга" и составь структуру страницы по нему</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="code-wrap">
+      <div class="code-block prompt">@Gmail покажи последние 5 писем от клиентов и скажи какие требуют срочного ответа</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="callout green">
+      <div class="callout-label">Совет</div>
+      <p>Начни с Google Drive — это самый полезный коннектор для большинства задач. Когда перестанешь копировать куски документов в чат и начнёшь просто ссылаться на файлы — поймёшь насколько это удобнее.</p>
+    </div>
+  </div>
+</div>
+
 <div class="section" id="agents">
   <div class="section-header" onclick="toggle(this)">
     <span class="section-icon">🤝</span>
@@ -1331,47 +1375,96 @@ HIDDEN-END -->
 <div class="section" id="first-project">
   <div class="section-header" onclick="toggle(this)">
     <span class="section-icon">🚀</span>
-    <span class="section-name">Первый проект с нуля</span>
+    <span class="section-name">Первый проект с нуля — визитка и лендинг за 60 секунд</span>
     <span class="section-chevron">▼</span>
   </div>
   <div class="section-body">
-    <p>Открываешь папку, пишешь задачу, смотришь как Claude Code делает всё сам. Первый раз это немного магия.</p>
-    <h3>Открыть проект</h3>
-    <p>Создай на компьютере пустую папку. Например, на рабочем столе - назови как хочешь, хоть <code>my-project</code>.</p>
-    <p>В VS Code нажми "Открыть папку" (File → Open Folder) и выбери её. Всё - ты в проекте. Папка пустая, файлов нет. Это нормально.</p>
-    <h3>Первая задача</h3>
-    <p>Открывай Claude Code - иконка в левой панели VS Code. Видишь поле для ввода. Пиши первую задачу. Для старта подойдёт что-то простое:</p>
+    <p>Создаёшь папку, открываешь в VS Code, пишешь задачу — смотришь как Claude Code делает всё сам. Первый раз это немного магия.</p>
+    <h3>Шаг 1. Создай папку и открой в VS Code</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text">Открой Документы → папку Projects (создал в предыдущем разделе). Создай внутри новую папку, например <code>my-first-project</code>. Только латиница, без пробелов.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">В VS Code: Файл → Открыть папку → выбери <code>my-first-project</code>. Папка пустая, файлов нет — это нормально.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Кликни на иконку Claude в левой панели. Откроется поле для ввода — это и есть Claude Code.</div></div>
+    </div>
+    <h3>Шаг 2. Первая задача — личная визитка</h3>
+    <p>Скопируй промпт, подставь свои данные и отправь. Через 30 секунд — готовая страница с тёмным дизайном, градиентами и анимациями.</p>
     <div class="code-wrap">
-      <div class="code-label">Варианты первого промпта</div>
-      <div class="code-block prompt">Создай простую HTML-страницу с заголовком и коротким текстом о себе</div>
+      <div class="code-label">Промпт — персональная визитка</div>
+      <div class="code-block prompt">Создай интерактивный файл vizitka.html - персональную визитку. Данные:
+- Имя: {Твоё имя и фамилия}
+- Специализация: {Чем занимаешься}
+- Telegram: {ссылка на твой TG}
+
+Дизайн:
+- Тёмный фон (#0a0a0a)
+- Имя крупно, с градиентным свечением
+- Иконки соцсетей с hover-эффектом
+- Кнопка "Написать мне" с анимацией
+- Красиво и на компьютере, и на телефоне
+
+Всё в одном HTML-файле, без внешних зависимостей. Для иконок используй SVG.</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
-    <div class="code-wrap">
-      <div class="code-label">Или</div>
-      <div class="code-block prompt">Сделай страницу с тёмным фоном, белым текстом и моим именем по центру</div>
-      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
-    </div>
-    <h3>Claude Code спросит разрешение</h3>
-    <p>Перед тем как что-то делать - он покажет план и попросит подтвердить. Напишет что именно хочет создать. Нажимай "Yes" или "Allow".</p>
     <div class="callout blue">
-      <div class="callout-label">Почему он спрашивает</div>
-      <p>Это встроенная защита - чтобы он не делал ничего без твоего ведома. Потом можно настроить режим когда он действует сам, но на старте лучше так - видишь каждый шаг.</p>
+      <div class="callout-label">Claude Code спросит разрешение</div>
+      <p>Перед тем как создать файл — он покажет план и попросит подтвердить. Нажимай "Yes" или "Allow". Это режим "Ask Before Edit" — ты контролируешь каждый шаг. Можно переключить на автоматический когда освоишься.</p>
     </div>
-    <p>Через несколько секунд в папке появится файл. Открой его двойным кликом в браузере - увидишь результат.</p>
-    <h3>Дальше - усложняй</h3>
-    <p>Теперь можно давать следующие задачи прямо в том же диалоге, один за другим:</p>
+    <h3>Шаг 3. Открой результат в браузере</h3>
+    <p>Два способа:</p>
+    <ul>
+      <li><strong>Простой:</strong> найди файл <code>vizitka.html</code> в папке проекта, двойной клик — откроется в браузере</li>
+      <li><strong>Лучше:</strong> напиши Claude "Запусти страницу в браузере" — он покажет адрес <code>http://localhost:3000</code>, открой его</li>
+    </ul>
+    <div class="callout">
+      <div class="callout-label">Что такое localhost</div>
+      <p>Адрес твоего компьютера. Как черновик — видишь только ты, в интернет не выходит. Это нормально на этапе разработки.</p>
+    </div>
+    <h3>Посмотри на телефоне</h3>
+    <p>Телефон и компьютер должны быть в одной Wi-Fi сети. Спроси Claude:</p>
     <div class="code-wrap">
-      <div class="code-label">Добавить интерактивность</div>
-      <div class="code-block prompt">Добавь кнопку которая меняет цвет фона при нажатии</div>
+      <div class="code-block prompt">Покажи адрес для просмотра с телефона</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
-    <div class="callout">
-      <div class="callout-label">Один совет</div>
-      <p>Чем конкретнее задача - тем точнее результат. "Сделай красиво" работает хуже чем "тёмный фон, белый текст, заголовок по центру, размер 48px". Claude Code понимает человеческий язык, но конкретика помогает.</p>
+    <p>Claude покажет Network-адрес вида <code>http://192.168.1.100:3000</code> — открой его в браузере на телефоне. Видишь свою страницу с анимациями. Это то что сделаешь одним промптом.</p>
+    <h3>Шаг 4. Правь на лету</h3>
+    <p>Не нравится что-то — скажи прямо в чате. Не нужно перезагружать страницу — Claude меняет файл, браузер обновляется сам:</p>
+    <div class="code-wrap">
+      <div class="code-block prompt">Поменяй акцентный цвет на синий</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="code-wrap">
+      <div class="code-block prompt">Добавь секцию "Мои услуги" с тремя карточками</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="code-wrap">
+      <div class="code-block prompt">Сделай кнопку больше и добавь пульсирующую анимацию</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <p>Описал — увидел — поправил — готово. Это и есть вайбкодинг.</p>
+    <h3>Задание 2 — мини-лендинг для продукта</h3>
+    <p>Визитка — это про тебя. Лендинг — про твой продукт или услугу. Тот же принцип, чуть сложнее промпт:</p>
+    <div class="code-wrap">
+      <div class="code-label">Промпт — мини-лендинг</div>
+      <div class="code-block prompt">Создай файл landing.html - мини-лендинг для продукта. Данные:
+- Название: {Например: "TaskFlow - умный планировщик"}
+- Описание: {Одно предложение о продукте}
+- 3 преимущества: {Чем полезен}
+- Для кого подходит: {Целевая аудитория}
+- Кнопка с призывом: {Текст кнопки и ссылка}
+
+Дизайн:
+- Тёмный фон с градиентом
+- Заголовок с градиентным текстом
+- Три карточки преимуществ с иконками
+- Кнопка CTA с пульсирующей анимацией
+- Адаптивный для телефона
+
+Всё в одном HTML-файле, без зависимостей. SVG для иконок.</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
     <div class="callout green">
-      <div class="callout-label">Это и есть вайбкодинг</div>
-      <p>Ты описываешь что хочешь - он делает. Дальше будет сложнее и интереснее: многостраничные проекты, логика, база данных. Но принцип тот же.</p>
+      <div class="callout-label">За такую страницу на рынке берут 15-30 тыс. рублей</div>
+      <p>Ты сделаешь её за один промпт. Конкретика в промпте = конкретный результат. "Сделай красиво" работает хуже чем указать цвета, шрифты, структуру блоков. Claude понимает человеческий язык — но чем точнее задача, тем точнее результат.</p>
     </div>
   </div>
 </div>
@@ -1449,6 +1542,31 @@ HIDDEN-END -->
 - Моя правка → memory/feedback_тема.md</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
+    <h3>MEMORY.md — что туда пишут</h3>
+    <p>MEMORY.md — долгосрочная память проекта. Факты которые должны сохраняться между сессиями: что решили, что не сработало, кто аудитория, какие инструменты используем. Не задачи (они в PLAN.md), не правила (они в CLAUDE.md) — а накопленный опыт.</p>
+    <div class="code-wrap">
+      <div class="code-label">Пример MEMORY.md</div>
+      <div class="code-block prompt"># MEMORY.md
+
+## Проект
+- Лендинг для психолога Анны, запуск 15 мая
+- Аудитория: женщины 30-45, тревожность и выгорание
+- Оффер: первая сессия бесплатно
+
+## Решения
+- Отказались от карусели — загружает страницу
+- Цвет кнопки #2563eb — клиент утвердил
+
+## Что не работает
+- Длинные тексты — Анна говорит "слишком академично"
+- Слово "психотерапия" заменяем на "поддержка"
+
+## Стиль
+- Тон: тепло, без медицинского жаргона
+- Анна говорит "ты" своей аудитории</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <p>Папка <code>memory/</code> рядом — туда идут дневники отдельных сессий (<code>2026-04-14.md</code>) и файлы с правками (<code>feedback_стиль.md</code>). Claude их читает в начале каждой сессии если это прописано в CLAUDE.md.</p>
     <div class="callout green">
       <div class="callout-label">Тест что работает</div>
       <p>Открой новый чат, дай короткую задачу без упоминания правил. Если Claude сам применил твой стиль - CLAUDE.md читается.</p>
