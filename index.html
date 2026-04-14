@@ -298,7 +298,7 @@ a { color: var(--accent); }
 
 <!-- TOPNAV -->
 <nav class="topnav">
-  <a href="/" class="nav-logo" style="text-decoration:none;color:inherit;">AI База</a>
+  <a href="index.html" class="nav-logo" style="text-decoration:none;color:inherit;">AI База</a>
   <div class="nav-links">
     <a href="#block0" class="nav-link">Блок 0 — Мышление</a>
     <a href="#block1" class="nav-link">Блок 1 — Основы</a>
@@ -1205,6 +1205,75 @@ HIDDEN-END -->
       <div class="code-label">Одной фразой</div>
       <div class="code-block cmd">Подключи проект к GitHub. Создай репозиторий и отправь файлы.</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="power-tips">
+  <div class="section-header" onclick="toggle(this)">
+    <span class="section-icon">⚡</span>
+    <span class="section-name">Продвинутые фишки</span>
+    <span class="section-chevron">▼</span>
+  </div>
+  <div class="section-body">
+    <p>Приёмы которые ускоряют работу когда уже освоился с Claude Code. В первую неделю не нужны - потом становятся незаменимыми.</p>
+
+    <h3>Несколько проектов одновременно</h3>
+    <p>VS Code по умолчанию закрывает текущий проект когда открываешь новую папку. Чтобы работать с несколькими параллельно - открывай второе окно.</p>
+    <p><code>Cmd + Shift + N</code> - новое пустое окно. В нём <code>File → Open Folder</code> и выбираешь папку. Или перетащи папку на иконку VS Code в Dock с зажатым <code>Cmd</code>.</p>
+    <p>Чтобы новое окно создавалось автоматически каждый раз: <code>Cmd + ,</code> (настройки) → в поиске <code>window.openFoldersInNewWindow</code> → поставь <code>on</code>.</p>
+    <p>Каждое окно - отдельный Claude Code со своим контекстом. В одном пишешь пост для Reels, в другом - код платформы, они друг другу не мешают.</p>
+    <p>Альтернатива когда хочется в одном окне: <code>File → Add Folder to Workspace</code>. Добавит вторую папку в текущее окно, переключаешься между ними в сайдбаре. Claude Code при этом один на обе.</p>
+
+    <h3>Git worktrees - параллельные Claude на одном проекте</h3>
+    <p>Это другая история. Не два проекта, а <em>один</em> проект над которым надо работать одновременно в нескольких направлениях. Пока один Claude переделывает главную страницу, другой правит баг в меню - и они не мешают друг другу.</p>
+    <p>Как это работает: делаешь копию папки проекта на отдельной ветке git. Физически появляется вторая папка рядом с основной, в неё открываешь второе окно VS Code, в нём запускаешь своего Claude Code. Когда закончил - ветки сливаешь обратно в основную.</p>
+    <p>Ничего ставить не надо - <code>worktree</code> встроен в git. Базовая команда в терминале:</p>
+    <div class="code-wrap">
+      <div class="code-label">Создать worktree</div>
+      <div class="code-block bash">git worktree add ../baza-znaniy-eksperiment new-branch</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <p>Проще - через скилл <code>worktree</code> из плагина Superpowers. Просто говоришь Claude в основном окне: "сделай worktree для эксперимента с новой главной" - он сам создаст папку, ветку и всё настроит.</p>
+    <p>Когда реально нужно: большая задача идёт долго, а хочется параллельно поправить мелочь. Или эксперимент который не жалко выкинуть - worktree удалил, основной проект не тронут.</p>
+    <p>Когда не нужно: если у тебя два разных проекта - worktree тут ни при чём, это задача для двух окон VS Code.</p>
+
+    <h3>Bypass permissions - чтобы Claude не спрашивал каждый раз</h3>
+    <p>По умолчанию Claude Code спрашивает разрешение на каждое действие: создать файл, запустить команду, удалить что-то. Защита. Но когда уже доверяешь ему и проект в git - можно включить режим в котором он просто делает.</p>
+    <p>В VS Code расширении этот режим по умолчанию скрыт. Чтобы появился - нужно включить одну настройку.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text">Открой настройки VS Code: <code>Cmd + ,</code> (Mac) или <code>Ctrl + ,</code> (Windows).</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">В строке поиска сверху введи: <code>allowDangerouslySkipPermissions</code>.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Найдётся галка <strong>Claude Code: Allow Dangerously Skip Permissions</strong>. Поставь её.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">В Claude Code появится новый режим. Переключение - <code>Shift + Tab</code>, он циклом перебирает: default → accept edits → plan → bypass permissions.</div></div>
+    </div>
+    <p>Альтернатива - прописать режим по умолчанию в файле <code>.claude/settings.json</code> внутри проекта:</p>
+    <div class="code-wrap">
+      <div class="code-label">.claude/settings.json</div>
+      <div class="code-block bash">{
+  "defaultMode": "bypassPermissions"
+}</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <div class="callout" style="background:rgba(248,113,113,0.1);border-left:3px solid #f87171;padding:1rem 1.2rem;border-radius:0 8px 8px 0;margin:1rem 0;">
+      <div class="callout-label" style="color:#f87171;font-weight:700;margin-bottom:.3rem;">Осторожно</div>
+      <p>Anthropic прямо рекомендует включать это только в изолированной среде (контейнер, виртуалка) где Claude физически не может сломать ничего критичного. На обычном рабочем Mac правило простое: сначала закоммить всё в git - если что-то пойдёт не так, откатишься одной командой. Запись в <code>.git</code>, <code>.claude</code>, <code>.vscode</code> даже в этом режиме остаётся защищённой.</p>
+    </div>
+
+    <h3>Переключение моделей /model - экономия токенов</h3>
+    <p>В Claude Code работают разные модели Claude. Opus - самый умный и дорогой. Sonnet - золотая середина. Haiku - самый быстрый и дешёвый. Команда <code>/model</code> прямо в чате Claude Code переключает между ними на лету.</p>
+    <div class="code-wrap">
+      <div class="code-label">Команды переключения</div>
+      <div class="code-block cmd">/model opus       для сложных задач и планирования
+/model sonnet     повседневная работа
+/model haiku      быстрые простые правки
+/model opusplan   Opus планирует, Sonnet выполняет</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <p>Логика экономии: начинаешь сессию на sonnet. Если задача простая (переименовать файлы, поправить текст) - переключаешь на haiku. Если сложное планирование или архитектура - opus. Если не уверен - opusplan сам разрулит: думать будет Opus, делать руками Sonnet.</p>
+    <div class="callout blue">
+      <div class="callout-label">Мой рабочий режим</div>
+      <p>Для серьёзных задач где надо сначала продумать стратегию, а потом тупо сделать много однообразной работы - ставлю <code>opusplan</code>. Получается что план строит самая дорогая модель, а бьёт код по плану более дешёвая. На длинной сессии разница ощутимая.</p>
     </div>
   </div>
 </div>

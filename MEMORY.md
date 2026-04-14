@@ -32,6 +32,9 @@
 ## Рабочий процесс (контент базы)
 - [Голосовой ввод — обязательный раздел](memory/project_voice_input.md) — Wispr Flow / AquaVoice, критичная фишка Никиты
 
+## Рабочий процесс со мной
+- [Деплой после каждой партии правок](memory/feedback_deploy_workflow.md) — git commit + push в main, Netlify подхватывает сам
+
 ## Референсы
 - Claude-Code-Starter-Kit.html — эталон формата (10 блоков, промпты внутри)
 - mavgpt.ai — модель Resource Hub, единая точка входа
