@@ -1210,48 +1210,121 @@ HIDDEN-END -->
 <div class="section" id="install">
   <div class="section-header" onclick="toggle(this)">
     <span class="section-icon">⚙️</span>
-    <span class="section-name">Установка - пошагово</span>
+    <span class="section-name">Настраиваем рабочее место - VS Code, Claude Code, GitHub</span>
     <span class="section-chevron">▼</span>
   </div>
   <div class="section-body">
-    <p>Скачиваешь VS Code, устанавливаешь два расширения, авторизуешься. Минут пять и всё готово.</p>
+    <p>Для работы с Claude Code нужны три инструмента. Ставятся один раз, работают вместе.</p>
+    <div class="info-cards">
+      <div class="info-card"><div class="info-card-title">VS Code — мастерская</div><div class="info-card-text">Бесплатный редактор от Microsoft. Здесь живут твои папки и файлы. Сюда устанавливается Claude Code</div></div>
+      <div class="info-card"><div class="info-card-title">Claude Code — напарник</div><div class="info-card-text">AI-агент внутри VS Code. Видит все файлы проекта, создаёт, редактирует, запускает команды. Ты говоришь — он делает</div></div>
+      <div class="info-card"><div class="info-card-title">GitHub — страховка</div><div class="info-card-text">Облачное хранилище для проектов. Бесплатно. Если компьютер накроется — код в безопасности. Плюс история всех изменений</div></div>
+    </div>
     <div class="callout" style="background:rgba(248,113,113,0.1);border-left:3px solid #f87171;padding:1rem 1.2rem;border-radius:0 8px 8px 0;margin:1rem 0;">
       <div class="callout-label" style="color:#f87171;font-weight:700;margin-bottom:.3rem;">Если ты из России — обязательно под VPN</div>
-      <p>Весь процесс установки и работы делай <strong>под VPN</strong>. Без него не откроется claude.ai, не пройдёт логин через Anthropic, и Claude Code не получит доступ к API. VPN нужен и при первой настройке, и каждый раз когда работаешь с Claude.</p>
+      <p>Весь процесс установки и работы делай под VPN. Без него Claude Code не авторизуется и не получит доступ к API. VPN нужен и при первой настройке, и каждый раз когда работаешь. Про выбор VPN — в разделе "Старт на claude.ai" выше.</p>
     </div>
-    <h3>Шаги</h3>
+
+    <h3>Шаг 1. Устанавливаем VS Code</h3>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-text">Скачай VS Code: <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a>. Бесплатный редактор от Microsoft под Mac, Windows, Linux.</div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Для Windows важно:</strong> при установке поставь галку "Add to PATH". Без неё Claude Code не запустится.</div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-text">Открой VS Code, слева иконка расширений (Cmd/Ctrl+Shift+X). В поиске введи <code>russian</code>, поставь "Russian Language Pack" от Microsoft. Перезапусти - всё станет по-русски.</div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-text">Снова в расширения, в поиске <code>claude code</code>. Поставь "Claude Code" от Anthropic.</div></div>
-      <div class="step"><div class="step-num">5</div><div class="step-text">Иконка Claude в боковой панели. Откроется браузер для авторизации - войди через свой аккаунт Anthropic (тот же что на claude.ai).</div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Заходи на <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a> и скачивай. Бесплатно, Mac / Windows / Linux.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Mac: скачанный файл перетащи в папку "Программы". Windows: запусти установщик и жми "Далее" — но на шаге "Выберите дополнительные задачи" <strong>обязательно поставь галку "Добавить в PATH"</strong>. Без неё Claude Code не запустится. Если пропустил — проще переустановить, это 2 минуты.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Открой VS Code. Слева иконка расширений (Cmd+Shift+X на Mac, Ctrl+Shift+X на Windows). Найди "Russian Language Pack" от Microsoft — поставь. Перезапусти VS Code. Весь интерфейс станет на русском.</div></div>
     </div>
-    <div class="callout green">
-      <div class="callout-label">Аккаунта нет?</div>
-      <p>Регистрируйся на claude.ai - бесплатно. Потом возвращайся к шагу 5.</p>
-    </div>
-    <h3>Что понадобится по деньгам</h3>
-    <ul>
-      <li><strong>Claude Pro или Max</strong> - подписка $20 или $100-200/мес. На Pro можно начать, для серьёзной работы лучше Max.</li>
-      <li><strong>Аккаунт GitHub</strong> - бесплатный. Для сохранений проектов в облако (позже).</li>
-    </ul>
-    <h3>Проверка что всё работает</h3>
-    <p>Создай папку <code>Documents/Projects/test</code>, открой её в VS Code (File → Open Folder), запусти Claude Code и напиши:</p>
+
+    <h3>Шаг 2. Папки проектов — важное правило</h3>
+    <p>VS Code и Claude Code работают с папками, а не с отдельными файлами. Один проект = одна папка. Claude видит только то что внутри открытой папки.</p>
+    <p>Создай структуру один раз и больше к этому не возвращайся:</p>
     <div class="code-wrap">
-      <div class="code-label">Первый тест</div>
-      <div class="code-block prompt">Создай файл test.md с текстом "Claude работает". Потом прочитай его и подтверди.</div>
+      <div class="code-label">Структура на компьютере</div>
+      <div class="code-block bash">Документы/
+└── Projects/
+    ├── my-first-project/
+    ├── landing-for-client/
+    └── telegram-bot/</div>
+    </div>
+    <div class="callout blue">
+      <div class="callout-label">Правила именования папок</div>
+      <p>Только латиница: <code>my-project</code>, а не <code>мой-проект</code>. Без пробелов — дефис вместо пробела. Без спецсимволов (!, #, @). Всё строчными. Звучит занудно, но VS Code и git плохо работают с кириллицей в именах.</p>
+    </div>
+
+    <h3>Шаг 3. Устанавливаем Claude Code</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text">В VS Code открой расширения (Cmd/Ctrl+Shift+X). В поиске набери <code>claude code</code>.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Проверь издателя.</strong> В результатах поиска должно быть "Claude Code" от <strong>Anthropic</strong>. Есть подделки с похожими названиями — не ставь их. Только Anthropic.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Нажми Install. После установки в левой панели VS Code появится иконка Claude.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">Кликни на иконку Claude — откроется браузер для авторизации. Войди через тот же аккаунт Anthropic что и на claude.ai. Если аккаунта нет — сначала зарегистрируйся по инструкции в блоке 1 выше.</div></div>
+    </div>
+
+    <h3>Шаг 4. Три режима работы — выбери правильный с первого дня</h3>
+    <p>Claude Code работает в трёх режимах. Переключаются кнопкой в интерфейсе.</p>
+    <div class="info-cards">
+      <div class="info-card"><div class="info-card-title">Plan Mode</div><div class="info-card-text">Только думает и отвечает. Файлы не трогает. Используй когда обсуждаешь идею, задаёшь вопросы, планируешь — без риска что что-то изменится</div></div>
+      <div class="info-card"><div class="info-card-title">Ask Before Edit</div><div class="info-card-text">Спрашивает разрешение перед каждым действием. Рекомендую на старте — видишь каждый шаг и понимаешь что происходит</div></div>
+      <div class="info-card"><div class="info-card-title">Edit Automatically</div><div class="info-card-text">Делает всё сам без подтверждений. Переходи сюда когда освоился и доверяешь процессу. Работает быстрее</div></div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">С чего начать</div>
+      <p>Первые несколько дней — только "Ask Before Edit". Так понимаешь что Claude делает на каждом шаге. Потом сам почувствуешь когда удобнее переключиться на автоматический.</p>
+    </div>
+
+    <h3>Шаг 5. Первая проверка</h3>
+    <p>Создай папку <code>Documents/Projects/test</code>, открой её в VS Code (Файл → Открыть папку), запусти Claude Code и напиши:</p>
+    <div class="code-wrap">
+      <div class="code-label">Проверочный запрос</div>
+      <div class="code-block prompt">Привет! Ты меня слышишь? Скажи в двух словах что ты умеешь.</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
-    <p>Если файл появился и Claude ответил - всё готово.</p>
-    <h3>Через терминал (альтернатива)</h3>
-    <p>Для тех кто уже работает с командной строкой:</p>
+    <p>Если Claude ответил — установка прошла успешно. Если не отвечает — проверь VPN и подписку на claude.ai.</p>
+
+    <h3>Шаг 6. GitHub — страховка для проектов</h3>
+    <p>Git — это как сохранения в видеоигре. Сделал что-то рабочее — сохранился. Что-то сломалось — загрузил предыдущее сохранение. GitHub — облако куда эти сохранения загружаются.</p>
+    <p>Два слова которые надо запомнить:</p>
+    <ul>
+      <li><strong>Commit (коммит)</strong> — сохранился на своём компьютере</li>
+      <li><strong>Push (пуш)</strong> — загрузил сохранение в облако на GitHub</li>
+    </ul>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text">Зарегистрируйся на <a href="https://github.com" target="_blank">github.com</a> — бесплатно. Email, пароль, подтверди аккаунт.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Когда проект создан — просто скажи Claude Code одной фразой:</div></div>
+    </div>
+    <div class="code-wrap">
+      <div class="code-label">Подключить проект к GitHub</div>
+      <div class="code-block prompt">Подключи проект к GitHub. Создай репозиторий и отправь файлы.</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <p>Claude выполнит все команды сам. Может попросить авторизоваться в GitHub — следуй его инструкциям.</p>
+    <h4>Ритм сохранений</h4>
+    <table class="compare">
+      <tr><th>Когда</th><th>Что сказать Claude</th></tr>
+      <tr><td>Сделал что-то рабочее</td><td>Сделай коммит — [описание что сделал]</td></tr>
+      <tr><td>Уходишь от компьютера</td><td>Сделай коммит и пуш</td></tr>
+      <tr><td>Что-то сломалось</td><td>Покажи историю коммитов</td></tr>
+      <tr><td>Надо откатиться</td><td>Верни проект к коммиту — [название]</td></tr>
+    </table>
+    <div class="callout green">
+      <div class="callout-label">Привычка которая спасёт</div>
+      <p>"Сделай коммит и пуш" — фраза которую произносишь каждые 20-30 минут работы. Через неделю это станет рефлексом. Один раз потеряешь час работы из-за случайного удаления — и этот рефлекс появится сам собой. Лучше чтобы это произошло на тестовом проекте.</p>
+    </div>
+
+    <h3>Чек-лист — всё ли готово</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">✓</div><div class="step-text">VS Code установлен, интерфейс на русском</div></div>
+      <div class="step"><div class="step-num">✓</div><div class="step-text">Папка <code>Documents/Projects/</code> создана</div></div>
+      <div class="step"><div class="step-num">✓</div><div class="step-text">Claude Code от Anthropic установлен и авторизован</div></div>
+      <div class="step"><div class="step-num">✓</div><div class="step-text">Режим "Ask Before Edit" выбран</div></div>
+      <div class="step"><div class="step-num">✓</div><div class="step-text">Первый тестовый запрос прошёл успешно</div></div>
+      <div class="step"><div class="step-num">✓</div><div class="step-text">Аккаунт GitHub создан</div></div>
+    </div>
+
+    <h3>Через терминал (для тех кто дружит с командной строкой)</h3>
+    <p>Альтернативный способ — установка без VS Code, напрямую через npm:</p>
     <div class="code-wrap">
       <div class="code-label">Установка глобально</div>
       <div class="code-block bash">npm install -g @anthropic-ai/claude-code</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
-    <p>Потом переходишь в папку проекта и запускаешь командой <code>claude</code>. Нужен Node.js - если нет, скачай с nodejs.org.</p>
+    <p>Нужен Node.js — если нет, скачай с <a href="https://nodejs.org" target="_blank">nodejs.org</a>. После установки переходишь в папку проекта и запускаешь командой <code>claude</code>.</p>
   </div>
 </div>
 
@@ -1583,51 +1656,123 @@ HIDDEN-END -->
 <div class="section" id="project-structure">
   <div class="section-header" onclick="toggle(this)">
     <span class="section-icon">📂</span>
-    <span class="section-name">Структура папки проекта</span>
+    <span class="section-name">Архитектура проекта - какие файлы нужны и для чего</span>
     <span class="section-chevron">▼</span>
   </div>
   <div class="section-body">
-    <p>Каждый проект живёт в своей папке. Без правильной структуры Claude теряется, с правильной - всё под рукой.</p>
-    <h3>Правила имени папки</h3>
-    <ul>
-      <li>Только латиница: <code>kontent-zavod</code>, не "контент-завод"</li>
-      <li>Без пробелов - дефис между словами</li>
-      <li>Без спецсимволов (! @ # и подобное)</li>
-      <li>Только строчные буквы</li>
-    </ul>
-    <p>Эти правила не прихоть. VS Code и git плохо работают с кириллицей и пробелами в именах.</p>
-    <h3>Что внутри папки</h3>
+    <p>Папка проекта — это не просто место где лежит код. Это место где живёт контекст: кто ты, что строишь, как тебе помогать. Правильная структура — Claude работает как коллега который знает проект. Без неё — как новый сотрудник в первый рабочий день каждый раз.</p>
+
+    <h3>Минимум для старта — 3 файла</h3>
     <div class="code-wrap">
-      <div class="code-label">Рабочая структура</div>
-      <div class="code-block tree">Documents/Projects/
-└── my-project/
-    ├── CLAUDE.md          ← правила работы
-    ├── PLAN.md            ← что делаем и что сделали
-    ├── MEMORY.md          ← долгосрочная память
-    ├── memory/
-    │   ├── 2026-04-12.md  ← дневники сессий
-    │   └── feedback_*.md  ← твои правки
-    ├── knowledge/         ← база знаний проекта
-    └── [рабочие файлы]</div>
+      <div class="code-label">Базовая структура</div>
+      <div class="code-block tree">my-project/
+├── CLAUDE.md     ← правила работы для Claude
+├── PLAN.md       ← план и чек-лист задач
+├── CONTEXT.md    ← паспорт проекта: что строим и для кого
+└── [рабочие файлы — index.html, bot.py и т.д.]</div>
+    </div>
+    <p>Три файла — и Claude уже в курсе проекта с первой секунды. Дальше структура растёт по мере надобности.</p>
+
+    <h3>CLAUDE.md — правила работы</h3>
+    <p>Главный файл проекта. Claude читает его автоматически при каждом запуске сессии. Всё что здесь написано — он держит в голове на протяжении всей работы.</p>
+    <p>Здесь только то что применяется всегда: как ты хочешь работать, что нельзя делать без спроса, как должен выглядеть результат. Не пиши сюда задачи — они в PLAN.md.</p>
+    <div class="code-wrap">
+      <div class="code-label">Шаблон CLAUDE.md</div>
+      <div class="code-block prompt"># CLAUDE.md
+
+## Кто я
+[Имя, чем занимаюсь, контекст проекта одной строкой]
+
+## Правила работы
+- Перед созданием нового файла — скажи что планируешь, потом делай
+- Не удаляй ничего без явного разрешения
+- Пиши код с комментариями на русском
+- [добавь свои правила]
+
+## Стиль общения
+- Коротко, по делу, без лишних объяснений
+- Уточняй если задача неоднозначная
+
+## При старте сессии
+1. Прочитай CONTEXT.md
+2. Прочитай PLAN.md — что сейчас в работе
+3. Прочитай MEMORY.md если есть</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
-    <h3>Что в каком файле</h3>
+    <div class="callout">
+      <div class="callout-label">Как проверить что работает</div>
+      <p>Открой новый чат в Claude Code, дай простую задачу без объяснений. Если Claude сам применил твои правила — CLAUDE.md читается. Если нет — проверь что файл в корне папки проекта, а не где-то внутри.</p>
+    </div>
+
+    <h3>CONTEXT.md — паспорт проекта</h3>
+    <p>Статичное описание: что строишь, для кого, зачем. Заполняется один раз в начале и редко меняется. Это не задачи и не история решений — только суть проекта.</p>
+    <p>Claude читает этот файл чтобы понимать общую картину. Без него он помогает с конкретными задачами, но не знает как они связаны с целью.</p>
+    <div class="code-wrap">
+      <div class="code-label">Шаблон CONTEXT.md</div>
+      <div class="code-block prompt"># CONTEXT.md
+
+## Что это за проект
+[Одна фраза: что за продукт/сервис/инструмент]
+
+## Для кого
+[Целевая аудитория — кто будет пользоваться]
+
+## Зачем это нужно
+[Какую задачу решает, почему существует]
+
+## Текущее состояние
+[Что уже готово, что нет]
+
+## Стек
+[Технологии, языки, инструменты]</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+
+    <h3>PLAN.md — план и чек-лист</h3>
+    <p>Динамический файл. Обновляется постоянно по ходу работы. Здесь живут задачи: что сделано, что в работе, что ещё предстоит.</p>
+    <p>Claude смотрит в PLAN.md чтобы понять что делать дальше и не предлагать то что уже сделано.</p>
+    <div class="code-wrap">
+      <div class="code-label">Шаблон PLAN.md</div>
+      <div class="code-block prompt"># PLAN.md
+
+## В работе
+- [ ] Текущая задача
+
+## Сделано
+- [x] Завершённая задача
+
+## Следующие шаги
+- [ ] Что делаем после текущего
+
+## На потом
+- [ ] Идеи и задачи без чёткого срока</div>
+      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
+    </div>
+    <p>Попроси Claude отмечать выполненные задачи сам: "Когда задача готова — поставь [x] в PLAN.md". Это работает, и ты всегда видишь прогресс.</p>
+
+    <h3>Структура растёт по мере проекта</h3>
+    <p>Три файла выше — это старт. По мере развития проекта появляются новые. Добавляй их когда почувствуешь боль — не заранее.</p>
     <table class="compare">
-      <tr><th>Файл</th><th>Что внутри</th></tr>
-      <tr><td>CLAUDE.md</td><td>Правила работы. Claude читает при каждом запуске. Здесь только то что применяется всегда.</td></tr>
-      <tr><td>PLAN.md</td><td>Чек-лист задач. Что сделано, что в работе. Динамический файл.</td></tr>
-      <tr><td>MEMORY.md</td><td>Долгосрочная память. Решения, факты, стратегия. До 200 строк.</td></tr>
-      <tr><td>memory/YYYY-MM-DD.md</td><td>Дневник конкретной сессии. Что обсуждали, что решили.</td></tr>
-      <tr><td>memory/feedback_тема.md</td><td>Твои правки - чтобы не повторять одно и то же.</td></tr>
-      <tr><td>knowledge/</td><td>База знаний проекта. Архитектура, чеклисты, материалы.</td></tr>
+      <tr><th>Когда появляется боль</th><th>Какой файл решает</th></tr>
+      <tr><td>Claude забыл что решили три сессии назад</td><td><code>MEMORY.md</code> + папка <code>memory/</code></td></tr>
+      <tr><td>Начинаешь большой проект, нужно изучить рынок</td><td><code>research.md</code> — исследование ниши и конкурентов</td></tr>
+      <tr><td>Разрабатываешь конкретный продукт или приложение</td><td><code>brief.md</code> — план с экранами и функциями</td></tr>
+      <tr><td>Отдаёшь проект на тестирование другому человеку</td><td><code>TESTING.md</code> — гид для тестировщика</td></tr>
+      <tr><td>Публикуешь проект в интернет</td><td><code>DEPLOYMENT.md</code> — пошаговый деплой</td></tr>
     </table>
-    <h3>Как создать всю структуру разом</h3>
-    <p>Не нужно делать вручную. Открой новую папку в VS Code и скажи Claude:</p>
+    <div class="callout blue">
+      <div class="callout-label">Про MEMORY.md</div>
+      <p>Отдельная история. Claude не помнит прошлые сессии — каждый раз как новый день. MEMORY.md — это долгосрочная память: решения которые приняли, факты о проекте, что сработало а что нет. Папка <code>memory/</code> рядом — дневники отдельных сессий. Подробнее про это — в разделе "CLAUDE.md и память" ниже.</p>
+    </div>
+
+    <h3>Как создать стартовую структуру за секунду</h3>
+    <p>Открой пустую папку в VS Code и скажи Claude:</p>
     <div class="code-wrap">
-      <div class="code-label">Одной командой</div>
-      <div class="code-block cmd">Создай в этой папке структуру проекта: CLAUDE.md с правилами работы, PLAN.md для задач, MEMORY.md для долгосрочной памяти и папку memory/ для дневников сессий.</div>
+      <div class="code-label">Создать структуру одной командой</div>
+      <div class="code-block prompt">Создай стартовую структуру проекта: CLAUDE.md с правилами работы, PLAN.md для задач с секциями "В работе / Сделано / Следующие шаги", CONTEXT.md для описания проекта. Заполни базовые шаблоны — потом я сам допишу детали.</div>
       <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
     </div>
+    <p>Claude создаст все три файла с шаблонами. Останется только подставить свои данные.</p>
   </div>
 </div>
 
