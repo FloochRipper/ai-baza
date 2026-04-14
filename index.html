@@ -577,7 +577,6 @@ a { color: var(--accent); }
     <span class="logo-dot" aria-hidden="true"></span><span>AI База</span>
   </a>
   <div class="nav-links">
-    <a href="#block0" class="nav-link">Мышление</a>
     <a href="#block1" class="nav-link">Основы AI</a>
     <a href="#block2" class="nav-link">Claude Code</a>
     <a href="#glossary" class="nav-link">Словарь</a>
@@ -610,7 +609,6 @@ a { color: var(--accent); }
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleBurger()"></div>
 <aside class="mobile-panel" id="mobilePanel" aria-label="Мобильное меню">
   <div class="mp-section">Блоки</div>
-  <a href="#block0" onclick="toggleBurger()">00 - Мышление</a>
   <a href="#block1" onclick="toggleBurger()">01 - Основы AI</a>
   <a href="#block2" onclick="toggleBurger()">02 - Claude Code</a>
   <a href="#glossary" onclick="toggleBurger()">Словарь</a>
@@ -625,12 +623,12 @@ a { color: var(--accent); }
 <div class="hero">
   <div class="hero-badge">Бесплатная база знаний</div>
   <h1>Всё про AI<br>и <span>Claude</span><br>с нуля</h1>
-  <p class="hero-sub">Без воды. Мышление, промпты по R.A.C.E.T., Claude Code и как всё это применять на практике.</p>
+  <p class="hero-sub">Без воды. Промпты по R.A.C.E.T., Claude Code и как всё это применять на практике.</p>
 
-  <button type="button" class="onboarding" onclick="startOnboarding()" aria-label="Начать с блока 00 - Мышление">
+  <button type="button" class="onboarding" onclick="startOnboarding()" aria-label="Начни с блока 01 - Основы AI">
     <span class="onb-icon" aria-hidden="true">→</span>
     <span class="onb-text">
-      <strong>Первый раз здесь?</strong> Начни с блока 00 - Мышление.
+      <strong>Первый раз здесь?</strong> Начни с блока 01 - Основы AI.
       <small>Покажу куда смотреть, чтобы не утонуть в инструментах</small>
     </span>
     <span class="onb-arrow">Поехали</span>
@@ -655,10 +653,6 @@ a { color: var(--accent); }
 <!-- STICKY TOC (desktop only) -->
 <aside class="toc" id="toc" aria-label="Оглавление">
   <div class="toc-title">Оглавление</div>
-  <div class="toc-block">00 Мышление</div>
-  <a class="toc-link" href="#mindset-trap">Учить vs зарабатывать</a>
-  <a class="toc-link" href="#diagnostic">Диагностика</a>
-  <a class="toc-link" href="#mistakes">5 ошибок</a>
   <div class="toc-block">01 Основы AI</div>
   <a class="toc-link" href="#what-is-ai">Что такое нейросеть</a>
   <a class="toc-link" href="#ecosystem-claude">Карта Claude</a>
@@ -691,12 +685,6 @@ a { color: var(--accent); }
 
 <!-- BLOCKS OVERVIEW -->
 <div class="blocks-grid">
-  <a href="#block0" class="block-card">
-    <div class="block-num">00</div>
-    <div class="block-title">Мышление</div>
-    <div class="block-desc">Почему "учить AI" не равно "зарабатывать с AI". Диагностика где вы сейчас, 5 ошибок новичков</div>
-    <div class="block-tags"><span class="tag">Старт</span><span class="tag">Цель</span></div>
-  </a>
   <a href="#block1" class="block-card">
     <div class="block-num">01</div>
     <div class="block-title">Основы AI</div>
@@ -713,129 +701,6 @@ a { color: var(--accent); }
 
 <!-- CONTENT -->
 <div class="content">
-
-<!-- ═══ BLOCK 0 — МЫШЛЕНИЕ ═══ -->
-<div id="block0" class="block-divider">
-  <div class="block-label">
-    <div class="block-num-label">00</div>
-    <div>
-      <div class="block-title-label">Мышление</div>
-      <div class="block-desc-label">Первый шаг — не инструменты, а понимание куда вы идёте</div>
-    </div>
-  </div>
-</div>
-
-<div class="section" id="mindset-trap">
-  <div class="section-header" onclick="toggle(this)">
-    <span class="section-icon">🎯</span>
-    <span class="section-name">Почему "выучить AI" не равно "зарабатывать с AI"</span>
-    <span class="section-chevron">▼</span>
-  </div>
-  <div class="section-body">
-    <p>15 лет в бизнесе. Франчайзинг в 57 городах. Если что-то и понял — рынок не платит за знания, платит за решённые задачи.</p>
-    <p>С AI работает та же логика. Можно выучить 10 нейросетей и не заработать. Можно знать только Claude — и закрывать задачи клиентам.</p>
-    <div class="callout">
-      <div class="callout-label">Суть</div>
-      <p>Никто не покупает "умение пользоваться молотком". Покупают построенный дом. С AI — то же самое.</p>
-    </div>
-    <h3>Цепочка работающей головы</h3>
-    <ol style="padding-left:1.2rem; font-size:0.88rem; color:rgba(244,244,239,0.85); line-height:1.8;">
-      <li><strong>Боль клиента</strong> — у человека есть задача, которую он не может или не хочет решать сам</li>
-      <li><strong>Решение с AI</strong> — конкретный продукт: пост, бот, лендинг, аналитика, скрипт</li>
-      <li><strong>Измеримый результат</strong> — "+30% заявок", "10 часов в неделю экономии", "50 постов за день"</li>
-      <li><strong>Цена</strong> — за результат, не за процесс</li>
-    </ol>
-    <p>Если вы остановились на пункте 1 — у вас хобби. Если дошли до 4 — профессия.</p>
-  </div>
-</div>
-
-<div class="section" id="diagnostic">
-  <div class="section-header" onclick="toggle(this)">
-    <span class="section-icon">📍</span>
-    <span class="section-name">Диагностика — где вы сейчас</span>
-    <span class="section-chevron">▼</span>
-  </div>
-  <div class="section-body">
-    <p>Навигатор не работает без стартовой точки. Тот же принцип с деньгами и целями: без честного ответа "где я сейчас" — не построить маршрут.</p>
-    <p>Откройте ChatGPT или Claude, скопируйте промпт. Он задаст 8 вопросов и выдаст анализ с рекомендациями по направлению.</p>
-    <div class="code-wrap">
-      <div class="code-label">Промпт — диагностика</div>
-      <div class="code-block prompt">Ты — карьерный и финансовый диагност. Помоги честно разобрать мою текущую ситуацию, чтобы поставить правильную цель.
-
-Задай 8 вопросов по очереди (по одному, жди ответ):
-
-1. Сколько сейчас зарабатываю в месяц? (средний за 3 месяца)
-2. Какой доход хочу через 3 месяца? Через 6?
-3. Сколько часов в день реально готов работать? (честно)
-4. Сколько дней в неделю?
-5. Какие навыки уже есть? (тексты, продажи, дизайн, код, соцсети)
-6. Пробовал ли нейросети? Что именно делал?
-7. Что больше всего останавливает? (страхи, сомнения)
-8. Есть ли компьютер с интернетом для ежедневной работы?
-
-После каждого вопроса предлагай варианты ответа для примера.
-
-Когда ответы готовы — выдай анализ:
-
-ТЕКУЩАЯ ТОЧКА
-- Доход сейчас: [сумма]
-- Цель 3 / 6 мес: [суммы]
-- Ресурс времени: [часов в неделю]
-- Сильные стороны: [список]
-- Зоны роста: [список]
-- Главные страхи + как работать
-
-РЕКОМЕНДАЦИЯ
-- Направление: [нейрокреатор / вайбкодер / архитектор агентов]
-- Обоснование
-- Первые 3 действия
-
-Реалистичная оценка: честно — насколько цели достижимы при заявленном времени. Если завышены — скажи и предложи коррекцию.
-
-Будь дружелюбным, но не приукрашивай.</div>
-      <button class="copy-btn" onclick="copy(this)">КОПИЯ</button>
-    </div>
-    <div class="callout blue">
-      <div class="callout-label">Правило</div>
-      <p>Честность важнее удобства. "Зарабатываю 50К" вместо реальных 30К — диагноз будет ложный. "4 часа в день" при реальном часе — план провалится в первую неделю.</p>
-    </div>
-  </div>
-</div>
-
-<div class="section" id="mistakes">
-  <div class="section-header" onclick="toggle(this)">
-    <span class="section-icon">⚠️</span>
-    <span class="section-name">5 ошибок которые крадут месяцы</span>
-    <span class="section-chevron">▼</span>
-  </div>
-  <div class="section-body">
-    <h4>1. Учат всё подряд</h4>
-    <p>Midjourney, Suno, Runway, Kling, ElevenLabs, HeyGen — и всё по чуть-чуть. За 3 месяца 270 часов на "изучение". За это же время можно было сделать 5-7 оплачиваемых проектов.</p>
-    <p>Правильно — одно направление, один-два инструмента до уровня рабочих задач. Остальное добавится когда понадобится.</p>
-    <h4>2. Не могут сформулировать что делают</h4>
-    <p>"Работаю с нейросетями" — не ответ. Клиент не понимает, зачем ему платить.</p>
-    <div class="callout">
-      <div class="callout-label">Формула позиционирования</div>
-      <p>[Делаю что] + [какой результат] + [для кого] + [за какой срок]</p>
-    </div>
-    <p style="font-size:0.82rem; color:var(--muted);">Плохо: "Помогаю предпринимателям с AI". Хорошо: "Делаю контент-план и 30 постов в Instagram для экспертов-психологов за 3 дня"</p>
-    <h4>3. Бесплатно "для портфолио"</h4>
-    <p>Бесплатная работа обесценивает. Клиент думает: раз не берут денег — значит ничего не стоит. Плюс — потом неудобно повышать до рыночной цены.</p>
-    <p>Первая работа — за деньги. Даже если маленькие. Это другая позиция в диалоге.</p>
-    <h4>4. Ждут "когда будут готовы"</h4>
-    <p>Готовность не уровень знаний. Это решение начать. Люди с 20-летним опытом каждый день сталкиваются с новым и всё равно работают.</p>
-    <p>Первый заказ реально взять через 7-14 дней после старта.</p>
-    <h4>5. Копят чужие промпты вместо понимания</h4>
-    <p>500 промптов в закладках, ни одного решённого запроса. Промпт — инструмент, не решение. Ценность в понимании задачи клиента, не в красивом шаблоне.</p>
-    <p>Отсюда — блок про R.A.C.E.T. ниже. Это не магический промпт, а способ думать о задаче.</p>
-  </div>
-</div>
-
-<!-- SKRITO: Карта роста (#27) — до переработки -->
-<!-- HIDDEN-START: growth-map
-Раздел "Карта роста" скрыт. Причина: логика нарушена — специализация должна быть сразу после онбординга (до проектов), + текущая версия похожа на материал Ледовских. Переделать под своё.
-Оригинальное содержимое — см. git history.
-HIDDEN-END -->
 
 <!-- ═══ BLOCK 1 — ОСНОВЫ AI ═══ -->
 <div id="block1" class="block-divider">
@@ -2100,7 +1965,7 @@ function toggleBurger() {
 
 // === Onboarding CTA: scroll to first section + open it ===
 function startOnboarding() {
-  const target = document.getElementById('mindset-trap');
+  const target = document.getElementById('what-is-ai');
   if (!target) return;
   const header = target.querySelector(':scope > .section-header');
   if (header && !header.classList.contains('open')) {
