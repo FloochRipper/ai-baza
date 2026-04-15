@@ -66,3 +66,4 @@
 - [ ] База промптов с поиском
 - [ ] Интеграция с Telegram-каналом Никиты
 - [ ] Блок 3 ВИЗУАЛ и Блок 4 АГЕНТЫ (отдельные продукты позже)
+- [ ] Спарсить курс aizdec.me `tuning-claude-code` (и другие доступные) через Playwright с сохранённой Telegram-сессией → сырьё в markdown (`~/Documents/aizdec-dump/`) → ручной отбор тем которых нет в базе → переписать своим голосом. Workflow: `login.js` (headed, ручной Telegram-логин, сохраняет `auth.json`) + `scrape.js` (обход с сохранённой сессией). Node v22 и Playwright 1.59 уже стоят, нужно только `npx playwright install chromium`.
