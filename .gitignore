@@ -3,5 +3,8 @@
 node_modules/
 *.log
 _sources/
-.claude/
+.claude/worktrees/
+.claude/skills/
+.claude/scheduled_tasks.lock
+.claude/.DS_Store
 skills-lock.json
