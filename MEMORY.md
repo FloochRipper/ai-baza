@@ -26,6 +26,9 @@
 ## Концепция лид-магнита
 - [Система AI-агентов, не промпты](memory/feedback_lead_magnet_agents.md) — двухуровневый подход
 
+## Состав базы знаний
+- [Content-zavod-starter - часть базы знаний, не лид-магнит](memory/project_content_zavod_starter_role.md) - раздел внутри baza-znaniy, деплоится как подпапка
+
 ## Архитектура проекта в контенте базы
 - [Третий файл минимума называем CONTEXT.md, не project.md](memory/project_file_naming_convention.md) — своя конвенция, не курсовая
 
@@ -45,3 +48,6 @@
 ## Визуальная айдентика
 - Тёмный фон #0a0a0a, светлый #f4f4ef, акцент #F5521A (оранжевый)
 - Bebas Neue + Montserrat
+- Дизайн v2 (2026-04-14): мобильный бургер, поиск по секциям, sticky-TOC слева, блок автора на hero, onboarding CTA, tripwire-CTA (×2), раскрыть/свернуть всё
+- Блок "Мышление" (00) убран — база начинается с "Основы AI" (01)
+- [Запасной визуал neon-dark — паттерны для v2](memory/project_design_direction_neon-dark.md) — ⌘K-палитра, двухколоночный hero, SaaS-стиль карточек блоков
