@@ -1,198 +1,93 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>100 промптов PRO — по сферам жизни</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #0a0a0a;
-  --bg2: #111111;
-  --bg3: #1a1a1a;
-  --card: #161616;
-  --border: rgba(255,255,255,0.08);
-  --accent: #F5521A;
-  --accent2: rgba(245,82,26,0.12);
-  --text: #f4f4ef;
-  --muted: #888;
-  --blue: #60a5fa;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body { background:var(--bg); color:var(--text); font-family:'Montserrat',sans-serif; line-height:1.7; }
-.topnav {
-  position: sticky; top:0; z-index:100;
-  background: rgba(10,10,10,0.92); backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 2rem; display: flex; align-items: center; gap: 0; height: 56px;
-  overflow-x: auto;
-}
-.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; color:var(--accent); letter-spacing:.05em; margin-right:2rem; white-space:nowrap; }
-.nav-links { display:flex; gap:0.25rem; flex-wrap:nowrap; }
-.nav-link {
-  padding: 0.4rem 0.9rem; border-radius:6px;
-  font-size:0.78rem; font-weight:500; color:var(--muted);
-  text-decoration:none; transition:all 0.2s; white-space:nowrap;
-}
-.nav-link:hover, .nav-link.active { color:var(--text); background:var(--bg3); }
-.nav-link.active { color:var(--accent); }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>100 промптов PRO — AI База</title>
+  <meta name="description" content="100 промптов PRO-уровня по формуле R.A.C.E.T. по 8 сферам: бизнес, маркетинг, контент, продуктивность, саморазвитие, креатив, здоровье, финансы.">
+  <link rel="stylesheet" href="styles.css?v=7">
+  <style>
+    /* 100 prompts page overrides */
+    .prompts-hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 24px 32px;
+    }
+    .prompts-hero h1 { font-size: 40px; font-weight: 900; letter-spacing: -0.03em; margin-bottom: 12px; }
+    .prompts-hero .lead { font-size: 16px; color: var(--muted); max-width: 560px; }
 
-.hero { max-width: 900px; margin: 0 auto; padding: 5rem 2rem 2rem; text-align: center; }
-.hero-badge { display:inline-block; background:var(--accent2); border:1px solid var(--accent); color:var(--accent); font-size:0.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:0.35rem 1rem; border-radius:100px; margin-bottom:1.5rem; }
-.hero h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,6vw,4.5rem); line-height:1.1; letter-spacing:.02em; margin-bottom:1rem; }
-.hero h1 span { color:var(--accent); }
-.hero-sub { font-size:1rem; color:var(--muted); max-width:620px; margin:0 auto 2.5rem; }
+    .cat-nav {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .cat-nav a {
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      transition: border-color 0.15s;
+      display: block;
+    }
+    .cat-nav a:hover { border-color: var(--accent); color: var(--accent); }
+    .cat-nav .cat-count { font-family: var(--mono); font-size: 10px; color: var(--muted); font-weight: 400; display: block; margin-top: 2px; }
 
-.intro { max-width:760px; margin:0 auto; padding:0 2rem 3rem; }
-.intro p { font-size:0.92rem; color:rgba(244,244,239,0.82); margin-bottom:0.75rem; }
+    .prompts-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
 
-.formula { background:var(--card); border:1px solid var(--accent); border-radius:16px; padding:2rem; margin:2rem 0; }
-.formula-title { font-family:'Bebas Neue',sans-serif; font-size:1.4rem; letter-spacing:.03em; margin-bottom:1rem; }
-.racet { display:grid; grid-template-columns:repeat(5,1fr); gap:0.5rem; margin:1rem 0; }
-.racet-cell { background:var(--accent2); border:1px solid var(--accent); border-radius:10px; padding:1rem 0.5rem; text-align:center; }
-.racet-letter { font-family:'Bebas Neue',sans-serif; font-size:2rem; color:var(--accent); line-height:1; }
-.racet-name { font-size:0.72rem; font-weight:700; color:var(--text); margin:0.3rem 0 0.2rem; text-transform:uppercase; letter-spacing:.05em; }
-.racet-desc { font-size:0.68rem; color:var(--muted); line-height:1.4; }
+    .category { margin-bottom: 56px; scroll-margin-top: 72px; }
+    .cat-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
+    .cat-header-num { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    .cat-header-title { font-family: var(--sans); font-weight: 900; font-size: 24px; letter-spacing: -0.02em; }
+    .cat-header-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
 
-/* CATEGORY GRID */
-.cat-grid { max-width:820px; margin:0 auto; padding:0 2rem 3rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0.75rem; }
-.cat-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.25rem; text-decoration:none; color:inherit; transition:all 0.2s; }
-.cat-card:hover { border-color:var(--accent); transform:translateY(-2px); }
-.cat-icon { font-size:1.5rem; margin-bottom:0.5rem; }
-.cat-name { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.03em; margin-bottom:0.3rem; }
-.cat-count { font-size:0.72rem; color:var(--muted); }
+    .prompt { border: 1px solid var(--line); border-radius: 4px; padding: 20px; margin-bottom: 12px; }
+    .prompt:hover { border-color: var(--ink); }
+    .prompt-head { display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start; }
+    .prompt-num { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--accent); min-width: 28px; }
+    .prompt-title { font-family: var(--sans); font-weight: 700; font-size: 16px; line-height: 1.3; margin-bottom: 4px; }
+    .prompt-use { font-size: 13px; color: var(--muted); line-height: 1.4; }
 
-/* CONTENT */
-.content { max-width:820px; margin:0 auto; padding:0 2rem 6rem; }
-
-.category { margin-bottom:3rem; scroll-margin-top: 70px; }
-.cat-header { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; padding-bottom:0.75rem; border-bottom:2px solid var(--accent); }
-.cat-header-num { font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--accent); opacity:.3; line-height:1; }
-.cat-header-title { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:.03em; }
-.cat-header-sub { font-size:0.78rem; color:var(--muted); margin-top:0.2rem; }
-
-.prompt { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.5rem; margin-bottom:1rem; transition:border-color .2s; }
-.prompt:hover { border-color:var(--accent); }
-.prompt-head { display:flex; gap:1rem; align-items:flex-start; margin-bottom:1rem; }
-.prompt-num { background:var(--accent); color:white; width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.85rem; font-weight:800; flex-shrink:0; font-family:'Bebas Neue',sans-serif; }
-.prompt-title { font-weight:700; font-size:0.95rem; color:var(--text); line-height:1.4; }
-.prompt-use { font-size:0.74rem; color:var(--muted); margin-top:0.25rem; }
-
-.code-wrap { position:relative; }
-.code-block {
-  background:#0d0d0d; border:1px solid var(--border); border-radius:10px;
-  padding:1.25rem 1rem; padding-right:3.5rem;
-  font-family:'SF Mono','Fira Code',monospace;
-  font-size:0.78rem; line-height:1.7; color:#c7d2fe;
-  white-space:pre-wrap; word-break:break-word; overflow-x:auto;
-  border-left:3px solid var(--blue);
-}
-.copy-btn {
-  position:absolute; top:0.6rem; right:0.6rem;
-  background:var(--bg3); border:1px solid var(--border); border-radius:6px;
-  color:var(--muted); font-size:0.65rem; font-weight:600; padding:0.3rem 0.6rem;
-  cursor:pointer; transition:all 0.2s; letter-spacing:.05em;
-}
-.copy-btn:hover { background:var(--accent); color:white; border-color:var(--accent); }
-.copy-btn.copied { background:#4ade80; color:black; border-color:#4ade80; }
-
-.back-btn { display:inline-block; background:var(--bg3); border:1px solid var(--border); color:var(--text); font-size:0.78rem; padding:0.5rem 1rem; border-radius:8px; text-decoration:none; margin:2rem 0; transition:border-color .2s; }
-.back-btn:hover { border-color:var(--accent); }
-
-@media(max-width:768px) {
-  body { line-height:1.6; }
-  .topnav { padding:0 0.75rem; height:52px; }
-  .nav-logo { font-size:1.1rem; margin-right:1rem; }
-  .nav-link { padding:0.35rem 0.7rem; font-size:0.72rem; }
-
-  .hero { padding:3rem 1rem 1rem; }
-  .hero-sub { font-size:0.92rem; }
-
-  .intro, .cat-grid, .content { padding-left:1rem; padding-right:1rem; }
-
-  .formula { padding:1.25rem; }
-  .formula-title { font-size:1.2rem; }
-
-  .racet { grid-template-columns:repeat(2,1fr); gap:0.4rem; }
-  .racet-cell { padding:0.85rem 0.4rem; }
-  .racet-letter { font-size:1.7rem; }
-  .racet-name { font-size:0.65rem; }
-  .racet-desc { font-size:0.62rem; }
-
-  .cat-grid { grid-template-columns:1fr; gap:0.6rem; }
-  .cat-card { padding:1rem 1.1rem; }
-
-  .category { margin-bottom:2rem; }
-  .cat-header { gap:0.75rem; }
-  .cat-header-num { font-size:2.25rem; }
-  .cat-header-title { font-size:1.35rem; }
-  .cat-header-sub { font-size:0.72rem; }
-
-  .prompt { padding:1.15rem 1rem; }
-  .prompt-num { width:28px; height:28px; font-size:0.75rem; }
-  .prompt-title { font-size:0.88rem; }
-  .prompt-use { font-size:0.7rem; }
-
-  .code-block { font-size:0.72rem; padding:1rem 0.85rem; padding-right:3rem; line-height:1.6; }
-  .copy-btn { font-size:0.6rem; padding:0.25rem 0.5rem; }
-}
-
-@media(max-width:400px) {
-  .nav-logo { display:none; }
-  .racet { grid-template-columns:repeat(2,1fr); gap:0.3rem; }
-  .code-block { font-size:0.68rem; }
-}
-</style>
+    /* reuse site code-block styles */
+    .prompt .code-block { margin-top: 4px; }
+  </style>
 </head>
 <body>
 
-<nav class="topnav">
-  <a href="index.html" class="nav-logo" style="text-decoration:none;color:inherit;">AI База</a>
-  <div class="nav-links">
-    <a href="index.html" class="nav-link">← База знаний</a>
-    <a href="#cat-business" class="nav-link">Бизнес</a>
-    <a href="#cat-marketing" class="nav-link">Маркетинг</a>
-    <a href="#cat-content" class="nav-link">Контент</a>
-    <a href="#cat-productivity" class="nav-link">Продуктивность</a>
-    <a href="#cat-self" class="nav-link">Саморазвитие</a>
-    <a href="#cat-creative" class="nav-link">Креатив</a>
-    <a href="#cat-health" class="nav-link">Здоровье</a>
-    <a href="#cat-finance" class="nav-link">Финансы</a>
-  </div>
+<header class="site-header">
+  <a href="index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="block-00/01-intro.html" class="active">Для новичка</a>
+    <a href="#">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="prompts-hero">
+  <h1>100 промптов <span class="accent">PRO</span></h1>
+  <p class="lead">По формуле R.A.C.E.T. Разбито по 8 сферам жизни. Бери, подставляй под свою задачу, используй сразу.</p>
+</div>
+
+<nav class="cat-nav">
+  <a href="#cat-business">💼 Бизнес<span class="cat-count">12 промптов</span></a>
+  <a href="#cat-marketing">📢 Маркетинг<span class="cat-count">15 промптов</span></a>
+  <a href="#cat-content">✍️ Контент<span class="cat-count">15 промптов</span></a>
+  <a href="#cat-productivity">⚡ Продуктивность<span class="cat-count">12 промптов</span></a>
+  <a href="#cat-selfdev">🌱 Саморазвитие<span class="cat-count">12 промптов</span></a>
+  <a href="#cat-creative">🎨 Креатив<span class="cat-count">12 промптов</span></a>
+  <a href="#cat-health">💪 Здоровье<span class="cat-count">11 промптов</span></a>
+  <a href="#cat-finance">💰 Финансы<span class="cat-count">11 промптов</span></a>
 </nav>
 
-<div class="hero">
-  <div class="hero-badge">Приложение к базе знаний</div>
-  <h1>100 промптов<br><span>PRO уровня</span></h1>
-  <p class="hero-sub">Готовые промпты по формуле R.A.C.E.T. — с ролью, детальной постановкой, уровнями анализа и форматом вывода. Копируй, подставляй данные, получай экспертный результат.</p>
-</div>
-
-<div class="intro">
-  <div class="formula">
-    <div class="formula-title">Формула R.A.C.E.T.</div>
-    <div class="racet">
-      <div class="racet-cell"><div class="racet-letter">R</div><div class="racet-name">Role</div><div class="racet-desc">Кем выступает AI</div></div>
-      <div class="racet-cell"><div class="racet-letter">A</div><div class="racet-name">Action</div><div class="racet-desc">Что сделать</div></div>
-      <div class="racet-cell"><div class="racet-letter">C</div><div class="racet-name">Context</div><div class="racet-desc">Данные</div></div>
-      <div class="racet-cell"><div class="racet-letter">E</div><div class="racet-name">Expectation</div><div class="racet-desc">Формат</div></div>
-      <div class="racet-cell"><div class="racet-letter">T</div><div class="racet-name">Tone</div><div class="racet-desc">Как звучит</div></div>
-    </div>
-    <p style="font-size:0.82rem; color:var(--muted); margin-top:1rem;">В каждом промпте добавлены: уровни анализа (от очевидного к стратегическим инсайтам) + правило анти-поверхностности. Работают в ChatGPT, Claude, Gemini.</p>
-  </div>
-</div>
-
-<div class="cat-grid">
-  <a href="#cat-business" class="cat-card"><div class="cat-icon">💼</div><div class="cat-name">Бизнес</div><div class="cat-count">15 промптов</div></a>
-  <a href="#cat-marketing" class="cat-card"><div class="cat-icon">📢</div><div class="cat-name">Маркетинг и продажи</div><div class="cat-count">15 промптов</div></a>
-  <a href="#cat-content" class="cat-card"><div class="cat-icon">✍️</div><div class="cat-name">Контент и соцсети</div><div class="cat-count">15 промптов</div></a>
-  <a href="#cat-productivity" class="cat-card"><div class="cat-icon">⚡</div><div class="cat-name">Продуктивность</div><div class="cat-count">10 промптов</div></a>
-  <a href="#cat-self" class="cat-card"><div class="cat-icon">🌱</div><div class="cat-name">Саморазвитие</div><div class="cat-count">10 промптов</div></a>
-  <a href="#cat-creative" class="cat-card"><div class="cat-icon">🎨</div><div class="cat-name">Креатив</div><div class="cat-count">10 промптов</div></a>
-  <a href="#cat-health" class="cat-card"><div class="cat-icon">💪</div><div class="cat-name">Здоровье и отношения</div><div class="cat-count">10 промптов</div></a>
-  <a href="#cat-finance" class="cat-card"><div class="cat-icon">💰</div><div class="cat-name">Финансы</div><div class="cat-count">15 промптов</div></a>
-</div>
-
+<div class="prompts-content">
 <div class="content">
 
 <!-- ═══ БИЗНЕС ═══ -->
@@ -204,7 +99,9 @@ body { background:var(--bg); color:var(--text); font-family:'Montserrat',sans-se
 
   <div class="prompt">
     <div class="prompt-head"><div class="prompt-num">1</div><div><div class="prompt-title">Глубокий анализ целевой аудитории</div><div class="prompt-use">Когда: запускаете продукт и нужно понять кому и как продавать</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: ты — multi-expert: маркетинговый стратег + поведенческий психолог + data-аналитик + продуктолог.
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: ты — multi-expert: маркетинговый стратег + поведенческий психолог + data-аналитик + продуктолог.
 
 Action: проведи глубокий анализ ЦА для [продукт / ниша / рынок].
 
@@ -226,12 +123,15 @@ Expectation — 5 уровней анализа:
 
 Формат: 7 разделов — сегменты, боли vs заявленные, мотивы, барьеры, путь к покупке, инсайты, применение.
 
-Tone: эксперт уровня top-1%. Анти-поверхностность: не давай ответов вроде "хотят качество и низкую цену". Только глубина и причинно-следственные связи.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: эксперт уровня top-1%. Анти-поверхностность: не давай ответов вроде "хотят качество и низкую цену". Только глубина и причинно-следственные связи.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">2</div><div><div class="prompt-title">Проверка идеи бизнеса на жизнеспособность</div><div class="prompt-use">Когда: есть идея, нужно понять стоит ли в неё вкладываться</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: венчурный аналитик с 15-летним опытом, специализация — проверка ранних стадий. Разобрал 500+ идей, 80% отсеивал на этом этапе.
+    <div class="prompt-head"><div class="prompt-num">2</div><div><div class="prompt-title">Проверка идеи бизнеса на жизнеспособность</div><div class="prompt-use">Когда: есть идея, нужно понять стоит ли в неё вкладываться</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: венчурный аналитик с 15-летним опытом, специализация — проверка ранних стадий. Разобрал 500+ идей, 80% отсеивал на этом этапе.
 
 Action: проведи жёсткую диагностику моей идеи и вынеси вердикт — стоит ли в неё вкладываться.
 
@@ -251,12 +151,15 @@ Expectation — 5 уровней проверки:
 - Альтернативная формулировка идеи (если слабая)
 - Минимальный тест — как за 2 недели понять реально ли
 
-Tone: беспощадно честный. Не щади чувства. Анти-поверхностность: никаких общих фраз про "надо работать над продуктом".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: беспощадно честный. Не щади чувства. Анти-поверхностность: никаких общих фраз про "надо работать над продуктом".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">3</div><div><div class="prompt-title">Продуктовая стратегия — где горячий сегмент</div><div class="prompt-use">Когда: у вас уже есть продукт, но продажи идут неровно</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: продуктовый стратег. Работал с стартапами от ранней стадии до $10M ARR. Специализация — находить сегменты с высокой готовностью платить.
+    <div class="prompt-head"><div class="prompt-num">3</div><div><div class="prompt-title">Продуктовая стратегия — где горячий сегмент</div><div class="prompt-use">Когда: у вас уже есть продукт, но продажи идут неровно</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: продуктовый стратег. Работал с стартапами от ранней стадии до $10M ARR. Специализация — находить сегменты с высокой готовностью платить.
 
 Action: найди в моей аудитории самый горячий сегмент — тех кто готов купить сейчас с минимальным прогревом.
 
@@ -280,12 +183,15 @@ Expectation — 5 уровней:
 - 3 канала доступа
 - Квалифицирующие вопросы на первом касании
 
-Tone: прагматик. Не "все ЦА хороши" — а конкретно кто платит больше и быстрее.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: прагматик. Не "все ЦА хороши" — а конкретно кто платит больше и быстрее.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">4</div><div><div class="prompt-title">Анализ конкурентов — где их слабые места</div><div class="prompt-use">Когда: нужно отстроиться на рынке</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: конкурентный аналитик, ex-McKinsey, специализация — вскрывать уязвимости лидеров рынка.
+    <div class="prompt-head"><div class="prompt-num">4</div><div><div class="prompt-title">Анализ конкурентов — где их слабые места</div><div class="prompt-use">Когда: нужно отстроиться на рынке</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: конкурентный аналитик, ex-McKinsey, специализация — вскрывать уязвимости лидеров рынка.
 
 Action: проведи сравнительный анализ 5 главных конкурентов и найди стратегические дыры в их позиционировании.
 
@@ -309,12 +215,15 @@ Expectation — 5 уровней:
 - Моё отстроечное позиционирование (1 фраза)
 - План действий на 30 дней
 
-Tone: аналитик без эмоций. Анти-поверхностность: если конкурент лидер — это не значит что он делает всё правильно. Ищи дыры.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: аналитик без эмоций. Анти-поверхностность: если конкурент лидер — это не значит что он делает всё правильно. Ищи дыры.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">5</div><div><div class="prompt-title">Оффер под разные сегменты ЦА</div><div class="prompt-use">Когда: один продукт, несколько типов клиентов</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: копирайтер-оффермейкер. Специализируешься на том, чтобы одна и та же услуга звучала по-разному для разных людей — без изменения сути.
+    <div class="prompt-head"><div class="prompt-num">5</div><div><div class="prompt-title">Оффер под разные сегменты ЦА</div><div class="prompt-use">Когда: один продукт, несколько типов клиентов</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: копирайтер-оффермейкер. Специализируешься на том, чтобы одна и та же услуга звучала по-разному для разных людей — без изменения сути.
 
 Action: создай 5 разных офферов моего продукта под 5 разных сегментов ЦА.
 
@@ -332,12 +241,15 @@ Expectation — 5 сегментов, для каждого:
 
 Формат: таблица с 5 столбцами (сегмент / боль / оффер / CTA / антислова).
 
-Tone: для каждого оффера — свой. Для предпринимателя — ROI и время. Для новичка — простота и поддержка. Для эксперта — глубина и уникальность.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: для каждого оффера — свой. Для предпринимателя — ROI и время. Для новичка — простота и поддержка. Для эксперта — глубина и уникальность.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">6</div><div><div class="prompt-title">Воронка продаж — от холодного до покупки</div><div class="prompt-use">Когда: лидов много, покупок мало</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: маркетолог-архитектор воронок, построил 50+ систем для онлайн-школ и консалтинга.
+    <div class="prompt-head"><div class="prompt-num">6</div><div><div class="prompt-title">Воронка продаж — от холодного до покупки</div><div class="prompt-use">Когда: лидов много, покупок мало</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: маркетолог-архитектор воронок, построил 50+ систем для онлайн-школ и консалтинга.
 
 Action: спроектируй воронку продаж от холодного касания до закрытия сделки.
 
@@ -361,12 +273,15 @@ Expectation — 5 этапов воронки:
 - KPI воронки: какие цифры нормально / плохо
 - Первый эксперимент на 2 недели
 
-Tone: практик. Анти-поверхностность: не "создайте ценность" — конкретные действия.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик. Анти-поверхностность: не "создайте ценность" — конкретные действия.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">7</div><div><div class="prompt-title">Ценообразование — сколько стоить</div><div class="prompt-use">Когда: боитесь завысить или занизить цену</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: специалист по pricing-стратегии. Работал с SaaS, услугами, инфопродуктами. Знаешь, как цена влияет на восприятие и объём.
+    <div class="prompt-head"><div class="prompt-num">7</div><div><div class="prompt-title">Ценообразование — сколько стоить</div><div class="prompt-use">Когда: боитесь завысить или занизить цену</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: специалист по pricing-стратегии. Работал с SaaS, услугами, инфопродуктами. Знаешь, как цена влияет на восприятие и объём.
 
 Action: помоги определить оптимальную цену для моего продукта.
 
@@ -389,12 +304,15 @@ Expectation — 5 уровней:
 - Тарифная сетка из 3 тарифов
 - 5 аргументов которые поднимают воспринимаемую ценность
 
-Tone: практик. Без "каждый бизнес уникален". Дай конкретные цифры и объясни логику.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик. Без "каждый бизнес уникален". Дай конкретные цифры и объясни логику.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">8</div><div><div class="prompt-title">Лид-магнит — что отдать бесплатно</div><div class="prompt-use">Когда: нужно собирать базу подписчиков</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: специалист по лид-магнитам. Делал магниты с конверсией 40%+.
+    <div class="prompt-head"><div class="prompt-num">8</div><div><div class="prompt-title">Лид-магнит — что отдать бесплатно</div><div class="prompt-use">Когда: нужно собирать базу подписчиков</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: специалист по лид-магнитам. Делал магниты с конверсией 40%+.
 
 Action: предложи 5 идей лид-магнита для моего продукта.
 
@@ -414,12 +332,15 @@ Expectation — 5 уровней для каждой идеи:
 Формат — таблица с 5 идеями.
 Плюс рекомендация: какую запустить первой и почему.
 
-Tone: практик. Лид-магнит должен решать одну острую боль за 15 минут.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик. Лид-магнит должен решать одну острую боль за 15 минут.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">9</div><div><div class="prompt-title">Продуктовая линейка — от трипвайера до VIP</div><div class="prompt-use">Когда: нужно выстроить систему продаж</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: продуктолог с опытом построения онлайн-академий от 0 до $1M.
+    <div class="prompt-head"><div class="prompt-num">9</div><div><div class="prompt-title">Продуктовая линейка — от трипвайера до VIP</div><div class="prompt-use">Когда: нужно выстроить систему продаж</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: продуктолог с опытом построения онлайн-академий от 0 до $1M.
 
 Action: спроектируй продуктовую линейку из 4 уровней под мою нишу.
 
@@ -443,12 +364,15 @@ Expectation — 4 уровня:
 
 Формат: таблица + финальная воронка (как один продукт ведёт к другому).
 
-Tone: прагматичный, без инфоцыганщины.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: прагматичный, без инфоцыганщины.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">10</div><div><div class="prompt-title">Работа с возражениями — топ-7</div><div class="prompt-use">Когда: клиенты уходят "подумать"</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: эксперт по переговорам и продажам, специализация — превращение сопротивления в покупку.
+    <div class="prompt-head"><div class="prompt-num">10</div><div><div class="prompt-title">Работа с возражениями — топ-7</div><div class="prompt-use">Когда: клиенты уходят "подумать"</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: эксперт по переговорам и продажам, специализация — превращение сопротивления в покупку.
 
 Action: определи топ-7 возражений клиентов в моей нише и дай готовые ответы.
 
@@ -469,12 +393,15 @@ Expectation — для каждого возражения:
 - Универсальный приём "возражение → переосмысление → новая рамка"
 - Что НЕ отвечать (типичные ошибки)
 
-Tone: эмпатичный продавец, не давящий. Анти-поверхностность: "Дорого" не всегда про деньги — часто про доверие или ценность.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: эмпатичный продавец, не давящий. Анти-поверхностность: "Дорого" не всегда про деньги — часто про доверие или ценность.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">11</div><div><div class="prompt-title">Бизнес-модель одной страницей</div><div class="prompt-use">Когда: нужно структурировать проект на старте</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: бизнес-архитектор, использующий Lean Canvas.
+    <div class="prompt-head"><div class="prompt-num">11</div><div><div class="prompt-title">Бизнес-модель одной страницей</div><div class="prompt-use">Когда: нужно структурировать проект на старте</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: бизнес-архитектор, использующий Lean Canvas.
 
 Action: заполни Lean Canvas моего проекта.
 
@@ -493,12 +420,15 @@ Expectation — 9 блоков:
 
 Формат: Lean Canvas как таблица + 3 главных риска + первые 3 эксперимента на 2 недели.
 
-Tone: прагматично. Каждый блок — в одно-два предложения, без воды.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: прагматично. Каждый блок — в одно-два предложения, без воды.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">12</div><div><div class="prompt-title">Позиционирование одной фразой</div><div class="prompt-use">Когда: клиент спрашивает "что ты делаешь"</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: брендинг-стратег. Специализация — превращать размытое "помогаю бизнесу" в точное позиционирование.
+    <div class="prompt-head"><div class="prompt-num">12</div><div><div class="prompt-title">Позиционирование одной фразой</div><div class="prompt-use">Когда: клиент спрашивает "что ты делаешь"</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: брендинг-стратег. Специализация — превращать размытое "помогаю бизнесу" в точное позиционирование.
 
 Action: создай 5 вариантов позиционирования меня/моего бизнеса одной фразой.
 
@@ -517,12 +447,15 @@ Expectation — 5 вариантов по разным стратегиям:
 
 Формат: 5 фраз + объяснение когда какую использовать + 3 теста (говорят ли запомнилось, вызывает ли вопрос, хочется ли подписаться).
 
-Tone: провокативно. Без "индивидуальный подход к каждому клиенту".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: провокативно. Без "индивидуальный подход к каждому клиенту".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">13</div><div><div class="prompt-title">Customer Journey Map — путь клиента</div><div class="prompt-use">Когда: хочется понять где клиент теряется</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: UX-стратег, строил CJM для e-commerce и SaaS.
+    <div class="prompt-head"><div class="prompt-num">13</div><div><div class="prompt-title">Customer Journey Map — путь клиента</div><div class="prompt-use">Когда: хочется понять где клиент теряется</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: UX-стратег, строил CJM для e-commerce и SaaS.
 
 Action: построй customer journey map — путь клиента от осознания проблемы до повторной покупки.
 
@@ -547,12 +480,15 @@ Expectation — 5 этапов:
 
 Формат: таблица + 3 главных точки где теряем клиента.
 
-Tone: эмпатичный аналитик. Думай как клиент, не как продавец.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: эмпатичный аналитик. Думай как клиент, не как продавец.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">14</div><div><div class="prompt-title">Принятие сложного бизнес-решения</div><div class="prompt-use">Когда: стоишь перед выбором</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: стратегический консультант, ex-BCG. Помогаешь принимать сложные решения без эмоций.
+    <div class="prompt-head"><div class="prompt-num">14</div><div><div class="prompt-title">Принятие сложного бизнес-решения</div><div class="prompt-use">Когда: стоишь перед выбором</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: стратегический консультант, ex-BCG. Помогаешь принимать сложные решения без эмоций.
 
 Action: помоги принять решение: [вопрос].
 
@@ -575,12 +511,15 @@ Expectation — 5 уровней:
 - Стоп-сигнал: что должно случиться, чтобы отказаться
 - Тест на 2 недели: как проверить дешёво
 
-Tone: холодный аналитик. Без эмоций. Анти-поверхностность: "надо подумать" не ответ.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: холодный аналитик. Без эмоций. Анти-поверхностность: "надо подумать" не ответ.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">15</div><div><div class="prompt-title">Архитектор нейросотрудника — инструкция для GPT-агента</div><div class="prompt-use">Когда: строишь своего ИИ-ассистента</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: архитектор нейросотрудников с 50+ внедрений в бизнесе.
+    <div class="prompt-head"><div class="prompt-num">15</div><div><div class="prompt-title">Архитектор нейросотрудника — инструкция для GPT-агента</div><div class="prompt-use">Когда: строишь своего ИИ-ассистента</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: архитектор нейросотрудников с 50+ внедрений в бизнесе.
 
 Action: составь детальную инструкцию для GPT-агента, который будет выполнять [роль: продавец / маркетолог / консультант / аналитик] в моём бизнесе.
 
@@ -603,7 +542,7 @@ Expectation — инструкция по блокам:
 - Список FAQ с готовыми ответами
 - Тест — 10 вопросов для проверки работы
 
-Tone: детальный, без общих фраз. Каждый блок как прямая инструкция.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: детальный, без общих фраз. Каждый блок как прямая инструкция.</div></div>
   </div>
 </div>
 
@@ -611,12 +550,15 @@ Tone: детальный, без общих фраз. Каждый блок ка
 <div class="category" id="cat-marketing">
   <div class="cat-header">
     <div class="cat-header-num">02</div>
-    <div><div class="cat-header-title">📢 Маркетинг и продажи</div><div class="cat-header-sub">Реклама, воронки, CTA, email, таргет</div></div>
+    <div><div class="cat-header-title">📢 Маркетинг и продажи</div><div class="cat-header-sub">Реклама, воронки, CTA, email, таргет</pre>
+    </div>
   </div>
 
   <div class="prompt">
     <div class="prompt-head"><div class="prompt-num">16</div><div><div class="prompt-title">Продающий лендинг — структура + текст</div><div class="prompt-use">Когда: нужен сайт для оффера</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: копирайтер с 10-летним опытом в продающих текстах, обученный у Кеннеди и Шугермана.
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: копирайтер с 10-летним опытом в продающих текстах, обученный у Кеннеди и Шугермана.
 
 Action: напиши продающий лендинг для [продукт].
 
@@ -638,12 +580,15 @@ Expectation — структура из 8 экранов:
 
 Для каждого экрана: заголовок, подзаголовок, основной текст (2-3 предложения), CTA.
 
-Tone: по формуле 4U — Полезно + Срочно + Уникально + Ультраспецифично. Без штампов.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: по формуле 4U — Полезно + Срочно + Уникально + Ультраспецифично. Без штампов.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">17</div><div><div class="prompt-title">Рекламный креатив — 5 вариантов A/B</div><div class="prompt-use">Когда: запускаешь таргет и нужны разные подходы</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: директор креативного агентства, специализация — перформанс-креативы для соцсетей.
+    <div class="prompt-head"><div class="prompt-num">17</div><div><div class="prompt-title">Рекламный креатив — 5 вариантов A/B</div><div class="prompt-use">Когда: запускаешь таргет и нужны разные подходы</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: директор креативного агентства, специализация — перформанс-креативы для соцсетей.
 
 Action: создай 5 рекламных креативов для A/B-теста.
 
@@ -669,12 +614,15 @@ Expectation — 5 креативов по разным стратегиям:
 
 Формат: таблица для сравнения + рекомендация с какого начать тест.
 
-Tone: смело, но в рамках площадки. Анти-поверхностность: "ограниченное предложение" уже не работает.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: смело, но в рамках площадки. Анти-поверхностность: "ограниченное предложение" уже не работает.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">18</div><div><div class="prompt-title">Email-рассылка — прогрев из 5 писем</div><div class="prompt-use">Когда: новый подписчик попал в базу</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: email-маркетолог с 10-летним опытом, работал с сериями с open rate 50%+.
+    <div class="prompt-head"><div class="prompt-num">18</div><div><div class="prompt-title">Email-рассылка — прогрев из 5 писем</div><div class="prompt-use">Когда: новый подписчик попал в базу</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: email-маркетолог с 10-летним опытом, работал с сериями с open rate 50%+.
 
 Action: создай прогревающую серию из 5 писем для новых подписчиков.
 
@@ -699,12 +647,15 @@ Expectation — 5 писем:
 
 Формат: каждое письмо как готовый текст для копирования.
 
-Tone: человек, не робот. Каждое письмо — одна мысль, один CTA. Анти-поверхностность: без "Здравствуйте, дорогой подписчик".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: человек, не робот. Каждое письмо — одна мысль, один CTA. Анти-поверхностность: без "Здравствуйте, дорогой подписчик".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">19</div><div><div class="prompt-title">CTA — 10 вариантов призыва</div><div class="prompt-use">Когда: кнопка "Оставить заявку" не работает</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: конверсионный копирайтер, эксперт по микро-текстам.
+    <div class="prompt-head"><div class="prompt-num">19</div><div><div class="prompt-title">CTA — 10 вариантов призыва</div><div class="prompt-use">Когда: кнопка "Оставить заявку" не работает</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: конверсионный копирайтер, эксперт по микро-текстам.
 
 Action: создай 10 вариантов CTA для [продукт / контекст].
 
@@ -727,12 +678,15 @@ Expectation — 10 CTA по разным психологическим стра
 
 Формат: 10 CTA + когда какой использовать + тест (4 критерия оценки).
 
-Tone: короткие, глагольные, без "Узнайте больше". Анти-поверхностность: CTA начинается с действия клиента, не с нашего предложения.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: короткие, глагольные, без "Узнайте больше". Анти-поверхностность: CTA начинается с действия клиента, не с нашего предложения.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">20</div><div><div class="prompt-title">Скрипт продаж — звонок / переписка</div><div class="prompt-use">Когда: нужно обучать менеджеров</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: тренер отдела продаж с 15-летним опытом, специализация — высокочековые услуги.
+    <div class="prompt-head"><div class="prompt-num">20</div><div><div class="prompt-title">Скрипт продаж — звонок / переписка</div><div class="prompt-use">Когда: нужно обучать менеджеров</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: тренер отдела продаж с 15-летним опытом, специализация — высокочековые услуги.
 
 Action: составь скрипт продажи для [формат: звонок / переписка в мессенджере].
 
@@ -758,12 +712,15 @@ Expectation — 5 этапов:
 
 Формат: готовый скрипт с прямой речью + блок-схема решений.
 
-Tone: уверенный профессионал. Анти-поверхностность: без "Добрый день, как у вас дела?".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: уверенный профессионал. Анти-поверхностность: без "Добрый день, как у вас дела?".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">21</div><div><div class="prompt-title">Анализ рекламных кампаний — что работает</div><div class="prompt-use">Когда: крутили таргет, пора разбираться</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: performance-маркетолог с 10-летним опытом анализа кампаний.
+    <div class="prompt-head"><div class="prompt-num">21</div><div><div class="prompt-title">Анализ рекламных кампаний — что работает</div><div class="prompt-use">Когда: крутили таргет, пора разбираться</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: performance-маркетолог с 10-летним опытом анализа кампаний.
 
 Action: проанализируй мои рекламные кампании и найди паттерны победителей.
 
@@ -785,12 +742,15 @@ Expectation — 5 уровней анализа:
 - 5 новых объявлений на основе паттернов (заголовок + текст + CTA + гипотеза)
 - План эксперимента: что масштабировать, что отключить
 
-Tone: аналитик-прагматик. Без "нужно продолжать тестировать" — конкретные шаги.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: аналитик-прагматик. Без "нужно продолжать тестировать" — конкретные шаги.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">22</div><div><div class="prompt-title">Коммерческое предложение (КП)</div><div class="prompt-use">Когда: клиент просит прислать предложение</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: специалист по B2B-копирайтингу, делаешь КП с конверсией в сделку выше 30%.
+    <div class="prompt-head"><div class="prompt-num">22</div><div><div class="prompt-title">Коммерческое предложение (КП)</div><div class="prompt-use">Когда: клиент просит прислать предложение</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: специалист по B2B-копирайтингу, делаешь КП с конверсией в сделку выше 30%.
 
 Action: составь коммерческое предложение для [клиент / ниша].
 
@@ -813,12 +773,15 @@ Expectation — структура КП:
 
 Для каждого раздела — текст (2-5 предложений) + акценты.
 
-Tone: деловой, но живой. Анти-поверхностность: не "мы обеспечим индивидуальный подход" — конкретика задачи и решения.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: деловой, но живой. Анти-поверхностность: не "мы обеспечим индивидуальный подход" — конкретика задачи и решения.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">23</div><div><div class="prompt-title">Акция под праздник / сезон</div><div class="prompt-use">Когда: нужен инфоповод для продаж</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: маркетолог-акционист, делал кампании с ROI 5+ для малого бизнеса.
+    <div class="prompt-head"><div class="prompt-num">23</div><div><div class="prompt-title">Акция под праздник / сезон</div><div class="prompt-use">Когда: нужен инфоповод для продаж</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: маркетолог-акционист, делал кампании с ROI 5+ для малого бизнеса.
 
 Action: придумай 3 акции для моего бизнеса на [повод / сезон].
 
@@ -840,12 +803,15 @@ Expectation — для каждой акции:
 
 Плюс проверка реалистичности — "что может пойти не так" для каждой.
 
-Tone: креативно, но приземлённо. Анти-поверхностность: скидка 10% — не акция, а девальвация.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: креативно, но приземлённо. Анти-поверхностность: скидка 10% — не акция, а девальвация.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">24</div><div><div class="prompt-title">Реферальная программа</div><div class="prompt-use">Когда: хочется чтобы клиенты приводили клиентов</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: специалист по программам лояльности и рефералу, обучался на кейсах Dropbox и Uber.
+    <div class="prompt-head"><div class="prompt-num">24</div><div><div class="prompt-title">Реферальная программа</div><div class="prompt-use">Когда: хочется чтобы клиенты приводили клиентов</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: специалист по программам лояльности и рефералу, обучался на кейсах Dropbox и Uber.
 
 Action: спроектируй реферальную программу для моего бизнеса.
 
@@ -867,12 +833,15 @@ Expectation — 5 блоков:
 - Метрики программы (K-factor, CAC)
 - Точка безубыточности программы
 
-Tone: практик. Анти-поверхностность: бонусы за "подписку" не работают.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик. Анти-поверхностность: бонусы за "подписку" не работают.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">25</div><div><div class="prompt-title">Сотрудничество с блогерами</div><div class="prompt-use">Когда: хочется выйти на новую аудиторию</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: инфлюенсер-маркетолог, работавший с 200+ интеграциями.
+    <div class="prompt-head"><div class="prompt-num">25</div><div><div class="prompt-title">Сотрудничество с блогерами</div><div class="prompt-use">Когда: хочется выйти на новую аудиторию</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: инфлюенсер-маркетолог, работавший с 200+ интеграциями.
 
 Action: составь стратегию работы с блогерами для моего продукта.
 
@@ -895,12 +864,15 @@ Expectation:
 - 3 KPI оценки результата
 - Как не попасть на "мёртвые" аккаунты с накрученной аудиторией
 
-Tone: практик. Анти-поверхностность: "раздайте продукт 100 блогерам" — деньги на ветер.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик. Анти-поверхностность: "раздайте продукт 100 блогерам" — деньги на ветер.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">26</div><div><div class="prompt-title">Продажи на маркетплейсе (WB/OZON)</div><div class="prompt-use">Когда: запускаешь товар на маркетплейсе</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: эксперт по маркетплейсам с 5-летним опытом, работал с WB/Ozon, средний чек 50М+.
+    <div class="prompt-head"><div class="prompt-num">26</div><div><div class="prompt-title">Продажи на маркетплейсе (WB/OZON)</div><div class="prompt-use">Когда: запускаешь товар на маркетплейсе</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: эксперт по маркетплейсам с 5-летним опытом, работал с WB/Ozon, средний чек 50М+.
 
 Action: составь стратегию вывода моего товара на [WB / Ozon].
 
@@ -921,12 +893,15 @@ Expectation — 5 блоков:
 - Точка безубыточности (сколько продаж в месяц)
 - План первых 90 дней
 
-Tone: практик с цифрами. Анти-поверхностность: без "хороший товар продаст себя".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик с цифрами. Анти-поверхностность: без "хороший товар продаст себя".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">27</div><div><div class="prompt-title">Продажи на Авито</div><div class="prompt-use">Когда: нужно быстро продавать услугу / товар</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: эксперт по продажам на Авито, 200+ объявлений с конверсией 3-5%.
+    <div class="prompt-head"><div class="prompt-num">27</div><div><div class="prompt-title">Продажи на Авито</div><div class="prompt-use">Когда: нужно быстро продавать услугу / товар</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: эксперт по продажам на Авито, 200+ объявлений с конверсией 3-5%.
 
 Action: составь рабочее объявление для моего [товар / услуга] на Авито.
 
@@ -948,12 +923,15 @@ Expectation:
 - Скрипт первого ответа
 - Когда повышать / понижать объявление
 
-Tone: разговорный. Анти-поверхностность: без канцеляризмов типа "Продам".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: разговорный. Анти-поверхностность: без канцеляризмов типа "Продам".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">28</div><div><div class="prompt-title">Retention — как не терять клиентов</div><div class="prompt-use">Когда: клиенты уходят после одной покупки</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: retention-маркетолог для подписочных моделей, опыт с SaaS и онлайн-школами.
+    <div class="prompt-head"><div class="prompt-num">28</div><div><div class="prompt-title">Retention — как не терять клиентов</div><div class="prompt-use">Когда: клиенты уходят после одной покупки</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: retention-маркетолог для подписочных моделей, опыт с SaaS и онлайн-школами.
 
 Action: построй систему удержания клиентов для моего бизнеса.
 
@@ -976,12 +954,15 @@ Expectation — 5 уровней:
 
 Плюс: 7 точек контакта между покупкой и повторной покупкой.
 
-Tone: системно, без "любите клиентов".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: системно, без "любите клиентов".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">29</div><div><div class="prompt-title">Сбор отзывов — как получать 5 звёзд</div><div class="prompt-use">Когда: нужны кейсы и отзывы</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: специалист по социальному доказательству, работал с бизнесами где отзывы = 60% продаж.
+    <div class="prompt-head"><div class="prompt-num">29</div><div><div class="prompt-title">Сбор отзывов — как получать 5 звёзд</div><div class="prompt-use">Когда: нужны кейсы и отзывы</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: специалист по социальному доказательству, работал с бизнесами где отзывы = 60% продаж.
 
 Action: построй систему сбора отзывов для моего бизнеса.
 
@@ -1002,12 +983,15 @@ Expectation:
 - 5 наводящих вопросов чтобы отзыв не был "всё отлично"
 - Как использовать отзывы в маркетинге
 
-Tone: этичный, без манипуляций. Анти-поверхностность: "купить отзывы" — путь к бану.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: этичный, без манипуляций. Анти-поверхностность: "купить отзывы" — путь к бану.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">30</div><div><div class="prompt-title">Монетизация экспертизы — упаковка в продукт</div><div class="prompt-use">Когда: есть знания, нет продукта</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: продюсер онлайн-продуктов, помогаешь экспертам упаковать знания в продаваемый продукт.
+    <div class="prompt-head"><div class="prompt-num">30</div><div><div class="prompt-title">Монетизация экспертизы — упаковка в продукт</div><div class="prompt-use">Когда: есть знания, нет продукта</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: продюсер онлайн-продуктов, помогаешь экспертам упаковать знания в продаваемый продукт.
 
 Action: помоги упаковать мою экспертизу в продукт.
 
@@ -1028,7 +1012,7 @@ Expectation — 5 уровней:
 - 5 причин почему купят у меня, а не у конкурентов
 - Самый простой тест: как за 2 недели продать первому клиенту
 
-Tone: практик, без "раскройте свою миссию". Анти-поверхностность: "стать гуру" не продукт.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик, без "раскройте свою миссию". Анти-поверхностность: "стать гуру" не продукт.</div></div>
   </div>
 </div>
 
@@ -1036,12 +1020,15 @@ Tone: практик, без "раскройте свою миссию". Ант�
 <div class="category" id="cat-content">
   <div class="cat-header">
     <div class="cat-header-num">03</div>
-    <div><div class="cat-header-title">✍️ Контент и соцсети</div><div class="cat-header-sub">Посты, Reels, Stories, Threads, Telegram, YouTube</div></div>
+    <div><div class="cat-header-title">✍️ Контент и соцсети</div><div class="cat-header-sub">Посты, Reels, Stories, Threads, Telegram, YouTube</pre>
+    </div>
   </div>
 
   <div class="prompt">
     <div class="prompt-head"><div class="prompt-num">31</div><div><div class="prompt-title">Контент-план на месяц — детальный</div><div class="prompt-use">Когда: надо быстро расписать месяц публикаций</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: контент-стратег, делающий планы с конверсией в заявки для онлайн-экспертов.
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: контент-стратег, делающий планы с конверсией в заявки для онлайн-экспертов.
 
 Action: создай детальный контент-план на месяц (30 постов) для моего Telegram/Instagram.
 
@@ -1072,12 +1059,15 @@ Expectation — формула 40/30/30:
 
 Формат: таблица из 30 строк.
 
-Tone: в моём стиле. Анти-поверхностность: без "делитесь в комментариях что думаете".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: в моём стиле. Анти-поверхностность: без "делитесь в комментариях что думаете".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">32</div><div><div class="prompt-title">Экспертный пост с кейсом</div><div class="prompt-use">Когда: нужно показать экспертность</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: эксперт-практик в [ниша] с 10-летним опытом, автор методики [если есть].
+    <div class="prompt-head"><div class="prompt-num">32</div><div><div class="prompt-title">Экспертный пост с кейсом</div><div class="prompt-use">Когда: нужно показать экспертность</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: эксперт-практик в [ниша] с 10-летним опытом, автор методики [если есть].
 
 Action: напиши экспертный пост на тему [тема].
 
@@ -1095,12 +1085,15 @@ Expectation:
 
 Формат: 1200-1800 знаков, короткие абзацы по 2-3 строки, без маркированных списков.
 
-Tone: разговорный русский, живой. Анти-поверхностность: без "как показывает практика" и "в современном мире".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: разговорный русский, живой. Анти-поверхностность: без "как показывает практика" и "в современном мире".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">33</div><div><div class="prompt-title">Пост-история с трансформацией</div><div class="prompt-use">Когда: нужен эмоциональный контакт с ЦА</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: сторителлер в стиле автобиографических постов, читается как сериал.
+    <div class="prompt-head"><div class="prompt-num">33</div><div><div class="prompt-title">Пост-история с трансформацией</div><div class="prompt-use">Когда: нужен эмоциональный контакт с ЦА</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: сторителлер в стиле автобиографических постов, читается как сериал.
 
 Action: напиши пост-историю о трансформации — [герой: я / мой клиент / персонаж].
 
@@ -1121,12 +1114,15 @@ Expectation — структура:
 
 Формат: 1500-2000 знаков, абзацы по 2-3 строки, диалоги в прямой речи.
 
-Tone: искренне, с WTF-моментами. Техника "прерванного рассказа" — разбить подзаголовками-интригами.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: искренне, с WTF-моментами. Техника "прерванного рассказа" — разбить подзаголовками-интригами.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">34</div><div><div class="prompt-title">Продающий пост с оффером</div><div class="prompt-use">Когда: запускаете продукт в своей базе</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: копирайтер-практик в продающих постах с конверсией 2-5% в заявки.
+    <div class="prompt-head"><div class="prompt-num">34</div><div><div class="prompt-title">Продающий пост с оффером</div><div class="prompt-use">Когда: запускаете продукт в своей базе</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: копирайтер-практик в продающих постах с конверсией 2-5% в заявки.
 
 Action: напиши продающий пост для запуска [продукт / услуга].
 
@@ -1148,12 +1144,15 @@ Expectation — структура PAS:
 
 Формат: 2000-2500 знаков, без маркированных списков, живые абзацы.
 
-Tone: эмпатичный эксперт, не продажник. Анти-поверхностность: без "только сегодня и только для вас".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: эмпатичный эксперт, не продажник. Анти-поверхностность: без "только сегодня и только для вас".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">35</div><div><div class="prompt-title">Сценарий Reels — 3 варианта хука</div><div class="prompt-use">Когда: снимаете короткое видео</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: продюсер вирусных Reels, делал ролики с охватами 100K+.
+    <div class="prompt-head"><div class="prompt-num">35</div><div><div class="prompt-title">Сценарий Reels — 3 варианта хука</div><div class="prompt-use">Когда: снимаете короткое видео</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: продюсер вирусных Reels, делал ролики с охватами 100K+.
 
 Action: напиши сценарий Reels на 45-60 секунд на тему [тема].
 
@@ -1180,12 +1179,15 @@ Expectation — 3 варианта хука (первые 3 секунды):
 
 Формат: раскадровка по секундам.
 
-Tone: энергично, но без "привет мои красотки". Анти-поверхностность: каждая секунда должна быть нужной.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: энергично, но без "привет мои красотки". Анти-поверхностность: каждая секунда должна быть нужной.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">36</div><div><div class="prompt-title">Вирусный Reels — формат-челлендж</div><div class="prompt-use">Когда: цель — максимум охватов</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: креативный директор вирусного контента, изучал алгоритмы TikTok и Instagram.
+    <div class="prompt-head"><div class="prompt-num">36</div><div><div class="prompt-title">Вирусный Reels — формат-челлендж</div><div class="prompt-use">Когда: цель — максимум охватов</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: креативный директор вирусного контента, изучал алгоритмы TikTok и Instagram.
 
 Action: придумай 5 форматов Reels для вирусного распространения в моей нише [ниша].
 
@@ -1210,12 +1212,15 @@ Expectation — 5 форматов по стратегиям:
 
 Формат: раскадровка + обоснование виральности каждого.
 
-Tone: смело, без "здравствуйте дорогие подписчики". Анти-поверхностность: не "советы как быть счастливым".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: смело, без "здравствуйте дорогие подписчики". Анти-поверхностность: не "советы как быть счастливым".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">37</div><div><div class="prompt-title">Карусель для Instagram — 8 слайдов</div><div class="prompt-use">Когда: нужен полезный "сохраняемый" контент</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: дизайнер-копирайтер каруселей с сохранениями 5%+.
+    <div class="prompt-head"><div class="prompt-num">37</div><div><div class="prompt-title">Карусель для Instagram — 8 слайдов</div><div class="prompt-use">Когда: нужен полезный "сохраняемый" контент</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: дизайнер-копирайтер каруселей с сохранениями 5%+.
 
 Action: создай сценарий карусели из 8 слайдов на тему [тема].
 
@@ -1238,12 +1243,15 @@ Expectation — 8 слайдов:
 
 Плюс — подпись к карусели (полный текст).
 
-Tone: живо, без общих фраз. Анти-поверхностность: каждый слайд должен добавлять — не повторять.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: живо, без общих фраз. Анти-поверхностность: каждый слайд должен добавлять — не повторять.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">38</div><div><div class="prompt-title">Ветка Threads — тезисная история</div><div class="prompt-use">Когда: нужен формат микро-блога</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: автор вирусных веток на Threads / X, умеющий писать коротко.
+    <div class="prompt-head"><div class="prompt-num">38</div><div><div class="prompt-title">Ветка Threads — тезисная история</div><div class="prompt-use">Когда: нужен формат микро-блога</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: автор вирусных веток на Threads / X, умеющий писать коротко.
 
 Action: напиши ветку постов (5-8 сообщений) на тему [тема].
 
@@ -1264,12 +1272,15 @@ Expectation:
 
 Формат: пронумерованная ветка с чётким переходом между постами.
 
-Tone: резко, коротко, без воды. Анти-поверхностность: каждый пост как микро-эссе с выводом.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: резко, коротко, без воды. Анти-поверхностность: каждый пост как микро-эссе с выводом.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">39</div><div><div class="prompt-title">Stories — серия из 7 слайдов</div><div class="prompt-use">Когда: ведёшь прогрев через Stories</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: специалист по Stories с конверсией в переходы 5-10%.
+    <div class="prompt-head"><div class="prompt-num">39</div><div><div class="prompt-title">Stories — серия из 7 слайдов</div><div class="prompt-use">Когда: ведёшь прогрев через Stories</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: специалист по Stories с конверсией в переходы 5-10%.
 
 Action: напиши серию из 7 Stories на тему [тема / прогрев к продукту].
 
@@ -1293,12 +1304,15 @@ Expectation — 7 слайдов с разной механикой:
 - Интерактив (если нужен — стикер, опрос, кнопка)
 - Длительность показа
 
-Tone: разговорно, "как другу". Анти-поверхностность: без "ставь лайк если да".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: разговорно, "как другу". Анти-поверхностность: без "ставь лайк если да".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">40</div><div><div class="prompt-title">Сценарий YouTube — длинное видео</div><div class="prompt-use">Когда: готовишь полноценный ролик</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: сценарист YouTube, делал ролики с retention 50%+ на длине 15+ минут.
+    <div class="prompt-head"><div class="prompt-num">40</div><div><div class="prompt-title">Сценарий YouTube — длинное видео</div><div class="prompt-use">Когда: готовишь полноценный ролик</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: сценарист YouTube, делал ролики с retention 50%+ на длине 15+ минут.
 
 Action: напиши сценарий YouTube-видео на тему [тема] длительностью [10 / 15 / 20 минут].
 
@@ -1324,12 +1338,15 @@ Expectation — структура:
 - Описание для YouTube (с тайм-кодами)
 - Превью-концепт
 
-Tone: в моём стиле, без "подписывайтесь на канал". Анти-поверхностность: каждые 90 секунд — новый крючок чтобы не закрыли.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: в моём стиле, без "подписывайтесь на канал". Анти-поверхностность: каждые 90 секунд — новый крючок чтобы не закрыли.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">41</div><div><div class="prompt-title">Telegram-канал — запуск с нуля</div><div class="prompt-use">Когда: только завёл канал</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: продюсер Telegram-каналов, запустил 20+ с нуля до 10К+ подписчиков.
+    <div class="prompt-head"><div class="prompt-num">41</div><div><div class="prompt-title">Telegram-канал — запуск с нуля</div><div class="prompt-use">Когда: только завёл канал</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: продюсер Telegram-каналов, запустил 20+ с нуля до 10К+ подписчиков.
 
 Action: составь стратегию запуска моего Telegram-канала.
 
@@ -1351,12 +1368,15 @@ Expectation — 5 блоков:
 - 3 варианта закреплённого поста
 - План первых 90 дней с метриками
 
-Tone: без "сарафан и сторис". Анти-поверхностность: рост с нуля = работа, не магия.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: без "сарафан и сторис". Анти-поверхностность: рост с нуля = работа, не магия.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">42</div><div><div class="prompt-title">Вовлечение аудитории — 10 механик</div><div class="prompt-use">Когда: мало комментариев и реакций</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: специалист по community management, строил активные сообщества 10К+.
+    <div class="prompt-head"><div class="prompt-num">42</div><div><div class="prompt-title">Вовлечение аудитории — 10 механик</div><div class="prompt-use">Когда: мало комментариев и реакций</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: специалист по community management, строил активные сообщества 10К+.
 
 Action: предложи 10 механик вовлечения для моих соцсетей.
 
@@ -1382,12 +1402,15 @@ Expectation — 10 механик по стратегиям:
 - Пример формулировки
 - Ожидаемый эффект
 
-Tone: практик, без "делитесь в комментариях что думаете".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик, без "делитесь в комментариях что думаете".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">43</div><div><div class="prompt-title">Хуки для постов — 15 проверенных</div><div class="prompt-use">Когда: пост готов, но не зацепляет</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: копирайтер-хук-мастер, изучил 1000+ вирусных публикаций.
+    <div class="prompt-head"><div class="prompt-num">43</div><div><div class="prompt-title">Хуки для постов — 15 проверенных</div><div class="prompt-use">Когда: пост готов, но не зацепляет</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: копирайтер-хук-мастер, изучил 1000+ вирусных публикаций.
 
 Action: напиши 15 вариантов хука (первого предложения) для поста на тему [тема].
 
@@ -1409,12 +1432,15 @@ Expectation — 15 хуков по 5 стратегиям × 3 варианта 
 
 Плюс: 3 совета как переделать слабый хук.
 
-Tone: цепляюще, без "привет друзья". Анти-поверхностность: хук решает читать дальше или нет.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: цепляюще, без "привет друзья". Анти-поверхностность: хук решает читать дальше или нет.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">44</div><div><div class="prompt-title">Уникализация контента — переписать без плагиата</div><div class="prompt-use">Когда: хочется переформулировать чужое</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: редактор-копирайтер, специализируешься на переработке контента с сохранением смысла, но уникальным подходом.
+    <div class="prompt-head"><div class="prompt-num">44</div><div><div class="prompt-title">Уникализация контента — переписать без плагиата</div><div class="prompt-use">Когда: хочется переформулировать чужое</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: редактор-копирайтер, специализируешься на переработке контента с сохранением смысла, но уникальным подходом.
 
 Action: перепиши этот текст так, чтобы он сохранил ключевые идеи, но стал уникальным по стилю и подаче.
 
@@ -1434,12 +1460,15 @@ Expectation — 3 версии:
 - 3 новых заголовка
 - Идеи для дополнительного контента на основе темы
 
-Tone: моя индивидуальность, не чужая. Анти-поверхностность: простой рерайт = плагиат.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: моя индивидуальность, не чужая. Анти-поверхностность: простой рерайт = плагиат.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">45</div><div><div class="prompt-title">Статья на Яндекс.Дзен / VC.ru</div><div class="prompt-use">Когда: ведёшь лонгриды</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: редактор-копирайтер с опытом статей на Дзене 100K+ дочитываний.
+    <div class="prompt-head"><div class="prompt-num">45</div><div><div class="prompt-title">Статья на Яндекс.Дзен / VC.ru</div><div class="prompt-use">Когда: ведёшь лонгриды</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: редактор-копирайтер с опытом статей на Дзене 100K+ дочитываний.
 
 Action: напиши статью для [Дзен / VC.ru] на тему [тема].
 
@@ -1463,7 +1492,7 @@ Expectation:
 - SEO-ключи (для Дзена)
 - 3 вопроса для обсуждения в комментариях
 
-Tone: экспертный, но живой. Анти-поверхностность: без "в заключение хочется отметить".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: экспертный, но живой. Анти-поверхностность: без "в заключение хочется отметить".</div></div>
   </div>
 </div>
 
@@ -1471,12 +1500,15 @@ Tone: экспертный, но живой. Анти-поверхностнос
 <div class="category" id="cat-productivity">
   <div class="cat-header">
     <div class="cat-header-num">04</div>
-    <div><div class="cat-header-title">⚡ Продуктивность</div><div class="cat-header-sub">Планирование, задачи, расстановка приоритетов</div></div>
+    <div><div class="cat-header-title">⚡ Продуктивность</div><div class="cat-header-sub">Планирование, задачи, расстановка приоритетов</pre>
+    </div>
   </div>
 
   <div class="prompt">
     <div class="prompt-head"><div class="prompt-num">46</div><div><div class="prompt-title">SMART-цели на год / квартал</div><div class="prompt-use">Когда: хочется системы, а не хаоса</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: коуч по целеполаганию, специализируешься на SMART и OKR.
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: коуч по целеполаганию, специализируешься на SMART и OKR.
 
 Action: сформулируй мои цели на [год / квартал] по SMART.
 
@@ -1503,12 +1535,15 @@ Expectation — 5 целей по SMART:
 - Одна МВЦ (самая важная цель) — отсечь остальные
 - Ритуал проверки (еженедельный / месячный)
 
-Tone: честно и реалистично. Анти-поверхностность: "быть счастливым" не цель.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: честно и реалистично. Анти-поверхностность: "быть счастливым" не цель.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">47</div><div><div class="prompt-title">Приоритезация задач — матрица Эйзенхауэра</div><div class="prompt-use">Когда: задач много, времени мало</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: эксперт по тайм-менеджменту, работаешь с бизнесами топ-уровня.
+    <div class="prompt-head"><div class="prompt-num">47</div><div><div class="prompt-title">Приоритезация задач — матрица Эйзенхауэра</div><div class="prompt-use">Когда: задач много, времени мало</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: эксперт по тайм-менеджменту, работаешь с бизнесами топ-уровня.
 
 Action: помоги приоритезировать мой список задач.
 
@@ -1533,12 +1568,15 @@ Expectation — разложи по матрице Эйзенхауэра:
 - План на сегодня (топ-3)
 - План на эту неделю (топ-7)
 
-Tone: строго. Анти-поверхностность: "всё важно" — никогда не правда.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: строго. Анти-поверхностность: "всё важно" — никогда не правда.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">48</div><div><div class="prompt-title">Разбивка проекта на простые шаги</div><div class="prompt-use">Когда: большая задача парализует</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: проджект-менеджер, специализируешься на декомпозиции сложных проектов.
+    <div class="prompt-head"><div class="prompt-num">48</div><div><div class="prompt-title">Разбивка проекта на простые шаги</div><div class="prompt-use">Когда: большая задача парализует</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: проджект-менеджер, специализируешься на декомпозиции сложных проектов.
 
 Action: разбей мой проект [описание] на простые исполнимые шаги.
 
@@ -1562,12 +1600,15 @@ Expectation:
 - 3 главных риска проекта
 - Что делать если срываем сроки
 
-Tone: пошагово, без общих фраз. Анти-поверхностность: "планирование" и "работа" — не задачи.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: пошагово, без общих фраз. Анти-поверхностность: "планирование" и "работа" — не задачи.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">49</div><div><div class="prompt-title">Утренняя рутина для продуктивности</div><div class="prompt-use">Когда: пересобираешь день</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: коуч по высокой производительности, изучал привычки топ-руководителей.
+    <div class="prompt-head"><div class="prompt-num">49</div><div><div class="prompt-title">Утренняя рутина для продуктивности</div><div class="prompt-use">Когда: пересобираешь день</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: коуч по высокой производительности, изучал привычки топ-руководителей.
 
 Action: составь персональную утреннюю рутину на 60-90 минут.
 
@@ -1593,12 +1634,15 @@ Expectation — блоки рутины:
 - Ритуал вечером чтобы утро было проще
 - Метрика: как понять что рутина работает
 
-Tone: практик. Анти-поверхностность: без "начните свой день с благодарности".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик. Анти-поверхностность: без "начните свой день с благодарности".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">50</div><div><div class="prompt-title">Борьба с прокрастинацией</div><div class="prompt-use">Когда: всё откладываешь</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: поведенческий психолог, специализируешься на прокрастинации и привычках.
+    <div class="prompt-head"><div class="prompt-num">50</div><div><div class="prompt-title">Борьба с прокрастинацией</div><div class="prompt-use">Когда: всё откладываешь</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: поведенческий психолог, специализируешься на прокрастинации и привычках.
 
 Action: помоги разобраться с моей прокрастинацией и дай конкретный план.
 
@@ -1620,12 +1664,15 @@ Expectation — 5 уровней анализа:
 - Как работать с задачей которая пугает
 - Скрипт самодиалога в момент избегания
 
-Tone: эмпатичный, но честный. Анти-поверхностность: "просто возьмись и сделай" не работает.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: эмпатичный, но честный. Анти-поверхностность: "просто возьмись и сделай" не работает.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">51</div><div><div class="prompt-title">Делегирование — как отдать задачи</div><div class="prompt-use">Когда: всё тащишь на себе</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: бизнес-коуч, специализируешься на переходе от "делаю всё сам" к системе.
+    <div class="prompt-head"><div class="prompt-num">51</div><div><div class="prompt-title">Делегирование — как отдать задачи</div><div class="prompt-use">Когда: всё тащишь на себе</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: бизнес-коуч, специализируешься на переходе от "делаю всё сам" к системе.
 
 Action: помоги разобраться какие задачи делегировать и как.
 
@@ -1649,12 +1696,15 @@ Expectation:
 - 3 барьера делегирования у меня и как преодолеть
 - Система контроля (раз в неделю / месяц)
 
-Tone: практик. Анти-поверхностность: "делегируйте всё что можно" — деньги на ветер без системы.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик. Анти-поверхностность: "делегируйте всё что можно" — деньги на ветер без системы.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">52</div><div><div class="prompt-title">Еженедельное ретро — анализ недели</div><div class="prompt-use">Когда: пятница, подводить итоги</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: коуч по саморефлексии, помогаешь превращать опыт в инсайты.
+    <div class="prompt-head"><div class="prompt-num">52</div><div><div class="prompt-title">Еженедельное ретро — анализ недели</div><div class="prompt-use">Когда: пятница, подводить итоги</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: коуч по саморефлексии, помогаешь превращать опыт в инсайты.
 
 Action: проведи мою еженедельную ретроспективу.
 
@@ -1676,12 +1726,15 @@ Expectation — 5 вопросов:
 - 1 вещь за которую критикую
 - 3 приоритета следующей недели (не больше!)
 
-Tone: честно и конструктивно. Анти-поверхностность: не "всё хорошо" и не самоедство.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: честно и конструктивно. Анти-поверхностность: не "всё хорошо" и не самоедство.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">53</div><div><div class="prompt-title">Блокировка времени — план идеальной недели</div><div class="prompt-use">Когда: хочется системы, а не реактивности</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: эксперт по time-blocking и глубокой работе.
+    <div class="prompt-head"><div class="prompt-num">53</div><div><div class="prompt-title">Блокировка времени — план идеальной недели</div><div class="prompt-use">Когда: хочется системы, а не реактивности</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: эксперт по time-blocking и глубокой работе.
 
 Action: составь шаблон идеальной недели с блоками времени.
 
@@ -1709,12 +1762,15 @@ Expectation — план на 7 дней с блоками:
 - Что делать с форс-мажорами
 - Как реагировать на "срочно"
 
-Tone: дисциплинированно. Анти-поверхностность: "гибкий график" часто = реактивность.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: дисциплинированно. Анти-поверхностность: "гибкий график" часто = реактивность.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">54</div><div><div class="prompt-title">Инбокс ноль — разбор почты / мессенджеров</div><div class="prompt-use">Когда: уведомлений 300+</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: специалист по методологии GTD (Getting Things Done).
+    <div class="prompt-head"><div class="prompt-num">54</div><div><div class="prompt-title">Инбокс ноль — разбор почты / мессенджеров</div><div class="prompt-use">Когда: уведомлений 300+</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: специалист по методологии GTD (Getting Things Done).
 
 Action: построй систему обработки входящих сообщений (почта, мессенджеры, соцсети).
 
@@ -1736,12 +1792,15 @@ Expectation — 5 правил обработки:
 - Как отключить уведомления чтобы не терять важное
 - Автоправила / фильтры
 
-Tone: строго. Анти-поверхностность: "отвечать сразу" = хаос.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: строго. Анти-поверхностность: "отвечать сразу" = хаос.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">55</div><div><div class="prompt-title">Борьба с выгоранием</div><div class="prompt-use">Когда: устал, ничего не хочется</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: психолог, специализируешься на выгорании у предпринимателей.
+    <div class="prompt-head"><div class="prompt-num">55</div><div><div class="prompt-title">Борьба с выгоранием</div><div class="prompt-use">Когда: устал, ничего не хочется</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: психолог, специализируешься на выгорании у предпринимателей.
 
 Action: помоги разобраться с моим состоянием и составь план восстановления.
 
@@ -1764,7 +1823,7 @@ Expectation — 5 уровней:
 - Что точно не поможет ("отдохни на выходных" — нет)
 - Как объяснить близким что происходит
 
-Tone: эмпатично, но не жалостливо. Анти-поверхностность: выгорание не лечится отпуском.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: эмпатично, но не жалостливо. Анти-поверхностность: выгорание не лечится отпуском.</div></div>
   </div>
 </div>
 
@@ -1772,12 +1831,15 @@ Tone: эмпатично, но не жалостливо. Анти-поверх�
 <div class="category" id="cat-self">
   <div class="cat-header">
     <div class="cat-header-num">05</div>
-    <div><div class="cat-header-title">🌱 Саморазвитие</div><div class="cat-header-sub">Обучение, рефлексия, решения, личный бренд</div></div>
+    <div><div class="cat-header-title">🌱 Саморазвитие</div><div class="cat-header-sub">Обучение, рефлексия, решения, личный бренд</pre>
+    </div>
   </div>
 
   <div class="prompt">
     <div class="prompt-head"><div class="prompt-num">56</div><div><div class="prompt-title">Изучение новой темы — план на месяц</div><div class="prompt-use">Когда: хочешь освоить что-то с нуля</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: эксперт по learning design, строил обучающие программы для корпораций.
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: эксперт по learning design, строил обучающие программы для корпораций.
 
 Action: построй план изучения [тема] с нуля за 30 дней.
 
@@ -1802,12 +1864,15 @@ Expectation — структура месяца:
 - 3 типичных ошибки новичков
 - Как проверить что реально изучил, а не "прослушал"
 
-Tone: практика выше теории. Анти-поверхностность: не "смотрите 10 курсов".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практика выше теории. Анти-поверхностность: не "смотрите 10 курсов".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">57</div><div><div class="prompt-title">Распаковка экспертности</div><div class="prompt-use">Когда: не понимаешь в чём ценен</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: продюсер-эксперт по распаковке, работал со 100+ экспертами.
+    <div class="prompt-head"><div class="prompt-num">57</div><div><div class="prompt-title">Распаковка экспертности</div><div class="prompt-use">Когда: не понимаешь в чём ценен</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: продюсер-эксперт по распаковке, работал со 100+ экспертами.
 
 Action: распакуй мою экспертность через серию вопросов и структурируй.
 
@@ -1829,12 +1894,15 @@ Expectation — задай 10 вопросов по одному и собери
 - 5 тем контента из моего опыта
 - 3 продуктовые идеи на моей экспертизе
 
-Tone: глубокий интервьюер. Анти-поверхностность: "помогаю людям" — не ответ.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: глубокий интервьюер. Анти-поверхностность: "помогаю людям" — не ответ.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">58</div><div><div class="prompt-title">Путь героя — история личного бренда</div><div class="prompt-use">Когда: строишь личный бренд</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: сторителлер личных брендов, изучил путь 50+ инфлюенсеров.
+    <div class="prompt-head"><div class="prompt-num">58</div><div><div class="prompt-title">Путь героя — история личного бренда</div><div class="prompt-use">Когда: строишь личный бренд</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: сторителлер личных брендов, изучил путь 50+ инфлюенсеров.
 
 Action: собери мою историю по архетипу "Путь героя" для личного бренда.
 
@@ -1860,12 +1928,15 @@ Expectation — структура:
 - 5 постов на основе этой истории
 - Как рассказывать при знакомстве (30 секунд)
 
-Tone: искренне, без пафоса. Анти-поверхностность: без "я поняла в чём моё предназначение".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: искренне, без пафоса. Анти-поверхностность: без "я поняла в чём моё предназначение".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">59</div><div><div class="prompt-title">Нейминг и слоганы</div><div class="prompt-use">Когда: нужно название</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: нейминг-специалист, автор названий для стартапов с оценкой $1M+.
+    <div class="prompt-head"><div class="prompt-num">59</div><div><div class="prompt-title">Нейминг и слоганы</div><div class="prompt-use">Когда: нужно название</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: нейминг-специалист, автор названий для стартапов с оценкой $1M+.
 
 Action: придумай 10 вариантов названия для [проект / продукт].
 
@@ -1893,12 +1964,15 @@ Expectation — 10 названий по 5 стратегиям:
 - 3 слогана для топ-3 названий
 - Что точно не называть (банальные паттерны)
 
-Tone: креативно и практично. Анти-поверхностность: без "название которое запоминается".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: креативно и практично. Анти-поверхностность: без "название которое запоминается".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">60</div><div><div class="prompt-title">Работа с самозванцем</div><div class="prompt-use">Когда: "я недостаточно хорош"</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: психолог, специализируешься на синдроме самозванца у экспертов.
+    <div class="prompt-head"><div class="prompt-num">60</div><div><div class="prompt-title">Работа с самозванцем</div><div class="prompt-use">Когда: "я недостаточно хорош"</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: психолог, специализируешься на синдроме самозванца у экспертов.
 
 Action: помоги разобраться с ощущением самозванца.
 
@@ -1919,12 +1993,15 @@ Expectation — 5 уровней:
 - Дневник "доказательства экспертности" — что туда писать
 - Когда обратиться к терапевту
 
-Tone: эмпатично, без токсичного позитива. Анти-поверхностность: "цените себя" не помогает.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: эмпатично, без токсичного позитива. Анти-поверхностность: "цените себя" не помогает.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">61</div><div><div class="prompt-title">Письмо самому себе из будущего</div><div class="prompt-use">Когда: запутался куда идти</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: коуч, специализируешься на визуализации и возврате к ценностям.
+    <div class="prompt-head"><div class="prompt-num">61</div><div><div class="prompt-title">Письмо самому себе из будущего</div><div class="prompt-use">Когда: запутался куда идти</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: коуч, специализируешься на визуализации и возврате к ценностям.
 
 Action: напиши мне письмо от меня из будущего через 5 лет.
 
@@ -1944,12 +2021,15 @@ Expectation — письмо от меня-будущего:
 
 Формат: 800-1200 слов, живым языком, с деталями.
 
-Tone: от меня к мне. Искренне. Анти-поверхностность: без общих мудростей "живи в моменте".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: от меня к мне. Искренне. Анти-поверхностность: без общих мудростей "живи в моменте".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">62</div><div><div class="prompt-title">Разбор конфликта / сложного разговора</div><div class="prompt-use">Когда: поссорился или перед важным разговором</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: медиатор и специалист по non-violent communication.
+    <div class="prompt-head"><div class="prompt-num">62</div><div><div class="prompt-title">Разбор конфликта / сложного разговора</div><div class="prompt-use">Когда: поссорился или перед важным разговором</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: медиатор и специалист по non-violent communication.
 
 Action: помоги разобрать конфликт [с кем и о чём] и подготовить разговор.
 
@@ -1971,12 +2051,15 @@ Expectation — 5 уровней:
 - 3 стоп-сигнала (паузы если эскалация)
 - Что НЕ говорить (триггеры)
 
-Tone: эмпатично к обеим сторонам. Анти-поверхностность: без "вы должны друг друга понять".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: эмпатично к обеим сторонам. Анти-поверхностность: без "вы должны друг друга понять".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">63</div><div><div class="prompt-title">Трудоустройство / собеседование</div><div class="prompt-use">Когда: ищешь работу / проект</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: рекрутер с 10-летним опытом найма в топ-компании.
+    <div class="prompt-head"><div class="prompt-num">63</div><div><div class="prompt-title">Трудоустройство / собеседование</div><div class="prompt-use">Когда: ищешь работу / проект</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: рекрутер с 10-летним опытом найма в топ-компании.
 
 Action: подготовь меня к собеседованию на позицию [должность].
 
@@ -1998,12 +2081,15 @@ Expectation:
 - Что говорить нельзя
 - Как держать себя если вопрос в тупик
 
-Tone: практик. Анти-поверхностность: "я коммуникабельный и ответственный" — хуже чем ничего.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик. Анти-поверхностность: "я коммуникабельный и ответственный" — хуже чем ничего.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">64</div><div><div class="prompt-title">Составление резюме</div><div class="prompt-use">Когда: нужно обновить CV</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: HR-директор с опытом просмотра 10000+ резюме.
+    <div class="prompt-head"><div class="prompt-num">64</div><div><div class="prompt-title">Составление резюме</div><div class="prompt-use">Когда: нужно обновить CV</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: HR-директор с опытом просмотра 10000+ резюме.
 
 Action: составь сильное резюме на позицию [роль].
 
@@ -2026,12 +2112,15 @@ Expectation — структура:
 - Как адаптировать под конкретную вакансию
 - Что точно не писать
 
-Tone: конкретно, с цифрами. Анти-поверхностность: без "ответственный командный игрок".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: конкретно, с цифрами. Анти-поверхностность: без "ответственный командный игрок".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">65</div><div><div class="prompt-title">Переговоры с клиентом / работодателем</div><div class="prompt-use">Когда: торгуешься за условия</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: переговорщик по методике Криса Восса (ex-FBI), специализация — win-win решения.
+    <div class="prompt-head"><div class="prompt-num">65</div><div><div class="prompt-title">Переговоры с клиентом / работодателем</div><div class="prompt-use">Когда: торгуешься за условия</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: переговорщик по методике Криса Восса (ex-FBI), специализация — win-win решения.
 
 Action: подготовь меня к переговорам [с кем и о чём].
 
@@ -2054,7 +2143,7 @@ Expectation — 5 уровней:
 - Техника "зеркало" и "лейблы"
 - Когда закрыть сделку, когда отойти
 
-Tone: спокойно, уверенно. Анти-поверхностность: "предложите им больше" — проиграть.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: спокойно, уверенно. Анти-поверхностность: "предложите им больше" — проиграть.</div></div>
   </div>
 </div>
 
@@ -2062,12 +2151,15 @@ Tone: спокойно, уверенно. Анти-поверхностност�
 <div class="category" id="cat-creative">
   <div class="cat-header">
     <div class="cat-header-num">06</div>
-    <div><div class="cat-header-title">🎨 Креатив</div><div class="cat-header-sub">Идеи, концепции, визуал, storytelling</div></div>
+    <div><div class="cat-header-title">🎨 Креатив</div><div class="cat-header-sub">Идеи, концепции, визуал, storytelling</pre>
+    </div>
   </div>
 
   <div class="prompt">
     <div class="prompt-head"><div class="prompt-num">66</div><div><div class="prompt-title">Генерация идей — 20 концептов</div><div class="prompt-use">Когда: нужно много идей на тему</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: креативный директор-генератор идей, методология Edward de Bono.
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: креативный директор-генератор идей, методология Edward de Bono.
 
 Action: сгенерируй 20 идей для [проект / задача].
 
@@ -2090,12 +2182,15 @@ Expectation — 20 идей по 5 стратегиям × 4 каждая:
 
 Плюс: топ-3 которые стоит попробовать и почему.
 
-Tone: дикие идеи приветствуются. Анти-поверхностность: "улучшить качество" — не идея.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: дикие идеи приветствуются. Анти-поверхностность: "улучшить качество" — не идея.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">67</div><div><div class="prompt-title">Brainstorm с ограничениями</div><div class="prompt-use">Когда: нужны идеи в рамках</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: фасилитатор brainstorming по SCAMPER.
+    <div class="prompt-head"><div class="prompt-num">67</div><div><div class="prompt-title">Brainstorm с ограничениями</div><div class="prompt-use">Когда: нужны идеи в рамках</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: фасилитатор brainstorming по SCAMPER.
 
 Action: проведи brainstorm по методологии SCAMPER для [продукт / ситуация].
 
@@ -2119,12 +2214,15 @@ Expectation — 7 срезов:
 - 3 идеи которые можно реализовать за неделю
 - План теста для каждой
 
-Tone: смело. Анти-поверхностность: идея "сделать лучше" — не идея.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: смело. Анти-поверхностность: идея "сделать лучше" — не идея.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">68</div><div><div class="prompt-title">Концепт визуала / постера</div><div class="prompt-use">Когда: делаешь дизайн</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: арт-директор с опытом в рекламе и брендинге.
+    <div class="prompt-head"><div class="prompt-num">68</div><div><div class="prompt-title">Концепт визуала / постера</div><div class="prompt-use">Когда: делаешь дизайн</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: арт-директор с опытом в рекламе и брендинге.
 
 Action: придумай 3 концепта визуала для [проект / рекламная кампания].
 
@@ -2149,12 +2247,15 @@ Expectation — 3 концепта:
 
 Плюс: один концепт рекомендуешь и почему.
 
-Tone: визуальные образы, не абстракции. Анти-поверхностность: без "стильно и современно".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: визуальные образы, не абстракции. Анти-поверхностность: без "стильно и современно".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">69</div><div><div class="prompt-title">Промпт для Midjourney / Nano Banana</div><div class="prompt-use">Когда: генерируешь изображение</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: промпт-инженер по генеративным изображениям (Midjourney, DALL-E, Nano Banana).
+    <div class="prompt-head"><div class="prompt-num">69</div><div><div class="prompt-title">Промпт для Midjourney / Nano Banana</div><div class="prompt-use">Когда: генерируешь изображение</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: промпт-инженер по генеративным изображениям (Midjourney, DALL-E, Nano Banana).
 
 Action: составь 5 вариантов промпта для изображения: [описание].
 
@@ -2182,12 +2283,15 @@ Expectation — структура каждого промпта из 7 элем
 
 Плюс: перевод на английский для Midjourney + параметры (--ar 16:9 --v 6).
 
-Tone: детально. Анти-поверхностность: без "beautiful, high quality".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: детально. Анти-поверхностность: без "beautiful, high quality".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">70</div><div><div class="prompt-title">Сценарий презентации</div><div class="prompt-use">Когда: выступаешь с докладом</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: сторителлер-презентатор, готовил топ-спикеров TED.
+    <div class="prompt-head"><div class="prompt-num">70</div><div><div class="prompt-title">Сценарий презентации</div><div class="prompt-use">Когда: выступаешь с докладом</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: сторителлер-презентатор, готовил топ-спикеров TED.
 
 Action: напиши сценарий презентации на [тема] длительностью [минут].
 
@@ -2214,12 +2318,15 @@ Expectation — структура:
 - Что репетировать
 - Как работать с вопросами
 
-Tone: живой, с историями. Анти-поверхностность: без "уважаемые коллеги, сегодня я расскажу".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: живой, с историями. Анти-поверхностность: без "уважаемые коллеги, сегодня я расскажу".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">71</div><div><div class="prompt-title">Логотип — концепт</div><div class="prompt-use">Когда: нужен логотип</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: брендинг-дизайнер с 15-летним опытом.
+    <div class="prompt-head"><div class="prompt-num">71</div><div><div class="prompt-title">Логотип — концепт</div><div class="prompt-use">Когда: нужен логотип</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: брендинг-дизайнер с 15-летним опытом.
 
 Action: разработай концепт логотипа для [бренд].
 
@@ -2248,12 +2355,15 @@ Expectation — 5 направлений:
 - 3 референса-вдохновения
 - Что делать НЕ надо
 
-Tone: визуально, с конкретикой. Анти-поверхностность: без "современный и минималистичный".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: визуально, с конкретикой. Анти-поверхностность: без "современный и минималистичный".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">72</div><div><div class="prompt-title">Написание книги / гайда</div><div class="prompt-use">Когда: хочешь упаковать опыт</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: литературный редактор нон-фикшн, редактировал бестселлеры.
+    <div class="prompt-head"><div class="prompt-num">72</div><div><div class="prompt-title">Написание книги / гайда</div><div class="prompt-use">Когда: хочешь упаковать опыт</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: литературный редактор нон-фикшн, редактировал бестселлеры.
 
 Action: составь структуру моей книги / гайда на тему [тема].
 
@@ -2278,12 +2388,15 @@ Expectation — структура:
 - Как издать (самиздат / издательство / PDF)
 - Лид-магнит из первой главы
 
-Tone: автор-практик, не академик. Анти-поверхностность: без лирических отступлений.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: автор-практик, не академик. Анти-поверхностность: без лирических отступлений.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">73</div><div><div class="prompt-title">Подкаст — план первого сезона</div><div class="prompt-use">Когда: запускаешь подкаст</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: продюсер подкастов, запускал шоу в топ-10 Apple Podcasts.
+    <div class="prompt-head"><div class="prompt-num">73</div><div><div class="prompt-title">Подкаст — план первого сезона</div><div class="prompt-use">Когда: запускаешь подкаст</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: продюсер подкастов, запускал шоу в топ-10 Apple Podcasts.
 
 Action: спроектируй сезон 1 моего подкаста (10 выпусков).
 
@@ -2306,12 +2419,15 @@ Expectation:
 - Как продвигать (первый месяц)
 - Метрики успеха
 
-Tone: конкретно, без "главное — страсть к делу". Анти-поверхностность: без "найдите свой голос".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: конкретно, без "главное — страсть к делу". Анти-поверхностность: без "найдите свой голос".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">74</div><div><div class="prompt-title">Мастермайнд — программа встречи</div><div class="prompt-use">Когда: ведёшь группу предпринимателей</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: фасилитатор мастермайндов с 5+ лет опыта.
+    <div class="prompt-head"><div class="prompt-num">74</div><div><div class="prompt-title">Мастермайнд — программа встречи</div><div class="prompt-use">Когда: ведёшь группу предпринимателей</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: фасилитатор мастермайндов с 5+ лет опыта.
 
 Action: спроектируй программу 2-часовой встречи мастермайнд-группы.
 
@@ -2337,12 +2453,15 @@ Expectation — программа:
 - Как работать с конфликтами
 - Метрика качества встречи
 
-Tone: фасилитатор, не гуру. Анти-поверхностность: без "поделитесь тем, что на сердце".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: фасилитатор, не гуру. Анти-поверхностность: без "поделитесь тем, что на сердце".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">75</div><div><div class="prompt-title">Креативный проект — продюсирование</div><div class="prompt-use">Когда: запускаешь фильм / выставку / ивент</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: продюсер креативных проектов (фильмы, выставки, ивенты).
+    <div class="prompt-head"><div class="prompt-num">75</div><div><div class="prompt-title">Креативный проект — продюсирование</div><div class="prompt-use">Когда: запускаешь фильм / выставку / ивент</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: продюсер креативных проектов (фильмы, выставки, ивенты).
 
 Action: составь план запуска [проект].
 
@@ -2365,7 +2484,7 @@ Expectation — 5 блоков:
 - Критерий успеха проекта (в цифрах)
 - Что делать если половина бюджета
 
-Tone: продюсер, не мечтатель. Анти-поверхностность: "когда люди увидят — сразу полюбят" — не план.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: продюсер, не мечтатель. Анти-поверхностность: "когда люди увидят — сразу полюбят" — не план.</div></div>
   </div>
 </div>
 
@@ -2373,12 +2492,15 @@ Tone: продюсер, не мечтатель. Анти-поверхностн
 <div class="category" id="cat-health">
   <div class="cat-header">
     <div class="cat-header-num">07</div>
-    <div><div class="cat-header-title">💪 Здоровье и отношения</div><div class="cat-header-sub">Спорт, питание, сон, семья, общение</div></div>
+    <div><div class="cat-header-title">💪 Здоровье и отношения</div><div class="cat-header-sub">Спорт, питание, сон, семья, общение</pre>
+    </div>
   </div>
 
   <div class="prompt">
     <div class="prompt-head"><div class="prompt-num">76</div><div><div class="prompt-title">Персональная программа тренировок</div><div class="prompt-use">Когда: нужен фитнес-план</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: сертифицированный тренер по функциональному фитнесу с опытом 10+ лет.
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: сертифицированный тренер по функциональному фитнесу с опытом 10+ лет.
 
 Action: составь персональную программу тренировок на 8 недель.
 
@@ -2406,12 +2528,15 @@ Expectation:
 - Что делать если пропустил день
 - Как прогрессировать после 8 недель
 
-Tone: тренер-практик. Анти-поверхностность: без "слушайте своё тело".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: тренер-практик. Анти-поверхностность: без "слушайте своё тело".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">77</div><div><div class="prompt-title">План питания под цель</div><div class="prompt-use">Когда: нужно структурировать питание</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: нутрициолог с медицинским образованием, без диетических крайностей.
+    <div class="prompt-head"><div class="prompt-num">77</div><div><div class="prompt-title">План питания под цель</div><div class="prompt-use">Когда: нужно структурировать питание</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: нутрициолог с медицинским образованием, без диетических крайностей.
 
 Action: составь план питания на неделю под мою цель.
 
@@ -2438,12 +2563,15 @@ Expectation:
 - Читмилы — когда можно и как
 - Самые частые ошибки
 
-Tone: практик без фанатизма. Анти-поверхностность: без "пейте больше воды".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик без фанатизма. Анти-поверхностность: без "пейте больше воды".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">78</div><div><div class="prompt-title">Восстановление сна</div><div class="prompt-use">Когда: плохо спишь</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: сомнолог с сертификацией, помог 500+ людям восстановить сон.
+    <div class="prompt-head"><div class="prompt-num">78</div><div><div class="prompt-title">Восстановление сна</div><div class="prompt-use">Когда: плохо спишь</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: сомнолог с сертификацией, помог 500+ людям восстановить сон.
 
 Action: составь план восстановления сна.
 
@@ -2468,12 +2596,15 @@ Expectation:
 - Что не работает вопреки хайпу (мелатонин не всегда)
 - Гаджеты — нужны ли
 
-Tone: эксперт, без alarmism. Анти-поверхностность: без "ложитесь раньше".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: эксперт, без alarmism. Анти-поверхностность: без "ложитесь раньше".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">79</div><div><div class="prompt-title">Работа со стрессом</div><div class="prompt-use">Когда: много тревоги</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: психолог с CBT-подходом, специализируешься на управлении стрессом.
+    <div class="prompt-head"><div class="prompt-num">79</div><div><div class="prompt-title">Работа со стрессом</div><div class="prompt-use">Когда: много тревоги</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: психолог с CBT-подходом, специализируешься на управлении стрессом.
 
 Action: дай конкретный план работы с моим стрессом.
 
@@ -2500,12 +2631,15 @@ Expectation — 5 уровней:
 - 3 красных флага — к врачу
 - Что не поможет вопреки обещаниям
 
-Tone: практик с эмпатией. Анти-поверхностность: без "будьте в моменте".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик с эмпатией. Анти-поверхностность: без "будьте в моменте".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">80</div><div><div class="prompt-title">Отношения с партнёром — диагностика</div><div class="prompt-use">Когда: в отношениях напряжение</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: семейный терапевт, работаешь методом Готтмана.
+    <div class="prompt-head"><div class="prompt-num">80</div><div><div class="prompt-title">Отношения с партнёром — диагностика</div><div class="prompt-use">Когда: в отношениях напряжение</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: семейный терапевт, работаешь методом Готтмана.
 
 Action: проведи диагностику моих отношений и дай план работы.
 
@@ -2528,12 +2662,15 @@ Expectation — 5 уровней по Готтману:
 - Формат "отношенческого разговора" (1 раз в неделю)
 - Красные флаги — к терапевту
 
-Tone: без обвинений в чью-то сторону. Анти-поверхностность: без "любовь — это работа".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: без обвинений в чью-то сторону. Анти-поверхностность: без "любовь — это работа".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">81</div><div><div class="prompt-title">Воспитание детей — сложная ситуация</div><div class="prompt-use">Когда: не знаешь как реагировать</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: детский психолог с 15-летним опытом, подход — осознанное родительство.
+    <div class="prompt-head"><div class="prompt-num">81</div><div><div class="prompt-title">Воспитание детей — сложная ситуация</div><div class="prompt-use">Когда: не знаешь как реагировать</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: детский психолог с 15-летним опытом, подход — осознанное родительство.
 
 Action: разбери мою ситуацию с ребёнком и дай рекомендации.
 
@@ -2555,12 +2692,15 @@ Expectation — 5 уровней:
 - 3 фразы которые работают
 - Красные флаги — к специалисту
 
-Tone: эмпатия к родителю и ребёнку. Анти-поверхностность: без "просто поговорите по душам".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: эмпатия к родителю и ребёнку. Анти-поверхностность: без "просто поговорите по душам".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">82</div><div><div class="prompt-title">Деловая коммуникация — сложное письмо</div><div class="prompt-use">Когда: надо написать клиенту / партнёру</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: бизнес-коммуникатор, специализируешься на сложных переговорных письмах.
+    <div class="prompt-head"><div class="prompt-num">82</div><div><div class="prompt-title">Деловая коммуникация — сложное письмо</div><div class="prompt-use">Когда: надо написать клиенту / партнёру</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: бизнес-коммуникатор, специализируешься на сложных переговорных письмах.
 
 Action: помоги составить сложное деловое письмо [кому о чём].
 
@@ -2587,12 +2727,15 @@ Expectation — 3 варианта письма:
 - Как реагировать на возможный ответ
 - Точка "отказа" (когда закрывать тему)
 
-Tone: профессионально, без пассивной агрессии. Анти-поверхностность: без "надеюсь на взаимопонимание".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: профессионально, без пассивной агрессии. Анти-поверхностность: без "надеюсь на взаимопонимание".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">83</div><div><div class="prompt-title">Планирование путешествия</div><div class="prompt-use">Когда: собираешься в поездку</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: травел-планер, организовал 100+ поездок в 30+ стран.
+    <div class="prompt-head"><div class="prompt-num">83</div><div><div class="prompt-title">Планирование путешествия</div><div class="prompt-use">Когда: собираешься в поездку</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: травел-планер, организовал 100+ поездок в 30+ стран.
 
 Action: составь план путешествия в [место] на [дней].
 
@@ -2615,12 +2758,15 @@ Expectation — план:
 - 3 типичные ошибки туристов
 - Как сэкономить без потери качества
 
-Tone: практик, без "прочувствуйте атмосферу". Анти-поверхностность: не общие фразы типа "попробуйте местную кухню".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик, без "прочувствуйте атмосферу". Анти-поверхностность: не общие фразы типа "попробуйте местную кухню".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">84</div><div><div class="prompt-title">Дружба — как поддерживать отношения</div><div class="prompt-use">Когда: всё крутится вокруг работы</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: психолог, специализируешься на социальных связях и их влиянии на жизнь.
+    <div class="prompt-head"><div class="prompt-num">84</div><div><div class="prompt-title">Дружба — как поддерживать отношения</div><div class="prompt-use">Когда: всё крутится вокруг работы</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: психолог, специализируешься на социальных связях и их влиянии на жизнь.
 
 Action: помоги построить систему поддержания дружеских отношений.
 
@@ -2641,12 +2787,15 @@ Expectation — 5 уровней:
 - Что НЕ делать (обязаловку по графику)
 - Как говорить "нет" чтобы не испортить отношения
 
-Tone: практично и человечно. Анти-поверхностность: без "цените близких".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практично и человечно. Анти-поверхностность: без "цените близких".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">85</div><div><div class="prompt-title">Досуг — хобби и восстановление</div><div class="prompt-use">Когда: не умеешь отдыхать</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: коуч по балансу работа-жизнь.
+    <div class="prompt-head"><div class="prompt-num">85</div><div><div class="prompt-title">Досуг — хобби и восстановление</div><div class="prompt-use">Когда: не умеешь отдыхать</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: коуч по балансу работа-жизнь.
 
 Action: помоги найти хобби / формат досуга, подходящий именно мне.
 
@@ -2672,7 +2821,7 @@ Expectation:
 - Когда пересматривать выбор
 - Как интегрировать в график без вины
 
-Tone: без пафоса про "найти себя". Анти-поверхностность: "попробуй йогу" — не рекомендация.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: без пафоса про "найти себя". Анти-поверхностность: "попробуй йогу" — не рекомендация.</div></div>
   </div>
 </div>
 
@@ -2680,12 +2829,15 @@ Tone: без пафоса про "найти себя". Анти-поверхн�
 <div class="category" id="cat-finance">
   <div class="cat-header">
     <div class="cat-header-num">08</div>
-    <div><div class="cat-header-title">💰 Финансы</div><div class="cat-header-sub">Бюджет, инвестиции, подушка, цели</div></div>
+    <div><div class="cat-header-title">💰 Финансы</div><div class="cat-header-sub">Бюджет, инвестиции, подушка, цели</pre>
+    </div>
   </div>
 
   <div class="prompt">
     <div class="prompt-head"><div class="prompt-num">86</div><div><div class="prompt-title">Личный финансовый план</div><div class="prompt-use">Когда: хочешь систему, а не хаос</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: финансовый советник с 10-летним опытом, без проталкивания продуктов.
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: финансовый советник с 10-летним опытом, без проталкивания продуктов.
 
 Action: составь мой финансовый план.
 
@@ -2713,12 +2865,15 @@ Expectation — 5 блоков:
 - 3 типичные ошибки на моём этапе
 - Точка, где понадобится советник
 
-Tone: честный советник. Анти-поверхностность: без "живите по средствам".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: честный советник. Анти-поверхностность: без "живите по средствам".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">87</div><div><div class="prompt-title">Аудит расходов — где утекают деньги</div><div class="prompt-use">Когда: не понятно куда уходит зарплата</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: специалист по личному бюджетированию, работал с 200+ семьями.
+    <div class="prompt-head"><div class="prompt-num">87</div><div><div class="prompt-title">Аудит расходов — где утекают деньги</div><div class="prompt-use">Когда: не понятно куда уходит зарплата</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: специалист по личному бюджетированию, работал с 200+ семьями.
 
 Action: сделай аудит моих расходов и найди точки утечки.
 
@@ -2741,12 +2896,15 @@ Expectation — 5 уровней:
 - Приложение / система для учёта
 - Правила подписок (аудит раз в квартал)
 
-Tone: без осуждения. Анти-поверхностность: "кофе по утрам" — не главная утечка.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: без осуждения. Анти-поверхностность: "кофе по утрам" — не главная утечка.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">88</div><div><div class="prompt-title">Подушка безопасности — как собрать</div><div class="prompt-use">Когда: нет запаса на чёрный день</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: финансовый консультант, специализируешься на антикризисном планировании.
+    <div class="prompt-head"><div class="prompt-num">88</div><div><div class="prompt-title">Подушка безопасности — как собрать</div><div class="prompt-use">Когда: нет запаса на чёрный день</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: финансовый консультант, специализируешься на антикризисном планировании.
 
 Action: составь план создания финансовой подушки.
 
@@ -2768,12 +2926,15 @@ Expectation:
 - Что считается форс-мажором (когда можно тратить)
 - Правило пополнения после использования
 
-Tone: практик. Анти-поверхностность: без "инвестируйте в образование".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик. Анти-поверхностность: без "инвестируйте в образование".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">89</div><div><div class="prompt-title">Инвестиционный план — первые шаги</div><div class="prompt-use">Когда: есть подушка, думаешь об инвестициях</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: инвестиционный советник, подход в стиле Боглхэдов (пассивное индексное).
+    <div class="prompt-head"><div class="prompt-num">89</div><div><div class="prompt-title">Инвестиционный план — первые шаги</div><div class="prompt-use">Когда: есть подушка, думаешь об инвестициях</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: инвестиционный советник, подход в стиле Боглхэдов (пассивное индексное).
 
 Action: построй мой первый инвестиционный план.
 
@@ -2795,12 +2956,15 @@ Expectation:
 - Что не покупать (структурные продукты, обещания 30% доходности)
 - Когда пересматривать стратегию
 
-Tone: без продвижения конкретных продуктов. Анти-поверхностность: "купите Apple" — не стратегия.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: без продвижения конкретных продуктов. Анти-поверхностность: "купите Apple" — не стратегия.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">90</div><div><div class="prompt-title">Закрытие долгов — план</div><div class="prompt-use">Когда: долги душат</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: специалист по реструктуризации долгов.
+    <div class="prompt-head"><div class="prompt-num">90</div><div><div class="prompt-title">Закрытие долгов — план</div><div class="prompt-use">Когда: долги душат</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: специалист по реструктуризации долгов.
 
 Action: составь план закрытия моих долгов.
 
@@ -2826,12 +2990,15 @@ Expectation — 5 шагов:
 - Что не делать (новые кредиты для погашения старых)
 - Красные флаги — к финансовому консультанту
 
-Tone: без осуждения. Анти-поверхностность: "затяните пояса" не план.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: без осуждения. Анти-поверхностность: "затяните пояса" не план.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">91</div><div><div class="prompt-title">Финансовый отчёт для бизнеса</div><div class="prompt-use">Когда: не понимаешь прибыль бизнеса</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: финансовый директор с опытом в SMB, специализация — просто о цифрах.
+    <div class="prompt-head"><div class="prompt-num">91</div><div><div class="prompt-title">Финансовый отчёт для бизнеса</div><div class="prompt-use">Когда: не понимаешь прибыль бизнеса</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: финансовый директор с опытом в SMB, специализация — просто о цифрах.
 
 Action: построй систему ежемесячного финансового отчёта для моего бизнеса.
 
@@ -2856,12 +3023,15 @@ Expectation:
 - Примеры "зон роста" которые находятся через аудит
 - Когда переходить на бухгалтера / финдиректора
 
-Tone: без финансовой зауми. Анти-поверхностность: просто и применимо.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: без финансовой зауми. Анти-поверхностность: просто и применимо.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">92</div><div><div class="prompt-title">Калькулятор ROI — окупится или нет</div><div class="prompt-use">Когда: думаешь вкладываться в обучение / рекламу</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: инвестиционный аналитик, считаешь ROI для бизнеса и личных решений.
+    <div class="prompt-head"><div class="prompt-num">92</div><div><div class="prompt-title">Калькулятор ROI — окупится или нет</div><div class="prompt-use">Когда: думаешь вкладываться в обучение / рекламу</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: инвестиционный аналитик, считаешь ROI для бизнеса и личных решений.
 
 Action: помоги посчитать ROI моего решения: [вложение во что].
 
@@ -2886,12 +3056,15 @@ Expectation — расчёт:
 - 3 признака что вложение стоит того
 - Когда отказаться от инвестиции
 
-Tone: аналитик без эмоций. Анти-поверхностность: "вложись в себя" — не расчёт.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: аналитик без эмоций. Анти-поверхностность: "вложись в себя" — не расчёт.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">93</div><div><div class="prompt-title">Переход к финансовой свободе</div><div class="prompt-use">Когда: цель — FIRE</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: финансовый стратег FIRE-движения (Financial Independence Retire Early).
+    <div class="prompt-head"><div class="prompt-num">93</div><div><div class="prompt-title">Переход к финансовой свободе</div><div class="prompt-use">Когда: цель — FIRE</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: финансовый стратег FIRE-движения (Financial Independence Retire Early).
 
 Action: спроектируй мой путь к финансовой независимости.
 
@@ -2913,12 +3086,15 @@ Expectation:
 - 3 вещи которые могут сорвать план
 - Версии FIRE (Lean / Fat / Barista) — какая моя
 
-Tone: реалистично. Анти-поверхностность: без "просто откладывайте больше".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: реалистично. Анти-поверхностность: без "просто откладывайте больше".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">94</div><div><div class="prompt-title">Налоговая оптимизация (ИП / ООО / самозанятый)</div><div class="prompt-use">Когда: выбираешь форму</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: налоговый консультант с опытом малого бизнеса в РФ.
+    <div class="prompt-head"><div class="prompt-num">94</div><div><div class="prompt-title">Налоговая оптимизация (ИП / ООО / самозанятый)</div><div class="prompt-use">Когда: выбираешь форму</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: налоговый консультант с опытом малого бизнеса в РФ.
 
 Action: помоги выбрать оптимальную налоговую форму для моей деятельности.
 
@@ -2946,12 +3122,15 @@ Expectation — сравнение 4 вариантов:
 - На что обращать внимание (договора / чеки)
 - Когда идти к бухгалтеру
 
-Tone: практик. Анти-поверхностность: "каждый случай индивидуален" — не ответ.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: практик. Анти-поверхностность: "каждый случай индивидуален" — не ответ.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">95</div><div><div class="prompt-title">Рост дохода — где точки роста</div><div class="prompt-use">Когда: застрял в доходе</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: коуч по увеличению дохода для специалистов и предпринимателей.
+    <div class="prompt-head"><div class="prompt-num">95</div><div><div class="prompt-title">Рост дохода — где точки роста</div><div class="prompt-use">Когда: застрял в доходе</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: коуч по увеличению дохода для специалистов и предпринимателей.
 
 Action: помоги найти точки роста моего дохода.
 
@@ -2979,12 +3158,15 @@ Expectation — 5 уровней:
 - Что ограничивает меня сейчас
 - Когда пора менять модель (не перерастаю ли)
 
-Tone: прагматично. Анти-поверхностность: "повышайте скилы" не план.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: прагматично. Анти-поверхностность: "повышайте скилы" не план.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">96</div><div><div class="prompt-title">Защита финансов — страховка, документы</div><div class="prompt-use">Когда: строишь систему безопасности</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: специалист по личной финансовой безопасности.
+    <div class="prompt-head"><div class="prompt-num">96</div><div><div class="prompt-title">Защита финансов — страховка, документы</div><div class="prompt-use">Когда: строишь систему безопасности</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: специалист по личной финансовой безопасности.
 
 Action: построй систему защиты моих финансов.
 
@@ -3007,12 +3189,15 @@ Expectation — 5 блоков:
 - Что точно не нужно (переплачиваем)
 - Чек-лист для ежегодной проверки
 
-Tone: прагматично. Анти-поверхностность: без "страхуйте всё на свете".</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: прагматично. Анти-поверхностность: без "страхуйте всё на свете".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">97</div><div><div class="prompt-title">Разговор с детьми о деньгах</div><div class="prompt-use">Когда: хочешь развить финансовую грамотность у ребёнка</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: психолог + специалист по финансовой грамотности детей.
+    <div class="prompt-head"><div class="prompt-num">97</div><div><div class="prompt-title">Разговор с детьми о деньгах</div><div class="prompt-use">Когда: хочешь развить финансовую грамотность у ребёнка</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: психолог + специалист по финансовой грамотности детей.
 
 Action: составь план финансового воспитания ребёнка.
 
@@ -3038,12 +3223,15 @@ Expectation — план по возрасту:
 - 3 разговора которые запомнятся на всю жизнь
 - Как отвечать на "почему у нас нет как у N"
 
-Tone: без лекций. Анти-поверхностность: "научите ценить деньги" — не инструкция.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: без лекций. Анти-поверхностность: "научите ценить деньги" — не инструкция.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">98</div><div><div class="prompt-title">Анализ финансовых документов</div><div class="prompt-use">Когда: надо разобраться в отчёте / договоре</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: финансовый аналитик + юрист.
+    <div class="prompt-head"><div class="prompt-num">98</div><div><div class="prompt-title">Анализ финансовых документов</div><div class="prompt-use">Когда: надо разобраться в отчёте / договоре</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: финансовый аналитик + юрист.
 
 Action: проанализируй этот документ и выдели ключевое.
 
@@ -3064,12 +3252,15 @@ Expectation — 5 уровней:
 - На что смотреть в первую очередь
 - Риски которые обычно пропускают
 
-Tone: строго аналитически. Анти-поверхностность: "подпишите если доверяете" — не экспертиза.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: строго аналитически. Анти-поверхностность: "подпишите если доверяете" — не экспертиза.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">99</div><div><div class="prompt-title">Составление счёта / договора</div><div class="prompt-use">Когда: работаешь с клиентом</div></div></div>
-    <div class="code-wrap"><div class="code-block">Role: юрист + бухгалтер, специализация — документы для фрилансеров и микробизнеса.
+    <div class="prompt-head"><div class="prompt-num">99</div><div><div class="prompt-title">Составление счёта / договора</div><div class="prompt-use">Когда: работаешь с клиентом</pre>
+    </div></div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: юрист + бухгалтер, специализация — документы для фрилансеров и микробизнеса.
 
 Action: составь шаблон [счёт / договор] для моей услуги.
 
@@ -3093,11 +3284,12 @@ Expectation — готовый шаблон с:
 - 3 типичные ошибки в таких договорах
 - Что можно не писать (типовые ФЗ)
 
-Tone: юридически корректно, но читаемо. Анти-поверхностность: без "в соответствии с законодательством РФ" без конкретики.</div><button class="copy-btn" onclick="copy(this)">КОПИЯ</button></div>
+Tone: юридически корректно, но читаемо. Анти-поверхностность: без "в соответствии с законодательством РФ" без конкретики.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">100</div><div><div class="prompt-title">Годовая финансовая ревизия</div><div class="prompt-use">Когда: конец года или квартала</div></div></div>
+    <div class="prompt-head"><div class="prompt-num">100</div><div><div class="prompt-title">Годовая финансовая ревизия</div><div class="prompt-use">Когда: конец года или квартала</pre>
+    </div></div>
     <div class="code-wrap"><div class="code-block">Role: финансовый коуч + аналитик, проводишь годовые аудиты.
 
 Action: проведи мою годовую финансовую ревизию.
@@ -3127,33 +3319,8 @@ Tone: честно, без оправданий. Анти-поверхностн
 <a href="index.html" class="back-btn">← Вернуться к Базе знаний</a>
 
 </div>
+</div>
 
-<script>
-function copy(btn) {
-  const code = btn.previousElementSibling.innerText;
-  navigator.clipboard.writeText(code).then(() => {
-    const old = btn.innerText;
-    btn.innerText = 'СКОПИРОВАНО';
-    btn.classList.add('copied');
-    setTimeout(() => {
-      btn.innerText = old;
-      btn.classList.remove('copied');
-    }, 1500);
-  });
-}
-
-// Active nav on scroll
-const links = document.querySelectorAll('.nav-link[href^="#"]');
-const cats = Array.from(links).map(l => document.getElementById(l.getAttribute('href').substring(1))).filter(Boolean);
-
-function updateActive() {
-  const scrollY = window.scrollY + 100;
-  let activeIdx = -1;
-  cats.forEach((s, i) => { if (s.offsetTop <= scrollY) activeIdx = i; });
-  links.forEach((l, i) => l.classList.toggle('active', i === activeIdx));
-}
-window.addEventListener('scroll', updateActive);
-updateActive();
-</script>
+<script src="scripts.js"></script>
 </body>
 </html>
