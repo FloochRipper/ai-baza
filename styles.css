@@ -251,7 +251,7 @@ a { color: inherit; text-decoration: none; }
 
 .breadcrumbs {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--muted);
@@ -337,7 +337,7 @@ a { color: inherit; text-decoration: none; }
 }
 .callout .callout-label {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 700;
@@ -399,12 +399,12 @@ a { color: inherit; text-decoration: none; }
 .grid-card .card-name {
   font-family: var(--sans);
   font-weight: 700;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 .grid-card .card-desc {
-  font-size: 9px;
+  font-size: 10px;
   color: var(--muted);
   line-height: 1.35;
   margin-top: 3px;
@@ -422,12 +422,12 @@ a { color: inherit; text-decoration: none; }
 .compare-col {
   padding: 10px 12px;
   border-radius: 4px;
-  font-size: 11px;
+  font-size: 15px;
   line-height: 1.5;
 }
 .compare-col .compare-tag {
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 700;
@@ -464,14 +464,14 @@ a { color: inherit; text-decoration: none; }
 }
 .code-block-head .code-title {
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #aaa;
 }
 .code-block-head .copy-btn {
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 10px;
   color: var(--accent);
   border: 1px solid var(--accent);
   padding: 2px 8px;
@@ -484,7 +484,7 @@ a { color: inherit; text-decoration: none; }
   margin: 0;
   padding: 12px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.55;
   color: #e0e0e0;
   white-space: pre-wrap;
@@ -502,7 +502,7 @@ a { color: inherit; text-decoration: none; }
 }
 .data-table th {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
@@ -529,7 +529,7 @@ a { color: inherit; text-decoration: none; }
   margin-top: 24px;
   border-top: 1px solid var(--line);
   font-family: var(--sans);
-  font-size: 11px;
+  font-size: 14px;
 }
 .pager-prev, .pager-next {
   padding: 10px 12px;
@@ -541,7 +541,7 @@ a { color: inherit; text-decoration: none; }
 .pager-prev:hover, .pager-next:hover { border-color: var(--ink); }
 .pager-label {
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -644,14 +644,14 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 6px;
 }
 .section-card p {
-  font-size: 12px;
+  font-size: 15px;
   color: var(--muted);
   line-height: 1.5;
   margin-bottom: 12px;
 }
 .section-card .card-cta {
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   color: var(--ink);
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -677,7 +677,7 @@ a { color: inherit; text-decoration: none; }
 .sidebar-toc a {
   display: block;
   padding: 4px 0 4px 10px;
-  font-size: 13px;
+  font-size: 15px;
   color: var(--muted);
   border-left: 1px solid var(--line);
   line-height: 1.4;
