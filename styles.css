@@ -362,13 +362,13 @@ a { color: inherit; text-decoration: none; }
 .grid-cards.cols-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-cards.cols-2 { grid-template-columns: repeat(2, 1fr); }
 
-.card {
+.grid-card {
   border: 1px solid var(--ink);
   padding: 10px 8px;
   text-align: center;
   background: #fff;
 }
-.card .card-letter {
+.grid-card .card-letter {
   font-family: var(--sans);
   font-weight: 900;
   font-size: 28px;
@@ -376,14 +376,14 @@ a { color: inherit; text-decoration: none; }
   line-height: 1;
   margin-bottom: 4px;
 }
-.card .card-name {
+.grid-card .card-name {
   font-family: var(--sans);
   font-weight: 700;
   font-size: 9px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
-.card .card-desc {
+.grid-card .card-desc {
   font-size: 9px;
   color: var(--muted);
   line-height: 1.35;
@@ -468,7 +468,7 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.55;
   color: #e0e0e0;
   white-space: pre-wrap;
-  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 /* ============================================================
