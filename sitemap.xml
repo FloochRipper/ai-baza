@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://baza-zaniy.vercel.app/</loc><priority>1.0</priority></url>
-  <url><loc>https://baza-zaniy.vercel.app/block-00/01-intro.html</loc><priority>0.8</priority></url>
-  <url><loc>https://baza-zaniy.vercel.app/block-00/02-ai-llm-neurons.html</loc><priority>0.8</priority></url>
-  <url><loc>https://baza-zaniy.vercel.app/block-00/03-claude-map.html</loc><priority>0.8</priority></url>
-  <url><loc>https://baza-zaniy.vercel.app/block-00/04-chatgpt-vs-claude.html</loc><priority>0.8</priority></url>
-  <url><loc>https://baza-zaniy.vercel.app/block-00/05-prompting-racet.html</loc><priority>0.8</priority></url>
-  <url><loc>https://baza-zaniy.vercel.app/block-00/06-prompt-techniques.html</loc><priority>0.8</priority></url>
-  <url><loc>https://baza-zaniy.vercel.app/block-00/07-glossary.html</loc><priority>0.8</priority></url>
-  <url><loc>https://baza-zaniy.vercel.app/block-00/08-common-mistakes.html</loc><priority>0.8</priority></url>
-  <url><loc>https://baza-zaniy.vercel.app/block-00/09-first-day.html</loc><priority>0.8</priority></url>
-  <url><loc>https://baza-zaniy.vercel.app/block-00/10-where-next.html</loc><priority>0.8</priority></url>
+  <url><loc>https://floochripper.github.io/baza-zaniy/</loc><priority>1.0</priority></url>
+  <url><loc>https://floochripper.github.io/baza-zaniy/block-00/01-intro.html</loc><priority>0.8</priority></url>
+  <url><loc>https://floochripper.github.io/baza-zaniy/block-00/02-ai-llm-neurons.html</loc><priority>0.8</priority></url>
+  <url><loc>https://floochripper.github.io/baza-zaniy/block-00/03-claude-map.html</loc><priority>0.8</priority></url>
+  <url><loc>https://floochripper.github.io/baza-zaniy/block-00/04-chatgpt-vs-claude.html</loc><priority>0.8</priority></url>
+  <url><loc>https://floochripper.github.io/baza-zaniy/block-00/05-prompting-racet.html</loc><priority>0.8</priority></url>
+  <url><loc>https://floochripper.github.io/baza-zaniy/block-00/06-prompt-techniques.html</loc><priority>0.8</priority></url>
+  <url><loc>https://floochripper.github.io/baza-zaniy/block-00/07-glossary.html</loc><priority>0.8</priority></url>
+  <url><loc>https://floochripper.github.io/baza-zaniy/block-00/08-common-mistakes.html</loc><priority>0.8</priority></url>
+  <url><loc>https://floochripper.github.io/baza-zaniy/block-00/09-first-day.html</loc><priority>0.8</priority></url>
+  <url><loc>https://floochripper.github.io/baza-zaniy/block-00/10-where-next.html</loc><priority>0.8</priority></url>
 </urlset>
