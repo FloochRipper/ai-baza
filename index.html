@@ -1,153 +1,64 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI База знаний — Никита Шлык</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI База — практические знания по AI и вайбкодингу</title>
+  <meta name="description" content="База знаний по AI, Claude и вайбкодингу. Для новичков и практиков — от основ до Claude Code и контент-системы.">
+  <meta property="og:title" content="AI База — практические знания по AI">
+  <meta property="og:description" content="База знаний по AI, Claude и вайбкодингу. От основ до Claude Code.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "AI База",
+    "description": "База знаний по AI, Claude и вайбкодингу",
+    "author": {"@type": "Person", "name": "Никита Шлык"}
+  }
+  </script>
 </head>
 <body>
 
-<!-- TOPNAV -->
-<nav class="topnav">
-  <a href="index.html" class="nav-logo" aria-label="AI База - на главную">
-    <span class="logo-dot" aria-hidden="true"></span><span>AI База</span>
-  </a>
-  <div class="nav-links">
-    <a href="block-01.html" class="nav-link" data-page="block-01.html">01 Основы AI</a>
-    <a href="block-02.html" class="nav-link" data-page="block-02.html">02 Claude Code</a>
-    <a href="#glossary" class="nav-link">Словарь</a>
-    <a href="100-prompts-pro.html" class="nav-link">+100 промптов</a>
-    <a href="content-zavod-starter/" class="nav-link">Контент-завод</a>
-  </div>
-  <div class="nav-search" role="search">
-    <span class="search-icon" aria-hidden="true">⌕</span>
-    <input
-      id="searchInput"
-      type="search"
-      placeholder="Поиск по словарю..."
-      aria-label="Поиск по словарю"
-      autocomplete="off"
-    />
-    <button class="clear-btn" type="button" aria-label="Очистить поиск" onclick="clearSearch()">×</button>
-  </div>
-  <button class="burger" type="button" id="burgerBtn" aria-label="Меню" aria-expanded="false" onclick="toggleBurger()">
-    <span></span>
-  </button>
-</nav>
+<header class="site-header">
+  <a href="index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="block-00/01-intro.html">Для новичка</a>
+    <a href="#">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
 
-<!-- MOBILE PANEL -->
-<div class="mobile-overlay" id="mobileOverlay" onclick="toggleBurger()"></div>
-<aside class="mobile-panel" id="mobilePanel" aria-label="Мобильное меню">
-  <div class="mp-section">Блоки</div>
-  <a href="block-01.html">01 - Основы AI</a>
-  <a href="block-02.html">02 - Claude Code</a>
-  <a href="#glossary" onclick="toggleBurger()">Словарь</a>
-  <div class="mp-section">Ресурсы</div>
-  <a href="100-prompts-pro.html">+100 промптов</a>
-  <a href="content-zavod-starter/">Контент-завод</a>
-</aside>
+<section class="hub-hero">
+  <h1>Собери свою<br><span class="accent">AI-систему</span></h1>
+  <p class="lead">Практическая база знаний по AI, Claude и вайбкодингу. Без воды — только то, что реально работает.</p>
+</section>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-badge">Бесплатная база знаний</div>
-  <h1>Всё про AI<br>и <span>Claude</span><br>с нуля</h1>
-  <p class="hero-sub">Без воды. Промпты по R.A.C.E.T., Claude Code и как всё это применять на практике.</p>
+<div class="hub-sections">
 
-  <a href="block-01.html" class="onboarding" aria-label="Начни с блока 01 - Основы AI">
-    <span class="onb-icon" aria-hidden="true">→</span>
-    <span class="onb-text">
-      <strong>Первый раз здесь?</strong> Начни с блока 01 - Основы AI.
-      <small>Покажу куда смотреть, чтобы не утонуть в инструментах</small>
-    </span>
-    <span class="onb-arrow">Поехали</span>
+  <a class="section-card" href="block-00/01-intro.html">
+    <div class="card-tag">Блок 01</div>
+    <h3>Для новичка</h3>
+    <p>AI, нейросети, LLM, ChatGPT vs Claude, промптинг, R.A.C.E.T., словарь. Точка входа без лишнего шума.</p>
+    <span class="card-cta">Читать →</span>
   </a>
 
-  <div class="author">
-    <div class="author-avatar" aria-hidden="true">Н</div>
-    <div class="author-info">
-      <div class="author-name">Никита Шлык</div>
-      <div class="author-bio">Предприниматель 15+ лет. Учусь вайбкодингу сам и пишу сюда всё что узнаю.</div>
-      <div class="author-links">
-        <a href="https://instagram.com/nikitashlyk" target="_blank" rel="noopener">Instagram @nikitashlyk</a>
-        <a href="https://t.me/nikitashlyk" target="_blank" rel="noopener">Telegram @nikitashlyk</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- BLOCKS OVERVIEW -->
-<div class="blocks-grid">
-  <a href="block-01.html" class="block-card">
-    <div class="block-num">01</div>
-    <div class="block-title">Основы AI</div>
-    <div class="block-desc">ChatGPT vs Claude, агенты и проекты, формула R.A.C.E.T. и 100 промптов к ней</div>
-    <div class="block-tags"><span class="tag">Новичкам</span><span class="tag">R.A.C.E.T.</span><span class="tag">100 промптов</span></div>
+  <a class="section-card" href="#" style="opacity:.5; pointer-events:none;">
+    <div class="card-tag">Блок 02 · Скоро</div>
+    <h3>Claude Code</h3>
+    <p>VS Code + Claude Code, первый проект, скиллы, MCP, деплой. Для тех, кто хочет делать сайты руками AI.</p>
+    <span class="card-cta">Скоро →</span>
   </a>
-  <a href="block-02.html" class="block-card">
-    <div class="block-num">02</div>
-    <div class="block-title">Claude Code</div>
-    <div class="block-desc">Установка, команды, структура проекта, скиллы, память между сессиями</div>
-    <div class="block-tags"><span class="tag">VS Code</span><span class="tag">Команды</span><span class="tag">Скиллы</span></div>
+
+  <a class="section-card" href="#" style="opacity:.5; pointer-events:none;">
+    <div class="card-tag">Блок 03 · Скоро</div>
+    <h3>Контент-система</h3>
+    <p>Хуки, сценарии для Reels, контент-план через AI. Для тех, кто ведёт соцсети и хочет ускориться.</p>
+    <span class="card-cta">Скоро →</span>
   </a>
+
 </div>
 
-<!-- CONTENT -->
-<div class="content">
-
-<!-- ═══ ГЛОССАРИЙ ═══ -->
-<div id="glossary" class="block-divider">
-  <div class="block-label">
-    <div class="block-num-label">🔤</div>
-    <div>
-      <div class="block-title-label">Словарь терминов</div>
-      <div class="block-desc-label">Всё что встретится на пути простыми словами</div>
-    </div>
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-header open" onclick="toggle(this)">
-    <span class="section-icon">📖</span>
-    <span class="section-name">Термины</span>
-    <span class="section-chevron">▼</span>
-  </div>
-  <div class="section-body open">
-    <div class="glossary-grid">
-      <div class="gloss-item"><div class="gloss-term">LLM</div><div class="gloss-def">Большая языковая модель. Claude, ChatGPT, Gemini — это LLM</div></div>
-      <div class="gloss-item"><div class="gloss-term">Промпт</div><div class="gloss-def">Ваш запрос к AI. Главный инструмент получения нужного результата</div></div>
-      <div class="gloss-item"><div class="gloss-term">R.A.C.E.T.</div><div class="gloss-def">Формула промпта: Role, Action, Context, Expectation, Tone</div></div>
-      <div class="gloss-item"><div class="gloss-term">Токен</div><div class="gloss-def">Единица обработки текста AI. Ориентир — 1 слово ≈ 1-2 токена</div></div>
-      <div class="gloss-item"><div class="gloss-term">Агент</div><div class="gloss-def">AI со специализацией и автономией. Делает цепочку шагов сам</div></div>
-      <div class="gloss-item"><div class="gloss-term">Скилл</div><div class="gloss-def">Готовая инструкция на конкретную задачу. Вызывается через /команду</div></div>
-      <div class="gloss-item"><div class="gloss-term">Плагин</div><div class="gloss-def">Расширение Claude Code. Ставится один раз, даёт новые возможности</div></div>
-      <div class="gloss-item"><div class="gloss-term">MCP</div><div class="gloss-def">Model Context Protocol — способ подключать к Claude внешние инструменты</div></div>
-      <div class="gloss-item"><div class="gloss-term">CLAUDE.md</div><div class="gloss-def">Файл правил проекта. Claude читает при каждом запуске сессии</div></div>
-      <div class="gloss-item"><div class="gloss-term">Git / Commit</div><div class="gloss-def">Сохранение версии. Как чекпоинт в видеоигре</div></div>
-      <div class="gloss-item"><div class="gloss-term">Push</div><div class="gloss-def">Отправка сохранений в облако (GitHub). Защита от поломки компа</div></div>
-      <div class="gloss-item"><div class="gloss-term">Фронтенд</div><div class="gloss-def">Всё что видит пользователь: кнопки, тексты, картинки</div></div>
-      <div class="gloss-item"><div class="gloss-term">Бэкенд</div><div class="gloss-def">Внутренняя логика: данные, авторизация, обработка</div></div>
-      <div class="gloss-item"><div class="gloss-term">API</div><div class="gloss-def">Способ программ общаться между собой</div></div>
-      <div class="gloss-item"><div class="gloss-term">Деплой</div><div class="gloss-def">Публикация сайта или приложения в интернет</div></div>
-      <div class="gloss-item"><div class="gloss-term">MVP</div><div class="gloss-def">Минимальная рабочая версия продукта. Самокат прежде чем строить машину</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- CTA -->
-<div class="cta-block">
-  <div class="cta-title">Следующий шаг</div>
-  <div class="cta-sub">Подписывайтесь на Telegram — разборы, живые примеры и что я применяю сам</div>
-  <a href="https://t.me/nikitashlyk" class="cta-btn" target="_blank">Telegram</a>
-</div>
-
-<div class="no-results" id="noResults">
-  Ничего не нашлось. Попробуй другой запрос или
-  <a href="#" onclick="event.preventDefault(); clearSearch();" style="color:var(--accent);">сбрось поиск</a>.
-</div>
-
-</div><!-- /content -->
-
-<script src="scripts.js"></script>
 </body>
 </html>
