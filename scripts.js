@@ -18,7 +18,7 @@ function copyCode(btn) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const tocLinks = document.querySelectorAll('.sidebar-toc a');
+  const tocLinks = document.querySelectorAll('.toc a, .sidebar-toc a');
   const headings = document.querySelectorAll('h2[id], h3[id]');
   if (!tocLinks.length || !headings.length) return;
 
