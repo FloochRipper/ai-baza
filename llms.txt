@@ -4,7 +4,7 @@
 
 ## Разделы
 
-- [Для новичка](https://floochripper.github.io/baza-zaniy/block-00/01-intro.html): AI, нейросети, LLM, ChatGPT vs Claude, промптинг, R.A.C.E.T.
+- [Для новичка](https://floochripper.github.io/ai-baza/block-00/01-intro.html): AI, нейросети, LLM, ChatGPT vs Claude, промптинг, R.A.C.E.T.
 - Claude Code (скоро): VS Code, первый проект, скиллы, MCP, деплой
 - Контент-система (скоро): хуки, сценарии для Reels, контент-план
 
