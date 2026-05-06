@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Карта Claude — AI База</title>
+  <title>ChatGPT vs Claude — в чём реальная разница — AI База</title>
   <meta name="description" content="Как устроен Claude: интерфейсы, тарифы, модели и главная фича — Projects.">
-  <meta property="og:title" content="Карта Claude — AI База">
+  <meta property="og:title" content="ChatGPT vs Claude — в чём реальная разница — AI База">
   <meta property="og:description" content="Интерфейсы, тарифы, модели и Projects в Claude.">
   <meta property="og:type" content="article">
   <link rel="stylesheet" href="../styles.css">
@@ -39,13 +39,13 @@
     <nav class="sidebar-nav">
       <a href="01-intro.html"><span class="num">01</span>Зачем этот блок</a>
       <a href="02-ai-llm-neurons.html"><span class="num">02</span>AI, нейросети, LLM</a>
-      <a href="03-claude-map.html" class="active"><span class="num">03</span>Карта Claude</a>
-      <a href="04-chatgpt-vs-claude.html"><span class="num">04</span>ChatGPT vs Claude</a>
+      <a href="03-claude-map.html" class="active"><span class="num">03</span>ChatGPT vs Claude</a>
+      <a href="04-chatgpt-vs-claude.html"><span class="num">04</span>Философия Claude Projects</a>
       <a href="05-prompting-racet.html"><span class="num">05</span>Промптинг и R.A.C.E.T.</a>
       <a href="06-prompt-techniques.html"><span class="num">06</span>Техники прокачки</a>
       <a href="07-glossary.html"><span class="num">07</span>Словарь терминов</a>
       <a href="08-common-mistakes.html"><span class="num">08</span>Типичные ошибки</a>
-      <a href="09-first-day.html"><span class="num">09</span>Первый день</a>
+      <a href="09-first-day.html"><span class="num">09</span>Что сделать в первый день</a>
       <a href="10-where-next.html"><span class="num">10</span>Куда идти дальше</a>
     </nav>
   </aside>
@@ -54,67 +54,43 @@
     <div class="breadcrumbs">
       <a href="../index.html">AI База</a> <span>/</span>
       <a href="01-intro.html">Для новичка</a> <span>/</span>
-      Карта Claude
+      ChatGPT vs Claude
     </div>
 
     <div class="article-head">
-      <h1>Карта <span class="accent">Claude</span></h1>
+      <h1>ChatGPT vs <span class="accent">Claude</span></h1>
       <button class="copy-page-btn" onclick="copyPageUrl()">⧉ Copy link</button>
     </div>
 
-    <p id="interfaces">Claude — продукт компании Anthropic. Существует в нескольких форматах: веб-интерфейс на claude.ai, мобильное приложение, API для разработчиков и Claude Code — инструмент для работы с кодом прямо в терминале.</p>
+    <p>Сейчас есть много разных AI-моделей — американские, китайские и другие. Разберём самые популярные.</p>
 
-    <h2 id="plans">Тарифы: что реально нужно</h2>
-
-    <table class="data-table">
-      <thead>
-        <tr><th>Тариф</th><th>Цена</th><th>Для кого</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>Free</strong></td><td>0$</td><td>Попробовать. Лимиты на количество сообщений.</td></tr>
-        <tr><td><strong>Pro</strong></td><td>$20/мес</td><td>Регулярная работа. Приоритет в пиковое время, больше токенов.</td></tr>
-        <tr><td><strong>Max</strong></td><td>$100/мес</td><td>Интенсивная работа с кодом, большие контексты.</td></tr>
-        <tr><td><strong>Team</strong></td><td>от $25/чел</td><td>Командное использование.</td></tr>
-      </tbody>
-    </table>
-
-    <div class="callout key">
-      <span class="callout-label">⚡ Что выбрать на старте</span>
-      <p>Начни с Free — пойми, нужно ли тебе вообще. Если начнёшь использовать регулярно, переходи на Pro. Max нужен, если упрёшься в лимиты при работе с кодом.</p>
-    </div>
-
-    <h2 id="projects">Главная фича Claude — Projects</h2>
-    <p>Project — это папка с контекстом. Ты один раз загружаешь туда всё про свой проект: кто ты, чем занимаешься, какая аудитория, примеры текста, правила работы. И каждый раз, когда открываешь этот Project, — Claude уже всё знает.</p>
-
-    <div class="compare">
-      <div class="compare-col bad">
-        <span class="compare-tag">Без Projects</span>
-        <div>Каждый новый чат начинаешь с объяснений. «А, мы же делали лендинг для психолога» — и ты снова всё объясняешь с нуля.</div>
-      </div>
-      <div class="compare-col good">
-        <span class="compare-tag">С Projects</span>
-        <div>Зашёл в Project «Мой бренд» — Claude уже знает кто ты, над чем работаете и какие правила. Объяснять не нужно.</div>
-      </div>
-    </div>
-
-    <h2 id="models">Модели Claude</h2>
-    <p>Anthropic регулярно выпускает новые версии. На момент написания актуальны:</p>
-
-    <table class="data-table">
-      <thead>
-        <tr><th>Модель</th><th>Характеристика</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>Claude Sonnet</strong></td><td>Баланс скорости и качества. Рабочая лошадка.</td></tr>
-        <tr><td><strong>Claude Opus</strong></td><td>Самая мощная. Медленнее и дороже.</td></tr>
-        <tr><td><strong>Claude Haiku</strong></td><td>Быстрая и дешёвая. Для простых задач.</td></tr>
-      </tbody>
-    </table>
+    <h2 id="basics">На базовом уровне</h2>
+    <p>ChatGPT и Claude делают примерно одно и то же: пишут текст, анализируют документы, отвечают на вопросы. В большинстве повседневных задач разница почти не ощущается.</p>
+    <p>Но нюансы есть. Claude лучше справляется с длинными текстами и объёмными документами — он хорошо держит контекст на протяжении долгого разговора и не теряет нить. Стиль ответов более живой, меньше воды. В коде Claude тоже силён — не зря его инструмент Claude Code стал популярным среди разработчиков.</p>
+    <p>ChatGPT выигрывает в другом — это экосистема и интеграции. Генерация изображений через DALL-E встроена нативно, голосовой режим реально хорош. Плюс ChatGPT просто дольше на рынке — больше гайдов, больше сообщества.</p>
 
     <div class="callout analogy">
-      <span class="callout-label">Аналогия</span>
-      <p>Sonnet — как обычный автомобиль. Opus — как спорткар: мощнее, но дороже и медленнее разгоняется. Haiku — как скутер: быстро доехать из А в Б.</p>
+      <span class="callout-label">Моя практика</span>
+      <p>Для работы с текстом и кодом я чаще открываю Claude. Для быстрых решений с AI-ассистентами и генерации картинок — ChatGPT. Оба нейросети, разница проявляется на сложных задачах.</p>
     </div>
+
+    <h2 id="comparison">Сравнение</h2>
+    <div class="data-table">
+      <table>
+        <thead><tr><th></th><th>ChatGPT</th><th>Claude</th></tr></thead>
+        <tbody>
+          <tr><td>Разработчик</td><td>OpenAI</td><td>Anthropic</td></tr>
+          <tr><td>Сильная сторона</td><td>Быстрые ответы, маркетплейс агентов, изображения</td><td>Глубокий анализ, длинные тексты, аккуратный код</td></tr>
+          <tr><td>Агенты</td><td>GPT Store — тысячи готовых</td><td>Нет маркетплейса. Свой агент = свой Project</td></tr>
+          <tr><td>Код</td><td>Хорош для быстрых скриптов</td><td>Для больших проектов — Claude Code</td></tr>
+          <tr><td>Образ</td><td>Универсальный помощник</td><td>Вдумчивый эксперт</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="philosophy">Философская разница</h2>
+    <p>Anthropic — компания, которая создала Claude — изначально строилась вокруг безопасности AI. Это чувствуется в ответах: Claude чуть осторожнее на спорных темах. Кому-то это плюс, кому-то минус.</p>
+    <p>На практике полезно использовать оба. ChatGPT — для быстрого мозгового штурма, Claude — когда задача сложная или кода много.</p>
 
     <div class="pager">
       <a class="pager-prev" href="02-ai-llm-neurons.html">
@@ -123,17 +99,16 @@
       </a>
       <a class="pager-next" href="04-chatgpt-vs-claude.html">
         <span class="pager-label">Дальше →</span>
-        <span class="pager-title">ChatGPT vs Claude</span>
+        <span class="pager-title">Философия Claude Projects</span>
       </a>
     </div>
   </main>
 
   <aside class="toc">
     <h4>На этой странице</h4>
-    <a href="#interfaces" class="active">Интерфейсы</a>
-    <a href="#plans">Тарифы</a>
-    <a href="#projects">Projects</a>
-    <a href="#models">Модели</a>
+    <a href="#basics" class="active">На базовом уровне</a>
+    <a href="#comparison">Сравнение</a>
+    <a href="#philosophy">Философская разница</a>
   </aside>
 
 </div>
