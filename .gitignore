@@ -8,3 +8,5 @@ _sources/
 .claude/scheduled_tasks.lock
 .claude/.DS_Store
 skills-lock.json
+.superpowers/
+.vercel
