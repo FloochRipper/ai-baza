@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TITLE — AI База</title>
+  <meta name="description" content="DESCRIPTION">
+  <meta property="og:title" content="TITLE — AI База">
+  <meta property="og:description" content="DESCRIPTION">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://YOUR_DOMAIN/block-00/SLUG.html">
+  <link rel="stylesheet" href="../styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "TITLE",
+    "description": "DESCRIPTION",
+    "author": {"@type": "Person", "name": "Никита Шлык"},
+    "publisher": {"@type": "Organization", "name": "AI База"}
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo">
+    <span class="mark"></span>AI БАЗА
+  </a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html" class="active">Для новичка</a>
+    <a href="#">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Для новичка</div>
+    <nav class="sidebar-nav">
+      <a href="01-intro.html"><span class="num">01</span>Зачем этот блок</a>
+      <a href="02-ai-llm-neurons.html"><span class="num">02</span>AI, нейросети, LLM</a>
+      <a href="03-claude-map.html"><span class="num">03</span>Карта Claude</a>
+      <a href="04-chatgpt-vs-claude.html"><span class="num">04</span>ChatGPT vs Claude</a>
+      <a href="05-prompting-racet.html"><span class="num">05</span>Промптинг и R.A.C.E.T.</a>
+      <a href="06-prompt-techniques.html"><span class="num">06</span>Техники прокачки</a>
+      <a href="07-glossary.html"><span class="num">07</span>Словарь терминов</a>
+      <a href="08-common-mistakes.html"><span class="num">08</span>Типичные ошибки</a>
+      <a href="09-first-day.html"><span class="num">09</span>Первый день</a>
+      <a href="10-where-next.html"><span class="num">10</span>Куда идти дальше</a>
+    </nav>
+  </aside>
+
+  <!-- CENTER ARTICLE -->
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a>
+      <span>/</span>
+      <a href="01-intro.html">Для новичка</a>
+      <span>/</span>
+      PAGE TITLE
+    </div>
+
+    <div class="article-head">
+      <h1>H1 TITLE</h1>
+      <button class="copy-page-btn" onclick="copyPageUrl()">⧉ Copy link</button>
+    </div>
+
+    <!-- CONTENT HERE -->
+
+    <div class="pager">
+      <a class="pager-prev" href="PREV.html">
+        <span class="pager-label">← Раньше</span>
+        <span class="pager-title">PREV TITLE</span>
+      </a>
+      <a class="pager-next" href="NEXT.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">NEXT TITLE</span>
+      </a>
+    </div>
+  </main>
+
+  <!-- RIGHT TOC -->
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#section-1" class="active">Первый раздел</a>
+    <a href="#section-2">Второй раздел</a>
+  </aside>
+
+</div>
+
+<script>
+function copyPageUrl() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    const btn = document.querySelector('.copy-page-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent.trim()).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+
+// Highlight active TOC link on scroll
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  tocLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+
+</body>
+</html>
