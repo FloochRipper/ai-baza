@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Зачем этот блок — AI База</title>
+  <meta name="description" content="Коротко о том, что ты найдёшь в нулевом блоке и зачем он вообще нужен, если ты уже что-то знаешь про AI.">
+  <meta property="og:title" content="Зачем этот блок — AI База">
+  <meta property="og:description" content="Коротко о том, что ты найдёшь в нулевом блоке и зачем он вообще нужен.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Зачем этот блок",
+    "description": "Коротко о том, что ты найдёшь в нулевом блоке.",
+    "author": {"@type": "Person", "name": "Никита Шлык"},
+    "publisher": {"@type": "Organization", "name": "AI База"}
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="01-intro.html" class="active">Для новичка</a>
+    <a href="#">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Для новичка</div>
+    <nav class="sidebar-nav">
+      <a href="01-intro.html" class="active"><span class="num">01</span>Зачем этот блок</a>
+      <a href="02-ai-llm-neurons.html"><span class="num">02</span>AI, нейросети, LLM</a>
+      <a href="03-claude-map.html"><span class="num">03</span>Карта Claude</a>
+      <a href="04-chatgpt-vs-claude.html"><span class="num">04</span>ChatGPT vs Claude</a>
+      <a href="05-prompting-racet.html"><span class="num">05</span>Промптинг и R.A.C.E.T.</a>
+      <a href="06-prompt-techniques.html"><span class="num">06</span>Техники прокачки</a>
+      <a href="07-glossary.html"><span class="num">07</span>Словарь терминов</a>
+      <a href="08-common-mistakes.html"><span class="num">08</span>Типичные ошибки</a>
+      <a href="09-first-day.html"><span class="num">09</span>Первый день</a>
+      <a href="10-where-next.html"><span class="num">10</span>Куда идти дальше</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-intro.html">Для новичка</a> <span>/</span>
+      Зачем этот блок
+    </div>
+
+    <div class="article-head">
+      <h1>Зачем этот блок</h1>
+      <button class="copy-page-btn" onclick="copyPageUrl()">⧉ Copy link</button>
+    </div>
+
+    <p>Этот курс построен исключительно на прикладных необходимых вещах. Я не люблю много размусоливать и занимать твоё время.</p>
+
+    <p id="about">Нулевой блок — для тех, кто начинает с нуля. Если ты уже активный пользователь нейросетей — скорее всего, большую часть этого ты уже знаешь. Но я решил оставить этот блок, потому что всегда есть люди, которым нужна точка входа без лишнего шума.</p>
+
+    <div class="callout key">
+      <span class="callout-label">⚡ Главная идея блока</span>
+      <p>Не нужно знать всё. Нужно понимать архитектуру. А дальше ты учишься ставить задачи AI-агенту, который помогает разбираться, делать и проверять.</p>
+    </div>
+
+    <h2 id="what-inside">Что внутри</h2>
+    <p>Десять коротких страниц. Каждая закрывает один конкретный вопрос:</p>
+    <p>Что такое AI, нейросети и LLM — и почему это не синонимы. Как устроен Claude, какие у него интерфейсы и тарифы. В чём реальная разница между ChatGPT и Claude. Как правильно формулировать задачи — формула R.A.C.E.T. Словарь терминов, которые встретятся в следующих блоках.</p>
+
+    <div class="callout analogy">
+      <span class="callout-label">Аналогия</span>
+      <p>Это как инструкция к новому инструменту перед тем как начать им работать. Можно пропустить — но потом придётся возвращаться.</p>
+    </div>
+
+    <h2 id="who-for">Кому нужен, кому можно пропустить</h2>
+    <p>Нужен, если ты только начинаешь или работал с ChatGPT, но Claude для тебя новый. Можно пропустить, если ты уже понимаешь разницу между LLM и нейросетью, работаешь с Projects в Claude и знаешь формулу R.A.C.E.T.</p>
+
+    <div class="pager">
+      <div class="pager-prev" style="visibility:hidden;"></div>
+      <a class="pager-next" href="02-ai-llm-neurons.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">AI, нейросети, LLM</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#about" class="active">О блоке</a>
+    <a href="#what-inside">Что внутри</a>
+    <a href="#who-for">Кому нужен</a>
+  </aside>
+
+</div>
+
+<script>
+function copyPageUrl() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    const btn = document.querySelector('.copy-page-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>
