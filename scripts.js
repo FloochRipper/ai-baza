@@ -18,17 +18,27 @@ function copyCode(btn) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const tocLinks = document.querySelectorAll('.toc a');
+  const tocLinks = document.querySelectorAll('.sidebar-toc a');
   const headings = document.querySelectorAll('h2[id], h3[id]');
   if (!tocLinks.length || !headings.length) return;
 
-  window.addEventListener('scroll', () => {
-    let current = '';
+  function updateActive() {
+    let current = headings[0].id;
     headings.forEach(h => {
-      if (window.scrollY >= h.offsetTop - 90) current = h.id;
+      if (window.scrollY >= h.offsetTop - 100) current = h.id;
     });
     tocLinks.forEach(a => {
       a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+
+  // Immediate on load + click
+  updateActive();
+  window.addEventListener('scroll', updateActive);
+  tocLinks.forEach(a => {
+    a.addEventListener('click', () => {
+      tocLinks.forEach(l => l.classList.remove('active'));
+      a.classList.add('active');
     });
   });
 });
