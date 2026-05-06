@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Куда идти дальше — AI База</title>
+  <meta name="description" content="Завершение нулевого блока: что изучить дальше — Claude Code или Контент-система.">
+  <meta property="og:title" content="Куда идти дальше — AI База">
+  <meta property="og:description" content="Завершение нулевого блока и следующие шаги.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Куда идти дальше","description":"Завершение нулевого блока и следующие шаги.","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="01-intro.html" class="active">Для новичка</a>
+    <a href="#">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Для новичка</div>
+    <nav class="sidebar-nav">
+      <a href="01-intro.html"><span class="num">01</span>Зачем этот блок</a>
+      <a href="02-ai-llm-neurons.html"><span class="num">02</span>AI, нейросети, LLM</a>
+      <a href="03-claude-map.html"><span class="num">03</span>Карта Claude</a>
+      <a href="04-chatgpt-vs-claude.html"><span class="num">04</span>ChatGPT vs Claude</a>
+      <a href="05-prompting-racet.html"><span class="num">05</span>Промптинг и R.A.C.E.T.</a>
+      <a href="06-prompt-techniques.html"><span class="num">06</span>Техники прокачки</a>
+      <a href="07-glossary.html"><span class="num">07</span>Словарь терминов</a>
+      <a href="08-common-mistakes.html"><span class="num">08</span>Типичные ошибки</a>
+      <a href="09-first-day.html"><span class="num">09</span>Первый день</a>
+      <a href="10-where-next.html" class="active"><span class="num">10</span>Куда идти дальше</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-intro.html">Для новичка</a> <span>/</span>
+      Куда идти дальше
+    </div>
+
+    <div class="article-head">
+      <h1>Куда идти <span class="accent">дальше</span></h1>
+      <button class="copy-page-btn" onclick="copyPageUrl()">⧉ Copy link</button>
+    </div>
+
+    <p id="done">Ты прошёл нулевой блок. Теперь у тебя есть базовая картина: что такое AI, как устроен Claude, как формулировать задачи и что делать с результатами.</p>
+
+    <h2 id="next-blocks">Следующие блоки</h2>
+
+    <table class="data-table">
+      <thead><tr><th>Блок</th><th>Что внутри</th><th>Для кого</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Claude Code</strong></td>
+          <td>VS Code, первый проект, скиллы, MCP, деплой</td>
+          <td>Кто хочет делать сайты и инструменты руками AI</td>
+        </tr>
+        <tr>
+          <td><strong>Контент-система</strong></td>
+          <td>Хуки, сценарии для Reels, контент-план через AI</td>
+          <td>Кто ведёт соцсети и хочет ускорить производство контента</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout key">
+      <span class="callout-label">⚡ Рекомендация</span>
+      <p>Если хочешь делать сайты и инструменты — иди в Claude Code. Если главная задача — контент и аудитория — иди в Контент-систему. Оба блока независимы.</p>
+    </div>
+
+    <h2 id="mindset">Главная мысль</h2>
+    <p>Понимать архитектуру важнее, чем знать каждую команду. AI-инструменты меняются каждые несколько месяцев. Меняться вместе с ними проще, если понимаешь принципы, а не только кнопки.</p>
+
+    <div class="callout analogy">
+      <span class="callout-label">Финальная аналогия</span>
+      <p>Водитель, который понимает как работает машина, справится с любой моделью. Тот, кто запомнил только одну кнопку — потеряется на другом автомобиле.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="09-first-day.html">
+        <span class="pager-label">← Раньше</span>
+        <span class="pager-title">Первый день</span>
+      </a>
+      <div class="pager-next" style="visibility:hidden;"></div>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#done" class="active">Завершение</a>
+    <a href="#next-blocks">Следующие блоки</a>
+    <a href="#mindset">Главная мысль</a>
+  </aside>
+</div>
+
+<script>
+function copyPageUrl() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    const btn = document.querySelector('.copy-page-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>
