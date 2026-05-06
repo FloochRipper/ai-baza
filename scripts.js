@@ -3,7 +3,7 @@ function copyPageUrl() {
     const btn = document.querySelector('.copy-page-btn');
     if (!btn) return;
     const orig = btn.textContent;
-    btn.textContent = '✓ Copied';
+    btn.textContent = '✓ Скопировано';
     setTimeout(() => btn.textContent = orig, 1500);
   });
 }
