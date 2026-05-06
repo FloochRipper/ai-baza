@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Промптинг и R.A.C.E.T. — AI База</title>
+  <meta name="description" content="Формула R.A.C.E.T. для правильных запросов к AI: Role, Action, Context, Expectation, Tone — с шаблоном и примерами.">
+  <meta property="og:title" content="Промптинг и R.A.C.E.T. — AI База">
+  <meta property="og:description" content="Формула R.A.C.E.T. для правильных запросов к AI.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Промптинг и формула R.A.C.E.T.",
+    "description": "Формула R.A.C.E.T. для правильных запросов к AI.",
+    "author": {"@type": "Person", "name": "Никита Шлык"},
+    "publisher": {"@type": "Organization", "name": "AI База"}
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="01-intro.html" class="active">Для новичка</a>
+    <a href="#">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Для новичка</div>
+    <nav class="sidebar-nav">
+      <a href="01-intro.html"><span class="num">01</span>Зачем этот блок</a>
+      <a href="02-ai-llm-neurons.html"><span class="num">02</span>AI, нейросети, LLM</a>
+      <a href="03-claude-map.html"><span class="num">03</span>Карта Claude</a>
+      <a href="04-chatgpt-vs-claude.html"><span class="num">04</span>ChatGPT vs Claude</a>
+      <a href="05-prompting-racet.html" class="active"><span class="num">05</span>Промптинг и R.A.C.E.T.</a>
+      <a href="06-prompt-techniques.html"><span class="num">06</span>Техники прокачки</a>
+      <a href="07-glossary.html"><span class="num">07</span>Словарь терминов</a>
+      <a href="08-common-mistakes.html"><span class="num">08</span>Типичные ошибки</a>
+      <a href="09-first-day.html"><span class="num">09</span>Первый день</a>
+      <a href="10-where-next.html"><span class="num">10</span>Куда идти дальше</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-intro.html">Для новичка</a> <span>/</span>
+      Промптинг и R.A.C.E.T.
+    </div>
+
+    <div class="article-head">
+      <h1>Промптинг и формула <span class="accent">R.A.C.E.T.</span></h1>
+      <button class="copy-page-btn" onclick="copyPageUrl()">⧉ Copy link</button>
+    </div>
+
+    <p id="what">Промпт — это не заклинание. Это текст-команда, которую ты даёшь AI. Тема <span class="marker">заезженная</span>, но её нужно понимать. Чем точнее задача — тем меньше модель угадывает.</p>
+
+    <div class="callout key">
+      <span class="callout-label">⚡ Ключевой факт</span>
+      <p>AI не читает мысли. AI следует буквально. Качество результата = качество твоего запроса.</p>
+    </div>
+
+    <h2 id="formula">5 элементов формулы</h2>
+
+    <div class="grid-cards cols-5">
+      <div class="grid-card">
+        <div class="card-letter">R</div>
+        <div class="card-name">Role</div>
+        <div class="card-desc">Кем выступает AI</div>
+      </div>
+      <div class="grid-card">
+        <div class="card-letter">A</div>
+        <div class="card-name">Action</div>
+        <div class="card-desc">Что сделать</div>
+      </div>
+      <div class="grid-card">
+        <div class="card-letter">C</div>
+        <div class="card-name">Context</div>
+        <div class="card-desc">Ситуация, данные</div>
+      </div>
+      <div class="grid-card">
+        <div class="card-letter">E</div>
+        <div class="card-name">Expectation</div>
+        <div class="card-desc">Каким будет результат</div>
+      </div>
+      <div class="grid-card">
+        <div class="card-letter">T</div>
+        <div class="card-name">Tone</div>
+        <div class="card-desc">Как звучит</div>
+      </div>
+    </div>
+
+    <h2 id="template">Готовый шаблон</h2>
+
+    <div class="code-block">
+      <div class="code-block-head">
+        <span class="code-title">▸ R.A.C.E.T. — базовый шаблон</span>
+        <button class="copy-btn" onclick="copyCode(this)">⧉ Копировать</button>
+      </div>
+      <pre>Role: работай как [роль].
+Action: сделай [конкретное действие].
+Context: мой проект — [контекст], аудитория — [кто].
+Expectation: формат — [формат], с примерами и проверкой.
+Tone: пиши простым языком, без воды, как для новичка.</pre>
+    </div>
+
+    <h2 id="example">Плохо vs хорошо</h2>
+
+    <div class="compare">
+      <div class="compare-col bad">
+        <span class="compare-tag">Плохой промпт</span>
+        <div>Напиши продающий текст о курсе по фотографии.</div>
+      </div>
+      <div class="compare-col good">
+        <span class="compare-tag">По R.A.C.E.T.</span>
+        <div>Role: фотограф-преподаватель с 10-летним опытом. Action: напиши продающий пост для Instagram. Context: новички 25–35 лет, хотят научиться снимать на телефон. Expectation: 3 абзаца, с болью и оффером. Tone: живой, без клише.</div>
+      </div>
+    </div>
+
+    <div class="callout analogy">
+      <span class="callout-label">Аналогия</span>
+      <p>Промпт — как рецепт для повара. Написал «торт» — получишь что попало. Написал «шоколадный торт с вишней, 3 слоя, без орехов» — шанс получить нужное сильно выше.</p>
+    </div>
+
+    <div class="callout warn">
+      <span class="callout-label">⚠ Важно</span>
+      <p>С каждым обновлением LLM-модели становятся умнее. Возможно, в будущем огромные промпты не нужны. Но сейчас — чем конкретнее, тем лучше.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="04-chatgpt-vs-claude.html">
+        <span class="pager-label">← Раньше</span>
+        <span class="pager-title">ChatGPT vs Claude</span>
+      </a>
+      <a class="pager-next" href="06-prompt-techniques.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">Техники прокачки</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#what" class="active">Что такое промпт</a>
+    <a href="#formula">Формула R.A.C.E.T.</a>
+    <a href="#template">Готовый шаблон</a>
+    <a href="#example">Плохо vs хорошо</a>
+  </aside>
+
+</div>
+
+<script>
+function copyPageUrl() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    const btn = document.querySelector('.copy-page-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent.trim()).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>
