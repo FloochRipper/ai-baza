@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Словарь терминов — AI База</title>
+  <meta name="description" content="Все ключевые термины AI и вайбкодинга простыми словами — с аналогиями.">
+  <meta property="og:title" content="Словарь терминов — AI База">
+  <meta property="og:description" content="Ключевые термины AI простыми словами.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Словарь терминов","description":"Ключевые термины AI простыми словами.","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="01-intro.html" class="active">Для новичка</a>
+    <a href="#">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Для новичка</div>
+    <nav class="sidebar-nav">
+      <a href="01-intro.html"><span class="num">01</span>Зачем этот блок</a>
+      <a href="02-ai-llm-neurons.html"><span class="num">02</span>AI, нейросети, LLM</a>
+      <a href="03-claude-map.html"><span class="num">03</span>Карта Claude</a>
+      <a href="04-chatgpt-vs-claude.html"><span class="num">04</span>ChatGPT vs Claude</a>
+      <a href="05-prompting-racet.html"><span class="num">05</span>Промптинг и R.A.C.E.T.</a>
+      <a href="06-prompt-techniques.html"><span class="num">06</span>Техники прокачки</a>
+      <a href="07-glossary.html" class="active"><span class="num">07</span>Словарь терминов</a>
+      <a href="08-common-mistakes.html"><span class="num">08</span>Типичные ошибки</a>
+      <a href="09-first-day.html"><span class="num">09</span>Первый день</a>
+      <a href="10-where-next.html"><span class="num">10</span>Куда идти дальше</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-intro.html">Для новичка</a> <span>/</span>
+      Словарь терминов
+    </div>
+
+    <div class="article-head">
+      <h1>Словарь <span class="accent">терминов</span></h1>
+      <button class="copy-page-btn" onclick="copyPageUrl()">⧉ Copy link</button>
+    </div>
+
+    <p id="intro">Термины, которые встретятся в следующих блоках. Здесь — простыми словами, с аналогиями.</p>
+
+    <h2 id="ai-terms">AI и модели</h2>
+
+    <h3>LLM</h3>
+    <p>Большая языковая модель. Claude, ChatGPT, Gemini — это LLM. Особенно хорошо работает с текстом, смыслом, инструкциями, кодом и объяснениями.</p>
+    <div class="callout analogy"><span class="callout-label">Аналогия</span><p>Как очень начитанный собеседник, который прочёл миллионы книг и может поддержать любую тему.</p></div>
+
+    <h3>Промпт</h3>
+    <p>Текст-команда, которую ты пишешь AI. Главный инструмент получения нужного результата.</p>
+    <div class="callout analogy"><span class="callout-label">Аналогия</span><p>Как рецепт для повара: написал «торт» — получишь что попало. Написал «шоколадный торт с вишней, 3 слоя» — получишь именно это.</p></div>
+
+    <h3>Токен</h3>
+    <p>Единица обработки текста AI. Ориентир — 1 слово ≈ 1–2 токена. За токены платят деньги.</p>
+    <div class="callout analogy"><span class="callout-label">Аналогия</span><p>Как минуты на телефоне: чем дольше говоришь — тем больше тратишь.</p></div>
+
+    <h3>R.A.C.E.T.</h3>
+    <p>Формула промпта: Role, Action, Context, Expectation, Tone.</p>
+
+    <h3>Агент (AI-агент)</h3>
+    <p>AI, который сам выполняет задачи: ищет информацию, пишет код, отвечает на вопросы. Делает цепочку шагов сам.</p>
+    <div class="callout analogy"><span class="callout-label">Аналогия</span><p>Как личный помощник, который работает без перерывов и не забывает задачи.</p></div>
+
+    <h2 id="dev-terms">Разработка и инфраструктура</h2>
+
+    <h3>Скилл</h3>
+    <p>Готовая инструкция на конкретную задачу. Вызывается через /команду внутри Claude Code.</p>
+
+    <h3>MCP</h3>
+    <p>Model Context Protocol — способ подключать к Claude внешние инструменты: браузер, файловую систему, базы данных.</p>
+
+    <h3>CLAUDE.md</h3>
+    <p>Файл правил проекта. Claude читает его при каждом запуске сессии — там лежит контекст, правила и инструкции.</p>
+
+    <h3>Git / Commit</h3>
+    <p>Сохранение версии кода.</p>
+    <div class="callout analogy"><span class="callout-label">Аналогия</span><p>Машина времени для файлов: сохранил 100 версий, можно вернуться к любой.</p></div>
+
+    <h3>Push</h3>
+    <p>Отправка сохранений в облако (GitHub). Защита от поломки компьютера.</p>
+
+    <h3>Деплой</h3>
+    <p>Публикация сайта или приложения в интернет.</p>
+    <div class="callout analogy"><span class="callout-label">Аналогия</span><p>Как открытие магазина: вывеска повешена, двери открыты — заходите.</p></div>
+
+    <h2 id="web-terms">Веб</h2>
+
+    <h3>Вайбкодинг</h3>
+    <p>Ты говоришь AI, что хочешь — он пишет код за тебя. Никакого программирования руками.</p>
+    <div class="callout analogy"><span class="callout-label">Аналогия</span><p>Как заказать еду в ресторане: говоришь официанту что хочешь, а повар готовит.</p></div>
+
+    <h3>Фронтенд</h3>
+    <p>Всё, что видит пользователь: кнопки, тексты, картинки, цвета.</p>
+    <div class="callout analogy"><span class="callout-label">Аналогия</span><p>Витрина магазина — красивая, привлекает покупателей.</p></div>
+
+    <h3>Бэкенд</h3>
+    <p>Скрытая часть сайта: где хранятся данные, проверяются пароли, считаются заказы.</p>
+    <div class="callout analogy"><span class="callout-label">Аналогия</span><p>Кухня ресторана и склад — посетители не видят, но без них ничего не работает.</p></div>
+
+    <h3>API</h3>
+    <p>Способ, которым программы разговаривают друг с другом и передают данные.</p>
+    <div class="callout analogy"><span class="callout-label">Аналогия</span><p>Официант в ресторане: берёт твой заказ, несёт на кухню, приносит блюдо.</p></div>
+
+    <h3>MVP</h3>
+    <p>Минимальная рабочая версия продукта. Сначала самокат, потом машина.</p>
+
+    <h3>Хостинг</h3>
+    <p>Компьютер в интернете, на котором живёт твой сайт 24/7.</p>
+    <div class="callout analogy"><span class="callout-label">Аналогия</span><p>Аренда квартиры для сайта: платишь за место, сайт там «живёт».</p></div>
+
+    <h3>Домен</h3>
+    <p>Имя твоего сайта, которое люди вводят в браузере. Например: mybrand.ru.</p>
+
+    <h3>Парсинг</h3>
+    <p>Робот заходит на сайты и собирает нужную информацию автоматически.</p>
+    <div class="callout analogy"><span class="callout-label">Аналогия</span><p>Помощник, который обходит 50 магазинов и записывает все цены в табличку за тебя.</p></div>
+
+    <h3>Фреймворк</h3>
+    <p>Набор готовых инструментов, чтобы не писать всё с нуля. Next.js, React, Vue — это фреймворки.</p>
+    <div class="callout analogy"><span class="callout-label">Аналогия</span><p>Готовый каркас дома: стены уже стоят, тебе остаётся сделать ремонт и расставить мебель.</p></div>
+
+    <div class="pager">
+      <a class="pager-prev" href="06-prompt-techniques.html">
+        <span class="pager-label">← Раньше</span>
+        <span class="pager-title">Техники прокачки</span>
+      </a>
+      <a class="pager-next" href="08-common-mistakes.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">Типичные ошибки</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro" class="active">Введение</a>
+    <a href="#ai-terms">AI и модели</a>
+    <a href="#dev-terms">Разработка</a>
+    <a href="#web-terms">Веб</a>
+  </aside>
+</div>
+
+<script>
+function copyPageUrl() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    const btn = document.querySelector('.copy-page-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>
