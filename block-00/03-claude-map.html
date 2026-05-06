@@ -3,18 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ChatGPT vs Claude — в чём реальная разница — AI База</title>
-  <meta name="description" content="Как устроен Claude: интерфейсы, тарифы, модели и главная фича — Projects.">
-  <meta property="og:title" content="ChatGPT vs Claude — в чём реальная разница — AI База">
-  <meta property="og:description" content="Интерфейсы, тарифы, модели и Projects в Claude.">
-  <meta property="og:type" content="article">
+  <title>ChatGPT vs Claude — AI База</title>
+  <meta name="description" content="Чем отличается ChatGPT от Claude, в чём философия Projects и почему это меняет подход к работе с AI.">
   <link rel="stylesheet" href="../styles.css?v=5">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Карта Claude",
-    "description": "Как устроен Claude: интерфейсы, тарифы, модели и Projects.",
+    "headline": "ChatGPT vs Claude",
     "author": {"@type": "Person", "name": "Никита Шлык"},
     "publisher": {"@type": "Organization", "name": "AI База"}
   }
@@ -40,14 +36,21 @@
       <a href="01-intro.html"><span class="num">01</span>Зачем этот раздел</a>
       <a href="02-ai-llm-neurons.html"><span class="num">02</span>AI, нейросети, LLM</a>
       <a href="03-claude-map.html" class="active"><span class="num">03</span>ChatGPT vs Claude</a>
-      <a href="04-chatgpt-vs-claude.html"><span class="num">04</span>Философия Claude Projects</a>
-      <a href="05-prompting-racet.html"><span class="num">05</span>Промптинг и R.A.C.E.T.</a>
-      <a href="06-prompt-techniques.html"><span class="num">06</span>Техники прокачки</a>
-      <a href="07-glossary.html"><span class="num">07</span>Словарь терминов</a>
-      <a href="08-common-mistakes.html"><span class="num">08</span>Типичные ошибки</a>
-      <a href="09-first-day.html"><span class="num">09</span>Что сделать в первый день</a>
-      <a href="10-where-next.html"><span class="num">10</span>Куда идти дальше</a>
+      <a href="05-prompting-racet.html"><span class="num">04</span>Промптинг и R.A.C.E.T.</a>
+      <a href="06-prompt-techniques.html"><span class="num">05</span>Техники прокачки</a>
+      <a href="07-glossary.html"><span class="num">06</span>Словарь терминов</a>
+      <a href="08-common-mistakes.html"><span class="num">07</span>Типичные ошибки</a>
+      <a href="09-first-day.html"><span class="num">08</span>Что сделать в первый день</a>
+      <a href="10-where-next.html"><span class="num">09</span>Куда идти дальше</a>
     </nav>
+    <div class="sidebar-toc">
+      <h4>На этой странице</h4>
+      <a href="#basics">На базовом уровне</a>
+      <a href="#comparison">Сравнение</a>
+      <a href="#chatgpt-chats">ChatGPT — это чаты</a>
+      <a href="#claude-projects">Claude — это Projects</a>
+      <a href="#mindshift">Смена мышления</a>
+    </div>
   </aside>
 
   <main class="article">
@@ -57,16 +60,19 @@
       ChatGPT vs Claude
     </div>
 
-    <div class="article-head">
-      <h1>ChatGPT vs <span class="accent">Claude</span></h1>
-    </div>
+    <h1>ChatGPT vs <span class="accent">Claude</span></h1>
 
-    <p>Сейчас есть много разных AI-моделей — американские, китайские и другие. Разберём самые популярные.</p>
+    <p id="basics">Сейчас есть много разных AI-моделей — американские, китайские и другие. Разберём самые популярные и главное — чем они реально отличаются для повседневной работы.</p>
 
     <h2 id="basics">На базовом уровне</h2>
+
     <p>ChatGPT и Claude делают примерно одно и то же: пишут текст, анализируют документы, отвечают на вопросы. В большинстве повседневных задач разница почти не ощущается.</p>
+
     <p>Но нюансы есть. Claude лучше справляется с длинными текстами и объёмными документами — он хорошо держит контекст на протяжении долгого разговора и не теряет нить. Стиль ответов более живой, меньше воды. В коде Claude тоже силён — не зря его инструмент Claude Code стал популярным среди разработчиков.</p>
-    <p>ChatGPT выигрывает в другом — это экосистема и интеграции. Генерация изображений через DALL-E встроена нативно, голосовой режим реально хорош. Плюс ChatGPT просто дольше на рынке — больше гайдов, больше сообщества.</p>
+
+    <p>ChatGPT выигрывает в другом — это экосистема и интеграции. Генерация изображений через DALL-E встроена нативно, голосовой режим реально хорош и звучит естественно. Плюс ChatGPT просто дольше на рынке — больше гайдов, больше сообщества, люди к нему привыкли.</p>
+
+    <p>Есть и философская разница. Anthropic — компания, которая создала Claude — изначально строилась вокруг безопасности AI. Это чувствуется в ответах: Claude чуть осторожнее на спорных темах. Кому-то это плюс, кому-то минус.</p>
 
     <div class="callout analogy">
       <span class="callout-label">Моя практика</span>
@@ -74,60 +80,89 @@
     </div>
 
     <h2 id="comparison">Сравнение</h2>
+
     <div class="data-table">
       <table>
-        <thead><tr><th></th><th>ChatGPT</th><th>Claude</th></tr></thead>
+        <thead>
+          <tr><th></th><th>ChatGPT</th><th>Claude</th></tr>
+        </thead>
         <tbody>
           <tr><td>Разработчик</td><td>OpenAI</td><td>Anthropic</td></tr>
           <tr><td>Сильная сторона</td><td>Быстрые ответы, маркетплейс агентов, изображения</td><td>Глубокий анализ, длинные тексты, аккуратный код</td></tr>
-          <tr><td>Агенты</td><td>GPT Store — тысячи готовых</td><td>Нет маркетплейса. Свой агент = свой Project</td></tr>
+          <tr><td>Маркетплейс</td><td>GPT Store — тысячи готовых агентов</td><td>Нет маркетплейса. Свой агент = свой Project</td></tr>
           <tr><td>Код</td><td>Хорош для быстрых скриптов</td><td>Для больших проектов — Claude Code</td></tr>
           <tr><td>Образ</td><td>Универсальный помощник</td><td>Вдумчивый эксперт</td></tr>
         </tbody>
       </table>
     </div>
 
-    <h2 id="philosophy">Философская разница</h2>
-    <p>Anthropic — компания, которая создала Claude — изначально строилась вокруг безопасности AI. Это чувствуется в ответах: Claude чуть осторожнее на спорных темах. Кому-то это плюс, кому-то минус.</p>
     <p>На практике полезно использовать оба. ChatGPT — для быстрого мозгового штурма, Claude — когда задача сложная или кода много.</p>
+
+    <h2 id="chatgpt-chats">ChatGPT — это чаты</h2>
+
+    <p>Я долго сидел на ChatGPT и мне казалось, что Claude — это тот же чат, только от другой компании. Это не так. У них разная философия работы. Пока её не поймёшь — будешь недоиспользовать Claude как минимум на 80%.</p>
+
+    <p>В ChatGPT у тебя есть обычные чаты и GPTs — настраиваемые помощники под конкретные задачи. Например, можно сделать помощника для сценариев, анализа конкурентов или упаковки оффера. Или выбрать готового из GPT Store — там тысячи вариантов под любые задачи.</p>
+
+    <p>Открыл, задал вопрос, получил ответ. Закрыл — забыл. Память есть, но она общая на весь аккаунт. Контекст своего проекта ты держишь в голове: «а, мы же делали лендинг для психолога» — и каждый новый чат начинаешь с объяснений.</p>
+
+    <div class="callout key">
+      <span class="callout-label">⚡ Ключевой факт</span>
+      <p>Проблема «чужих» GPT-ассистентов: при закрытии диалогового окна он забывает про тебя. Твой контекст всегда нужно объяснять заново.</p>
+    </div>
+
+    <h2 id="claude-projects">Claude — это Projects</h2>
+
+    <p>Любая серьёзная задача в Claude — это отдельный Project со своим контекстом, файлами и инструкциями. Project «Мой бренд», Project «Клиент Иван», Project «Лендинг для психолога». Зашёл в нужный — Claude уже знает кто ты, над чем работаете, какие правила. Объяснять с нуля не нужно.</p>
+
+    <p>Project можно воспринимать как папку, куда ты складываешь контекст: кто ты, чем занимаешься, какая аудитория, какие продукты, какие примеры текста и какие правила работы.</p>
+
+    <div class="data-table">
+      <table>
+        <thead>
+          <tr><th></th><th>ChatGPT</th><th>Claude</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Как мыслить о работе</td><td>Каждый разговор — новый запуск</td><td>Каждая задача — отдельный проект</td></tr>
+          <tr><td>Где хранится контекст</td><td>В твоей голове или в настройках аккаунта</td><td>Внутри Project — для всех чатов этого проекта</td></tr>
+          <tr><td>Файлы и инструкции</td><td>Загружаешь в каждый чат заново</td><td>Один раз в Project — работает везде внутри</td></tr>
+          <tr><td>Переключение между темами</td><td>Вкладки в истории чатов</td><td>Разные Projects в меню слева</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="mindshift">Смена мышления</h2>
+
+    <div class="callout key">
+      <span class="callout-label">Смена мышления</span>
+      <p>Перестаёшь думать «сейчас задам вопрос AI». Начинаешь думать «работаю внутри проекта X — Claude уже в курсе». Это другая модель работы. И с неё вся польза от Claude начинается.</p>
+    </div>
+
+    <p>В Claude Code та же философия, только проект там — это физическая папка у тебя на компьютере. Про это подробнее в следующих разделах.</p>
 
     <div class="pager">
       <a class="pager-prev" href="02-ai-llm-neurons.html">
         <span class="pager-label">← Раньше</span>
         <span class="pager-title">AI, нейросети, LLM</span>
       </a>
-      <a class="pager-next" href="04-chatgpt-vs-claude.html">
+      <a class="pager-next" href="05-prompting-racet.html">
         <span class="pager-label">Дальше →</span>
-        <span class="pager-title">Философия Claude Projects</span>
+        <span class="pager-title">Промптинг и R.A.C.E.T.</span>
       </a>
     </div>
   </main>
-
 
   <aside class="toc">
     <h4>На этой странице</h4>
     <a href="#basics" class="active">На базовом уровне</a>
     <a href="#comparison">Сравнение</a>
-    <a href="#philosophy">Философская разница</a>
+    <a href="#chatgpt-chats">ChatGPT — это чаты</a>
+    <a href="#claude-projects">Claude — это Projects</a>
+    <a href="#mindshift">Смена мышления</a>
   </aside>
+
 </div>
 
-<script>
-function copyPageUrl() {
-  navigator.clipboard.writeText(window.location.href).then(() => {
-    const btn = document.querySelector('.copy-page-btn');
-    const orig = btn.textContent;
-    btn.textContent = '✓ Copied';
-    setTimeout(() => btn.textContent = orig, 1500);
-  });
-}
-const tocLinks = document.querySelectorAll('.toc a');
-const sections = document.querySelectorAll('[id]');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
-  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
-});
-</script>
+<script src="../scripts.js"></script>
 </body>
 </html>
