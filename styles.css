@@ -214,6 +214,22 @@ a { color: inherit; text-decoration: none; }
   padding-left: 9px;
   font-weight: 600;
 }
+.sidebar-nav .nav-soon {
+  display: block;
+  padding: 6px 0 6px 12px;
+  font-size: 13px;
+  color: var(--line);
+  border-left: 1px solid var(--line);
+  cursor: default;
+  line-height: 1.4;
+}
+.sidebar-nav .nav-soon .num {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--line);
+  margin-right: 8px;
+}
+
 .sidebar-nav .num {
   font-family: var(--mono);
   font-size: 10px;

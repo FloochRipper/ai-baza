@@ -56,6 +56,21 @@
     .prompt-title { font-family: var(--sans); font-weight: 700; font-size: 16px; line-height: 1.3; margin-bottom: 4px; }
     .prompt-use { font-size: 13px; color: var(--muted); line-height: 1.4; }
 
+
+    .prompts-back {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 16px 24px 0;
+    }
+    .prompts-back a {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .prompts-back a:hover { color: var(--accent); }
+
     /* reuse site code-block styles */
     .prompt .code-block { margin-top: 4px; }
   </style>
@@ -71,6 +86,9 @@
   </nav>
 </header>
 
+<div class="prompts-back">
+  <a href="block-00/05-prompting-racet.html">← Для новичка</a>
+</div>
 <div class="prompts-hero">
   <h1>100 промптов <span class="accent">PRO</span></h1>
   <p class="lead">По формуле R.A.C.E.T. Разбито по 8 сферам жизни. Бери, подставляй под свою задачу, используй сразу.</p>
@@ -127,7 +145,7 @@ Tone: эксперт уровня top-1%. Анти-поверхностност�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">2</div><div><div class="prompt-title">Проверка идеи бизнеса на жизнеспособность</div><div class="prompt-use">Когда: есть идея, нужно понять стоит ли в неё вкладываться</pre>
+    <div class="prompt-head"><div class="prompt-num">2</div><div><div class="prompt-title">Проверка идеи бизнеса на жизнеспособность</div><div class="prompt-use">Когда: есть идея, нужно понять стоит ли в неё вкладываться
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -155,7 +173,7 @@ Tone: беспощадно честный. Не щади чувства. Ант�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">3</div><div><div class="prompt-title">Продуктовая стратегия — где горячий сегмент</div><div class="prompt-use">Когда: у вас уже есть продукт, но продажи идут неровно</pre>
+    <div class="prompt-head"><div class="prompt-num">3</div><div><div class="prompt-title">Продуктовая стратегия — где горячий сегмент</div><div class="prompt-use">Когда: у вас уже есть продукт, но продажи идут неровно
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -187,7 +205,7 @@ Tone: прагматик. Не "все ЦА хороши" — а конкрет�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">4</div><div><div class="prompt-title">Анализ конкурентов — где их слабые места</div><div class="prompt-use">Когда: нужно отстроиться на рынке</pre>
+    <div class="prompt-head"><div class="prompt-num">4</div><div><div class="prompt-title">Анализ конкурентов — где их слабые места</div><div class="prompt-use">Когда: нужно отстроиться на рынке
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -219,7 +237,7 @@ Tone: аналитик без эмоций. Анти-поверхностнос�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">5</div><div><div class="prompt-title">Оффер под разные сегменты ЦА</div><div class="prompt-use">Когда: один продукт, несколько типов клиентов</pre>
+    <div class="prompt-head"><div class="prompt-num">5</div><div><div class="prompt-title">Оффер под разные сегменты ЦА</div><div class="prompt-use">Когда: один продукт, несколько типов клиентов
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -245,7 +263,7 @@ Tone: для каждого оффера — свой. Для предприни
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">6</div><div><div class="prompt-title">Воронка продаж — от холодного до покупки</div><div class="prompt-use">Когда: лидов много, покупок мало</pre>
+    <div class="prompt-head"><div class="prompt-num">6</div><div><div class="prompt-title">Воронка продаж — от холодного до покупки</div><div class="prompt-use">Когда: лидов много, покупок мало
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -277,7 +295,7 @@ Tone: практик. Анти-поверхностность: не "созда�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">7</div><div><div class="prompt-title">Ценообразование — сколько стоить</div><div class="prompt-use">Когда: боитесь завысить или занизить цену</pre>
+    <div class="prompt-head"><div class="prompt-num">7</div><div><div class="prompt-title">Ценообразование — сколько стоить</div><div class="prompt-use">Когда: боитесь завысить или занизить цену
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -308,7 +326,7 @@ Tone: практик. Без "каждый бизнес уникален". Да�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">8</div><div><div class="prompt-title">Лид-магнит — что отдать бесплатно</div><div class="prompt-use">Когда: нужно собирать базу подписчиков</pre>
+    <div class="prompt-head"><div class="prompt-num">8</div><div><div class="prompt-title">Лид-магнит — что отдать бесплатно</div><div class="prompt-use">Когда: нужно собирать базу подписчиков
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -336,7 +354,7 @@ Tone: практик. Лид-магнит должен решать одну о�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">9</div><div><div class="prompt-title">Продуктовая линейка — от трипвайера до VIP</div><div class="prompt-use">Когда: нужно выстроить систему продаж</pre>
+    <div class="prompt-head"><div class="prompt-num">9</div><div><div class="prompt-title">Продуктовая линейка — от трипвайера до VIP</div><div class="prompt-use">Когда: нужно выстроить систему продаж
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -368,7 +386,7 @@ Tone: прагматичный, без инфоцыганщины.</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">10</div><div><div class="prompt-title">Работа с возражениями — топ-7</div><div class="prompt-use">Когда: клиенты уходят "подумать"</pre>
+    <div class="prompt-head"><div class="prompt-num">10</div><div><div class="prompt-title">Работа с возражениями — топ-7</div><div class="prompt-use">Когда: клиенты уходят "подумать"
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -397,7 +415,7 @@ Tone: эмпатичный продавец, не давящий. Анти-по�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">11</div><div><div class="prompt-title">Бизнес-модель одной страницей</div><div class="prompt-use">Когда: нужно структурировать проект на старте</pre>
+    <div class="prompt-head"><div class="prompt-num">11</div><div><div class="prompt-title">Бизнес-модель одной страницей</div><div class="prompt-use">Когда: нужно структурировать проект на старте
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -424,7 +442,7 @@ Tone: прагматично. Каждый блок — в одно-два пр�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">12</div><div><div class="prompt-title">Позиционирование одной фразой</div><div class="prompt-use">Когда: клиент спрашивает "что ты делаешь"</pre>
+    <div class="prompt-head"><div class="prompt-num">12</div><div><div class="prompt-title">Позиционирование одной фразой</div><div class="prompt-use">Когда: клиент спрашивает "что ты делаешь"
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -451,7 +469,7 @@ Tone: провокативно. Без "индивидуальный подхо�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">13</div><div><div class="prompt-title">Customer Journey Map — путь клиента</div><div class="prompt-use">Когда: хочется понять где клиент теряется</pre>
+    <div class="prompt-head"><div class="prompt-num">13</div><div><div class="prompt-title">Customer Journey Map — путь клиента</div><div class="prompt-use">Когда: хочется понять где клиент теряется
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -484,7 +502,7 @@ Tone: эмпатичный аналитик. Думай как клиент, н�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">14</div><div><div class="prompt-title">Принятие сложного бизнес-решения</div><div class="prompt-use">Когда: стоишь перед выбором</pre>
+    <div class="prompt-head"><div class="prompt-num">14</div><div><div class="prompt-title">Принятие сложного бизнес-решения</div><div class="prompt-use">Когда: стоишь перед выбором
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -515,7 +533,7 @@ Tone: холодный аналитик. Без эмоций. Анти-пове�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">15</div><div><div class="prompt-title">Архитектор нейросотрудника — инструкция для GPT-агента</div><div class="prompt-use">Когда: строишь своего ИИ-ассистента</pre>
+    <div class="prompt-head"><div class="prompt-num">15</div><div><div class="prompt-title">Архитектор нейросотрудника — инструкция для GPT-агента</div><div class="prompt-use">Когда: строишь своего ИИ-ассистента
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -584,7 +602,7 @@ Tone: по формуле 4U — Полезно + Срочно + Уникаль�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">17</div><div><div class="prompt-title">Рекламный креатив — 5 вариантов A/B</div><div class="prompt-use">Когда: запускаешь таргет и нужны разные подходы</pre>
+    <div class="prompt-head"><div class="prompt-num">17</div><div><div class="prompt-title">Рекламный креатив — 5 вариантов A/B</div><div class="prompt-use">Когда: запускаешь таргет и нужны разные подходы
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -618,7 +636,7 @@ Tone: смело, но в рамках площадки. Анти-поверхн
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">18</div><div><div class="prompt-title">Email-рассылка — прогрев из 5 писем</div><div class="prompt-use">Когда: новый подписчик попал в базу</pre>
+    <div class="prompt-head"><div class="prompt-num">18</div><div><div class="prompt-title">Email-рассылка — прогрев из 5 писем</div><div class="prompt-use">Когда: новый подписчик попал в базу
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -651,7 +669,7 @@ Tone: человек, не робот. Каждое письмо — одна м
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">19</div><div><div class="prompt-title">CTA — 10 вариантов призыва</div><div class="prompt-use">Когда: кнопка "Оставить заявку" не работает</pre>
+    <div class="prompt-head"><div class="prompt-num">19</div><div><div class="prompt-title">CTA — 10 вариантов призыва</div><div class="prompt-use">Когда: кнопка "Оставить заявку" не работает
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -682,7 +700,7 @@ Tone: короткие, глагольные, без "Узнайте больш�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">20</div><div><div class="prompt-title">Скрипт продаж — звонок / переписка</div><div class="prompt-use">Когда: нужно обучать менеджеров</pre>
+    <div class="prompt-head"><div class="prompt-num">20</div><div><div class="prompt-title">Скрипт продаж — звонок / переписка</div><div class="prompt-use">Когда: нужно обучать менеджеров
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -716,7 +734,7 @@ Tone: уверенный профессионал. Анти-поверхност
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">21</div><div><div class="prompt-title">Анализ рекламных кампаний — что работает</div><div class="prompt-use">Когда: крутили таргет, пора разбираться</pre>
+    <div class="prompt-head"><div class="prompt-num">21</div><div><div class="prompt-title">Анализ рекламных кампаний — что работает</div><div class="prompt-use">Когда: крутили таргет, пора разбираться
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -746,7 +764,7 @@ Tone: аналитик-прагматик. Без "нужно продолжат
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">22</div><div><div class="prompt-title">Коммерческое предложение (КП)</div><div class="prompt-use">Когда: клиент просит прислать предложение</pre>
+    <div class="prompt-head"><div class="prompt-num">22</div><div><div class="prompt-title">Коммерческое предложение (КП)</div><div class="prompt-use">Когда: клиент просит прислать предложение
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -777,7 +795,7 @@ Tone: деловой, но живой. Анти-поверхностность: 
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">23</div><div><div class="prompt-title">Акция под праздник / сезон</div><div class="prompt-use">Когда: нужен инфоповод для продаж</pre>
+    <div class="prompt-head"><div class="prompt-num">23</div><div><div class="prompt-title">Акция под праздник / сезон</div><div class="prompt-use">Когда: нужен инфоповод для продаж
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -807,7 +825,7 @@ Tone: креативно, но приземлённо. Анти-поверхно
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">24</div><div><div class="prompt-title">Реферальная программа</div><div class="prompt-use">Когда: хочется чтобы клиенты приводили клиентов</pre>
+    <div class="prompt-head"><div class="prompt-num">24</div><div><div class="prompt-title">Реферальная программа</div><div class="prompt-use">Когда: хочется чтобы клиенты приводили клиентов
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -837,7 +855,7 @@ Tone: практик. Анти-поверхностность: бонусы за
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">25</div><div><div class="prompt-title">Сотрудничество с блогерами</div><div class="prompt-use">Когда: хочется выйти на новую аудиторию</pre>
+    <div class="prompt-head"><div class="prompt-num">25</div><div><div class="prompt-title">Сотрудничество с блогерами</div><div class="prompt-use">Когда: хочется выйти на новую аудиторию
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -868,7 +886,7 @@ Tone: практик. Анти-поверхностность: "раздайте
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">26</div><div><div class="prompt-title">Продажи на маркетплейсе (WB/OZON)</div><div class="prompt-use">Когда: запускаешь товар на маркетплейсе</pre>
+    <div class="prompt-head"><div class="prompt-num">26</div><div><div class="prompt-title">Продажи на маркетплейсе (WB/OZON)</div><div class="prompt-use">Когда: запускаешь товар на маркетплейсе
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -897,7 +915,7 @@ Tone: практик с цифрами. Анти-поверхностность:
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">27</div><div><div class="prompt-title">Продажи на Авито</div><div class="prompt-use">Когда: нужно быстро продавать услугу / товар</pre>
+    <div class="prompt-head"><div class="prompt-num">27</div><div><div class="prompt-title">Продажи на Авито</div><div class="prompt-use">Когда: нужно быстро продавать услугу / товар
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -927,7 +945,7 @@ Tone: разговорный. Анти-поверхностность: без к
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">28</div><div><div class="prompt-title">Retention — как не терять клиентов</div><div class="prompt-use">Когда: клиенты уходят после одной покупки</pre>
+    <div class="prompt-head"><div class="prompt-num">28</div><div><div class="prompt-title">Retention — как не терять клиентов</div><div class="prompt-use">Когда: клиенты уходят после одной покупки
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -958,7 +976,7 @@ Tone: системно, без "любите клиентов".</div></div>
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">29</div><div><div class="prompt-title">Сбор отзывов — как получать 5 звёзд</div><div class="prompt-use">Когда: нужны кейсы и отзывы</pre>
+    <div class="prompt-head"><div class="prompt-num">29</div><div><div class="prompt-title">Сбор отзывов — как получать 5 звёзд</div><div class="prompt-use">Когда: нужны кейсы и отзывы
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -987,7 +1005,7 @@ Tone: этичный, без манипуляций. Анти-поверхнос
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">30</div><div><div class="prompt-title">Монетизация экспертизы — упаковка в продукт</div><div class="prompt-use">Когда: есть знания, нет продукта</pre>
+    <div class="prompt-head"><div class="prompt-num">30</div><div><div class="prompt-title">Монетизация экспертизы — упаковка в продукт</div><div class="prompt-use">Когда: есть знания, нет продукта
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1063,7 +1081,7 @@ Tone: в моём стиле. Анти-поверхностность: без "�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">32</div><div><div class="prompt-title">Экспертный пост с кейсом</div><div class="prompt-use">Когда: нужно показать экспертность</pre>
+    <div class="prompt-head"><div class="prompt-num">32</div><div><div class="prompt-title">Экспертный пост с кейсом</div><div class="prompt-use">Когда: нужно показать экспертность
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1089,7 +1107,7 @@ Tone: разговорный русский, живой. Анти-поверхн
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">33</div><div><div class="prompt-title">Пост-история с трансформацией</div><div class="prompt-use">Когда: нужен эмоциональный контакт с ЦА</pre>
+    <div class="prompt-head"><div class="prompt-num">33</div><div><div class="prompt-title">Пост-история с трансформацией</div><div class="prompt-use">Когда: нужен эмоциональный контакт с ЦА
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1118,7 +1136,7 @@ Tone: искренне, с WTF-моментами. Техника "прерва�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">34</div><div><div class="prompt-title">Продающий пост с оффером</div><div class="prompt-use">Когда: запускаете продукт в своей базе</pre>
+    <div class="prompt-head"><div class="prompt-num">34</div><div><div class="prompt-title">Продающий пост с оффером</div><div class="prompt-use">Когда: запускаете продукт в своей базе
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1148,7 +1166,7 @@ Tone: эмпатичный эксперт, не продажник. Анти-п�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">35</div><div><div class="prompt-title">Сценарий Reels — 3 варианта хука</div><div class="prompt-use">Когда: снимаете короткое видео</pre>
+    <div class="prompt-head"><div class="prompt-num">35</div><div><div class="prompt-title">Сценарий Reels — 3 варианта хука</div><div class="prompt-use">Когда: снимаете короткое видео
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1183,7 +1201,7 @@ Tone: энергично, но без "привет мои красотки". А
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">36</div><div><div class="prompt-title">Вирусный Reels — формат-челлендж</div><div class="prompt-use">Когда: цель — максимум охватов</pre>
+    <div class="prompt-head"><div class="prompt-num">36</div><div><div class="prompt-title">Вирусный Reels — формат-челлендж</div><div class="prompt-use">Когда: цель — максимум охватов
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1216,7 +1234,7 @@ Tone: смело, без "здравствуйте дорогие подписч
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">37</div><div><div class="prompt-title">Карусель для Instagram — 8 слайдов</div><div class="prompt-use">Когда: нужен полезный "сохраняемый" контент</pre>
+    <div class="prompt-head"><div class="prompt-num">37</div><div><div class="prompt-title">Карусель для Instagram — 8 слайдов</div><div class="prompt-use">Когда: нужен полезный "сохраняемый" контент
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1247,7 +1265,7 @@ Tone: живо, без общих фраз. Анти-поверхностнос�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">38</div><div><div class="prompt-title">Ветка Threads — тезисная история</div><div class="prompt-use">Когда: нужен формат микро-блога</pre>
+    <div class="prompt-head"><div class="prompt-num">38</div><div><div class="prompt-title">Ветка Threads — тезисная история</div><div class="prompt-use">Когда: нужен формат микро-блога
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1276,7 +1294,7 @@ Tone: резко, коротко, без воды. Анти-поверхност
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">39</div><div><div class="prompt-title">Stories — серия из 7 слайдов</div><div class="prompt-use">Когда: ведёшь прогрев через Stories</pre>
+    <div class="prompt-head"><div class="prompt-num">39</div><div><div class="prompt-title">Stories — серия из 7 слайдов</div><div class="prompt-use">Когда: ведёшь прогрев через Stories
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1308,7 +1326,7 @@ Tone: разговорно, "как другу". Анти-поверхностн
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">40</div><div><div class="prompt-title">Сценарий YouTube — длинное видео</div><div class="prompt-use">Когда: готовишь полноценный ролик</pre>
+    <div class="prompt-head"><div class="prompt-num">40</div><div><div class="prompt-title">Сценарий YouTube — длинное видео</div><div class="prompt-use">Когда: готовишь полноценный ролик
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1342,7 +1360,7 @@ Tone: в моём стиле, без "подписывайтесь на кана
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">41</div><div><div class="prompt-title">Telegram-канал — запуск с нуля</div><div class="prompt-use">Когда: только завёл канал</pre>
+    <div class="prompt-head"><div class="prompt-num">41</div><div><div class="prompt-title">Telegram-канал — запуск с нуля</div><div class="prompt-use">Когда: только завёл канал
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1372,7 +1390,7 @@ Tone: без "сарафан и сторис". Анти-поверхностно
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">42</div><div><div class="prompt-title">Вовлечение аудитории — 10 механик</div><div class="prompt-use">Когда: мало комментариев и реакций</pre>
+    <div class="prompt-head"><div class="prompt-num">42</div><div><div class="prompt-title">Вовлечение аудитории — 10 механик</div><div class="prompt-use">Когда: мало комментариев и реакций
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1406,7 +1424,7 @@ Tone: практик, без "делитесь в комментариях чт�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">43</div><div><div class="prompt-title">Хуки для постов — 15 проверенных</div><div class="prompt-use">Когда: пост готов, но не зацепляет</pre>
+    <div class="prompt-head"><div class="prompt-num">43</div><div><div class="prompt-title">Хуки для постов — 15 проверенных</div><div class="prompt-use">Когда: пост готов, но не зацепляет
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1436,7 +1454,7 @@ Tone: цепляюще, без "привет друзья". Анти-повер�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">44</div><div><div class="prompt-title">Уникализация контента — переписать без плагиата</div><div class="prompt-use">Когда: хочется переформулировать чужое</pre>
+    <div class="prompt-head"><div class="prompt-num">44</div><div><div class="prompt-title">Уникализация контента — переписать без плагиата</div><div class="prompt-use">Когда: хочется переформулировать чужое
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1464,7 +1482,7 @@ Tone: моя индивидуальность, не чужая. Анти-пов�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">45</div><div><div class="prompt-title">Статья на Яндекс.Дзен / VC.ru</div><div class="prompt-use">Когда: ведёшь лонгриды</pre>
+    <div class="prompt-head"><div class="prompt-num">45</div><div><div class="prompt-title">Статья на Яндекс.Дзен / VC.ru</div><div class="prompt-use">Когда: ведёшь лонгриды
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1539,7 +1557,7 @@ Tone: честно и реалистично. Анти-поверхностно�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">47</div><div><div class="prompt-title">Приоритезация задач — матрица Эйзенхауэра</div><div class="prompt-use">Когда: задач много, времени мало</pre>
+    <div class="prompt-head"><div class="prompt-num">47</div><div><div class="prompt-title">Приоритезация задач — матрица Эйзенхауэра</div><div class="prompt-use">Когда: задач много, времени мало
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1572,7 +1590,7 @@ Tone: строго. Анти-поверхностность: "всё важно"
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">48</div><div><div class="prompt-title">Разбивка проекта на простые шаги</div><div class="prompt-use">Когда: большая задача парализует</pre>
+    <div class="prompt-head"><div class="prompt-num">48</div><div><div class="prompt-title">Разбивка проекта на простые шаги</div><div class="prompt-use">Когда: большая задача парализует
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1604,7 +1622,7 @@ Tone: пошагово, без общих фраз. Анти-поверхнос�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">49</div><div><div class="prompt-title">Утренняя рутина для продуктивности</div><div class="prompt-use">Когда: пересобираешь день</pre>
+    <div class="prompt-head"><div class="prompt-num">49</div><div><div class="prompt-title">Утренняя рутина для продуктивности</div><div class="prompt-use">Когда: пересобираешь день
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1638,7 +1656,7 @@ Tone: практик. Анти-поверхностность: без "начн�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">50</div><div><div class="prompt-title">Борьба с прокрастинацией</div><div class="prompt-use">Когда: всё откладываешь</pre>
+    <div class="prompt-head"><div class="prompt-num">50</div><div><div class="prompt-title">Борьба с прокрастинацией</div><div class="prompt-use">Когда: всё откладываешь
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1668,7 +1686,7 @@ Tone: эмпатичный, но честный. Анти-поверхностн
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">51</div><div><div class="prompt-title">Делегирование — как отдать задачи</div><div class="prompt-use">Когда: всё тащишь на себе</pre>
+    <div class="prompt-head"><div class="prompt-num">51</div><div><div class="prompt-title">Делегирование — как отдать задачи</div><div class="prompt-use">Когда: всё тащишь на себе
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1700,7 +1718,7 @@ Tone: практик. Анти-поверхностность: "делегиру
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">52</div><div><div class="prompt-title">Еженедельное ретро — анализ недели</div><div class="prompt-use">Когда: пятница, подводить итоги</pre>
+    <div class="prompt-head"><div class="prompt-num">52</div><div><div class="prompt-title">Еженедельное ретро — анализ недели</div><div class="prompt-use">Когда: пятница, подводить итоги
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1730,7 +1748,7 @@ Tone: честно и конструктивно. Анти-поверхност�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">53</div><div><div class="prompt-title">Блокировка времени — план идеальной недели</div><div class="prompt-use">Когда: хочется системы, а не реактивности</pre>
+    <div class="prompt-head"><div class="prompt-num">53</div><div><div class="prompt-title">Блокировка времени — план идеальной недели</div><div class="prompt-use">Когда: хочется системы, а не реактивности
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1766,7 +1784,7 @@ Tone: дисциплинированно. Анти-поверхностност�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">54</div><div><div class="prompt-title">Инбокс ноль — разбор почты / мессенджеров</div><div class="prompt-use">Когда: уведомлений 300+</pre>
+    <div class="prompt-head"><div class="prompt-num">54</div><div><div class="prompt-title">Инбокс ноль — разбор почты / мессенджеров</div><div class="prompt-use">Когда: уведомлений 300+
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1796,7 +1814,7 @@ Tone: строго. Анти-поверхностность: "отвечать �
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">55</div><div><div class="prompt-title">Борьба с выгоранием</div><div class="prompt-use">Когда: устал, ничего не хочется</pre>
+    <div class="prompt-head"><div class="prompt-num">55</div><div><div class="prompt-title">Борьба с выгоранием</div><div class="prompt-use">Когда: устал, ничего не хочется
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1868,7 +1886,7 @@ Tone: практика выше теории. Анти-поверхностно�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">57</div><div><div class="prompt-title">Распаковка экспертности</div><div class="prompt-use">Когда: не понимаешь в чём ценен</pre>
+    <div class="prompt-head"><div class="prompt-num">57</div><div><div class="prompt-title">Распаковка экспертности</div><div class="prompt-use">Когда: не понимаешь в чём ценен
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1898,7 +1916,7 @@ Tone: глубокий интервьюер. Анти-поверхностнос
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">58</div><div><div class="prompt-title">Путь героя — история личного бренда</div><div class="prompt-use">Когда: строишь личный бренд</pre>
+    <div class="prompt-head"><div class="prompt-num">58</div><div><div class="prompt-title">Путь героя — история личного бренда</div><div class="prompt-use">Когда: строишь личный бренд
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1932,7 +1950,7 @@ Tone: искренне, без пафоса. Анти-поверхностнос
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">59</div><div><div class="prompt-title">Нейминг и слоганы</div><div class="prompt-use">Когда: нужно название</pre>
+    <div class="prompt-head"><div class="prompt-num">59</div><div><div class="prompt-title">Нейминг и слоганы</div><div class="prompt-use">Когда: нужно название
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1968,7 +1986,7 @@ Tone: креативно и практично. Анти-поверхностн�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">60</div><div><div class="prompt-title">Работа с самозванцем</div><div class="prompt-use">Когда: "я недостаточно хорош"</pre>
+    <div class="prompt-head"><div class="prompt-num">60</div><div><div class="prompt-title">Работа с самозванцем</div><div class="prompt-use">Когда: "я недостаточно хорош"
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -1997,7 +2015,7 @@ Tone: эмпатично, без токсичного позитива. Анти
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">61</div><div><div class="prompt-title">Письмо самому себе из будущего</div><div class="prompt-use">Когда: запутался куда идти</pre>
+    <div class="prompt-head"><div class="prompt-num">61</div><div><div class="prompt-title">Письмо самому себе из будущего</div><div class="prompt-use">Когда: запутался куда идти
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2025,7 +2043,7 @@ Tone: от меня к мне. Искренне. Анти-поверхностн
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">62</div><div><div class="prompt-title">Разбор конфликта / сложного разговора</div><div class="prompt-use">Когда: поссорился или перед важным разговором</pre>
+    <div class="prompt-head"><div class="prompt-num">62</div><div><div class="prompt-title">Разбор конфликта / сложного разговора</div><div class="prompt-use">Когда: поссорился или перед важным разговором
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2055,7 +2073,7 @@ Tone: эмпатично к обеим сторонам. Анти-поверхн
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">63</div><div><div class="prompt-title">Трудоустройство / собеседование</div><div class="prompt-use">Когда: ищешь работу / проект</pre>
+    <div class="prompt-head"><div class="prompt-num">63</div><div><div class="prompt-title">Трудоустройство / собеседование</div><div class="prompt-use">Когда: ищешь работу / проект
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2085,7 +2103,7 @@ Tone: практик. Анти-поверхностность: "я коммун�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">64</div><div><div class="prompt-title">Составление резюме</div><div class="prompt-use">Когда: нужно обновить CV</pre>
+    <div class="prompt-head"><div class="prompt-num">64</div><div><div class="prompt-title">Составление резюме</div><div class="prompt-use">Когда: нужно обновить CV
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2116,7 +2134,7 @@ Tone: конкретно, с цифрами. Анти-поверхностнос
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">65</div><div><div class="prompt-title">Переговоры с клиентом / работодателем</div><div class="prompt-use">Когда: торгуешься за условия</pre>
+    <div class="prompt-head"><div class="prompt-num">65</div><div><div class="prompt-title">Переговоры с клиентом / работодателем</div><div class="prompt-use">Когда: торгуешься за условия
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2186,7 +2204,7 @@ Tone: дикие идеи приветствуются. Анти-поверхн�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">67</div><div><div class="prompt-title">Brainstorm с ограничениями</div><div class="prompt-use">Когда: нужны идеи в рамках</pre>
+    <div class="prompt-head"><div class="prompt-num">67</div><div><div class="prompt-title">Brainstorm с ограничениями</div><div class="prompt-use">Когда: нужны идеи в рамках
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2218,7 +2236,7 @@ Tone: смело. Анти-поверхностность: идея "сдела�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">68</div><div><div class="prompt-title">Концепт визуала / постера</div><div class="prompt-use">Когда: делаешь дизайн</pre>
+    <div class="prompt-head"><div class="prompt-num">68</div><div><div class="prompt-title">Концепт визуала / постера</div><div class="prompt-use">Когда: делаешь дизайн
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2251,7 +2269,7 @@ Tone: визуальные образы, не абстракции. Анти-п�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">69</div><div><div class="prompt-title">Промпт для Midjourney / Nano Banana</div><div class="prompt-use">Когда: генерируешь изображение</pre>
+    <div class="prompt-head"><div class="prompt-num">69</div><div><div class="prompt-title">Промпт для Midjourney / Nano Banana</div><div class="prompt-use">Когда: генерируешь изображение
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2287,7 +2305,7 @@ Tone: детально. Анти-поверхностность: без "beautif
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">70</div><div><div class="prompt-title">Сценарий презентации</div><div class="prompt-use">Когда: выступаешь с докладом</pre>
+    <div class="prompt-head"><div class="prompt-num">70</div><div><div class="prompt-title">Сценарий презентации</div><div class="prompt-use">Когда: выступаешь с докладом
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2322,7 +2340,7 @@ Tone: живой, с историями. Анти-поверхностность
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">71</div><div><div class="prompt-title">Логотип — концепт</div><div class="prompt-use">Когда: нужен логотип</pre>
+    <div class="prompt-head"><div class="prompt-num">71</div><div><div class="prompt-title">Логотип — концепт</div><div class="prompt-use">Когда: нужен логотип
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2359,7 +2377,7 @@ Tone: визуально, с конкретикой. Анти-поверхнос
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">72</div><div><div class="prompt-title">Написание книги / гайда</div><div class="prompt-use">Когда: хочешь упаковать опыт</pre>
+    <div class="prompt-head"><div class="prompt-num">72</div><div><div class="prompt-title">Написание книги / гайда</div><div class="prompt-use">Когда: хочешь упаковать опыт
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2392,7 +2410,7 @@ Tone: автор-практик, не академик. Анти-поверхн�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">73</div><div><div class="prompt-title">Подкаст — план первого сезона</div><div class="prompt-use">Когда: запускаешь подкаст</pre>
+    <div class="prompt-head"><div class="prompt-num">73</div><div><div class="prompt-title">Подкаст — план первого сезона</div><div class="prompt-use">Когда: запускаешь подкаст
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2423,7 +2441,7 @@ Tone: конкретно, без "главное — страсть к делу"
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">74</div><div><div class="prompt-title">Мастермайнд — программа встречи</div><div class="prompt-use">Когда: ведёшь группу предпринимателей</pre>
+    <div class="prompt-head"><div class="prompt-num">74</div><div><div class="prompt-title">Мастермайнд — программа встречи</div><div class="prompt-use">Когда: ведёшь группу предпринимателей
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2457,7 +2475,7 @@ Tone: фасилитатор, не гуру. Анти-поверхностнос
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">75</div><div><div class="prompt-title">Креативный проект — продюсирование</div><div class="prompt-use">Когда: запускаешь фильм / выставку / ивент</pre>
+    <div class="prompt-head"><div class="prompt-num">75</div><div><div class="prompt-title">Креативный проект — продюсирование</div><div class="prompt-use">Когда: запускаешь фильм / выставку / ивент
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2532,7 +2550,7 @@ Tone: тренер-практик. Анти-поверхностность: бе
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">77</div><div><div class="prompt-title">План питания под цель</div><div class="prompt-use">Когда: нужно структурировать питание</pre>
+    <div class="prompt-head"><div class="prompt-num">77</div><div><div class="prompt-title">План питания под цель</div><div class="prompt-use">Когда: нужно структурировать питание
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2567,7 +2585,7 @@ Tone: практик без фанатизма. Анти-поверхностн�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">78</div><div><div class="prompt-title">Восстановление сна</div><div class="prompt-use">Когда: плохо спишь</pre>
+    <div class="prompt-head"><div class="prompt-num">78</div><div><div class="prompt-title">Восстановление сна</div><div class="prompt-use">Когда: плохо спишь
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2600,7 +2618,7 @@ Tone: эксперт, без alarmism. Анти-поверхностность: 
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">79</div><div><div class="prompt-title">Работа со стрессом</div><div class="prompt-use">Когда: много тревоги</pre>
+    <div class="prompt-head"><div class="prompt-num">79</div><div><div class="prompt-title">Работа со стрессом</div><div class="prompt-use">Когда: много тревоги
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2635,7 +2653,7 @@ Tone: практик с эмпатией. Анти-поверхностност�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">80</div><div><div class="prompt-title">Отношения с партнёром — диагностика</div><div class="prompt-use">Когда: в отношениях напряжение</pre>
+    <div class="prompt-head"><div class="prompt-num">80</div><div><div class="prompt-title">Отношения с партнёром — диагностика</div><div class="prompt-use">Когда: в отношениях напряжение
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2666,7 +2684,7 @@ Tone: без обвинений в чью-то сторону. Анти-пове
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">81</div><div><div class="prompt-title">Воспитание детей — сложная ситуация</div><div class="prompt-use">Когда: не знаешь как реагировать</pre>
+    <div class="prompt-head"><div class="prompt-num">81</div><div><div class="prompt-title">Воспитание детей — сложная ситуация</div><div class="prompt-use">Когда: не знаешь как реагировать
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2696,7 +2714,7 @@ Tone: эмпатия к родителю и ребёнку. Анти-повер�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">82</div><div><div class="prompt-title">Деловая коммуникация — сложное письмо</div><div class="prompt-use">Когда: надо написать клиенту / партнёру</pre>
+    <div class="prompt-head"><div class="prompt-num">82</div><div><div class="prompt-title">Деловая коммуникация — сложное письмо</div><div class="prompt-use">Когда: надо написать клиенту / партнёру
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2731,7 +2749,7 @@ Tone: профессионально, без пассивной агрессии
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">83</div><div><div class="prompt-title">Планирование путешествия</div><div class="prompt-use">Когда: собираешься в поездку</pre>
+    <div class="prompt-head"><div class="prompt-num">83</div><div><div class="prompt-title">Планирование путешествия</div><div class="prompt-use">Когда: собираешься в поездку
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2762,7 +2780,7 @@ Tone: практик, без "прочувствуйте атмосферу". А
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">84</div><div><div class="prompt-title">Дружба — как поддерживать отношения</div><div class="prompt-use">Когда: всё крутится вокруг работы</pre>
+    <div class="prompt-head"><div class="prompt-num">84</div><div><div class="prompt-title">Дружба — как поддерживать отношения</div><div class="prompt-use">Когда: всё крутится вокруг работы
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2791,7 +2809,7 @@ Tone: практично и человечно. Анти-поверхностн�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">85</div><div><div class="prompt-title">Досуг — хобби и восстановление</div><div class="prompt-use">Когда: не умеешь отдыхать</pre>
+    <div class="prompt-head"><div class="prompt-num">85</div><div><div class="prompt-title">Досуг — хобби и восстановление</div><div class="prompt-use">Когда: не умеешь отдыхать
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2869,7 +2887,7 @@ Tone: честный советник. Анти-поверхностность: 
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">87</div><div><div class="prompt-title">Аудит расходов — где утекают деньги</div><div class="prompt-use">Когда: не понятно куда уходит зарплата</pre>
+    <div class="prompt-head"><div class="prompt-num">87</div><div><div class="prompt-title">Аудит расходов — где утекают деньги</div><div class="prompt-use">Когда: не понятно куда уходит зарплата
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2900,7 +2918,7 @@ Tone: без осуждения. Анти-поверхностность: "ко�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">88</div><div><div class="prompt-title">Подушка безопасности — как собрать</div><div class="prompt-use">Когда: нет запаса на чёрный день</pre>
+    <div class="prompt-head"><div class="prompt-num">88</div><div><div class="prompt-title">Подушка безопасности — как собрать</div><div class="prompt-use">Когда: нет запаса на чёрный день
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2930,7 +2948,7 @@ Tone: практик. Анти-поверхностность: без "инве�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">89</div><div><div class="prompt-title">Инвестиционный план — первые шаги</div><div class="prompt-use">Когда: есть подушка, думаешь об инвестициях</pre>
+    <div class="prompt-head"><div class="prompt-num">89</div><div><div class="prompt-title">Инвестиционный план — первые шаги</div><div class="prompt-use">Когда: есть подушка, думаешь об инвестициях
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2960,7 +2978,7 @@ Tone: без продвижения конкретных продуктов. А�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">90</div><div><div class="prompt-title">Закрытие долгов — план</div><div class="prompt-use">Когда: долги душат</pre>
+    <div class="prompt-head"><div class="prompt-num">90</div><div><div class="prompt-title">Закрытие долгов — план</div><div class="prompt-use">Когда: долги душат
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -2994,7 +3012,7 @@ Tone: без осуждения. Анти-поверхностность: "за�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">91</div><div><div class="prompt-title">Финансовый отчёт для бизнеса</div><div class="prompt-use">Когда: не понимаешь прибыль бизнеса</pre>
+    <div class="prompt-head"><div class="prompt-num">91</div><div><div class="prompt-title">Финансовый отчёт для бизнеса</div><div class="prompt-use">Когда: не понимаешь прибыль бизнеса
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -3027,7 +3045,7 @@ Tone: без финансовой зауми. Анти-поверхностно�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">92</div><div><div class="prompt-title">Калькулятор ROI — окупится или нет</div><div class="prompt-use">Когда: думаешь вкладываться в обучение / рекламу</pre>
+    <div class="prompt-head"><div class="prompt-num">92</div><div><div class="prompt-title">Калькулятор ROI — окупится или нет</div><div class="prompt-use">Когда: думаешь вкладываться в обучение / рекламу
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -3060,7 +3078,7 @@ Tone: аналитик без эмоций. Анти-поверхностнос�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">93</div><div><div class="prompt-title">Переход к финансовой свободе</div><div class="prompt-use">Когда: цель — FIRE</pre>
+    <div class="prompt-head"><div class="prompt-num">93</div><div><div class="prompt-title">Переход к финансовой свободе</div><div class="prompt-use">Когда: цель — FIRE
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -3090,7 +3108,7 @@ Tone: реалистично. Анти-поверхностность: без "�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">94</div><div><div class="prompt-title">Налоговая оптимизация (ИП / ООО / самозанятый)</div><div class="prompt-use">Когда: выбираешь форму</pre>
+    <div class="prompt-head"><div class="prompt-num">94</div><div><div class="prompt-title">Налоговая оптимизация (ИП / ООО / самозанятый)</div><div class="prompt-use">Когда: выбираешь форму
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -3126,7 +3144,7 @@ Tone: практик. Анти-поверхностность: "каждый с�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">95</div><div><div class="prompt-title">Рост дохода — где точки роста</div><div class="prompt-use">Когда: застрял в доходе</pre>
+    <div class="prompt-head"><div class="prompt-num">95</div><div><div class="prompt-title">Рост дохода — где точки роста</div><div class="prompt-use">Когда: застрял в доходе
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -3162,7 +3180,7 @@ Tone: прагматично. Анти-поверхностность: "повы
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">96</div><div><div class="prompt-title">Защита финансов — страховка, документы</div><div class="prompt-use">Когда: строишь систему безопасности</pre>
+    <div class="prompt-head"><div class="prompt-num">96</div><div><div class="prompt-title">Защита финансов — страховка, документы</div><div class="prompt-use">Когда: строишь систему безопасности
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -3193,7 +3211,7 @@ Tone: прагматично. Анти-поверхностность: без "�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">97</div><div><div class="prompt-title">Разговор с детьми о деньгах</div><div class="prompt-use">Когда: хочешь развить финансовую грамотность у ребёнка</pre>
+    <div class="prompt-head"><div class="prompt-num">97</div><div><div class="prompt-title">Разговор с детьми о деньгах</div><div class="prompt-use">Когда: хочешь развить финансовую грамотность у ребёнка
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -3227,7 +3245,7 @@ Tone: без лекций. Анти-поверхностность: "научи�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">98</div><div><div class="prompt-title">Анализ финансовых документов</div><div class="prompt-use">Когда: надо разобраться в отчёте / договоре</pre>
+    <div class="prompt-head"><div class="prompt-num">98</div><div><div class="prompt-title">Анализ финансовых документов</div><div class="prompt-use">Когда: надо разобраться в отчёте / договоре
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -3256,7 +3274,7 @@ Tone: строго аналитически. Анти-поверхностнос
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">99</div><div><div class="prompt-title">Составление счёта / договора</div><div class="prompt-use">Когда: работаешь с клиентом</pre>
+    <div class="prompt-head"><div class="prompt-num">99</div><div><div class="prompt-title">Составление счёта / договора</div><div class="prompt-use">Когда: работаешь с клиентом
     </div></div>
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -3288,7 +3306,7 @@ Tone: юридически корректно, но читаемо. Анти-п�
   </div>
 
   <div class="prompt">
-    <div class="prompt-head"><div class="prompt-num">100</div><div><div class="prompt-title">Годовая финансовая ревизия</div><div class="prompt-use">Когда: конец года или квартала</pre>
+    <div class="prompt-head"><div class="prompt-num">100</div><div><div class="prompt-title">Годовая финансовая ревизия</div><div class="prompt-use">Когда: конец года или квартала
     </div></div>
     <div class="code-wrap"><div class="code-block">Role: финансовый коуч + аналитик, проводишь годовые аудиты.
 
