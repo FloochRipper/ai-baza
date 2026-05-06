@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Типичные ошибки новичков — AI База</title>
+  <meta name="description" content="Пять самых частых ошибок при работе с AI — и как их исправить.">
+  <meta property="og:title" content="Типичные ошибки новичков — AI База">
+  <meta property="og:description" content="Пять самых частых ошибок при работе с AI.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Типичные ошибки новичков","description":"Пять частых ошибок при работе с AI.","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="01-intro.html" class="active">Для новичка</a>
+    <a href="#">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Для новичка</div>
+    <nav class="sidebar-nav">
+      <a href="01-intro.html"><span class="num">01</span>Зачем этот блок</a>
+      <a href="02-ai-llm-neurons.html"><span class="num">02</span>AI, нейросети, LLM</a>
+      <a href="03-claude-map.html"><span class="num">03</span>Карта Claude</a>
+      <a href="04-chatgpt-vs-claude.html"><span class="num">04</span>ChatGPT vs Claude</a>
+      <a href="05-prompting-racet.html"><span class="num">05</span>Промптинг и R.A.C.E.T.</a>
+      <a href="06-prompt-techniques.html"><span class="num">06</span>Техники прокачки</a>
+      <a href="07-glossary.html"><span class="num">07</span>Словарь терминов</a>
+      <a href="08-common-mistakes.html" class="active"><span class="num">08</span>Типичные ошибки</a>
+      <a href="09-first-day.html"><span class="num">09</span>Первый день</a>
+      <a href="10-where-next.html"><span class="num">10</span>Куда идти дальше</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-intro.html">Для новичка</a> <span>/</span>
+      Типичные ошибки
+    </div>
+
+    <div class="article-head">
+      <h1>Типичные ошибки <span class="accent">новичков</span></h1>
+      <button class="copy-page-btn" onclick="copyPageUrl()">⧉ Copy link</button>
+    </div>
+
+    <p id="intro">Собрал самые частые — те, которые сам проходил или видел у других. Большинство лечится одним правилом.</p>
+
+    <h2 id="mistakes">Ошибки</h2>
+
+    <h3 id="vague">«Сделай красиво»</h3>
+    <p>Расплывчатый запрос даёт расплывчатый результат. AI берёт самый усреднённый вариант из обучающих данных.</p>
+    <div class="callout warn"><span class="callout-label">Как чинить</span><p>Добавляй конкретику: формат, аудитория, длина, тон, что нельзя использовать.</p></div>
+
+    <h3 id="first-reply">Принять первый ответ как финальный</h3>
+    <p>Первый ответ — черновик, не финал. AI не знает, что именно тебе нужно, пока ты не скажешь что не так.</p>
+    <div class="callout warn"><span class="callout-label">Как чинить</span><p>Давай конкретный фидбэк: «сделай агрессивнее», «укороти вдвое», «добавь пример из жизни».</p></div>
+
+    <h3 id="no-context">Каждый раз объяснять всё с нуля</h3>
+    <p>Если ты объясняешь один и тот же проект в каждом новом чате — ты теряешь время. Это решается за 10 минут.</p>
+    <div class="callout warn"><span class="callout-label">Как чинить</span><p>Создай Project в Claude и один раз загрузи туда контекст проекта, правила и примеры. Всё — больше не нужно объяснять.</p></div>
+
+    <h3 id="trust">Доверять ответу без проверки</h3>
+    <p>AI уверенно пишет неправильные факты, выдуманные цитаты, устаревшие данные. Уверенность в голосе — не признак правоты.</p>
+    <div class="callout warn"><span class="callout-label">Как чинить</span><p>Всё, что касается фактов, статистики, дат, имён — проверяй вручную. AI — не энциклопедия.</p></div>
+
+    <h3 id="overcomplicate">Пытаться написать «идеальный» промпт</h3>
+    <p>Новички часто тратят час на составление промпта вместо того, чтобы за 5 минут написать нормальный и потом итерировать.</p>
+    <div class="callout warn"><span class="callout-label">Как чинить</span><p>Начни с простого запроса. Посмотри что получилось. Скажи что не так. Повтори 2–3 раза. Это быстрее.</p></div>
+
+    <div class="pager">
+      <a class="pager-prev" href="07-glossary.html">
+        <span class="pager-label">← Раньше</span>
+        <span class="pager-title">Словарь терминов</span>
+      </a>
+      <a class="pager-next" href="09-first-day.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">Первый день</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro" class="active">О чём страница</a>
+    <a href="#vague">«Сделай красиво»</a>
+    <a href="#first-reply">Первый ответ = финал</a>
+    <a href="#no-context">Объяснять с нуля</a>
+    <a href="#trust">Доверять без проверки</a>
+    <a href="#overcomplicate">Идеальный промпт</a>
+  </aside>
+</div>
+
+<script>
+function copyPageUrl() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    const btn = document.querySelector('.copy-page-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>
