@@ -4,24 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Промптинг и R.A.C.E.T. — AI База</title>
-  <meta name="description" content="Формула R.A.C.E.T. для правильных запросов к AI: Role, Action, Context, Expectation, Tone — с шаблоном и примерами.">
-  <meta property="og:title" content="Промптинг и R.A.C.E.T. — AI База">
-  <meta property="og:description" content="Формула R.A.C.E.T. для правильных запросов к AI.">
-  <meta property="og:type" content="article">
+  <meta name="description" content="Как правильно писать промпты: формула R.A.C.E.T., техники прокачки, типичные ошибки и 100 готовых примеров.">
   <link rel="stylesheet" href="../styles.css?v=5">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Промптинг и формула R.A.C.E.T.",
-    "description": "Формула R.A.C.E.T. для правильных запросов к AI.",
-    "author": {"@type": "Person", "name": "Никита Шлык"},
-    "publisher": {"@type": "Organization", "name": "AI База"}
-  }
+  {"@context":"https://schema.org","@type":"Article","headline":"Промптинг и R.A.C.E.T.","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
   </script>
 </head>
 <body>
-
 <header class="site-header">
   <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
   <nav class="site-nav">
@@ -32,20 +21,18 @@
 </header>
 
 <div class="layout">
-
   <aside class="sidebar">
     <div class="section-label">Раздел</div>
     <div class="section-title">Для новичка</div>
-        <nav class="sidebar-nav">
+    <nav class="sidebar-nav">
       <a href="01-intro.html"><span class="num">01</span>Зачем этот раздел</a>
       <a href="02-ai-llm-neurons.html"><span class="num">02</span>AI, нейросети, LLM</a>
       <a href="03-claude-map.html"><span class="num">03</span>ChatGPT vs Claude</a>
       <a href="05-prompting-racet.html" class="active"><span class="num">04</span>Промптинг и R.A.C.E.T.</a>
-      <a href="06-prompt-techniques.html"><span class="num">05</span>Техники прокачки</a>
-      <a href="07-glossary.html"><span class="num">06</span>Словарь терминов</a>
-      <a href="08-common-mistakes.html"><span class="num">07</span>Типичные ошибки</a>
-      <a href="09-first-day.html"><span class="num">08</span>Что сделать в первый день</a>
-      <a href="10-where-next.html"><span class="num">09</span>Куда идти дальше</a>
+      <a href="07-glossary.html"><span class="num">05</span>Словарь терминов</a>
+      <a href="08-common-mistakes.html"><span class="num">06</span>Типичные ошибки</a>
+      <a href="09-first-day.html"><span class="num">07</span>Что сделать в первый день</a>
+      <a href="10-where-next.html"><span class="num">08</span>Куда идти дальше</a>
     </nav>
   </aside>
 
@@ -56,54 +43,29 @@
       Промптинг и R.A.C.E.T.
     </div>
 
-    <div class="article-head">
-      <h1>Промптинг и формула <span class="accent">R.A.C.E.T.</span></h1>
-    </div>
+    <h1>Промптинг и формула <span class="accent">R.A.C.E.T.</span></h1>
 
-    <p id="what">Промпт — это не заклинание. Это текст-команда, которую ты даёшь AI. Тема <span class="marker">заезженная</span>, но её нужно понимать. Чем точнее задача — тем меньше модель угадывает.</p>
+    <p>Промпт — это текст-команда, которую ты пишешь AI. Не заклинание, не магия — просто задание. AI не читает мысли и не угадывает намерения. Он выполняет буквально то, что написано. Значит качество результата = качество твоего запроса.</p>
 
     <div class="callout key">
       <span class="callout-label">⚡ Ключевой факт</span>
-      <p>AI не читает мысли. AI следует буквально. Качество результата = качество твоего запроса.</p>
+      <p>AI не читает мысли. AI следует буквально. Написал «сделай красиво» — получил что попало. Написал конкретно — получил результат.</p>
     </div>
 
-    <h2 id="formula">5 элементов формулы</h2>
+    <h2 id="racet">Формула R.A.C.E.T.</h2>
+    <p>Структура из 5 элементов. Не обязательно использовать все пять в каждом промпте — но чем больше заполнено, тем точнее ответ.</p>
 
     <div class="grid-cards cols-5">
-      <div class="grid-card">
-        <div class="card-letter">R</div>
-        <div class="card-name">Role</div>
-        <div class="card-desc">Кем выступает AI</div>
-      </div>
-      <div class="grid-card">
-        <div class="card-letter">A</div>
-        <div class="card-name">Action</div>
-        <div class="card-desc">Что сделать</div>
-      </div>
-      <div class="grid-card">
-        <div class="card-letter">C</div>
-        <div class="card-name">Context</div>
-        <div class="card-desc">Ситуация, данные</div>
-      </div>
-      <div class="grid-card">
-        <div class="card-letter">E</div>
-        <div class="card-name">Expectation</div>
-        <div class="card-desc">Каким будет результат</div>
-      </div>
-      <div class="grid-card">
-        <div class="card-letter">T</div>
-        <div class="card-name">Tone</div>
-        <div class="card-desc">Как звучит</div>
-      </div>
+      <div class="grid-card"><div class="card-letter">R</div><div class="card-name">Role</div><div class="card-desc">Кем выступает AI</div></div>
+      <div class="grid-card"><div class="card-letter">A</div><div class="card-name">Action</div><div class="card-desc">Что сделать</div></div>
+      <div class="grid-card"><div class="card-letter">C</div><div class="card-name">Context</div><div class="card-desc">Ситуация, данные</div></div>
+      <div class="grid-card"><div class="card-letter">E</div><div class="card-name">Expectation</div><div class="card-desc">Каким будет результат</div></div>
+      <div class="grid-card"><div class="card-letter">T</div><div class="card-name">Tone</div><div class="card-desc">Как звучит</div></div>
     </div>
 
-    <h2 id="template">Готовый шаблон</h2>
-
+    <h2 id="template">Базовый шаблон</h2>
     <div class="code-block">
-      <div class="code-block-head">
-        <span class="code-title">▸ R.A.C.E.T. — базовый шаблон</span>
-        <button class="copy-btn" onclick="copyCode(this)">⧉ Копировать</button>
-      </div>
+      <div class="code-block-head"><span class="code-title">▸ R.A.C.E.T. — базовый шаблон</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
       <pre>Role: работай как [роль].
 Action: сделай [конкретное действие].
 Context: мой проект — [контекст], аудитория — [кто].
@@ -111,27 +73,157 @@ Expectation: формат — [формат], с примерами и пров�
 Tone: пиши простым языком, без воды, как для новичка.</pre>
     </div>
 
-    <h2 id="example">Плохо vs хорошо</h2>
-
-    <div class="compare">
-      <div class="compare-col bad">
-        <span class="compare-tag">Плохой промпт</span>
-        <div>Напиши продающий текст о курсе по фотографии.</div>
-      </div>
-      <div class="compare-col good">
-        <span class="compare-tag">По R.A.C.E.T.</span>
-        <div>Role: фотограф-преподаватель с 10-летним опытом. Action: напиши продающий пост для Instagram. Context: новички 25–35 лет, хотят научиться снимать на телефон. Expectation: 3 абзаца, с болью и оффером. Tone: живой, без клише.</div>
-      </div>
-    </div>
-
     <div class="callout analogy">
       <span class="callout-label">Аналогия</span>
       <p>Промпт — как рецепт для повара. Написал «торт» — получишь что попало. Написал «шоколадный торт с вишней, 3 слоя, без орехов» — шанс получить нужное сильно выше.</p>
     </div>
 
+    <h2 id="compare">Плохо vs хорошо</h2>
+    <div class="compare">
+      <div class="compare-col bad">
+        <div class="compare-label">Плохой промпт</div>
+        <p>Напиши продающий текст о курсе по фотографии.</p>
+      </div>
+      <div class="compare-col good">
+        <div class="compare-label">По R.A.C.E.T.</div>
+        <p>Role: фотограф-преподаватель с 10-летним опытом.<br>Action: напиши продающий пост для Instagram.<br>Context: новички 25–35 лет, хотят снимать на телефон.<br>Expectation: 3 абзаца, структура боль → решение → CTA.<br>Tone: живой, без клише.</p>
+      </div>
+    </div>
+
+    <h2 id="extended">Развёрнутый пример</h2>
+    <p>Чем больше контекста — тем точнее ответ. Вот как выглядит тот же промпт про фотокурс в полную силу:</p>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ R.A.C.E.T. — развёрнутая версия</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Role: фотограф-преподаватель с 10-летним опытом, автор методики
+«Первые красивые фото за 3 дня», обучил 1000+ новичков.
+
+Action: напиши продающий пост в Instagram, который:
+1. Разрушает миф о необходимости дорогой техники
+2. Показывает результаты учеников
+3. Ведёт на бесплатный мастер-класс
+
+Context:
+- Аудитория: новички 25–35 лет, мечтают о красивых фото
+- Главная боль: думают, что нужна дорогая камера и годы учёбы
+- Наше решение: результат на первом занятии, на любой технике
+- Цифра: 80% учеников делают красивые фото за 2 месяца
+
+Expectation:
+- Объём 1500 знаков
+- Структура: боль → миф → решение → доказательство → призыв
+- Эмодзи в меру, 1–2 на абзац
+- Обязательно: CTA с дедлайном
+
+Tone: вдохновляющий, но экспертный. Без пафоса. Акцент на простоте.</pre>
+    </div>
+
+    <h2 id="boost">Приёмы усиления</h2>
+    <p>Два элемента формулы дают особый прирост, если их прокачать.</p>
+    <h3>Для Role — опиши экспертизу через «суперсилу»</h3>
+    <p>Не «диетолог», а «нутрициолог с 15-летним опытом, специализация — похудение без диет, автор книги о здоровом питании». Чем конкретнее — тем лучше отыгрывает.</p>
+    <h3>Для Tone — задай персонажа или ситуацию</h3>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Варианты задания тона</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Персонаж:  "Пиши как [известный эксперт в нише] — в его стиле"
+Ситуация:  "Представь, что мы сидим в кафе и обсуждаем это"
+Метафора:  "Как старший брат, который делится опытом без лишних слов"</pre>
+    </div>
+
+    <h2 id="mistakes">3 типичные ошибки</h2>
     <div class="callout warn">
-      <span class="callout-label">⚠ Важно</span>
-      <p>С каждым обновлением LLM-модели становятся умнее. Возможно, в будущем огромные промпты не нужны. Но сейчас — чем конкретнее, тем лучше.</p>
+      <span class="callout-label">⚠ Ошибка 1 — размыто</span>
+      <p>«Сделай сайт» вместо «Сделай лендинг для психолога: главный экран, 3 преимущества, форма заявки».</p>
+    </div>
+    <div class="callout warn">
+      <span class="callout-label">⚠ Ошибка 2 — всё сразу</span>
+      <p>Регистрация + каталог + корзина + оплата в одном запросе. Дроби на шаги — AI справляется с каждым гораздо лучше по отдельности.</p>
+    </div>
+    <div class="callout warn">
+      <span class="callout-label">⚠ Ошибка 3 — нет контекста</span>
+      <p>AI не знает твою нишу, аудиторию и цели. Без контекста он отвечает шаблонно. Добавь 2–3 предложения о проекте — ответ станет другим.</p>
+    </div>
+
+    <h2 id="techniques">Техники прокачки</h2>
+    <p>R.A.C.E.T. — это база. Эти техники дают серьёзный прирост к качеству ответов.</p>
+
+    <h3>Цепочка шагов вместо одного запроса</h3>
+    <p>Не грузи всё в один промпт — дроби на шаги. Каждый шаг строится на результате предыдущего.</p>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Chain prompting — пример</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Шаг 1: Назови 3 главных страха родителей при покупке детского самоката.
+Шаг 2: Как наш самокат решает каждый из этих страхов? Конкретно.
+Шаг 3: Собери продающий пост, начиная с главного страха.</pre>
+    </div>
+
+    <h3>Цепочка мышления (Chain of Thought)</h3>
+    <p>Попроси AI думать вслух перед ответом — снижает ошибки на сложных задачах.</p>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Перед ответом — подумай шаг за шагом. Объясни свою логику, потом дай финальный ответ.</pre>
+    </div>
+
+    <h3>Примеры внутри промпта</h3>
+    <p>Дай AI образец того, что хочешь получить. Один хороший пример стоит трёх абзацев объяснения.</p>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт с примером</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Напиши три хука для Reels. Стиль — как в этом примере:
+«Вот почему 90% людей не могут выучить английский — и как я перестал быть одним из них»
+Моя тема: продажи через контент.</pre>
+    </div>
+
+    <h3>Инверсия — думай наоборот</h3>
+    <p>Вместо «как привлечь» — «почему уходят». Когда ищешь проблемы, решения всплывают сами.</p>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Инверсия</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>"Как сделать крутой сайт" → "5 причин, почему люди закрывают сайт в первые 3 секунды"
+"Как поднять конверсию" → "Что в моей воронке прямо сейчас отталкивает клиентов"</pre>
+    </div>
+
+    <h3>Ограничения работают лучше запросов</h3>
+    <p>Сказать «не используй клише» эффективнее, чем «пиши оригинально». Ограничения задают конкретный фильтр.</p>
+    <div class="callout analogy">
+      <span class="callout-label">Аналогия</span>
+      <p>Редактор говорит не «пиши хорошо», а «убери все слова "уникальный", "инновационный" и "экосистема"». Второй вариант работает.</p>
+    </div>
+
+    <h3>Итерации вместо одного запроса</h3>
+    <p>Не жди идеального ответа с первого раза. Лучшие результаты — через 2–4 итерации.</p>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Цикл итераций</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>1. Критика:   "Проанализируй этот текст как маркетолог с 10-летним опытом. Что улучшить?"
+2. Правки:    "Применяй замечания. Перепиши с учётом."
+3. Сравнение: "Сравни обе версии. Что стало лучше? Что ещё улучшить?"</pre>
+    </div>
+
+    <div class="callout key">
+      <span class="callout-label">⚡ Главный принцип</span>
+      <p>Работа с AI — это диалог, не одиночный запрос. Первый ответ — черновик. Прогоняй через 2–3 итерации. Именно там получается результат.</p>
+    </div>
+
+    <h2 id="templates">Шаблоны для сложных задач</h2>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Для анализа данных</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Анализ [чего]:
+- Что смотрим: [метрики]
+- Что ищем: аномалии, тренды, точки роста
+- Как показать: таблица + 3 главных вывода
+- Формат: маркированный список с цифрами</pre>
+    </div>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Для принятия решений</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Помоги принять решение: [вопрос]
+Критерии успеха:
+- [метрика 1]
+- [метрика 2]
+Формат ответа:
+✓ Плюсы   ✗ Минусы   ! Риски   → Рекомендация + обоснование</pre>
+    </div>
+
+    <h2 id="100prompts">100 готовых промптов</h2>
+    <p>Собрал отдельный файл — 100 промптов PRO-уровня по формуле R.A.C.E.T. Разбито по 8 сферам: бизнес, маркетинг, контент, продуктивность, саморазвитие, креатив, здоровье, финансы.</p>
+    <div class="callout key">
+      <span class="callout-label">Коллекция</span>
+      <p><a href="../100-prompts-pro.html" style="color:var(--accent); font-weight:700;">→ Открыть 100 готовых промптов</a> — бери, подставляй под свою задачу, используй сразу.</p>
     </div>
 
     <div class="pager">
@@ -139,47 +231,27 @@ Tone: пиши простым языком, без воды, как для но�
         <span class="pager-label">← Раньше</span>
         <span class="pager-title">ChatGPT vs Claude</span>
       </a>
-      <a class="pager-next" href="06-prompt-techniques.html">
+      <a class="pager-next" href="07-glossary.html">
         <span class="pager-label">Дальше →</span>
-        <span class="pager-title">Техники прокачки</span>
+        <span class="pager-title">Словарь терминов</span>
       </a>
     </div>
   </main>
 
-
   <aside class="toc">
     <h4>На этой странице</h4>
-    <a href="#what" class="active">Что такое промпт</a>
-    <a href="#formula">Формула R.A.C.E.T.</a>
-    <a href="#template">Готовый шаблон</a>
-    <a href="#example">Плохо vs хорошо</a>
+    <a href="#racet" class="active">Формула R.A.C.E.T.</a>
+    <a href="#template">Базовый шаблон</a>
+    <a href="#compare">Плохо vs хорошо</a>
+    <a href="#extended">Развёрнутый пример</a>
+    <a href="#boost">Приёмы усиления</a>
+    <a href="#mistakes">3 типичные ошибки</a>
+    <a href="#techniques">Техники прокачки</a>
+    <a href="#templates">Шаблоны</a>
+    <a href="#100prompts">100 промптов</a>
   </aside>
-</div>
 
-<script>
-function copyPageUrl() {
-  navigator.clipboard.writeText(window.location.href).then(() => {
-    const btn = document.querySelector('.copy-page-btn');
-    const orig = btn.textContent;
-    btn.textContent = '✓ Copied';
-    setTimeout(() => btn.textContent = orig, 1500);
-  });
-}
-function copyCode(btn) {
-  const pre = btn.closest('.code-block').querySelector('pre');
-  navigator.clipboard.writeText(pre.textContent.trim()).then(() => {
-    const orig = btn.textContent;
-    btn.textContent = '✓ Скопировано';
-    setTimeout(() => btn.textContent = orig, 1500);
-  });
-}
-const tocLinks = document.querySelectorAll('.toc a');
-const sections = document.querySelectorAll('[id]');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
-  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
-});
-</script>
+</div>
+<script src="../scripts.js"></script>
 </body>
 </html>
