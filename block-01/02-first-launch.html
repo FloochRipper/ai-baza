@@ -87,15 +87,23 @@
       <pre>Создай простую HTML страницу с заголовком «Привет мир»</pre>
     </div>
 
-    <p>При первом использовании Claude Code будет спрашивать разрешение перед каждым действием — прочитать файл, создать файл, изменить файл. Соглашайся: это нормальное поведение по умолчанию для безопасности.</p>
+    <p>Как только введёшь команду, Claude Code начнёт спрашивать разрешение на каждое действие — создать файл, изменить строку, прочитать что-то. Вот как это выглядит:</p>
 
-    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: первый запрос в Claude Code и ответ с созданием файла]</figure>
+    <figure style="margin:20px 0;">
+      <img src="../screenshots/claude-ask-permission.png" alt="Claude Code запрашивает разрешение" style="max-width:100%;border-radius:8px;display:block;" loading="lazy">
+    </figure>
 
-    <p>Если постоянные окна с подтверждениями мешают — ниже разберём как их убрать.</p>
+    <p>Поначалу это нормально. Но быстро начинает бесить — соглашаться на каждый чих неудобно. Для этого есть Bypass Permissions.</p>
 
     <h2 id="bypass">Bypass Permissions — убрать постоянные вопросы</h2>
 
-    <p>По умолчанию Claude Code спрашивает разрешение буквально на всё — прочитать файл, записать строку, запустить команду. Для новичка, работающего в одиночку над своим проектом, это превращается в постоянный шум.</p>
+    <p>В панели Claude Code нажми на кнопку режима внизу справа — выскочит меню с вариантами. Там есть <strong>Bypass permissions</strong> — выбери его.</p>
+
+    <figure style="margin:20px 0;">
+      <img src="../screenshots/claude-bypass-modes.png" alt="Меню режимов Claude Code с Bypass permissions" style="max-width:100%;border-radius:8px;display:block;" loading="lazy">
+    </figure>
+
+    <p>Теперь Claude Code работает без запросов. Но на всякий случай — лучше дополнительно прописать запреты на опасные действия через файл настроек. Вот рабочий вариант:</p>
 
     <p>Создай файл <code>.claude/settings.json</code> в корне проекта. Вот рабочий вариант:</p>
 
