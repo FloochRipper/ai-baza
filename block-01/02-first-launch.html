@@ -128,6 +128,41 @@
 
     <p>Есть ещё один важный момент — как работает память Claude Code и почему лучше давать одну задачу за раз. Об этом в статье про <a href="08-context-window.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">контекстное окно</a>.</p>
 
+    <h2 id="modes">Режимы работы</h2>
+
+    <p>В нижней части панели Claude Code есть переключатель режима. Он определяет как именно Claude будет вносить изменения — молча делать своё или спрашивать на каждом шаге.</p>
+
+    <p>Переключать можно клавишей <code>Shift+Tab</code> или кликом по кнопке режима внизу панели.</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Режим</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Когда использовать</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>Edit automatically</strong></td>
+          <td style="padding:10px;">Читает файлы, редактирует, создаёт — без лишних вопросов</td>
+          <td style="padding:10px;">Основной режим для работы</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>Ask before edits</strong></td>
+          <td style="padding:10px;">Перед каждым изменением файла показывает что собирается сделать и ждёт подтверждения</td>
+          <td style="padding:10px;">Когда хочешь контролировать каждый шаг</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><strong>Plan Mode</strong></td>
+          <td style="padding:10px;">Только составляет план — ни один файл не тронет, пока не разрешишь</td>
+          <td style="padding:10px;">Сложные задачи: сначала смотришь на план, потом запускаешь</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Для старта — Edit automatically. Когда задача крупная или рискованная — переключи в Plan Mode, проверь что Claude планирует, и только потом дай добро.</p>
+
     <h2 id="history">История диалогов</h2>
 
     <p>Каждый разговор в Claude Code сохраняется автоматически. Нажми на иконку часов в боковой панели Claude Code — там список всех прошлых сессий.</p>
@@ -199,6 +234,7 @@
     <a href="#russian">Лайфхак: VS Code на русском</a>
     <a href="#first-command">Первая команда</a>
     <a href="#bypass">Bypass Permissions</a>
+    <a href="#modes">Режимы работы</a>
     <a href="#history">История диалогов</a>
     <a href="#commands">Команды</a>
   </aside>
