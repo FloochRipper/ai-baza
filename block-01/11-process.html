@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Процесс: от идеи до рабочего проекта | AI База</title>
+  <meta name="description" content="Как работать с Claude Code системно: brainstorm → план → субагенты → деплой. Плюс Remote Control с телефона.">
+  <meta property="og:title" content="Процесс: от идеи до рабочего проекта">
+  <meta property="og:description" content="Как работать с Claude Code системно: brainstorm → план → субагенты → деплой. Плюс Remote Control с телефона.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=10">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Процесс: от идеи до рабочего проекта","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="01-what-is.html"><span class="num">01</span>Что такое Claude Code</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>CLAUDE.md</a>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Скиллы, MCP, Hooks</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html" class="active"><span class="num">11</span>Процесс</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      Процесс
+    </div>
+
+    <div class="article-head">
+      <h1><span class="accent">Процесс</span>: от идеи до результата</h1>
+    </div>
+
+    <p id="intro">Разница между теми, кто делает с Claude Code реальные продукты, и теми кто застрял на «попробовал пару раз» — не в знании команд. Разница в процессе.</p>
+
+    <p>Случайный порядок масштабирует хаос. Структура усиливает возможности. Одни и те же инструменты в руках у человека с процессом и без — это два разных результата.</p>
+
+    <h2 id="why-process">Почему порядок важнее инструментов</h2>
+
+    <p>Исследование DORA 2025 показало интересную вещь: с приходом AI-инструментов сильные команды стали ещё сильнее, а слабые — ещё слабее. Инструменты не выравнивают разрыв, они его усиливают.</p>
+
+    <p>Claude Code без процесса — это организованный хаос. Быстро, шумно, много движения. Но на выходе продукт, который надо переделывать, потому что с самого начала строили не то или не так.</p>
+
+    <h2 id="superpowers-flow">Процесс Superpowers</h2>
+
+    <p>Вот рабочий процесс, который я использую сам. Семь шагов от идеи до деплоя:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Полный цикл</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>1. BRAINSTORM    — разобрать задачу: цель, ограничения, варианты подхода
+2. СПЕЦИФИКАЦИЯ  — точно описать что должно получиться (функции, поведение, ограничения)
+3. ПЛАН          — Plan Mode (Shift+Tab): чертёж до стройки, без изменения файлов
+4. РЕАЛИЗАЦИЯ    — субагенты параллельно или последовательно
+5. REVIEW        — проверить результат по критериям из спецификации
+6. PR / COMMIT   — зафиксировать рабочую версию в git
+7. ДЕПЛОЙ        — push → автодеплой на хостинге</pre>
+    </div>
+
+    <p>Первые два шага — brainstorm и спецификация — кажутся лишними, когда хочется сразу делать. Но именно они спасают от главной потери времени: построить не то.</p>
+
+    <p>Brainstorm — это разговор с Claude: что именно нужно сделать, зачем, какие ограничения, какие есть варианты подхода. Спецификация — конкретное описание результата: какие функции, как должно вести себя, что точно не нужно. После этого у тебя есть критерии для шага 5 — ты знаешь, по чему проверять.</p>
+
+    <h2 id="plan-mode-first">Plan Mode — обязательный первый шаг</h2>
+
+    <p>Перед тем как написать первую строчку кода — включи Plan Mode. Нажимаешь Shift+Tab, описываешь задачу. Claude показывает полный план: какие файлы создаст, какие изменения внесёт, в какой последовательности.</p>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: Plan Mode — вывод плана с шагами до изменения файлов]</figure>
+
+    <p>В этот момент можно сказать «измени шаг 3» или «добавь обработку ошибок к шагу 5». Claude скорректирует план — и только после твоего одобрения начнёт работать. Ни один файл до этого не тронут.</p>
+
+    <p>Это архитектурный чертёж до начала строительства. Проблемы, найденные на этапе плана, стоят минуты. Те же проблемы, найденные после реализации — часы переделки.</p>
+
+    <h2 id="systematic-debug">Systematic Debugging — не заплатка, а причина</h2>
+
+    <p>Когда что-то сломалось, первый импульс — быстро починить и двигаться дальше. Это ловушка. Заплатка на симптом не убирает причину, она просто прячет её до следующего раза.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Правило отладки</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Симптом:  "Кнопка не работает"
+Заплатка: убрать кнопку или добавить try/catch
+Причина:  неправильный event listener, конфликт CSS, неправильный ID
+
+Правило: если не знаешь причину — не принимай fix.</pre>
+    </div>
+
+    <p>Когда что-то не работает, я прошу Claude так: «Найди корневую причину этой ошибки, не просто исправь симптом». После фикса — «как убедиться что это не повторится?». Два вопроса, которые превращают отладку в обучение.</p>
+
+    <h2 id="worktree-parallel">Git Worktree — несколько задач одновременно</h2>
+
+    <p>Git Worktree создаёт вторую копию проекта в отдельной папке. Один агент работает над фичей A в одной папке, другой над фичей B в другой — никаких конфликтов, каждый в своей ветке.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Создать воркдерево</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># Открыть воркдерево для новой фичи
+git worktree add ../project-feature-b feature-b
+
+# Запустить Claude Code в этой папке
+cd ../project-feature-b
+claude</pre>
+    </div>
+
+    <p>Это мощный инструмент для параллельной работы. Пока один агент пишет новую страницу, другой рефакторит старый код — и ни один не мешает другому. Потом сливаешь ветки в main.</p>
+
+    <h2 id="phone">Claude из телефона</h2>
+
+    <p>Поставил задачу агенту, закрыл ноутбук, уехал. Как следить за прогрессом и давать инструкции с телефона? Два способа.</p>
+
+    <p>Первый — Remote Control. В Claude Code есть встроенный режим <code>/remote-control</code>, который позволяет управлять активной сессией через приложение Claude на телефоне. Запустил задачу на ноутбуке, закрыл крышку — проверяешь и направляешь с телефона.</p>
+
+    <p>Второй — Telegram. Подключаешь Claude Code к своему Telegram-боту через MCP, и дальше общаешься с агентом прямо в мессенджере:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Подключить Telegram</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># 1. В @BotFather: /newbot → получи токен
+# 2. Установить MCP-сервер:
+claude mcp install @anthropic-ai/mcp-server-channels
+
+# 3. Запустить в channels-режиме:
+claude --channels</pre>
+    </div>
+
+    <p>После этого пишешь боту в Telegram, он передаёт инструкции агенту, агент отвечает обратно. Полноценное управление проектом с телефона, без ноутбука под рукой.</p>
+
+    <div class="callout analogy">
+      <span class="callout-label">Аналогия</span>
+      <p>Это как оставить кухарку на кухне — ты ушёл, она готовит. Телефон даёт тебе возможность подойти проверить и дать новые инструкции не возвращаясь домой.</p>
+    </div>
+
+    <div class="callout key">
+      <span class="callout-label">Итого</span>
+      <p>Инструменты знать нужно. Но без процесса они просто ускоряют хаос. Brainstorm → план → реализация → проверка → деплой — и каждый новый проект становится быстрее предыдущего.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="10-subagents.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">Субагенты</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#why-process">Почему порядок важнее инструментов</a>
+    <a href="#superpowers-flow">Процесс Superpowers</a>
+    <a href="#plan-mode-first">Plan Mode</a>
+    <a href="#systematic-debug">Systematic Debugging</a>
+    <a href="#worktree-parallel">Git Worktree</a>
+    <a href="#phone">Claude из телефона</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>

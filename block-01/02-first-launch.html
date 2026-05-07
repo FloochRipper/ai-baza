@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Первый запуск — рабочее место | AI База</title>
+  <meta name="description" content="Как настроить VS Code и Claude Code с нуля, что такое Bypass Permissions и команды которые нужны в первую очередь.">
+  <meta property="og:title" content="Первый запуск — рабочее место">
+  <meta property="og:description" content="Как настроить VS Code и Claude Code с нуля, что такое Bypass Permissions и команды которые нужны в первую очередь.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=10">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Первый запуск — рабочее место","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="01-what-is.html"><span class="num">01</span>Что такое Claude Code</a>
+      <a href="02-first-launch.html" class="active"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>CLAUDE.md</a>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Скиллы, MCP, Hooks</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      Первый запуск
+    </div>
+
+    <div class="article-head">
+      <h1>Первый <span class="accent">запуск</span></h1>
+    </div>
+
+    <p id="intro">Первый запуск может сбить с толку. Пустое окно терминала, непонятные команды, и непонятно с чего начать. Я помню это ощущение — открываешь VS Code, видишь пустоту и думаешь: «ну и что теперь делать».</p>
+
+    <p>В этой статье разберём всё по шагам — от установки редактора до первой рабочей сессии. К концу у тебя будет настроенное рабочее место и понимание базовых команд, которые нужны каждый день.</p>
+
+    <h2 id="install-vscode">Установка VS Code</h2>
+
+    <p>VS Code — это профессиональный редактор кода. Бесплатный, работает на Mac, Windows и Linux. Именно внутри него живёт Claude Code — как расширение.</p>
+
+    <p>Скачай с официального сайта: <a href="https://code.visualstudio.com" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">code.visualstudio.com</a>. Устанавливается как обычная программа — скачал, запустил, прошёл по шагам установщика.</p>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: сайт code.visualstudio.com, кнопка Download]</figure>
+
+    <p>После установки можно опционально добавить русский интерфейс. Открой вкладку расширений (Cmd+Shift+X на Mac, Ctrl+Shift+X на Windows), найди «Russian Language Pack» от Microsoft и установи. После перезапуска VS Code будет на русском.</p>
+
+    <h2 id="install-claude">Подключение Claude Code</h2>
+
+    <p>Claude Code ставится как расширение прямо в VS Code. Открой вкладку расширений (Cmd+Shift+X / Ctrl+Shift+X), введи в поиске «Claude Code» и установи расширение от Anthropic.</p>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: поиск «Claude Code» в панели расширений VS Code]</figure>
+
+    <p>После установки в боковой панели VS Code появится иконка Claude. Нажми на неё и войди через свой аккаунт на claude.ai. Если аккаунта ещё нет — зарегистрируйся там же, это бесплатно.</p>
+
+    <p>При первом входе Claude Code откроет новую сессию в терминале с приглашением <code>claude&gt;</code>. Это значит — всё работает.</p>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: авторизованная сессия Claude Code в терминале VS Code]</figure>
+
+    <h2 id="project-structure">Структура проекта</h2>
+
+    <p>Claude Code всегда работает внутри папки — проекта. Это важно понять с самого начала: он видит только то, что находится в открытой папке. Это не ограничение, а удобство — Claude не лезет куда не просили.</p>
+
+    <p>Для каждого нового проекта создавай отдельную папку. В VS Code: File → Open Folder, выбери папку и открой. Внутри этой папки будет жить всё — твои HTML/CSS файлы, скрипты, CLAUDE.md с настройками.</p>
+
+    <p>Чистая структура с самого начала экономит много нервов потом. Один проект — одна папка. Без исключений.</p>
+
+    <h2 id="first-command">Первая команда</h2>
+
+    <p>Пиши задачу обычным русским языком — никаких специальных синтаксисов учить не нужно. Например:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Первый запрос</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай простую HTML страницу с заголовком «Привет мир»</pre>
+    </div>
+
+    <p>При первом использовании Claude Code будет спрашивать разрешение перед каждым действием — прочитать файл, создать файл, изменить файл. Соглашайся: это нормальное поведение по умолчанию для безопасности.</p>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: первый запрос в Claude Code и ответ с созданием файла]</figure>
+
+    <p>Если постоянные окна с подтверждениями мешают — в следующем разделе разберём как их убрать.</p>
+
+    <h2 id="bypass">Bypass Permissions — убрать постоянные вопросы</h2>
+
+    <p>По умолчанию Claude Code спрашивает разрешение буквально на всё — прочитать файл, записать строку, запустить команду. Для новичка, работающего в одиночку над своим проектом, это превращается в постоянный шум.</p>
+
+    <p>Есть два способа это починить. Первый — добавить файл настроек в папку проекта. Создай файл <code>.claude/settings.json</code> в корне проекта с таким содержимым:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ .claude/settings.json</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>{
+  "permissions": {
+    "allow": ["Bash", "Read", "Write", "Edit"]
+  }
+}</pre>
+    </div>
+
+    <p>Второй способ — добавить короткий алиас в терминал. Открой файл <code>~/.zshrc</code> и добавь строку:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ ~/.zshrc</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>alias cc="claude --dangerously-skip-permissions"</pre>
+    </div>
+
+    <p>После этого набирай <code>cc</code> вместо <code>claude</code> — и никаких вопросов. Чтобы изменения вступили в силу, перезапусти терминал или выполни <code>source ~/.zshrc</code>.</p>
+
+    <div class="callout warn">
+      <span class="callout-label">Важно</span>
+      <p>Bypass Permissions отключает запросы. Используй только в своих проектах — не давай Claude Code с bypass доступ к чужим файлам или системным папкам.</p>
+    </div>
+
+    <h2 id="history">История диалогов</h2>
+
+    <p>Каждый разговор в Claude Code сохраняется автоматически. Нажми на иконку часов в боковой панели Claude Code — там список всех прошлых сессий.</p>
+
+    <p>История привязана к папке проекта. Переключился в другую папку — видишь историю того проекта. Это удобно: вернулся к задаче через неделю, открыл вчерашний разговор и продолжил с места остановки.</p>
+
+    <p>Чтобы продолжить конкретный разговор, нажми на него в истории или используй команду <code>/resume</code>.</p>
+
+    <h2 id="commands">Команды которые нужны сразу</h2>
+
+    <p>В Claude Code есть несколько команд, которые используешь каждый день. Вот самые важные:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Команда</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Когда использовать</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>/clear</code></td>
+          <td style="padding:10px;">Начать разговор с чистого листа (не удаляет файлы, только историю чата)</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>/compact</code></td>
+          <td style="padding:10px;">Сжать историю чата когда Claude начинает «тупить» — убирает лишнее, оставляет суть</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>/rewind</code></td>
+          <td style="padding:10px;">Откатить последние изменения — и файлы, и историю (двойной Escape тоже работает)</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>/resume</code></td>
+          <td style="padding:10px;">Продолжить предыдущий разговор</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>/voice</code></td>
+          <td style="padding:10px;">Включить голосовой ввод</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><code>/usage</code></td>
+          <td style="padding:10px;">Посмотреть сколько токенов использовал за месяц</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout analogy">
+      <span class="callout-label">Аналогия</span>
+      <p>Это как Ctrl+Z, только умнее. /rewind откатывает не только то что написал в чате, но и файлы которые Claude Code изменил. Если что-то пошло не так — нажал Esc Esc и всё вернулось.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="01-what-is.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">Что такое Claude Code</span>
+      </a>
+      <a class="pager-next" href="03-claude-md.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">CLAUDE.md</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#install-vscode">Установка VS Code</a>
+    <a href="#install-claude">Подключение Claude Code</a>
+    <a href="#project-structure">Структура проекта</a>
+    <a href="#first-command">Первая команда</a>
+    <a href="#bypass">Bypass Permissions</a>
+    <a href="#history">История диалогов</a>
+    <a href="#commands">Команды</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>

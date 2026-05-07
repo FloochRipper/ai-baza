@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Первый проект с нуля | AI База</title>
+  <meta name="description" content="Как сделать первый реальный проект с Claude Code: Plan Mode, как давать задачи, правило одна задача = один диалог.">
+  <meta property="og:title" content="Первый проект с нуля">
+  <meta property="og:description" content="Как сделать первый реальный проект с Claude Code: Plan Mode, как давать задачи, правило одна задача = один диалог.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=10">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Первый проект с нуля","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="01-what-is.html"><span class="num">01</span>Что такое Claude Code</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>CLAUDE.md</a>
+      <a href="04-first-project.html" class="active"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Скиллы, MCP, Hooks</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      Первый проект
+    </div>
+
+    <div class="article-head">
+      <h1>Первый <span class="accent">проект</span> с нуля</h1>
+    </div>
+
+    <p id="intro">Самая частая ошибка первого проекта — написать одно длинное сообщение с кучей требований и ждать что Claude Code сделает всё сразу. Получается хаос: половина сделана, половина пропущена, и непонятно с чего начинать разгребать.</p>
+
+    <p>Хороший проект начинается не с длинного текста, а с плана. Сначала договариваешься о том, что будет сделано — потом Claude Code берётся за работу. Это меняет всё.</p>
+
+    <h2 id="choose-task">Выбор задачи</h2>
+
+    <p>Лучший первый проект — тот, который ты уже держишь в голове и можешь описать в одном-двух предложениях. Не «что-нибудь полезное», а конкретная вещь с понятным результатом.</p>
+
+    <p>Хорошие варианты для старта: личный сайт-визитка, страница с контактами, простой калькулятор, форма для сбора заявок, автоматизация таблицы в Excel. Всё это маленькое, конкретное, и результат виден сразу.</p>
+
+    <p>Плохой первый проект — «сделай мне Instagram» или «хочу платформу как Airbnb». Слишком большое, непонятно с чего начать, и Claude Code тоже не знает куда смотреть. Начнёт — и через час у тебя будет нагромождение файлов без понятного результата.</p>
+
+    <p>Простой тест: если можешь объяснить задачу коллеге за две минуты — это хороший первый проект.</p>
+
+    <h2 id="plan-mode">Plan Mode — сначала чертёж, потом стройка</h2>
+
+    <p>Перед тем как начать, нажми Shift+Tab. Это включает Plan Mode — режим, в котором Claude Code описывает что планирует сделать, но ничего не трогает. Ни одного файла.</p>
+
+    <p>Ты читаешь план, говоришь да или нет, просишь поменять — и только потом Claude Code начинает строить. Как архитектор, который показывает чертёж до того, как экскаватор выехал на участок.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Пример: запуск через Plan Mode</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Shift+Tab → режим планирования включён
+
+"Хочу сделать одностраничный сайт для фотографа. Страница с именем,
+описанием и контактами. Тёмный фон, современный дизайн."
+
+Claude Code опишет план: какие файлы создаст, что в каждом,
+структуру CSS — всё до того как что-то сделает.</pre>
+    </div>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: Plan Mode в действии — Claude Code описывает план без создания файлов]</figure>
+
+    <p>Если план не нравится — скажи что поменять прямо в чате. «Добавь отдельный раздел с портфолио» или «убери форму обратной связи, мне она не нужна». Только после согласования жмёшь Enter и начинается стройка.</p>
+
+    <h2 id="give-tasks">Как давать задачи</h2>
+
+    <p>Хорошая задача — это конкретный результат плюс критерий, по которому можно проверить что всё сделано правильно. Без этого Claude Code либо делает не то, либо спрашивает уточнения на каждом шагу.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Плохо vs хорошо</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Плохо:  "Сделай красиво"
+
+Хорошо: "Добавь кнопку 'Написать мне' внизу страницы.
+         При клике — открывается письмо на myemail@gmail.com.
+         Кнопка оранжевого цвета, как акцент на странице."</pre>
+    </div>
+
+    <p>Ещё один приём — добавлять критерий проверки в конец каждой задачи. Тогда Claude Code сам проверит результат до того как доложит о готовности.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Критерий проверки</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>В конце каждой задачи добавляй:
+"Проверь: кнопка видна, клик открывает почту, на мобильном тоже работает."
+
+Тогда Claude Code сам проверит результат до того как доложит о готовности.</pre>
+    </div>
+
+    <h2 id="one-task-one-dialog">Одна задача = один диалог</h2>
+
+    <p>Чем длиннее становится чат, тем хуже Claude Code помнит начало разговора. Это не баг — это устройство контекстного окна, о котором отдельная статья. На практике это значит одно: длинный разговор = размытый результат.</p>
+
+    <p>Правило простое: одна чёткая задача на один разговор. Закончил задачу — написал <code>/clear</code> — начал новую задачу в чистом чате.</p>
+
+    <p>Это не ограничение, это рабочий процесс. Каждый разговор остаётся сфокусированным, Claude Code не путается в требованиях из начала переписки, результат чище.</p>
+
+    <div class="callout key">
+      <span class="callout-label">Главное правило</span>
+      <p>Не пытайся сделать весь проект в одном разговоре. Один диалог = одна задача = чистый результат.</p>
+    </div>
+
+    <h2 id="iterations">Итерации и правки</h2>
+
+    <p>Первый результат редко бывает идеальным — это нормально и ожидаемо. Не потому что Claude Code плохо работает, а потому что словами сложно передать всё с первого раза. Итерации — часть процесса.</p>
+
+    <p>Когда просишь правки — говори конкретно, что именно поменять. И всегда добавляй «остальное не трогай» — иначе Claude Code может начать улучшать то, что ты не просил.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Как просить правки</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>"Кнопка есть, но она слишком большая на мобильном.
+ Уменьши padding до 12px 24px. Остальное не трогай."</pre>
+    </div>
+
+    <p>«Остальное не трогай» — это не просьба, это инструкция. Без неё Claude Code честно попытается улучшить всё, что заметил по пути.</p>
+
+    <h2 id="when-wrong">Когда что-то пошло не так</h2>
+
+    <p>Бывает: попросил одно, получил другое, и файлы уже изменены. Без паники — есть два инструмента.</p>
+
+    <p>Быстрый откат: дважды нажми Escape или напиши <code>/rewind</code>. Claude Code откатит и файлы, и разговор к тому моменту, с которого всё пошло не так.</p>
+
+    <p>Если зашло далеко — выручит git. Это отдельная тема со своей статьёй, но суть простая: если регулярно делать <code>git commit</code> после каждой рабочей версии, у тебя всегда есть точка возврата.</p>
+
+    <div class="callout analogy">
+      <span class="callout-label">Аналогия</span>
+      <p>Как фотограф делает промежуточные снимки — commit это твой checkpoint. Сделал что-то работающее — зафиксировал. Пошло не так — вернулся к checkpoint.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="03-claude-md.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">CLAUDE.md</span>
+      </a>
+      <a class="pager-next" href="05-skills-mcp-hooks.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">Скиллы, MCP, Hooks</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#choose-task">Выбор задачи</a>
+    <a href="#plan-mode">Plan Mode</a>
+    <a href="#give-tasks">Как давать задачи</a>
+    <a href="#one-task-one-dialog">Одна задача = один диалог</a>
+    <a href="#iterations">Итерации и правки</a>
+    <a href="#when-wrong">Когда что-то пошло не так</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>

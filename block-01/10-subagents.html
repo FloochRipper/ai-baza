@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Субагенты: как запустить помощников | AI База</title>
+  <meta name="description" content="Что такое субагенты в Claude Code, как создать .claude/agents/, выбрать модель под задачу и запускать агентов параллельно.">
+  <meta property="og:title" content="Субагенты: как запустить помощников">
+  <meta property="og:description" content="Что такое субагенты в Claude Code, как создать .claude/agents/, выбрать модель под задачу и запускать агентов параллельно.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=10">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Субагенты: как запустить помощников","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="01-what-is.html"><span class="num">01</span>Что такое Claude Code</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>CLAUDE.md</a>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Скиллы, MCP, Hooks</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html" class="active"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      Субагенты
+    </div>
+
+    <div class="article-head">
+      <h1><span class="accent">Субагенты</span>: запустить помощников</h1>
+    </div>
+
+    <p id="intro">Представь, что ты менеджер. Есть задача которую можно разбить на части и раздать трём людям одновременно — вместо того чтобы делать всё самому по очереди. Claude Code работает точно так же через субагентов.</p>
+
+    <p>Один главный агент принимает задачу, разбивает её и запускает несколько помощников. Пока ты занимаешься другим — они работают. Потом собирает результаты.</p>
+
+    <h2 id="what-is">Что такое субагент</h2>
+
+    <p>Главный агент (оркестратор) создаёт субагентов — отдельные изолированные разговоры. У каждого субагента чистый контекст, конкретная задача, и он не знает что делают другие.</p>
+
+    <p>Это решает сразу две проблемы. Первая — скорость: несколько задач идут параллельно, не по очереди. Вторая — качество: каждый агент сфокусирован на своём, не отвлекается на чужой контекст.</p>
+
+    <div class="callout analogy">
+      <span class="callout-label">Аналогия</span>
+      <p>Оркестратор = дирижёр. Субагенты = музыканты. Каждый играет свою партию, дирижёр слушает всех и собирает симфонию.</p>
+    </div>
+
+    <h2 id="agents-folder">Папка .claude/agents/</h2>
+
+    <p>Каждый субагент — это markdown-файл в папке <code>.claude/agents/</code>. Создаёшь файл, описываешь агента — он готов к работе.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Структура папки</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>project/
+  .claude/
+    agents/
+      researcher.md     ← агент для исследований
+      code-writer.md    ← агент для написания кода
+      reviewer.md       ← агент для проверки</pre>
+    </div>
+
+    <p>Внутри каждого файла — два блока: шапка с метаданными и системный промпт. Вот как выглядит файл агента-исследователя:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ .claude/agents/researcher.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>---
+name: researcher
+description: Research agent. Searches for information, reads docs, summarizes findings.
+  Use for: finding information, checking documentation, competitive analysis.
+model: claude-haiku-4-5
+---
+
+You are a research assistant. Your task is to find and summarize information.
+Always cite sources. Be concise. Output structured summaries.</pre>
+    </div>
+
+    <p>Поле <code>description</code> — самое важное. Именно по нему оркестратор решает, какого агента вызвать под конкретную задачу. Пиши описание чётко: что делает, когда использовать.</p>
+
+    <h2 id="model-choice">Выбор модели под задачу</h2>
+
+    <p>Разные агенты могут использовать разные модели. Это позволяет не тратить дорогие токены Opus на задачи, которые отлично решает дешёвый Haiku.</p>
+
+    <div class="grid-cards cols-3">
+      <div class="grid-card" style="border-left: 4px solid #22c55e;">
+        <div class="card-letter" style="color: #22c55e;">O</div>
+        <div class="card-name">Opus — Планирование</div>
+        <div class="card-desc">Самый умный, медленный, дорогой. Для архитектурных решений, сложного анализа, задач где важна глубина мышления.</div>
+      </div>
+      <div class="grid-card" style="border-left: 4px solid var(--accent);">
+        <div class="card-letter" style="color: var(--accent);">S</div>
+        <div class="card-name">Sonnet — Код и контент</div>
+        <div class="card-desc">Баланс скорости и качества. Рабочая лошадка. 90% задач — сюда. Пишет код, рефакторит, создаёт контент.</div>
+      </div>
+      <div class="grid-card" style="border-left: 4px solid #6b7280;">
+        <div class="card-letter" style="color: #6b7280;">H</div>
+        <div class="card-name">Haiku — Поиск и мелкие задачи</div>
+        <div class="card-desc">Быстрый и дешёвый. Для поиска, сортировки, кратких ответов, задач с большим объёмом данных.</div>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Правило выбора модели</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Сложная задача / принять решение → Opus
+Написать код / рефакторинг / статья → Sonnet (по умолчанию)
+Поиск / суммаризация / простой ответ → Haiku</pre>
+    </div>
+
+    <h2 id="foreground-background">Foreground или background</h2>
+
+    <p>Субагент может работать в двух режимах. Foreground — главный агент ждёт пока субагент закончит, только потом продолжает. Это нужно когда результат одного шага нужен для следующего.</p>
+
+    <p>Background — субагент работает параллельно, главный агент не ждёт и занимается другими задачами. Это для независимых задач, которые можно делать одновременно.</p>
+
+    <p>На практике Claude Code разбирается с этим сам, исходя из твоих инструкций. Просто описываешь что нужно сделать — он решает как лучше организовать процесс:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Пример инструкции оркестратору</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>"Запусти три агента параллельно:
+ - Один ищет конкурентов в этой нише
+ - Второй анализирует наш сайт
+ - Третий пишет черновик статьи
+ Жди всех трёх, потом соберём результаты."</pre>
+    </div>
+
+    <h2 id="orchestration">Оркестрация через CLAUDE.md</h2>
+
+    <p>Можно прописать в CLAUDE.md когда и какого агента вызывать. Тогда Claude сам будет выбирать нужного агента под тип задачи — без лишних объяснений:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Добавить в CLAUDE.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>## Агенты и когда использовать
+
+Если задача = исследование → агент researcher
+Если задача = написание кода → агент code-writer
+Если задача = проверка результата → агент reviewer
+
+Для комплексных задач: сначала researcher, потом code-writer, потом reviewer.</pre>
+    </div>
+
+    <p>Это особенно удобно для повторяющихся рабочих процессов. Один раз описал логику — и не думаешь об этом каждый раз заново.</p>
+
+    <h2 id="builtin">Встроенные субагенты Anthropic</h2>
+
+    <p>Claude Code поставляется с несколькими встроенными субагентами. Они запускаются автоматически или по команде, и покрывают самые частые задачи при работе с кодом:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Агент</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>Explore</code></td>
+          <td style="padding:10px;">Поиск по кодовой базе: где что определено, что что использует</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>Plan</code></td>
+          <td style="padding:10px;">Планирование реализации: архитектура, шаги, trade-offs</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>Code Guide</code></td>
+          <td style="padding:10px;">Вопросы о Claude Code: как что работает, настройки, команды</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><code>StatusLine</code></td>
+          <td style="padding:10px;">Настройка statusline в терминале</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="agent-teams">Agent Teams — следующий уровень</h2>
+
+    <p>Обычные субагенты не знают друг о друге — каждый работает в своём изолированном пузыре. Agent Teams — это другой режим, где агенты могут общаться между собой напрямую.</p>
+
+    <p>Когда это нужно: сложные исследовательские задачи, где важно рассмотреть тему с нескольких сторон — один агент ищет аргументы за, другой против, третий синтезирует. Или сценарии ревью, где один агент пишет, другой критикует.</p>
+
+    <div class="callout warn">
+      <span class="callout-label">Важно</span>
+      <p>Agent Teams — мощный инструмент, но жрёт много токенов и времени. Для стандартных задач — субагенты без общения между собой. Agent Teams рассматривай только когда тебе действительно нужны несколько независимых точек зрения на одну задачу.</p>
+    </div>
+
+    <div class="callout key">
+      <span class="callout-label">Итого</span>
+      <p>Субагенты — это способ делать несколько вещей параллельно, не засоряя основной контекст. Создаёшь .claude/agents/ с описаниями, выбираешь модель под задачу, прописываешь логику в CLAUDE.md — и твой проект начинает работать как слаженная команда, а не один человек в очереди.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="09-second-brain.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">Второй мозг</span>
+      </a>
+      <a class="pager-next" href="11-process.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">Процесс</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#what-is">Что такое субагент</a>
+    <a href="#agents-folder">Папка .claude/agents/</a>
+    <a href="#model-choice">Выбор модели</a>
+    <a href="#foreground-background">Foreground / background</a>
+    <a href="#orchestration">Оркестрация через CLAUDE.md</a>
+    <a href="#builtin">Встроенные субагенты</a>
+    <a href="#agent-teams">Agent Teams</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>

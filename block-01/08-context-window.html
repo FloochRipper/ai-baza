@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Контекстное окно: почему Claude тупит | AI База</title>
+  <meta name="description" content="Что такое контекстное окно, три зоны заполненности, команды /compact /clear /rewind и как правильно работать чтобы Claude не терял нить.">
+  <meta property="og:title" content="Контекстное окно: почему Claude тупит">
+  <meta property="og:description" content="Что такое контекстное окно, три зоны заполненности, команды /compact /clear /rewind и как правильно работать чтобы Claude не терял нить.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=10">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Контекстное окно: почему Claude тупит","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="01-what-is.html"><span class="num">01</span>Что такое Claude Code</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>CLAUDE.md</a>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Скиллы, MCP, Hooks</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html" class="active"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      Контекстное окно
+    </div>
+
+    <div class="article-head">
+      <h1>Контекстное окно: <span class="accent">почему Claude тупит</span></h1>
+    </div>
+
+    <p id="intro">Замечал, что в конце длинного разговора с Claude Code он начинает давать странные ответы? Как будто забыл что делали раньше, повторяет уже сделанное, или делает что-то противоположное договорённостям?</p>
+
+    <p>Это контекстное окно заполняется. Не баг, не сбой — так работают все языковые модели без исключения. Разобравшись с этим один раз, ты перестанешь злиться и начнёшь работать так, чтобы этой проблемы почти не возникало.</p>
+
+    <h2 id="what-is">Что такое контекстное окно</h2>
+
+    <p>Хороший способ понять это — оперативная память компьютера против жёсткого диска. RAM хранит то, с чем компьютер работает прямо сейчас: открытые вкладки, запущенные программы. Жёсткий диск хранит всё остальное — терабайты файлов, к которым ты обратишься когда-нибудь потом.</p>
+
+    <p>Контекстное окно — это RAM Claude. Всё, что он может «видеть» прямо сейчас: вся переписка с начала сессии, все файлы, которые он читал, все свои ответы. За пределами этого окна для него не существует ничего.</p>
+
+    <p>У Claude Code окно — 200 000 токенов. Примерно 150 000 слов, или около 500 страниц текста. Звучит как много. Но длинный разговор с чтением десятков файлов съедает это пространство быстрее, чем кажется.</p>
+
+    <h2 id="zones">Три зоны заполненности</h2>
+
+    <div class="grid-cards cols-3">
+      <div class="grid-card" style="border-left: 4px solid #22c55e;">
+        <div class="card-letter" style="color: #22c55e;">0–50%</div>
+        <div class="card-name">Зелёная зона</div>
+        <div class="card-desc">Работает отлично. Помнит всё, отвечает точно. Можно работать спокойно.</div>
+      </div>
+      <div class="grid-card" style="border-left: 4px solid #eab308;">
+        <div class="card-letter" style="color: #eab308;">50–70%</div>
+        <div class="card-name">Оранжевая зона</div>
+        <div class="card-desc">Начинает упрощать. Ответы становятся более общими. Хорошее время для /compact.</div>
+      </div>
+      <div class="grid-card" style="border-left: 4px solid #ef4444;">
+        <div class="card-letter" style="color: #ef4444;">70–85%</div>
+        <div class="card-name">Красная зона</div>
+        <div class="card-desc">Заметно хуже. Может забывать детали задачи. После 85% — автоматическое сжатие.</div>
+      </div>
+    </div>
+
+    <p>Процент заполненности можно видеть прямо в терминале — через плагин statusline. Как его поставить, разберём <a href="#statusline" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">ниже в этой же статье</a>.</p>
+
+    <h2 id="lost-in-middle">Проблема «потеря середины»</h2>
+
+    <p>Есть ещё одна особенность, о которой важно знать. Исследования показывают: языковые модели хорошо помнят начало и конец контекста, но плохо воспроизводят то, что было в середине.</p>
+
+    <p>На практике это выглядит так: вы обсуждали важный архитектурный выбор в середине длинного разговора — и Claude в конце сессии действует так, как будто этого разговора не было. Технически он его «видит», но практически — не учитывает.</p>
+
+    <p>Решение простое: важный контекст держи либо в начале (CLAUDE.md делает это автоматически), либо повторяй в свежих сообщениях ближе к концу переписки.</p>
+
+    <h2 id="autocompact">Автокомпакт — что происходит автоматически</h2>
+
+    <p>Когда контекст достигает примерно 85%, Claude Code автоматически сжимает историю разговора. Это называется autocompact.</p>
+
+    <p>Что он сохраняет: текущую задачу, последние сообщения, важные решения. Что выбрасывает: подробные объяснения, повторяющиеся обмены репликами, детальные промежуточные шаги.</p>
+
+    <p>После автокомпакта Claude продолжает работу — но ты можешь заметить, что он «забыл» какую-то специфику. В интерфейсе появится сообщение о том, что сжатие произошло.</p>
+
+    <div class="callout analogy">
+      <span class="callout-label">Важно</span>
+      <p>Автокомпакт лучше, чем ничего, но хуже, чем ручной /compact с инструкциями. Потому что Claude сам решает что важно, а что нет — и не всегда угадывает правильно.</p>
+    </div>
+
+    <h2 id="compact">/compact — ручное сжатие</h2>
+
+    <p>Лучше не ждать автокомпакта — запускать /compact самому, когда видишь что разговор затянулся. Команда сжимает историю и освобождает место в контексте.</p>
+
+    <p>Умный способ — явно сказать что сохранить:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ В чате Claude Code</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>/compact Сохрани: текущую задачу — добавить форму регистрации.
+Мы используем React, форма отправляет на /api/register.
+Уже сделали: валидацию email. Осталось: обработка ошибок.</pre>
+    </div>
+
+    <p>Если написать просто /compact без аргументов — Claude сожмёт сам по своему усмотрению. Иногда этого достаточно, но с инструкцией результат надёжнее.</p>
+
+    <h2 id="clear">/clear — чистый старт</h2>
+
+    <p>Команда /clear очищает всю историю разговора полностью. Файлы при этом не трогаются — исчезает только переписка.</p>
+
+    <p>Когда использовать: задача закончена и ты берёшься за что-то принципиально другое. Новая задача — новый чат.</p>
+
+    <div class="callout analogy">
+      <span class="callout-label">Аналогия</span>
+      <p>Это как закрыть вкладку в браузере и открыть новую. Сайты (файлы) остаются, история браузера (переписка) — нет.</p>
+    </div>
+
+    <h2 id="rewind">/rewind — откатить всё назад</h2>
+
+    <p>Команда /rewind — это двойной Escape. Она откатывает назад и историю чата, и реальные изменения в файлах, которые Claude сделал.</p>
+
+    <p>Это редкая возможность: большинство «отмен» убирают только текст в интерфейсе, но не трогают уже изменённые файлы. /rewind откатывает и то и другое.</p>
+
+    <p>Когда использовать: Claude сделал что-то не то, и ты хочешь вернуться к состоянию до этого. Важное ограничение: работает только в рамках текущей сессии. Для более старых точек возврата — git.</p>
+
+    <div class="callout key">
+      <span class="callout-label">Совет</span>
+      <p>Именно поэтому полезно делать git commit после каждой завершённой задачи — это твои точки сохранения. /rewind закрывает последние несколько шагов, git закрывает всё остальное.</p>
+    </div>
+
+    <h2 id="statusline">Statusline — видеть заполненность в терминале</h2>
+
+    <p>Statusline — это плагин, который показывает процент заполненности контекста прямо в строке терминала. Видишь <code>[42%]</code> — понимаешь где находишься.</p>
+
+    <p>Установка:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ В чате Claude Code</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>/plugins
+# найти "statusline" и установить</pre>
+    </div>
+
+    <p>После установки в строке терминала появится индикатор. Теперь ты замечаешь оранжевую зону раньше, чем Claude начинает деградировать — и успеваешь сделать /compact вовремя.</p>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: строка терминала с индикатором statusline — например [58%] рядом с промптом]</figure>
+
+    <h2 id="rules">Правила которые помогают</h2>
+
+    <p>Три правила, которые я использую постоянно. Они не требуют ничего сложного — только привычки.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Рабочие правила</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Правило 1: одна задача = одна сессия
+Закончил задачу → /clear → новый чат для следующей.
+
+Правило 2: большие задачи — декомпозируй
+"Сделай мне e-commerce" → разбей на 10 задач по одной за раз.
+
+Правило 3: не раздувай инструменты
+Каждый подключённый MCP постоянно занимает ~2000 токенов.
+Подключай только те, что реально используешь.</pre>
+    </div>
+
+    <p>Первое правило — самое важное. Привычка делать /clear после каждой завершённой задачи меняет качество работы радикально. Новая задача в свежем контексте всегда даёт лучший результат, чем продолжение длинного хвоста переписки.</p>
+
+    <h2 id="models">Opus, Sonnet, Haiku — когда что выбрать</h2>
+
+    <p>Контекстное окно одинаковое у всех моделей Claude. Но скорость, глубина рассуждений и цена — разные. Вот когда что использовать:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Модель</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Характер</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Когда использовать</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>Claude Opus</code></td>
+          <td style="padding:10px;">Умнее, медленнее, дороже</td>
+          <td style="padding:10px;">Сложные задачи: архитектура, сложная отладка, стратегические решения</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>Claude Sonnet</code></td>
+          <td style="padding:10px;">Баланс скорости и качества</td>
+          <td style="padding:10px;">Большинство задач: написание кода, рефакторинг, создание контента</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><code>Claude Haiku</code></td>
+          <td style="padding:10px;">Быстро, дёшево</td>
+          <td style="padding:10px;">Простые запросы: поиск, краткие ответы, задачи с большим объёмом</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>По умолчанию Claude Code использует Sonnet — оптимальный вариант для повседневной работы. Переключить модель можно в настройках или для конкретного разговора.</p>
+
+    <div class="callout key">
+      <span class="callout-label">Итого</span>
+      <p>Контекстное окно — не враг, а инструмент. Следи за заполненностью через statusline, делай /compact когда доходишь до оранжевой зоны, /clear между задачами — и Claude будет работать стабильно весь день.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="07-deploy.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">Деплой</span>
+      </a>
+      <a class="pager-next" href="09-second-brain.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">Второй мозг</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#what-is">Что такое контекстное окно</a>
+    <a href="#zones">Три зоны заполненности</a>
+    <a href="#lost-in-middle">Потеря середины</a>
+    <a href="#autocompact">Автокомпакт</a>
+    <a href="#compact">/compact</a>
+    <a href="#clear">/clear</a>
+    <a href="#rewind">/rewind</a>
+    <a href="#statusline">Statusline</a>
+    <a href="#rules">Правила</a>
+    <a href="#models">Opus, Sonnet, Haiku</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>

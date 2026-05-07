@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Деплой: выложить в интернет | AI База</title>
+  <meta name="description" content="Как выложить сайт через Vercel или Netlify, настроить автодеплой с GitHub и безопасно хранить API-ключи.">
+  <meta property="og:title" content="Деплой: выложить в интернет">
+  <meta property="og:description" content="Как выложить сайт через Vercel или Netlify, настроить автодеплой с GitHub и безопасно хранить API-ключи.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=10">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Деплой: выложить в интернет","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="01-what-is.html"><span class="num">01</span>Что такое Claude Code</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>CLAUDE.md</a>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Скиллы, MCP, Hooks</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html" class="active"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      Деплой
+    </div>
+
+    <div class="article-head">
+      <h1><span class="accent">Деплой</span>: выложить в интернет</h1>
+    </div>
+
+    <p id="intro">Сделать сайт на локальном компьютере — это полдела. Выложить его так, чтобы его мог открыть любой человек в интернете — вот это уже продукт.</p>
+
+    <p>Деплой — это процесс, когда твои локальные файлы уезжают на сервер и получают публичный адрес. До деплоя сайт существует только на твоём компьютере. После — он живёт по ссылке, которую можно отправить любому.</p>
+
+    <h2 id="vercel">Vercel — самый простой способ</h2>
+
+    <p>Для статических сайтов и фронтенд-проектов Vercel — самый удобный вариант. Бесплатный тариф перекрывает все личные проекты с запасом. Схема работы простая: подключаешь GitHub-репозиторий, и дальше Vercel сам деплоит всё при каждом пуше.</p>
+
+    <p>Пошагово это выглядит так.</p>
+
+    <p>Шаг первый: регистрируешься на vercel.com через GitHub-аккаунт — одно нажатие, никаких форм.</p>
+
+    <p>Шаг второй: New Project → Import Git Repository → выбираешь свой репозиторий.</p>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: экран импорта репозитория в Vercel — список GitHub-репозиториев с кнопкой Import]</figure>
+
+    <p>Шаг третий: нажимаешь Deploy. Через 30–60 секунд сайт живой. Vercel выдаёт бесплатный адрес вида <code>yourproject.vercel.app</code> — уже можно отправлять ссылку.</p>
+
+    <div class="callout key">
+      <span class="callout-label">Главное</span>
+      <p>После первого деплоя всё работает автоматически. Написал код → git push → через минуту сайт обновился. Больше ничего делать не нужно.</p>
+    </div>
+
+    <h2 id="vercel-domain">Свой домен</h2>
+
+    <p>Адрес <code>yourproject.vercel.app</code> рабочий, но для серьёзного проекта лучше иметь свой домен. Купить его можно на reg.ru, namecheap.com или у любого регистратора — стоит от 500 рублей в год.</p>
+
+    <p>Подключается просто: в Vercel открываешь Settings → Domains → Add Domain, вводишь свой домен. Vercel покажет DNS-записи, которые нужно добавить — заходишь в панель регистратора и прописываешь их там. Обычно занимает до 30 минут, иногда быстрее.</p>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: настройка домена в Vercel — поле ввода домена и DNS-записи для добавления у регистратора]</figure>
+
+    <h2 id="netlify">Netlify — альтернатива</h2>
+
+    <p>Netlify работает по той же схеме, что и Vercel: подключаешь GitHub, дальше всё само. Принципиальной разницы для простых сайтов нет — выбирай, что нравится.</p>
+
+    <p>Netlify немного лучше в нескольких вещах: умеет обрабатывать формы без бэкенда, поддерживает файл <code>_headers</code> для настройки кэша, есть edge-функции. Подключить: netlify.com → New site from Git → выбираешь репозиторий.</p>
+
+    <p>Файл <code>_headers</code> в корне проекта управляет кэшем — шрифты и стили браузер будет загружать один раз и помнить долго:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ _headers</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/styles.css
+  Cache-Control: public, max-age=86400</pre>
+    </div>
+
+    <h2 id="github-actions">GitHub Actions — CI/CD без жаргона</h2>
+
+    <p>CI/CD — это «непрерывный деплой». На практике означает одно: каждый пуш в main — сайт обновился автоматически. GitHub Actions — это робот, который запускает нужные команды каждый раз, когда ты пушишь код.</p>
+
+    <p>Для простых сайтов Vercel и Netlify уже делают это за тебя. Actions нужен, когда есть шаг сборки (например, нужно прогнать npm run build), тесты, или сложная логика деплоя на нестандартный хостинг.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ .github/workflows/deploy.yml</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to Netlify
+        run: npx netlify-cli deploy --prod
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}</pre>
+    </div>
+
+    <p>Файл кладётся в папку <code>.github/workflows/</code> — GitHub подхватывает его автоматически и запускает при каждом пуше в ветку main.</p>
+
+    <h2 id="secrets">GitHub Secrets — API-ключи в безопасности</h2>
+
+    <p>Проблема: для деплоя нужны токены и ключи, но класть их прямо в код нельзя — они окажутся в публичном репозитории и любой сможет их использовать. Решение — GitHub Secrets.</p>
+
+    <p>Как добавить: заходишь в репозиторий на GitHub → Settings → Secrets and variables → Actions → New repository secret. Пишешь название — например, <code>NETLIFY_AUTH_TOKEN</code> — и вставляешь значение токена. Сохраняешь.</p>
+
+    <p>В файле воркфлоу обращаешься к секрету через <code>${{ secrets.NETLIFY_AUTH_TOKEN }}</code> — GitHub сам подставит реальное значение при запуске, и оно нигде не появится в логах.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Использование секретов в workflows</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>- name: Deploy
+  env:
+    API_KEY: ${{ secrets.MY_API_KEY }}
+    DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  run: ./deploy.sh</pre>
+    </div>
+
+    <div class="callout warn">
+      <span class="callout-label">Важно</span>
+      <p>Никогда не пиши API-ключи прямо в коде или в .github/workflows/*.yml файлах. Они попадут в публичный репозиторий. Всегда через Secrets.</p>
+    </div>
+
+    <h2 id="railway">Railway — для проектов с бэкендом</h2>
+
+    <p>Vercel и Netlify — это для статических сайтов: HTML, CSS, JS без сервера. Если в твоём проекте есть серверная часть — Python-скрипт, Node.js, база данных, Telegram-бот — нужен другой хостинг.</p>
+
+    <p>Railway подключается к GitHub так же, деплоит автоматически, есть бесплатный tier. Заходишь на railway.app, регистрируешься, New Project → Deploy from GitHub repo — остальное само.</p>
+
+    <div class="grid-cards cols-2">
+      <div class="grid-card">
+        <div class="card-letter">V/N</div>
+        <div class="card-name">Статические сайты</div>
+        <div class="card-desc">HTML, CSS, JS без сервера. React, Vue без API. Бесплатно для личных проектов.</div>
+      </div>
+      <div class="grid-card">
+        <div class="card-letter">R</div>
+        <div class="card-name">Серверные проекты</div>
+        <div class="card-desc">Python, Node.js, базы данных. Telegram-боты, API. Есть бесплатный tier.</div>
+      </div>
+    </div>
+
+    <div class="callout key">
+      <span class="callout-label">Итого</span>
+      <p>Для старта: Vercel или Netlify — подключил GitHub и забыл. Свой домен — пара записей у регистратора. API-ключи — только через Secrets, никогда в коде. Есть сервер — смотришь в сторону Railway.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="06-github.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">GitHub</span>
+      </a>
+      <a class="pager-next" href="08-context-window.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">Контекстное окно</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#vercel">Vercel</a>
+    <a href="#vercel-domain">Свой домен</a>
+    <a href="#netlify">Netlify</a>
+    <a href="#github-actions">GitHub Actions</a>
+    <a href="#secrets">GitHub Secrets</a>
+    <a href="#railway">Railway</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>

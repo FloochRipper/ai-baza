@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Второй мозг: Claude который всё помнит | AI База</title>
+  <meta name="description" content="Как настроить систему памяти в Claude Code: AutoMemory, папка memory/, knowledge-base и handoff между сессиями.">
+  <meta property="og:title" content="Второй мозг: Claude который всё помнит">
+  <meta property="og:description" content="Три слоя памяти, которые превращают Claude из инструмента с амнезией в партнёра, который помнит всё.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=10">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Второй мозг: Claude который всё помнит","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="01-what-is.html"><span class="num">01</span>Что такое Claude Code</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>CLAUDE.md</a>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Скиллы, MCP, Hooks</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html" class="active"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      Второй мозг
+    </div>
+
+    <div class="article-head">
+      <h1><span class="accent">Второй мозг</span>: Claude который всё помнит</h1>
+    </div>
+
+    <p id="intro">Claude ничего не помнит между сессиями. Объяснил ему свой проект — начал новый чат — объясняешь заново. Через неделю ещё раз. Это утомляет.</p>
+
+    <p>Но есть система, которая решает это. Не один инструмент — три слоя, каждый со своей ролью. Первый слой Claude ведёт сам. Второй — ты управляешь вручную. Третий работает сразу во всех твоих проектах. Вместе они превращают каждую новую сессию не в начало с нуля, а в продолжение.</p>
+
+    <h2 id="layers">Три слоя памяти</h2>
+
+    <p>Перед тем как разбирать каждый — вот общая картина:</p>
+
+    <p>Слой 1 — AutoMemory. Встроен в Claude Code, работает автоматически. Claude сам записывает заметки о тебе и проекте по ходу работы. Не требует настройки, но иногда пишет не то что нужно.</p>
+
+    <p>Слой 2 — папка <code>memory/</code>. Здесь ты решаешь, что важно. Файлы с контекстом о тебе, о проекте, о предпочтениях. Claude читает их в начале каждой сессии.</p>
+
+    <p>Слой 3 — <code>knowledge-base/</code>. Общий склад знаний, который работает сразу во всех проектах. Разобрал инструмент, принял решение, нашёл рабочую методологию — всё лежит здесь и доступно из любого проекта.</p>
+
+    <h2 id="automemory">Слой 1: AutoMemory</h2>
+
+    <p>AutoMemory встроен в Claude Code — ничего настраивать не нужно. Пока ты работаешь, Claude автоматически сохраняет заметки: что за проект, какие предпочтения ты высказывал, какие решения принимал. Всё это хранится в папке <code>.claude/</code> в корне проекта.</p>
+
+    <p>Посмотреть что там накопилось, включить или выключить AutoMemory — одна команда в чате:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ В чате Claude Code</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>/memory          # показать сохранённые заметки + переключатель вкл/выкл</pre>
+    </div>
+
+    <p>Минус у AutoMemory один: пишет всё подряд. Иногда сохраняет то, что ты не просил, и пропускает то, что реально важно. Полезно время от времени заходить и чистить руками — убирать лишнее, оставлять нужное.</p>
+
+    <div class="callout analogy">
+      <span class="callout-label">Аналогия</span>
+      <p>AutoMemory — это как новый сотрудник, который всё записывает в блокнот. Иногда пишет лишнее, иногда важное пропускает. Полезно заходить и чистить вручную.</p>
+    </div>
+
+    <h2 id="memory-folder">Слой 2: Папка memory/</h2>
+
+    <p>Это управляемый слой — ты сам решаешь что здесь хранится. В отличие от AutoMemory, который пишет что захочет, <code>memory/</code> содержит именно то, что ты считаешь важным.</p>
+
+    <p>Стандартная структура выглядит так:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Структура</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>project/
+  memory/
+    user.md        ← кто ты, предпочтения, стиль работы
+    feedback.md    ← что работает / что не делать
+    project.md     ← контекст проекта, решения, статус
+  MEMORY.md        ← индекс: одна строка на каждый файл памяти</pre>
+    </div>
+
+    <p><code>MEMORY.md</code> в корне — это индекс. Claude читает его первым, чтобы понять что вообще есть в памяти, и потом подтягивает нужные файлы по ситуации. Это экономит токены: не надо грузить всё подряд, только то что нужно для текущей задачи.</p>
+
+    <p>Создать структуру:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Терминал</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>mkdir -p memory
+touch MEMORY.md</pre>
+    </div>
+
+    <p>Попросить Claude что-то запомнить — просто скажи ему:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ В чате</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>"Запомни: я предпочитаю короткие ответы без лишних объяснений.
+ Записывать в memory/feedback.md."</pre>
+    </div>
+
+    <p>Вот пример того, как выглядит заполненный <code>memory/user.md</code>:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ memory/user.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>---
+name: User preferences
+type: user
+---
+
+Никита — предприниматель, не разработчик.
+Объяснять техническое на пальцах, без жаргона.
+Предпочитает короткие ответы.
+Работает на macOS, VS Code, zsh.</pre>
+    </div>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: структура папки memory/ в VS Code — три файла и MEMORY.md в корне проекта]</figure>
+
+    <h2 id="knowledge-base">Слой 3: knowledge-base/</h2>
+
+    <p>Первые два слоя живут внутри одного проекта. <code>knowledge-base/</code> работает иначе — это общая база, которая доступна из любого проекта.</p>
+
+    <p>Разобрал как деплоить на Vercel — эти знания пригодятся в следующем проекте тоже. Нашёл рабочую методологию — она универсальная, не привязана к конкретному проекту. Всё это живёт в <code>knowledge-base/</code>.</p>
+
+    <p>Структура:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Структура</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>knowledge-base/
+  raw/         ← сырьё: статьи, конспекты, источники
+  wiki/        ← упорядоченные заметки (один файл = одна тема)
+  outputs/     ← датированные разборы и решения (YYYY-MM-DD-тема.md)
+  INBOX.md     ← быстрый захват мыслей</pre>
+    </div>
+
+    <p>Создать:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Терминал</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>mkdir -p ~/Documents/knowledge-base/{raw,wiki,outputs}
+touch ~/Documents/knowledge-base/INBOX.md</pre>
+    </div>
+
+    <p>Как это используется на практике: разобрал какой хостинг выбрать — сохранил в <code>outputs/2026-05-10-vercel-vs-netlify.md</code>. Через месяц тот же вопрос в другом проекте — Claude читает этот файл и уже знает что решили и почему. Если что-то универсальное — методология, паттерн, принцип — идёт в <code>wiki/</code>. Быстрая мысль на ходу — в <code>INBOX.md</code>, потом Claude раскладывает по папкам.</p>
+
+    <p>Разница с Obsidian: Obsidian — это просто редактор markdown-файлов. <code>knowledge-base/</code> работает потому что Claude может активно читать и использовать эти файлы в работе, а не просто хранить их. Это долгосрочная память твоего AI, а не личные заметки.</p>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: папка knowledge-base/ в Finder — raw/, wiki/, outputs/ и INBOX.md]</figure>
+
+    <h2 id="handoff">Непрерывность между сессиями</h2>
+
+    <p>Три слоя выше решают долгосрочную память. Но есть ещё одна проблема: непрерывность внутри одного проекта по дням.</p>
+
+    <p>Работал три часа, принял решения, дошёл до конкретного состояния. На следующий день открываешь новый чат — Claude ничего не знает. Даже если память настроена, она не знает что именно происходило вчера и где ты остановился.</p>
+
+    <p>Решение — файл <code>.claude/handoff.md</code>. Это место где записывается: где остановились, что дальше, что обещали сделать.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Терминал</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>touch .claude/handoff.md</pre>
+    </div>
+
+    <p>Два скилла, которые делают это рабочим:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ В чате Claude Code</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>/morning    → Claude читает handoff, докладывает где остановились, готов продолжать
+
+/endday     → Claude записывает handoff по итогам сессии: что сделано, что дальше, обещания</pre>
+    </div>
+
+    <p>Это скиллы — если у тебя их нет, попроси Claude создать их или установи через skills.sh. Один раз настроил, и они появляются в любом проекте.</p>
+
+    <div class="callout key">
+      <span class="callout-label">Как это работает на практике</span>
+      <p>Один раз написал /endday — следующая сессия начинается с /morning и ты за 30 секунд в контексте. Не нужно вспоминать где остановился.</p>
+    </div>
+
+    <h2 id="where-to-put">Куда что класть: тест</h2>
+
+    <p>Когда непонятно куда сохранить информацию, задай себе один вопрос: "Это нужно будет через неделю или через месяц?"</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Дерево решений</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Задаёшь вопрос: "Это нужно будет через неделю или через месяц?"
+
+Через неделю забуду / это про текущую задачу → handoff.md
+Будет актуально месяцами → PLAN.md или wiki/
+Про меня лично (предпочтения, привычки) → memory/
+Разбор инструмента, принятое решение → outputs/ с датой
+Универсальная методология → wiki/</pre>
+    </div>
+
+    <div class="callout key">
+      <span class="callout-label">Итого</span>
+      <p>Три слоя вместе — это система где Claude помнит кто ты, что важно в проекте, и где вы остановились. Один раз настроил — каждая новая сессия начинается не с нуля, а с продолжения.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="08-context-window.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">Контекстное окно</span>
+      </a>
+      <a class="pager-next" href="10-subagents.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">Субагенты</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#layers">Три слоя памяти</a>
+    <a href="#automemory">Слой 1: AutoMemory</a>
+    <a href="#memory-folder">Слой 2: memory/</a>
+    <a href="#knowledge-base">Слой 3: knowledge-base/</a>
+    <a href="#handoff">Непрерывность</a>
+    <a href="#where-to-put">Куда что класть</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>

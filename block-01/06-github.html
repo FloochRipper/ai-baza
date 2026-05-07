@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub: сохранить и не потерять | AI База</title>
+  <meta name="description" content="Зачем нужен GitHub, как создать репозиторий, что такое .gitignore и как не залить в интернет свои пароли.">
+  <meta property="og:title" content="GitHub: сохранить и не потерять">
+  <meta property="og:description" content="Зачем нужен GitHub, как создать репозиторий, что такое .gitignore и как не залить в интернет свои пароли.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=10">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"GitHub: сохранить и не потерять","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="01-what-is.html"><span class="num">01</span>Что такое Claude Code</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>CLAUDE.md</a>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Скиллы, MCP, Hooks</a>
+      <a href="06-github.html" class="active"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      GitHub
+    </div>
+
+    <div class="article-head">
+      <h1><span class="accent">GitHub</span>: сохранить и не потерять</h1>
+    </div>
+
+    <p id="intro">Однажды я поменял что-то в проекте, всё сломалось, и я не мог вернуть как было. Потратил час, пытаясь вспомнить что именно трогал. С тех пор я использую GitHub.</p>
+
+    <p>GitHub — это история версий и резервная копия в одном месте. Каждое сохранение фиксирует состояние проекта с подписью что ты сделал. Если что-то сломалось — несколько команд, и ты в рабочей версии, как будто ничего не было.</p>
+
+    <h2 id="what-is-github">Зачем нужен GitHub</h2>
+
+    <p>Представь Google Docs с историей версий — только не для одного документа, а для всех файлов проекта сразу. Именно так и работает GitHub.</p>
+
+    <p>На практике это три вещи. Первая — откат. Что-то сломалось после изменений, нажал несколько команд и вернул рабочую версию, не разбираясь что именно пошло не так.</p>
+
+    <p>Вторая — резервная копия. Проект хранится не только на твоём компьютере. Сломался ноутбук, переехал на новую машину — зашёл на github.com, скачал, продолжил.</p>
+
+    <p>Третья — деплой. Такие хостинги как Vercel и Netlify подключаются прямо к GitHub. Запушил изменения — сайт обновился автоматически, без лишних действий. Как это работает разберём в следующей статье.</p>
+
+    <h2 id="create-repo">Создать репозиторий</h2>
+
+    <p>Репозиторий — это папка проекта на GitHub. Сначала создаём её там, потом связываем с локальной папкой на компьютере.</p>
+
+    <p>Шаг первый: регистрируешься на github.com, если ещё нет аккаунта. Шаг второй: нажимаешь кнопку «New repository», даёшь имя проекту, нажимаешь «Create repository».</p>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: создание нового репозитория на GitHub — форма с полем Name и кнопкой Create repository]</figure>
+
+    <p>Шаг третий: связываешь локальную папку с репозиторием. Открываешь терминал в папке проекта и выполняешь по очереди:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Терминал — первая привязка</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>git init
+git add .
+git commit -m "Первый коммит"
+git remote add origin https://github.com/username/repo-name.git
+git push -u origin main</pre>
+    </div>
+
+    <p>Замени <code>username</code> на своё имя на GitHub, <code>repo-name</code> — на имя репозитория. После этой привязки достаточно просто писать <code>git push</code> — больше не надо указывать куда именно.</p>
+
+    <p>Если хочется проще — есть GitHub CLI. Расскажу дальше.</p>
+
+    <h2 id="commit-push">Commit и Push — что это</h2>
+
+    <p>Commit — сохранить текущее состояние с подписью «что сделал». Push — отправить это сохранение на GitHub.</p>
+
+    <p>Аналогия простая: commit — это нажать «сохранить» в игре. Push — это загрузить сохранение в облако, чтобы оно было не только у тебя.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Терминал — обычный рабочий цикл</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># Посмотреть что изменилось
+git status
+
+# Добавить изменённые файлы
+git add .
+
+# Сохранить с описанием
+git commit -m "Добавил форму обратной связи"
+
+# Отправить на GitHub
+git push</pre>
+    </div>
+
+    <div class="callout key">
+      <span class="callout-label">Правило</span>
+      <p>Коммить партиями, не каждый чих. Сделал работающую фичу — коммит. Исправил баг — коммит. Хорошее описание коммита: что сделал, а не как. «Добавил форму обратной связи» — хорошо. «Изменил строку 42 в index.html» — бесполезно.</p>
+    </div>
+
+    <h2 id="github-cli">GitHub CLI — проще чем SSH</h2>
+
+    <p>По умолчанию GitHub требует настроить SSH-ключи, чтобы пушить изменения. Это небыстрая история: сгенерировать ключ, добавить в настройки аккаунта, разобраться почему не работает. Для новичка — лишний барьер.</p>
+
+    <p>GitHub CLI решает это элегантно: авторизация через браузер, без ключей. Ставишь утилиту, один раз логинишься — и <code>git push</code> работает без паролей и ключей навсегда.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Терминал — установка и вход</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># macOS
+brew install gh
+
+# Авторизация (откроет браузер)
+gh auth login</pre>
+    </div>
+
+    <p>После <code>gh auth login</code> браузер откроет страницу GitHub с подтверждением. Нажимаешь разрешить — готово. Больше никаких вопросов про пароли при пуше.</p>
+
+    <h2 id="gitignore">.gitignore — что не пушить в интернет</h2>
+
+    <p><code>.gitignore</code> — это файл в корне проекта, который говорит git: «вот эти файлы и папки — никогда не пуши». Он невидимый снаружи, но работает всегда.</p>
+
+    <p>Без него легко случайно опубликовать в публичный репозиторий ключи API, пароли от базы данных или личные настройки. Это реальная проблема: GitHub регулярно сканируется ботами, которые ищут именно такие утечки. Нашли твой ключ от OpenAI — через час у тебя списание на несколько тысяч долларов.</p>
+
+    <p>Вот что обязательно должно быть в <code>.gitignore</code>:</p>
+
+    <p><code>.env</code> и <code>.env.*</code> — файлы с переменными окружения. Сюда обычно кладут API-ключи и пароли. Никогда, ни при каких обстоятельствах, не пуши их в GitHub.</p>
+
+    <p><code>node_modules/</code> — огромная папка с зависимостями. Может весить сотни мегабайт. Её не нужно хранить в гит — любой может восстановить командой <code>npm install</code>.</p>
+
+    <p><code>.DS_Store</code> — системные файлы macOS. Создаются автоматически в каждой папке. Никому кроме твоей машины они не нужны.</p>
+
+    <p><code>.claude/settings.local.json</code> — личные настройки Claude Code. Claude при первом запуске сам добавляет этот файл в <code>.gitignore</code>, но лучше проверить что он там есть.</p>
+
+    <p>Что не надо игнорировать — и это частая ошибка новичков:</p>
+
+    <p><code>CLAUDE.md</code> должен быть в гит — вся команда должна видеть правила проекта. <code>.claude/settings.json</code> — общие настройки проекта, их тоже шарить. <code>.claude/agents/</code> — конфигурации субагентов, тоже в репозиторий.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ .gitignore — шаблон для проекта с Claude Code</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># Секреты и ключи — НИКОГДА не в гит
+.env
+.env.*
+.env.local
+*.key
+*.pem
+
+# Зависимости
+node_modules/
+.pnp
+
+# Система
+.DS_Store
+Thumbs.db
+
+# Claude Code — личные настройки
+.claude/settings.local.json
+
+# Временные файлы
+*.log
+dist/
+build/
+.cache/</pre>
+    </div>
+
+    <div class="callout key">
+      <span class="callout-label">Безопасность</span>
+      <p>Если ты случайно запушил <code>.env</code> с ключами — считай что ключи скомпрометированы, даже если репозиторий приватный. Правильное действие: немедленно отозвать ключи в сервисе (OpenAI, Stripe, что угодно) и выпустить новые. История гита хранит всё, даже если ты удалил файл в следующем коммите.</p>
+    </div>
+
+    <h2 id="branch-protection">Защита ветки main</h2>
+
+    <p>В платном GitHub (Teams и выше) можно включить защиту ветки: напрямую в <code>main</code> пушить нельзя. Любые изменения — только через отдельную ветку и Pull Request.</p>
+
+    <p>Это удобно в паре с Claude Code: Claude работает в своей feature-ветке, создаёт PR, ты смотришь что именно изменилось и нажимаешь «Merge». Никаких сюрпризов в боевом коде.</p>
+
+    <p>Для соло-проектов это необязательно, но хорошая привычка. Даже когда работаешь один — PR даёт возможность просмотреть изменения перед тем как они попадут в main.</p>
+
+    <h2 id="worktree">Git Worktree: несколько задач параллельно</h2>
+
+    <p>Worktree — это возможность создать вторую копию проекта в отдельной папке, на другой ветке. Обе папки — это один и тот же репозиторий, просто разные состояния.</p>
+
+    <p>Зачем это нужно: ты попросил Claude Code доделать задачу A, и пока он работает — хочешь начать задачу B. В обычном режиме нельзя: у тебя одна рабочая директория с одной активной веткой. С worktree — просто открываешь вторую папку в новом окне терминала.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Терминал — работа с воркдеревьями</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># Создать воркдерево для второй ветки
+git worktree add ../project-feature-branch feature-branch
+
+# Список воркдеревьев
+git worktree list
+
+# Удалить когда закончил
+git worktree remove ../project-feature-branch</pre>
+    </div>
+
+    <p>Важный момент: папку воркдерева нужно создавать за пределами основной папки проекта (в примере выше — <code>../</code> то есть на уровень выше). Иначе git увидит её внутри основного репозитория и это создаст путаницу. Если всё же хочешь держать её внутри — добавь имя этой папки в <code>.gitignore</code>.</p>
+
+    <div class="callout analogy">
+      <span class="callout-label">Аналогия</span>
+      <p>Worktree — это как открыть второй браузер с другой вкладкой вместо того чтобы переключаться на одном экране. Оба существуют одновременно, каждый в своём состоянии.</p>
+    </div>
+
+    <div class="callout key">
+      <span class="callout-label">Итого</span>
+      <p>GitHub — это страховка. .gitignore — это защита от утечки секретов. GitHub CLI — это удобство без лишних шагов. Потрать двадцать минут на настройку один раз — и больше не будешь терять работу из-за случайных изменений.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="05-skills-mcp-hooks.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">Скиллы, MCP, Hooks</span>
+      </a>
+      <a class="pager-next" href="07-deploy.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">Деплой</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#what-is-github">Зачем нужен GitHub</a>
+    <a href="#create-repo">Создать репозиторий</a>
+    <a href="#commit-push">Commit и Push</a>
+    <a href="#github-cli">GitHub CLI</a>
+    <a href="#gitignore">.gitignore</a>
+    <a href="#branch-protection">Защита ветки main</a>
+    <a href="#worktree">Git Worktree</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>

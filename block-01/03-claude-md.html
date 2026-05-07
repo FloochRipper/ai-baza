@@ -30,16 +30,17 @@
     <div class="section-label">Раздел</div>
     <div class="section-title">Claude Code</div>
     <nav class="sidebar-nav">
-      <span class="nav-soon"><span class="num">01</span>Что такое Claude Code</span>
-      <span class="nav-soon"><span class="num">02</span>Первый запуск</span>
+      <a href="01-what-is.html"><span class="num">01</span>Что такое Claude Code</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
       <a href="03-claude-md.html" class="active"><span class="num">03</span>CLAUDE.md</a>
-      <span class="nav-soon"><span class="num">04</span>Первый проект</span>
-      <span class="nav-soon"><span class="num">05</span>Скиллы, MCP, Hooks</span>
-      <span class="nav-soon"><span class="num">06</span>GitHub</span>
-      <span class="nav-soon"><span class="num">07</span>Деплой</span>
-      <span class="nav-soon"><span class="num">08</span>Контекстное окно</span>
-      <span class="nav-soon"><span class="num">09</span>Второй мозг</span>
-      <span class="nav-soon"><span class="num">10</span>Субагенты</span>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Скиллы, MCP, Hooks</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
     </nav>
   </aside>
 
@@ -207,7 +208,7 @@
       </tbody>
     </table>
 
-    <p>Claude Code при первом запуске автоматически добавляет <code>.claude/settings.local.json</code> в <code>.gitignore</code> — так что об этом можно не беспокоиться, оно само.</p>
+    <p><code>.gitignore</code> — это файл, который говорит git какие файлы не пушить в репозиторий. Нужен чтобы случайно не залить в интернет пароли, ключи API и личные настройки. Claude Code при первом запуске сам добавляет туда <code>.claude/settings.local.json</code> — так что об этом можно не беспокоиться. Подробно про .gitignore и что туда нужно добавить разберём в <a href="06-github.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">статье про GitHub</a>.</p>
 
     <div class="callout key">
       <span class="callout-label">Итого</span>

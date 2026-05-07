@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Скиллы, MCP и хуки | AI База</title>
+  <meta name="description" content="Как расширить возможности Claude Code: что такое скиллы, как работает MCP, и как настроить звуковое уведомление когда задача готова.">
+  <meta property="og:title" content="Скиллы, MCP и хуки">
+  <meta property="og:description" content="Как расширить возможности Claude Code: что такое скиллы, как работает MCP, и как настроить звуковое уведомление когда задача готова.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=10">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Скиллы, MCP и хуки","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="01-what-is.html"><span class="num">01</span>Что такое Claude Code</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>CLAUDE.md</a>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html" class="active"><span class="num">05</span>Скиллы, MCP, Hooks</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      Скиллы, MCP, Hooks
+    </div>
+
+    <div class="article-head">
+      <h1><span class="accent">Скиллы, MCP</span> и хуки</h1>
+    </div>
+
+    <p id="intro">По умолчанию Claude Code умеет читать файлы, писать код, запускать команды в терминале. Это уже много. Но настоящая мощь начинается когда подключаешь расширения.</p>
+
+    <p>Расширений три вида. Скиллы — это папки с инструкциями: говоришь Claude как вести себя в конкретной задаче. MCP — это внешние инструменты: подключаешь браузер, поиск в интернете, базы данных. Хуки — это автоматические действия на события: например, звук когда Claude закончил думать и ждёт тебя.</p>
+
+    <h2 id="skills">Скиллы — инструкции под задачу</h2>
+
+    <p>Скилл — это папка с файлом <code>SKILL.md</code> внутри. В начале файла YAML-шапка с двумя полями: <code>name</code> (имя скилла) и <code>description</code> (описание что делает и когда применять). Ниже — тело с самими инструкциями.</p>
+
+    <p>При старте каждой сессии Claude сканирует описания всех установленных скиллов. Когда ты пишешь задачу — он сверяет её с этими описаниями и решает: нужно ли загрузить какой-то скилл. Если совпадение найдено — тело скилла подгружается и Claude следует инструкциям внутри.</p>
+
+    <p>Ключевой момент: тело скилла грузится только когда нужно. В контексте постоянно висят только короткие описания — по строчке на каждый скилл. Это значит, что можно держать десятки скиллов и почти не тратить токены.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ YAML-шапка скилла — пример</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>---
+name: frontend-design
+description: Use when creating UI components, pages, or visual interfaces.
+  Creates distinctive, production-grade frontends. Triggers: "create page",
+  "design component", "build interface".
+---</pre>
+    </div>
+
+    <p>Чем точнее описание — тем надёжнее срабатывание. Хорошее описание говорит что делает скилл, что не делает, и какие фразы его вызывают.</p>
+
+    <div class="callout analogy">
+      <span class="callout-label">Аналогия</span>
+      <p>Скилл — это как стажёр с инструкцией. Инструкция в кармане (не читает постоянно), достаёт только когда задача подходит под его специализацию.</p>
+    </div>
+
+    <h2 id="skills-where">Где брать скиллы</h2>
+
+    <p>Есть три источника. Первый — <a href="https://skills.sh" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">skills.sh</a>, каталог от сообщества. Устанавливаешь одной командой в терминале через <code>npx skills</code>. Второй — официальный маркетплейс <code>/plugins</code> прямо внутри Claude Code: набираешь команду и видишь 100+ плагинов от разных авторов. Третий — скилл-креатор: мета-скилл, который создаёт новые скиллы по документации или промпту. Нужно что-то специфическое — описываешь, он делает.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Терминал — установка и управление</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># Установить скилл из каталога
+npx skills add anthropics/skills -a claude-code
+
+# Посмотреть установленные скиллы
+npx skills ls
+
+# Обновить
+npx skills update</pre>
+    </div>
+
+    <p>Перед установкой незнакомого скилла — проверь источник. Ставь только из проверенных репозиториев: Anthropic, GitHub, Microsoft и других крупных компаний, или скиллы с пометкой о прохождении аудита на skills.sh. Скилл — это инструкции которые выполняет Claude в твоём проекте, поэтому к источнику стоит относиться так же как к любому коду из интернета.</p>
+
+    <h2 id="skills-scope">Глобальные vs проектные скиллы</h2>
+
+    <p>Скиллы можно ставить в двух местах. Глобально — в <code>~/.claude/skills/</code>. Такие скиллы работают во всех проектах на твоей машине. Проектно — в <code>.claude/skills/</code> внутри конкретной папки с проектом. Работают только в этом проекте.</p>
+
+    <p>Правило простое: общие инструменты и методологии — глобально. Всё что завязано на конкретный продукт, голос, стиль — только в проекте.</p>
+
+    <p>Например: скилл для работы с PDF или создания презентаций — глобально, пригодится везде. Скилл с твоими авторскими фразами и стилем для контент-проекта — только в том проекте, в других он будет мешать.</p>
+
+    <h2 id="mcp">MCP — внешние инструменты через USB</h2>
+
+    <p>MCP расшифровывается как Model Context Protocol. Это стандарт, который Anthropic разработал чтобы внешние сервисы могли подключаться к Claude единым способом.</p>
+
+    <p>Аналогия: Claude Code — это компьютер, MCP — USB-хаб. Каждый MCP-сервер — это адаптер к какому-то сервису: браузеру, базе данных, Google Sheets, системе поиска. Без MCP Claude знает только то, что лежит в папке проекта. С MCP — может искать в интернете, открывать сайты, читать твой календарь, делать запросы к внешним API.</p>
+
+    <p>Технически это работает так: каждый MCP-сервер публикует список инструментов с описанием. Claude видит их как обычные инструменты рядом со своими встроенными и сам решает когда какой вызвать — как хороший сотрудник, который знает для чего у него есть каждый инструмент.</p>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: список MCP-серверов в Claude Code — показываем как это выглядит в интерфейсе]</figure>
+
+    <h2 id="mcp-install">Установка MCP тремя способами</h2>
+
+    <p>Первый — просто попросить Claude. Пишешь в чат: «Установи MCP сервер для поиска Exa» — он сам найдёт нужный пакет, скачает и настроит конфиг. Самый простой путь для большинства серверов.</p>
+
+    <p>Второй — команда в терминале напрямую:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Терминал</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>claude mcp install exa</pre>
+    </div>
+
+    <p>Третий — визуальный каталог <a href="https://smithery.ai" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">Smithery</a>. Заходишь на сайт, находишь нужный MCP-сервер, жмёшь кнопку установки — он сам генерирует команду и объясняет что делать. Удобно когда хочешь сначала посмотреть что вообще есть.</p>
+
+    <h2 id="mcp-vs-skill">MCP или скилл: как выбрать</h2>
+
+    <p>Частый вопрос: у меня есть задача — ставить MCP или скилл? Ответ зависит от одного: как часто ты это используешь.</p>
+
+    <div class="grid-cards cols-2">
+      <div class="grid-card" style="border-left: 4px solid #22c55e;">
+        <div class="card-letter" style="color: #22c55e;">MCP</div>
+        <div class="card-name">Если используешь часто</div>
+        <div class="card-desc">Подключается один раз, всегда доступен. Занимает ~2000 токенов контекста постоянно. Например: браузер, поиск в интернете.</div>
+      </div>
+      <div class="grid-card" style="border-left: 4px solid #eab308;">
+        <div class="card-letter" style="color: #eab308;">Скилл</div>
+        <div class="card-name">Если используешь редко</div>
+        <div class="card-desc">Загружается только когда нужен — не ест контекст постоянно. Например: создание слайдов, работа с PDF.</div>
+      </div>
+    </div>
+
+    <p>MCP всегда присутствует в контексте и готов ответить моментально — но за это платишь токенами при каждом запуске. Скилл не стоит ничего пока не нужен. Поэтому частые инструменты — MCP, редкие — скилл.</p>
+
+    <h2 id="mcp-starter">Три MCP с которых начать</h2>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Название</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Как поставить</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong style="font-weight:600;">Exa</strong></td>
+          <td style="padding:10px;">Лучший поиск в интернете. 1000 запросов в месяц бесплатно</td>
+          <td style="padding:10px;"><code>claude mcp install exa</code></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong style="font-weight:600;">Context7</strong></td>
+          <td style="padding:10px;">Актуальная документация любой библиотеки прямо в чате</td>
+          <td style="padding:10px;"><code>claude mcp install context7</code></td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><strong style="font-weight:600;">Chrome DevTools</strong></td>
+          <td style="padding:10px;">Управление браузером: открыть сайт, кликнуть, проверить</td>
+          <td style="padding:10px;">через Smithery</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Exa заменяет гугление — Claude сам ищет когда нужна актуальная информация. Context7 решает проблему устаревшей документации в обучающих данных: когда пишешь код с новой библиотекой, Claude смотрит живую документацию, а не то что знал год назад. Chrome DevTools нужен если хочешь тестировать сайты или автоматизировать браузер.</p>
+
+    <h2 id="hooks">Хуки — действия на автомате</h2>
+
+    <p>Хуки — это shell-команды, которые Claude Code запускает автоматически при определённых событиях. Настраиваются в файле <code>~/.claude/settings.json</code> в секции <code>"hooks"</code>.</p>
+
+    <p>Самое полезное применение — звуковое уведомление когда Claude заканчивает задачу. Поставил задачу, ушёл делать другое — услышал звук, вернулся, всё готово. Не надо периодически посматривать на экран.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ ~/.claude/settings.json — добавить секцию hooks</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff >/dev/null 2>&1 &"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff >/dev/null 2>&1 &"
+          }
+        ]
+      }
+    ]
+  }
+}</pre>
+    </div>
+
+    <p>Событие <code>Stop</code> срабатывает когда Claude закончил отвечать. Событие <code>Notification</code> — когда Claude ждёт твоего разрешения на какое-то действие. <code>afplay</code> — это встроенная macOS-утилита для воспроизведения звука, ничего устанавливать не нужно. <code>/System/Library/Sounds/Glass.aiff</code> — системный звук «Glass», короткий и не раздражает. Хвост <code>>/dev/null 2>&1 &</code> запускает команду в фоне чтобы не блокировать и не мусорить в вывод.</p>
+
+    <p>После сохранения файла изменения вступают в силу сразу — перезапускать Claude Code не нужно.</p>
+
+    <div class="callout key">
+      <span class="callout-label">Личное</span>
+      <p>Это одна из тех настроек, которые я поставил однажды и больше не снимал. Поставил задачу, ушёл пить кофе — услышал звук, вернулся, всё готово.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="04-first-project.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">Первый проект</span>
+      </a>
+      <a class="pager-next" href="06-github.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">GitHub</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#skills">Скиллы</a>
+    <a href="#skills-where">Где брать скиллы</a>
+    <a href="#skills-scope">Глобальные vs проектные</a>
+    <a href="#mcp">MCP</a>
+    <a href="#mcp-install">Установка MCP</a>
+    <a href="#mcp-vs-skill">MCP или скилл</a>
+    <a href="#mcp-starter">Три MCP для старта</a>
+    <a href="#hooks">Хуки</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>
