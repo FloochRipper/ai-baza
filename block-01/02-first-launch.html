@@ -97,46 +97,31 @@
 
     <h2 id="bypass">Bypass Permissions — убрать постоянные вопросы</h2>
 
-    <p>В панели Claude Code нажми на кнопку режима внизу справа — выскочит меню с вариантами. Там есть <strong>Bypass permissions</strong> — выбери его.</p>
+    <p>Нажми на кнопку режима внизу справа в панели Claude Code — выскочит меню. Там есть <strong>Bypass permissions</strong> — выбери его, и запросы исчезнут.</p>
 
     <figure style="margin:20px 0;">
       <img src="../screenshots/claude-bypass-modes.png" alt="Меню режимов Claude Code с Bypass permissions" style="max-width:100%;border-radius:8px;display:block;" loading="lazy">
     </figure>
 
-    <p>Теперь Claude Code работает без запросов. Но на всякий случай — лучше дополнительно прописать запреты на опасные действия через файл настроек. Вот рабочий вариант:</p>
-
-    <p>Создай файл <code>.claude/settings.json</code> в корне проекта. Вот рабочий вариант:</p>
+    <p>Если этого пункта нет — значит нужно настроить вручную. Скопируй команду ниже и вставь в Claude Code:</p>
 
     <div class="code-block">
-      <div class="code-block-head"><span class="code-title">▸ .claude/settings.json</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
-      <pre>{
-  "permissions": {
-    "defaultMode": "bypassPermissions",
-    "allow": [],
-    "deny": [
-      "Bash(rm -rf *)",
-      "Bash(rm -r *)",
-      "Bash(git push --force*)",
-      "Bash(git reset --hard*)"
-    ]
-  }
-}</pre>
+      <div class="code-block-head"><span class="code-title">▸ Команда для Claude Code</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Активируй режим bypass permissions со следующими настройками:
+
+1. defaultMode: "bypassPermissions"
+2. В секции allow добавь все стандартные операции: Read, Edit, Write, Bash, git команды, npm, pip, python, node
+3. В секции deny оставь защиту от опасных команд:
+   - rm -rf (удаление папок)
+   - git push --force (force push)
+   - git reset --hard
+   - git clean -f
+   - Доступ к .ssh, .aws, credentials.json, secrets</pre>
     </div>
-
-    <p><code>defaultMode: bypassPermissions</code> — Claude Code работает без запросов. Список <code>deny</code> — это жёсткое ограничение: даже без запросов он не сможет удалить папку целиком, сделать force push в git или жёсткий откат. Это страховка от случайных ошибок.</p>
-
-    <p>Есть ещё способ через терминал — добавить алиас в <code>~/.zshrc</code>:</p>
-
-    <div class="code-block">
-      <div class="code-block-head"><span class="code-title">▸ ~/.zshrc</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
-      <pre>alias cc="claude --dangerously-skip-permissions"</pre>
-    </div>
-
-    <p>После этого набирай <code>cc</code> вместо <code>claude</code>. Чтобы изменения вступили в силу — перезапусти терминал или выполни <code>source ~/.zshrc</code>.</p>
 
     <div class="callout warn">
       <span class="callout-label">Важно</span>
-      <p>Bypass Permissions отключает запросы. Используй только в своих проектах — не давай Claude Code с bypass доступ к чужим файлам или системным папкам.</p>
+      <p>Bypass Permissions отключает запросы. Используй только в своих проектах — не давай Claude Code доступ к чужим файлам или системным папкам.</p>
     </div>
 
     <p>Есть ещё один важный момент — как работает память Claude Code и почему лучше давать одну задачу за раз. Об этом в статье про <a href="08-context-window.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">контекстное окно</a>.</p>
