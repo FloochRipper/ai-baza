@@ -1,4 +1,5 @@
 {
+  "alias": ["ai-baza.vercel.app"],
   "headers": [
     {
       "source": "/fonts/(.*)",
