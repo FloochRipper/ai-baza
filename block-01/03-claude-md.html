@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Архитектура проекта | AI База</title>
-  <meta name="description" content="Как устроен проект изнутри: четыре файла, которые Claude читает автоматически, и алгоритм от идеи до реализации.">
+  <meta name="description" content="Как устроен проект изнутри: четыре файла, которые Claude читает автоматически, CLAUDE.md с правилами, и алгоритм от идеи до реализации.">
   <meta property="og:title" content="Архитектура проекта">
   <meta property="og:description" content="Четыре файла проекта, CLAUDE.md, PLAN.md — как один раз настроить и больше не объяснять с нуля.">
   <meta property="og:type" content="article">
@@ -56,28 +56,86 @@
       <h1>Архитектура <span class="accent">проекта</span></h1>
     </div>
 
-    <p id="intro">Каждый новый чат в Claude Code начинается с чистого листа. Он не помнит, что за проект, какой стек, какие правила вы установили в прошлый раз. Первые два дня это терпимо. Потом превращается в потерю времени — объяснять одно и то же снова и снова.</p>
+    <p id="intro">Каждый новый чат в Claude Code начинается с чистого листа. Он не помнит, что за проект, какой стек, какие правила ты установил в прошлый раз. Первые два дня это терпимо — пишешь «вот мой проект, вот что нужно», и поехали. Потом превращается в потерю времени: объяснять одно и то же снова и снова.</p>
 
     <p>Решение — несколько файлов в папке проекта, которые Claude читает автоматически при каждом запуске. Один раз настроил — и каждый новый чат уже в контексте. Это и есть архитектура проекта.</p>
 
+    <p>Но перед файлами — алгоритм. Большинство людей хотят сразу делать: писать код, создавать страницы. Это тупик. Без продуманной основы через три дня начинаются переделки, хаос и «всё снова не то». Поэтому сначала пять шагов.</p>
+
     <h2 id="algorithm">Алгоритм старта</h2>
 
-    <p>Перед тем как писать первую строчку кода, хорошая практика — пройти пять шагов. Это не бюрократия, а способ не переделывать всё через три дня.</p>
+    <p>Перед тем как писать первую строчку кода — пройди пять шагов. Это не бюрократия, а способ не переделывать всё через неделю.</p>
 
     <p style="font-size:17px;font-weight:600;margin:24px 0 6px;">1. Идея</p>
-    <p style="margin:0 0 16px;">Сформулируй одним предложением: что, для кого и зачем. «Я создаю ЧТО для КОГО чтобы решить КАКУЮ проблему». Без этого Claude будет угадывать.</p>
+    <p style="margin:0 0 8px;">Сформулируй одним предложением: что, для кого и зачем. «Я создаю ЧТО для КОГО чтобы решить КАКУЮ проблему». Без этого Claude будет угадывать.</p>
+    <p style="margin:0 0 16px;">Не нужно готового текста — расскажи как другу, без структуры. Голосом или текстом, как удобно. Claude сам оформит.</p>
 
     <p style="font-size:17px;font-weight:600;margin:0 0 6px;">2. Исследование</p>
-    <p style="margin:0 0 16px;">Попроси Claude найти 5–10 аналогов в твоей нише. Смотришь что работает, что нет — это основа для твоего решения.</p>
+    <p style="margin:0 0 8px;">Попроси Claude найти 5–10 аналогов в твоей нише. Смотришь что работает, что нет — это основа для твоего решения.</p>
 
-    <p style="font-size:17px;font-weight:600;margin:0 0 6px;">3. Критика</p>
-    <p style="margin:0 0 16px;">Попроси оценить идею честно: что может не сработать, чего не хватает, типичные ошибки в таких проектах. Claude не будет подхалимничать, если прямо попросить.</p>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт для исследования</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Найди 5-7 похожих проектов или сервисов в нише [твоя ниша].
+Для каждого: что делает, для кого, основные функции, что можно взять за основу.
+Сохрани результат в файл research.md</pre>
+    </div>
 
-    <p style="font-size:17px;font-weight:600;margin:0 0 6px;">4. План</p>
-    <p style="margin:0 0 16px;">Разбей на 3–5 этапов. Каждый этап — одна задача для Claude. Большая задача за один промпт = хаос.</p>
+    <p style="font-size:17px;font-weight:600;margin:16px 0 6px;">3. Критика</p>
+    <p style="margin:0 0 8px;">Попроси оценить идею честно: что может не сработать, чего не хватает, типичные ошибки в таких проектах. Claude не будет подхалимничать, если прямо попросить.</p>
 
-    <p style="font-size:17px;font-weight:600;margin:0 0 6px;">5. Реализация</p>
-    <p style="margin:0 0 16px;">Одна задача — один промпт. Не пишешь всё сразу, идёшь по плану шаг за шагом.</p>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт для критики</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Оцени эту идею честно. Что может не сработать?
+Какие типичные ошибки в таких проектах?
+Что я мог упустить?
+Не подхалимничай — мне нужен честный взгляд со стороны.</pre>
+    </div>
+
+    <p style="font-size:17px;font-weight:600;margin:16px 0 6px;">4. План</p>
+    <p style="margin:0 0 8px;">Разбей на 3–5 этапов. Каждый этап — одна задача для Claude. Большая задача за один промпт = хаос.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт для плана</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Разбей проект на 4-6 этапов от первого файла до готового результата.
+Каждый этап — конкретный шаг с понятным результатом.
+Сохрани в PLAN.md в формате [ ] пункт</pre>
+    </div>
+
+    <p style="font-size:17px;font-weight:600;margin:16px 0 6px;">5. Реализация</p>
+    <p style="margin:0 0 16px;">Одна задача — один промпт. Не пишешь всё сразу, идёшь по плану шаг за шагом. Сделал пункт — отметил галочку, взял следующий.</p>
+
+    <h2 id="idea-to-docs">Как сформулировать идею</h2>
+
+    <p>Самая частая проблема на старте — не знаешь как это всё описать. Кажется, что нужно сразу написать чёткий документ. Не нужно. Просто расскажи идею как другу — Claude сам структурирует.</p>
+
+    <p>Вот реальный поток разговора:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Шаг 1 — рассказываешь идею</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Хочу сделать телеграм-бота для своей кофейни. Чтобы люди могли смотреть меню и делать предзаказ. Ну типа выбираешь напиток, говоришь когда заберёшь, приходишь — уже готово. Ещё хочу чтобы была программа лояльности, каждый 5-й кофе бесплатно.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Шаг 2 — просишь структурировать</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Помоги превратить это в документацию проекта. Сделай структуру: что это, для кого, основные функции.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Шаг 3 — просишь найти что упустил</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Какие функции обычно есть в ботах для кофеен? Что я мог упустить?</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Шаг 4 — сохраняешь в файл</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай файл docs/project.md с этой документацией</pre>
+    </div>
+
+    <p>Не принимай всё что Claude предлагает — это только идеи. Ты выбираешь что подходит, что нет. Цель на этом этапе — зафиксировать основу, а не сделать всё идеально.</p>
+
+    <div class="callout analogy">
+      <span class="callout-label">Ещё пример</span>
+      <p>Ты: «Хочу сделать сайт-портфолио для себя как фрилансера. Я делаю дизайн и иллюстрации. Нужно показать работы и чтобы люди могли связаться.» → Клод предлагает структуру → Ты: «Добавь раздел с ценами. И убери блог — не буду вести.» → Клод обновляет → Ты: «Какие разделы обычно есть на портфолио дизайнеров? Что я мог забыть?» → Клод предлагает: отзывы, процесс работы, FAQ → Ты: «Отзывы хорошая идея. Добавь. Остальное не надо.» → Готово.</p>
+    </div>
 
     <h2 id="four-files">Четыре файла проекта</h2>
 
@@ -120,10 +178,10 @@
       <p>Называй файлы одинаково в каждом проекте. <code>research.md</code> — всегда исследование, <code>brief.md</code> — всегда техзадание. Единая структура — порядок в голове.</p>
     </div>
 
-    <p>Чтобы создать все четыре файла, дай Claude одну команду после того как открыл папку проекта:</p>
+    <p>Можно создать все четыре файла одной командой:</p>
 
     <div class="code-block">
-      <div class="code-block-head"><span class="code-title">▸ Запрос в Claude Code</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <div class="code-block-head"><span class="code-title">▸ Создать все файлы сразу</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
       <pre>Посмотри все файлы в проекте. Создай четыре файла:
 - research.md — исследование ниши (конкуренты, что работает, тренды)
 - brief.md — техзадание на основе исследования (цель, аудитория, структура, стиль)
@@ -133,13 +191,47 @@
 Если у тебя есть вопросы — задавай.</pre>
     </div>
 
+    <p>А вот шаблон для <code>brief.md</code> — он же подходит для <code>docs/project.md</code>:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Шаблон brief.md / project.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># Название проекта
+
+## Что это
+Краткое описание в 1-2 предложения.
+
+## Для кого
+Кто будет пользоваться? Целевая аудитория.
+
+## Проблема
+Какую проблему решает? Зачем это нужно?
+
+## Основные функции
+- Функция 1
+- Функция 2
+- Функция 3
+
+## Страницы / экраны
+Что увидит пользователь? Перечень страниц или экранов.
+
+## Чего НЕ будет (пока)
+Что сознательно не делаем. Важно для фокуса.
+
+## Технические заметки
+Если есть специфика: платформа, ограничения, интеграции.</pre>
+    </div>
+
     <h2 id="claude-md">CLAUDE.md — подробно</h2>
 
-    <p>Из четырёх файлов CLAUDE.md — самый важный. Это инструкция для нового сотрудника на холодильнике: «У нас принято так-то. Вот чего нельзя. Вот на что обращать внимание». Любой новый чат — и Claude сразу в контексте.</p>
+    <p>Из четырёх файлов CLAUDE.md — самый важный. Это инструкция на холодильнике для нового сотрудника: «У нас принято так-то. Вот чего нельзя. Вот на что обращать внимание». Любой новый чат — и Claude сразу в контексте.</p>
+
+    <p>Ключевое отличие от остальных файлов: Claude читает его автоматически. Не нужно каждый раз говорить «напоминаю, у нас такие-то правила». Просто написал — и оно работает всегда.</p>
 
     <h2 id="create">Как создать</h2>
 
-    <p>Самый простой способ — одна команда в чате:</p>
+    <p>Три способа — от быстрого к ручному.</p>
+
+    <p>Способ первый — одна команда в чате:</p>
 
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ В чате Claude Code</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -148,13 +240,27 @@
 
     <p>Claude пройдётся по всем файлам в папке, поймёт что за проект и создаст CLAUDE.md с базовой структурой. Потом дополняешь под себя.</p>
 
-    <p>Второй способ — создать вручную. Файл называется ровно <code>CLAUDE.md</code> и лежит в корне проекта.</p>
+    <p>Способ второй — попросить с конкретикой:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Создать CLAUDE.md с нуля</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай CLAUDE.md для этого проекта. Опиши что это за проект, структуру папок, как запускать, и добавь секцию для ошибок.</pre>
+    </div>
+
+    <p>Способ третий — создай файл вручную. Файл называется ровно <code>CLAUDE.md</code> и лежит в корне проекта.</p>
+
+    <p>Если файл уже есть, но слабый — не переписывай с нуля, попроси разобрать и улучшить:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Улучшить существующий CLAUDE.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Посмотри CLAUDE.md и сделай его глубокий разбор. Давай обсудим какие детали могут мешать работе, а какие ещё необходимо добавить.</pre>
+    </div>
 
     <p>Лайфхак: клавиша <code>#</code> прямо в чате — быстро добавить правило без открытия файла. Написал <code># не трогай файл config.json</code> → Claude добавил в CLAUDE.md.</p>
 
     <h2 id="what-to-write">Что писать</h2>
 
-    <p>Хороший CLAUDE.md отвечает на четыре вопроса: что за проект, для кого, какой стек, какие правила работы. Вот реальный шаблон на основе того, что использую сам:</p>
+    <p>Хороший CLAUDE.md отвечает на четыре вопроса: что за проект, для кого, какой стек, какие правила работы. Вот рабочий шаблон:</p>
 
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ CLAUDE.md — шаблон</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -189,12 +295,142 @@
 
     <div class="callout key">
       <span class="callout-label">Размер</span>
-      <p>Идеально — 60–100 строк. Длиннее 300 — уже тяжело. Файл читается при каждом запуске: чем длиннее, тем меньше места для реальной работы в контексте.</p>
+      <p>Идеально — 60–100 строк. До 300 — нормально. Больше 300 — уже тяжеловато. Файл читается при каждом запуске: чем длиннее, тем меньше места для реальной работы в контексте.</p>
     </div>
 
-    <h2 id="three-rules">Три правила, которые реально работают</h2>
+    <p>Есть приём который делает правила жёстче. Claude лучше воспринимает инструкции с ключевыми словами-маркерами, особенно на английском:</p>
 
-    <p>Из практики — три инструкции, которые меняют качество работы сильнее всего. Добавь в свой CLAUDE.md:</p>
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Слово</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Значение</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>NEVER</code></td>
+          <td style="padding:10px;">Строгий запрет — никогда и ни при каких условиях</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>ALWAYS</code></td>
+          <td style="padding:10px;">Обязательное действие — всегда, без исключений</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>MUST</code></td>
+          <td style="padding:10px;">Требование — должен выполнить</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><code>IMPORTANT</code></td>
+          <td style="padding:10px;">Важное замечание — обратить особое внимание</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Правила пиши на английском, пояснения можно на русском. Вот пример рабочего CLAUDE.md с маркерами:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Реальный пример CLAUDE.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># Project Rules
+
+## 1. NEVER restore previous versions without confirmation
+ALWAYS ask before restoring any backup or previous version
+
+## 2. Security — NEVER commit credentials
+- config.json contains API key — NEVER commit
+- .env files — NEVER commit
+- ALWAYS check git status before commits
+
+## 3. Git workflow
+- Main branch: main
+- ALWAYS create descriptive commit messages
+
+## 4. Before deleting
+ALWAYS ask before deleting any file
+
+## 5. Project structure
+- src/ — main code
+- docs/ — documentation
+- See: docs/architecture.md for details</pre>
+    </div>
+
+    <h2 id="dont-put">Что НЕ класть в CLAUDE.md</h2>
+
+    <p>Так же важно знать чего туда не нужно. CLAUDE.md — это инструкция, а не архив. Вот что там лишнее:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Куда вместо этого</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Вся документация проекта</td>
+          <td style="padding:10px;"><code>brief.md</code> или <code>docs/</code></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">История изменений</td>
+          <td style="padding:10px;">git-история или отдельный changelog</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Списки задач</td>
+          <td style="padding:10px;"><code>PLAN.md</code></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">API-ключи и пароли</td>
+          <td style="padding:10px;"><code>.env</code> (и в <code>.gitignore</code>)</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;">Тонны непонятных строк без структуры</td>
+          <td style="padding:10px;">Разбей на отдельные файлы через <code>@</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Правила в CLAUDE.md должны быть конкретными. «Будь внимательнее» и «не ошибайся» — не работают. «NEVER commit .env files» — работает.</p>
+
+    <h2 id="grows">Файл растёт из опыта</h2>
+
+    <p>CLAUDE.md — живой документ. Он не пишется один раз и забывается. Лучшие правила появляются из реальных факапов.</p>
+
+    <p>Claude случайно закоммитил что-то лишнее — добавил правило. Удалил файл без предупреждения — добавил правило. Начал переписывать код который не просили — добавил правило. Так постепенно файл превращается в точную инструкцию именно под твои задачи.</p>
+
+    <p>Когда увидел что проблема повторяется, напиши в чате прямо:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Зафиксировать ошибку</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Добавь в CLAUDE.md правило: NEVER делай X без подтверждения</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Или через # прямо в чате</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># никогда не удаляй файлы без подтверждения</pre>
+    </div>
+
+    <p>Раз в неделю — чистка. Правила устаревают: проект меняется, некоторые ограничения уже не нужны. Попроси Claude навести порядок:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Почистить CLAUDE.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Посмотри CLAUDE.md — объедини похожие правила и убери устаревшие.</pre>
+    </div>
+
+    <h2 id="at-references">@ ссылки на файлы</h2>
+
+    <p>Когда правил становится много — не нужно всё держать в одном файле. В CLAUDE.md можно ссылаться на другие файлы через символ <code>@</code>:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Ссылка на внешний файл</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Стиль кода описан в @docs/code-style.md
+Правила git-коммитов — @docs/git-workflow.md</pre>
+    </div>
+
+    <p>Символ <code>@</code> говорит Claude: прочитай этот файл. Вместо 20 правил в основном файле — одна строка. Основной CLAUDE.md остаётся коротким, детали — в отдельных файлах.</p>
+
+    <h2 id="three-rules">Четыре правила, которые реально работают</h2>
+
+    <p>Из практики — четыре инструкции, которые меняют качество работы сильнее всего. Добавь в свой CLAUDE.md:</p>
 
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Добавить в CLAUDE.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -216,14 +452,6 @@
     </div>
 
     <p>Первое правило даёт партнёра, а не исполнителя. Второе убирает хаос из ответов — всегда понимаешь что сделано и что дальше. Третье постепенно улучшает проект без отдельных задач на «проверь всё». Четвёртое снимает необходимость микроменеджмента.</p>
-
-    <h2 id="grows">Файл растёт из опыта</h2>
-
-    <p>CLAUDE.md — живой документ. Он не пишется один раз и забывается. Лучшие правила появляются из реальных факапов.</p>
-
-    <p>Claude случайно закоммитил что-то лишнее — добавил правило. Удалил файл без предупреждения — добавил правило. Начал переписывать код который не просили — добавил правило. Так постепенно файл превращается в точную инструкцию именно под твои задачи.</p>
-
-    <p>Удобный способ — сразу после косяка написать в чате: <code># никогда не удаляй файлы без подтверждения</code>. Claude сам добавит в CLAUDE.md.</p>
 
     <h2 id="global">Глобальный CLAUDE.md</h2>
 
@@ -261,6 +489,54 @@
 
     <p>Основной CLAUDE.md остаётся коротким. Claude подхватывает файлы из <code>rules/</code> автоматически.</p>
 
+    <h2 id="memory">CLAUDE.md vs MEMORY.md</h2>
+
+    <p>В Claude Code есть ещё один механизм памяти — <code>MEMORY.md</code>. Важно понимать разницу:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;"></th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">CLAUDE.md</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">MEMORY.md</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Кто пишет</td>
+          <td style="padding:10px;">Ты</td>
+          <td style="padding:10px;">Claude автоматически</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Где лежит</td>
+          <td style="padding:10px;">В корне проекта</td>
+          <td style="padding:10px;">В скрытой папке настроек</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Что внутри</td>
+          <td style="padding:10px;">Твои правила и инструкции</td>
+          <td style="padding:10px;">Технические заметки агента</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Надёжность</td>
+          <td style="padding:10px;color:#22c55e;">100% — всегда загружается</td>
+          <td style="padding:10px;color:var(--muted);">Пишет сам, может записать неточно</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Размер</td>
+          <td style="padding:10px;">60–100 строк идеально</td>
+          <td style="padding:10px;">До 200 строк (потом обрезается)</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Видно в git</td>
+          <td style="padding:10px;">Да — часть проекта</td>
+          <td style="padding:10px;">Нет — локальный файл</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Главный вывод: на CLAUDE.md можно положиться всегда. MEMORY.md — дополнительный слой, который помогает, но требует периодической чистки. Если хочешь что-то зафиксировать надёжно — пиши в CLAUDE.md.</p>
+
     <h2 id="automemory">AutoMemory</h2>
 
     <p>В Claude Code есть встроенная автопамять — он сам записывает заметки о проекте и твоих предпочтениях по ходу работы. Это работает параллельно с CLAUDE.md и не требует твоего участия.</p>
@@ -272,7 +548,14 @@
       <pre>/memory</pre>
     </div>
 
-    <p>Минус AutoMemory — пишет всё подряд, иногда не самое нужное. Стоит иногда заходить и чистить лишнее.</p>
+    <p>Можно явно попросить что-то запомнить — это надёжнее чем ждать пока он сам запишет:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Запомнить конкретное правило</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Запомни что мы всегда используем bun, а не npm в этом проекте</pre>
+    </div>
+
+    <p>Минус AutoMemory — пишет всё подряд, иногда не самое нужное. Стоит заходить раз в неделю и чистить лишнее.</p>
 
     <h2 id="settings">settings.json и settings.local.json</h2>
 
@@ -323,14 +606,18 @@
     <h4>На этой странице</h4>
     <a href="#intro">Вступление</a>
     <a href="#algorithm">Алгоритм старта</a>
+    <a href="#idea-to-docs">Как сформулировать идею</a>
     <a href="#four-files">Четыре файла</a>
     <a href="#claude-md">CLAUDE.md</a>
     <a href="#create">Как создать</a>
     <a href="#what-to-write">Что писать</a>
-    <a href="#three-rules">Три правила</a>
+    <a href="#dont-put">Что НЕ класть</a>
     <a href="#grows">Файл растёт из опыта</a>
+    <a href="#at-references">@ ссылки</a>
+    <a href="#three-rules">Четыре правила</a>
     <a href="#global">Глобальный CLAUDE.md</a>
     <a href="#rules-folder">Когда правил много</a>
+    <a href="#memory">CLAUDE.md vs MEMORY.md</a>
     <a href="#automemory">AutoMemory</a>
     <a href="#settings">settings.json</a>
   </aside>
