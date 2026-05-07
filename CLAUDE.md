@@ -118,23 +118,6 @@
 
 ---
 
-## КАКОЙ СКИЛЛ ДЛЯ ЧЕГО
-
-Superpowers-скиллы (brainstorming, systematic-debugging, verification-before-completion, skill-finder) активируются сами по триггерам из их описаний.
-
-Доменно-специфичные для этого проекта:
-
-| Задача | Скилл |
-|--------|-------|
-| Компоненты платформы, UI | frontend-design |
-| Сложный многостраничный HTML | web-artifacts-builder |
-| Дизайн слайдов/постеров | canvas-design |
-| Тестирование в браузере | webapp-testing |
-
-Скиллы контента (carousel, reels-tiktok, telegram, threads) живут в `../kontent-zavod-nikita/`.
-
----
-
 ## СПЕЦИФИКА ПАМЯТИ ЭТОГО ПРОЕКТА
 
 Общая система памяти (knowledge-base, auto memory, триггеры на outputs/wiki) описана в глобальном `~/.claude/CLAUDE.md` — работает во всех проектах.
