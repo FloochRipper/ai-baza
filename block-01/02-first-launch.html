@@ -103,23 +103,19 @@
       <img src="../screenshots/claude-bypass-modes.png" alt="Меню режимов Claude Code с Bypass permissions" style="max-width:100%;border-radius:8px;display:block;" loading="lazy">
     </figure>
 
-    <p>Если этого пункта нет — значит нужно настроить вручную. Скопируй команду ниже и вставь в Claude Code:</p>
+    <p>Если этого пункта нет — попроси Claude настроить за тебя. Просто скопируй промпт ниже и отправь в чат:</p>
 
     <div class="code-block">
-      <div class="code-block-head"><span class="code-title">▸ Команда для Claude Code</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
-      <pre>Активируй режим bypass permissions со следующими настройками:
+      <div class="code-block-head"><span class="code-title">▸ Промпт для Claude Code</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Включи мне режим Bypass Permissions с защитой от опасных команд:
+работать без подтверждений, но запретить удаление папок (rm -rf),
+force-push в гит, удаление веток, чтение секретных файлов
+(.env, credentials, токены, API-ключи).
 
-1. defaultMode: "bypassPermissions"
-2. В секции allow добавь все стандартные операции: Read, Edit, Write, Bash, git команды, npm, pip, python, node
-3. В секции deny оставь защиту от опасных команд:
-   - rm -rf (удаление папок)
-   - git push --force (force push)
-   - git reset --hard
-   - git clean -f
-   - Доступ к .ssh, .aws, credentials.json, secrets
-
-Настрой settings.json так, чтобы я мог работать быстро без лишних подтверждений, но не мог удалять файлы и ломать критичное.</pre>
+Настрой это правильным способом и объясни что добавил.</pre>
     </div>
+
+    <p>Claude сам создаст нужный файл настроек и пропишет защиту. Что это за файл и как он устроен — разберём в <a href="03-claude-md.html#settings" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">следующей статье</a>, пока не вникай.</p>
 
     <div class="callout warn">
       <span class="callout-label">Важно</span>
@@ -171,46 +167,60 @@
 
     <h2 id="commands">Команды которые нужны сразу</h2>
 
-    <p>В Claude Code есть несколько команд, которые используешь каждый день. Вот самые важные:</p>
+    <p>В Claude Code есть слэш-команды (начинаются со /) — это быстрые действия, которые экономят время. Чтобы посмотреть полный список, набери / в поле ввода — выпадет меню. Вот те что используешь каждый день:</p>
 
     <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
       <thead>
         <tr style="border-bottom:2px solid var(--ink);">
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Команда</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Когда использовать</th>
         </tr>
       </thead>
       <tbody>
         <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>/init</code></td>
+          <td style="padding:10px;">Изучает проект и создаёт стартовые файлы памяти</td>
+          <td style="padding:10px;">Первая команда в новом проекте — сразу после открытия папки</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;"><code>/clear</code></td>
-          <td style="padding:10px;">Начать разговор с чистого листа (не удаляет файлы, только историю чата)</td>
+          <td style="padding:10px;">Чистый лист в чате (файлы остаются, только история чата стирается)</td>
+          <td style="padding:10px;">Закончил одну задачу, начинаешь другую — не тащишь старый контекст</td>
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;"><code>/compact</code></td>
-          <td style="padding:10px;">Сжать историю чата когда Claude начинает «тупить» — убирает лишнее, оставляет суть</td>
+          <td style="padding:10px;">Сжимает историю чата — оставляет суть, убирает воду</td>
+          <td style="padding:10px;">Claude в длинном разговоре начинает «тупить» или путаться</td>
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;"><code>/rewind</code></td>
-          <td style="padding:10px;">Откатить последние изменения — и файлы, и историю (двойной Escape тоже работает)</td>
+          <td style="padding:10px;">Откатывает и файлы, и историю чата на шаг назад (двойной Escape тоже работает)</td>
+          <td style="padding:10px;">Claude сделал не то — хочешь вернуть как было</td>
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;"><code>/resume</code></td>
-          <td style="padding:10px;">Продолжить предыдущий разговор</td>
+          <td style="padding:10px;">Открывает выбор из прошлых разговоров</td>
+          <td style="padding:10px;">Продолжить вчерашнюю задачу — выбираешь нужный чат и работаешь дальше</td>
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;"><code>/voice</code></td>
-          <td style="padding:10px;">Включить голосовой ввод</td>
+          <td style="padding:10px;">Голосовой ввод</td>
+          <td style="padding:10px;">Длинная задача — печатать долго, проще наговорить</td>
         </tr>
         <tr>
           <td style="padding:10px;"><code>/usage</code></td>
-          <td style="padding:10px;">Посмотреть сколько токенов использовал за месяц</td>
+          <td style="padding:10px;">Сколько уже потратил токенов за месяц</td>
+          <td style="padding:10px;">Проверить остался ли лимит до конца цикла подписки</td>
         </tr>
       </tbody>
     </table>
 
+    <p style="font-size:14px;color:var(--muted);margin-top:6px;">Что такое токены — мера длины текста для AI, разбираем подробнее в <a href="08-context-window.html">статье 08 →</a></p>
+
     <div class="callout analogy">
       <span class="callout-label">Аналогия</span>
-      <p>Это как Ctrl+Z, только умнее. /rewind откатывает не только то что написал в чате, но и файлы которые Claude Code изменил. Если что-то пошло не так — нажал Esc Esc и всё вернулось.</p>
+      <p><code>/rewind</code> — это как Ctrl+Z, только умнее. Откатывает не только то что написал в чате, но и файлы которые Claude изменил. Если что-то пошло не так — нажал Esc Esc и всё вернулось.</p>
     </div>
 
     <div class="pager">
