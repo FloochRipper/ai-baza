@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Хуки в Claude Code: автоматизация на события | AI База</title>
+  <meta name="description" content="Хуки Claude Code: что это, какие события бывают, три типа хуков, готовые примеры конфигов для звука, форматирования, защиты от опасных команд.">
+  <meta property="og:title" content="Хуки в Claude Code: автоматизация на события">
+  <meta property="og:description" content="Полный гайд по хукам: события, три типа (command/prompt/agent), 5 готовых примеров JSON-конфигов.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=10">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Хуки в Claude Code","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="00-registration.html"><span class="num">00</span>Регистрация в Claude</a>
+      <a href="01-what-is.html"><span class="num">01</span>Подготовка к работе</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>Архитектура проекта</a>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Расширения — обзор</a>
+      <a href="05a-skills.html"><span class="num">05a</span>Скиллы</a>
+      <a href="05b-mcp.html"><span class="num">05b</span>MCP</a>
+      <a href="05c-hooks.html" class="active"><span class="num">05c</span>Хуки</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
+      <a href="12-agents-types.html"><span class="num">12</span>Виды агентов</a>
+      <a href="13-telegram-agent.html"><span class="num">13</span>Агент в Telegram</a>
+      <a href="14-troubleshooting.html"><span class="num">14</span>Troubleshooting</a>
+      <a href="15-whats-next.html"><span class="num">15</span>Что дальше</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      <a href="05-skills-mcp-hooks.html">Расширения</a> <span>/</span>
+      Хуки
+    </div>
+
+    <div class="article-head">
+      <h1><span class="accent">Хуки</span>: действия на автомате</h1>
+    </div>
+
+    <p id="intro">Хук — это правило для Claude Code: «когда происходит X, автоматически выполни Y». Claude закончил отвечать — играет звук. Сохранил файл — запускаются тесты. Хочет выполнить опасную команду — блокируется автоматически.</p>
+
+    <p>Хуки убирают из работы рутинные действия которые ты бы делал вручную. Один раз настроил — забыл, оно работает.</p>
+
+    <h2 id="what-can">Что можно автоматизировать</h2>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Сценарий</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Зачем</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Звук когда Claude закончил</td>
+          <td style="padding:10px;">Можно отойти от экрана — услышишь когда задача готова</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Тесты после изменения кода</td>
+          <td style="padding:10px;">Если что-то сломал — сразу видно, не нужно вспоминать через час</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Автоформатирование при сохранении</td>
+          <td style="padding:10px;">Код всегда красиво отформатирован, без ручного запуска линтера</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Защита от опасных команд</td>
+          <td style="padding:10px;">Блокировка <code>rm -rf</code>, force-push в main и других необратимых действий</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Уведомление в Telegram</td>
+          <td style="padding:10px;">Запустил долгую задачу, ушёл — приходит сообщение когда готово</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;">Загрузка контекста при старте</td>
+          <td style="padding:10px;">При открытии проекта автоматически читается handoff.md или другой контекст</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="events">Какие события бывают</h2>
+
+    <p>Хук срабатывает на конкретное событие. Вот основные:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Событие</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Когда срабатывает</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">VS Code</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Терминал</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>PreToolUse</code></td>
+          <td style="padding:10px;">Перед тем как Claude использует инструмент (напр. Bash)</td>
+          <td style="padding:10px;color:#22c55e;">✓</td>
+          <td style="padding:10px;color:#22c55e;">✓</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>PostToolUse</code></td>
+          <td style="padding:10px;">После использования инструмента</td>
+          <td style="padding:10px;color:#22c55e;">✓</td>
+          <td style="padding:10px;color:#22c55e;">✓</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>Stop</code></td>
+          <td style="padding:10px;">Claude закончил отвечать</td>
+          <td style="padding:10px;color:#22c55e;">✓</td>
+          <td style="padding:10px;color:#22c55e;">✓</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>SessionStart</code></td>
+          <td style="padding:10px;">При запуске новой сессии</td>
+          <td style="padding:10px;color:#22c55e;">✓</td>
+          <td style="padding:10px;color:#22c55e;">✓</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>SessionEnd</code></td>
+          <td style="padding:10px;">При завершении сессии</td>
+          <td style="padding:10px;color:#22c55e;">✓</td>
+          <td style="padding:10px;color:#22c55e;">✓</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>Notification</code></td>
+          <td style="padding:10px;">Claude ждёт ответа или подтверждения</td>
+          <td style="padding:10px;color:#ef4444;">✗</td>
+          <td style="padding:10px;color:#22c55e;">✓</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><code>UserPromptSubmit</code></td>
+          <td style="padding:10px;">При отправке пользовательского сообщения</td>
+          <td style="padding:10px;color:#22c55e;">✓</td>
+          <td style="padding:10px;color:#22c55e;">✓</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:14px;color:var(--muted);margin-top:6px;">Если нужны все хуки в VS Code — включи <code>claudeCode.useTerminal: true</code> в настройках расширения.</p>
+
+    <h2 id="types">Три типа хуков</h2>
+
+    <p>Хук может быть трёх видов в зависимости от того, что именно он делает:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Тип</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Когда выбирать</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>command</code></td>
+          <td style="padding:10px;">Запускает обычную shell-команду</td>
+          <td style="padding:10px;">Звук, скрипт, простое действие — самый стабильный вариант</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>prompt</code></td>
+          <td style="padding:10px;">Claude оценивает ситуацию и принимает решение</td>
+          <td style="padding:10px;">Когда нужна логика — например, проверка опасности команды</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><code>agent</code></td>
+          <td style="padding:10px;">Запускает мини-агента с инструментами</td>
+          <td style="padding:10px;">Сложные проверки, нужно прочитать файлы, проанализировать контекст</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="where-config">Где живёт конфигурация</h2>
+
+    <p>Хуки настраиваются в файлах <code>settings.json</code> на трёх уровнях (см. <a href="03-claude-md.html#settings">статью 03</a>):</p>
+
+    <ul style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li><code>~/.claude/settings.json</code> — глобальные хуки, работают везде</li>
+      <li><code>.claude/settings.json</code> — проектные хуки, в git, для всей команды</li>
+      <li><code>.claude/settings.local.json</code> — личные хуки, не в git</li>
+    </ul>
+
+    <p>Хуки также можно встраивать прямо в скиллы — в YAML-шапке.</p>
+
+    <h2 id="examples">5 готовых примеров</h2>
+
+    <h3 id="example-sound" style="font-size:18px;margin:28px 0 12px;">1. Звук когда задача готова</h3>
+
+    <p>Самый полезный хук на старте. Поставил задачу — ушёл пить кофе — услышал звук — вернулся к готовому результату.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ ~/.claude/settings.json</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff >/dev/null 2>&1 &"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff >/dev/null 2>&1 &"
+          }
+        ]
+      }
+    ]
+  }
+}</pre>
+    </div>
+
+    <p>Что тут: <code>afplay</code> — встроенная macOS-утилита для воспроизведения звука. <code>Glass.aiff</code> — короткий системный звук, не раздражает. <code>>/dev/null 2>&1 &</code> — запуск в фоне, чтобы не блокировать вывод. Для Windows замени на <code>powershell -c "[System.Media.SystemSounds]::Asterisk.Play()"</code>, для Linux — <code>paplay /usr/share/sounds/freedesktop/stereo/complete.oga</code>.</p>
+
+    <h3 id="example-format" style="font-size:18px;margin:28px 0 12px;">2. Автоформатирование после сохранения</h3>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Запуск Prettier на изменённых файлах</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx prettier --write $CLAUDE_FILE_PATH"
+          }
+        ]
+      }
+    ]
+  }
+}</pre>
+    </div>
+
+    <p>После любого редактирования или создания файла — Prettier приводит его к единому стилю. Сэкономит время на ручном форматировании.</p>
+
+    <h3 id="example-tests" style="font-size:18px;margin:28px 0 12px;">3. Тесты после изменения кода</h3>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Запуск тестов</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npm test --silent || echo '⚠️ Тесты не прошли'"
+          }
+        ]
+      }
+    ]
+  }
+}</pre>
+    </div>
+
+    <p>Если тесты сломались — сразу видно. Не нужно вспоминать через час «а почему сайт перестал работать».</p>
+
+    <h3 id="example-protect" style="font-size:18px;margin:28px 0 12px;">4. Защита от опасных команд</h3>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Блокировка опасного через prompt-хук</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Проверь команду на безопасность. Если она удаляет файлы (rm -rf), делает force-push в main, или экспортирует секреты — заблокируй. Иначе разреши."
+          }
+        ]
+      }
+    ]
+  }
+}</pre>
+    </div>
+
+    <p>Это уже умный хук — Claude сам оценивает каждую команду перед выполнением. Дополнение к статическим запретам в <code>permissions.deny</code> (см. <a href="03-claude-md.html#deny-starter">deny-список в 03</a>).</p>
+
+    <h3 id="example-telegram" style="font-size:18px;margin:28px 0 12px;">5. Уведомление в Telegram</h3>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Сообщение в Telegram когда готово</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "curl -s -X POST https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text='✅ Claude закончил задачу' >/dev/null"
+          }
+        ]
+      }
+    ]
+  }
+}</pre>
+    </div>
+
+    <p>Чтобы это работало: создай Telegram-бота через @BotFather, получи токен, узнай свой chat_id (через @userinfobot), пропиши <code>TG_BOT_TOKEN</code> и <code>TG_CHAT_ID</code> в env. Теперь даже если ушёл с компьютера — приходит сообщение «Claude готов».</p>
+
+    <h2 id="exit-codes">Exit-коды и что они значат</h2>
+
+    <p>Хук возвращает код, который определяет что произойдёт дальше:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Код</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Значение</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;color:#22c55e;font-weight:700;">0</td>
+          <td style="padding:10px;">Успех — продолжаем выполнение</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;color:#eab308;font-weight:700;">1</td>
+          <td style="padding:10px;">Ошибка, но не критично — показать сообщение и продолжить</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;color:#ef4444;font-weight:700;">2</td>
+          <td style="padding:10px;">Блок — остановить выполнение (только для PreToolUse)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="hooks-in-skills">Хуки внутри скиллов</h2>
+
+    <p>Хуки можно встроить прямо в YAML-шапку скилла — тогда они работают только когда этот скилл активен:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Скилл с встроенным хуком</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>---
+name: secure-deploy
+description: Деплой с проверками безопасности
+hooks:
+  PreToolUse:
+  - matcher: "Bash"
+    hooks:
+      - type: command
+        command: "./scripts/safety-check.sh"
+---
+
+При деплое сначала запусти проверку безопасности, потом разверни.</pre>
+    </div>
+
+    <p>Это полезно когда хук критичен для конкретного сценария но не нужен везде.</p>
+
+    <h2 id="when-useful">Где особенно полезны</h2>
+
+    <ul style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li><strong>На VPS-серверах</strong> — где Claude работает 24/7, нужны автоматические проверки</li>
+      <li><strong>Для агентов в проде</strong> — где нет тебя рядом смотреть за каждым действием</li>
+      <li><strong>В команде</strong> — где у всех должны срабатывать одинаковые правила автоматически</li>
+      <li><strong>Когда работаешь параллельно с несколькими задачами</strong> — звук помогает не пропускать момент готовности</li>
+    </ul>
+
+    <div class="callout key">
+      <span class="callout-label">Личное</span>
+      <p>Звук на завершение задачи и блокировка <code>rm -rf</code> — это два хука которые я ставлю первыми в любой среде. Поставил один раз — забыл. Работают надёжнее любых ручных проверок.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="05b-mcp.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">MCP</span>
+      </a>
+      <a class="pager-next" href="06-github.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">GitHub</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#what-can">Что можно автоматизировать</a>
+    <a href="#events">Какие события бывают</a>
+    <a href="#types">Три типа хуков</a>
+    <a href="#where-config">Где живёт конфигурация</a>
+    <a href="#examples">5 готовых примеров</a>
+    <a href="#exit-codes">Exit-коды</a>
+    <a href="#hooks-in-skills">Хуки в скиллах</a>
+    <a href="#when-useful">Где особенно полезны</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>

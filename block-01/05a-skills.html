@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Скиллы Claude Code: создать, установить, использовать | AI База</title>
+  <meta name="description" content="Что такое скиллы в Claude Code, как их создавать с нуля, где брать готовые, как ставить глобально или локально и проверять на безопасность.">
+  <meta property="og:title" content="Скиллы Claude Code: создать, установить, использовать">
+  <meta property="og:description" content="Полный гайд по скиллам: YAML-шапка, структура папки, промпт для создания, каталоги, безопасность.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=10">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Скиллы Claude Code","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="00-registration.html"><span class="num">00</span>Регистрация в Claude</a>
+      <a href="01-what-is.html"><span class="num">01</span>Подготовка к работе</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>Архитектура проекта</a>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Расширения — обзор</a>
+      <a href="05a-skills.html" class="active"><span class="num">05a</span>Скиллы</a>
+      <a href="05b-mcp.html"><span class="num">05b</span>MCP</a>
+      <a href="05c-hooks.html"><span class="num">05c</span>Хуки</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
+      <a href="12-agents-types.html"><span class="num">12</span>Виды агентов</a>
+      <a href="13-telegram-agent.html"><span class="num">13</span>Агент в Telegram</a>
+      <a href="14-troubleshooting.html"><span class="num">14</span>Troubleshooting</a>
+      <a href="15-whats-next.html"><span class="num">15</span>Что дальше</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      <a href="05-skills-mcp-hooks.html">Расширения</a> <span>/</span>
+      Скиллы
+    </div>
+
+    <div class="article-head">
+      <h1><span class="accent">Скиллы</span>: инструкции под задачу</h1>
+    </div>
+
+    <p id="intro">Скилл — это готовая инструкция для Claude под конкретную задачу. Не команда «сделай X», а свод правил «когда делаешь X — делай так». Создал один раз — Claude применяет автоматически когда замечает подходящую ситуацию.</p>
+
+    <p>Например: ты регулярно пишешь посты в Telegram-канал. Каждый раз объяснять «короткие абзацы, без эмодзи, провокационный заход» — утомительно. Создаёшь скилл — Claude применяет правила сам.</p>
+
+    <h2 id="how-works">Как это работает</h2>
+
+    <p>Скилл — это папка или файл с YAML-шапкой и текстом инструкции. В шапке два важных поля: <code>name</code> (имя скилла) и <code>description</code> (что делает и когда применять). Ниже — тело с правилами.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ YAML-шапка скилла</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>---
+name: post-writer
+description: Пишет посты в мой Telegram-канал.
+  Используй когда я прошу написать пост, придумать заход, оформить мысль для канала.
+---
+
+Когда я прошу написать пост:
+- Короткие абзацы (1-3 предложения)
+- Без эмодзи и канцелярита
+- Заход — провокационный вопрос или факт
+- Заканчивать призывом к действию или вопросом</pre>
+    </div>
+
+    <p>При старте каждой сессии Claude сканирует описания всех установленных скиллов. Когда ты пишешь задачу — он сверяет её с описаниями и решает: подходит ли какой-то скилл. Если да — тело скилла подгружается, Claude следует инструкциям.</p>
+
+    <p>Ключевой момент: тело скилла грузится <em>только когда нужно</em>. В контексте постоянно висят только короткие описания — по строчке на каждый. Можно держать десятки скиллов и почти не тратить токены. Это отличает скилл от MCP, который занимает место постоянно.</p>
+
+    <div class="callout analogy">
+      <span class="callout-label">Аналогия</span>
+      <p>Скилл — как стажёр с инструкцией в кармане. Не читает её постоянно, достаёт только когда задача подходит под его специализацию.</p>
+    </div>
+
+    <h2 id="structure">Структура файлов</h2>
+
+    <p>Простой скилл — один файл:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Минимальный скилл</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>.claude/skills/post-writer.md     ← один файл с YAML-шапкой и инструкцией</pre>
+    </div>
+
+    <p>Расширенный — папка со вспомогательными файлами:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Расширенный скилл</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>.claude/skills/post-writer/
+├── SKILL.md            ← главный файл с инструкцией
+├── examples/           ← примеры хороших постов
+│   ├── post-1.md
+│   └── post-2.md
+└── templates/          ← шаблоны разных форматов
+    └── narrative.md</pre>
+    </div>
+
+    <p>Когда папка нужна: скилл сложный, есть примеры или шаблоны на которые опирается. Когда хватает файла: правила компактные, всё помещается в одной инструкции.</p>
+
+    <h2 id="advanced-yaml">Расширенные настройки в шапке</h2>
+
+    <p>Кроме базовых <code>name</code> и <code>description</code> в шапке можно указать продвинутые параметры:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Полная шапка</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>---
+name: post-writer
+description: Пишет посты в Telegram-канал
+model: haiku
+context: fork
+allowed-tools: Read, Glob
+disable-model-invocation: false
+---</pre>
+    </div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:14px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Параметр</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Зачем</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>model</code></td>
+          <td style="padding:10px;">Какая модель будет выполнять скилл. <code>haiku</code> — дешевле и быстрее для простых задач, <code>sonnet</code> — основной баланс, <code>opus</code> — для сложных рассуждений</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>context: fork</code></td>
+          <td style="padding:10px;">Запускает скилл в изолированном контексте — он не видит историю чата и не загрязняет её. Полезно для технических задач которые не должны влиять на основной разговор</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>allowed-tools</code></td>
+          <td style="padding:10px;">Список инструментов которые можно использовать (Read, Edit, Bash и т.д.). Если хочешь чтобы скилл только читал, но не писал — оставь только Read</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><code>disable-model-invocation</code></td>
+          <td style="padding:10px;">Если <code>true</code> — Claude не может сам решить запустить этот скилл. Только ручной вызов через <code>/название</code>. Полезно для опасных или дорогих скиллов</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="create">Как создать свой скилл</h2>
+
+    <p>Самый простой путь — попросить Claude. Он умеет создавать скиллы по описанию задачи.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт для создания скилла</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай скилл для [задача].
+
+Когда я прошу [что делать], ты должен [как делать]:
+- Правило 1
+- Правило 2
+- Правило 3
+
+Триггеры (когда применять): [список фраз или ситуаций]
+Сделай его глобальным/проектным.</pre>
+    </div>
+
+    <p>Конкретный пример:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Реальный промпт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай скилл для написания постов в мой Telegram-канал.
+
+Когда я прошу написать пост, ты должен:
+- Писать коротко, максимум 5 абзацев
+- Начинать с провокационного вопроса или факта
+- Заканчивать призывом к действию
+- Использовать неформальный тон, без канцелярита
+- Не использовать слово «погружение»
+
+Триггеры: «напиши пост», «оформи в пост», «сделай пост для канала».
+Сделай его глобальным, чтобы работал везде.</pre>
+    </div>
+
+    <p>Claude создаст файл, добавит YAML-шапку, заполнит инструкции. Можно сразу проверить — попросить написать тестовый пост и посмотреть как сработают правила.</p>
+
+    <h3 id="improve" style="font-size:18px;margin:28px 0 12px;">Как улучшать скилл</h3>
+
+    <p>Скиллы редко получаются идеальными с первого раза. Нормальный процесс — допиливать на ходу. Когда видишь что результат не такой как нужно, говоришь Claude:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт для улучшения</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Этот пост получился слишком длинным. Добавь в скилл правило: максимум 3 абзаца.
+
+или
+
+В ответе клиенту не хватало конкретики.
+Обнови скилл: всегда добавлять один пример или ссылку.</pre>
+    </div>
+
+    <p>Принцип: ловишь себя на том, что объясняешь одно и то же правило третий раз — пора добавить его в скилл. Чем больше итераций — тем точнее работает.</p>
+
+    <h2 id="where-get">Где брать готовые скиллы</h2>
+
+    <p>Прежде чем писать с нуля — посмотри что уже есть. Три источника:</p>
+
+    <ul style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li><strong>skills.sh</strong> — каталог от сообщества. Установка одной командой через <code>npx skills</code></li>
+      <li><strong><code>/plugins</code> внутри Claude Code</strong> — официальный маркетплейс, 100+ скиллов от разных авторов</li>
+      <li><strong>anthropic/skills на GitHub</strong> — официальные скиллы от Anthropic для работы с PDF, Word, Excel, презентациями</li>
+      <li><strong>awesome-claude-code на GitHub</strong> — кураторский список лучших скиллов с описаниями</li>
+    </ul>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Терминал — установка и управление</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># Установить набор скиллов из каталога
+npx skills add anthropics/skills -a claude-code
+
+# Посмотреть что установлено
+npx skills ls
+
+# Обновить все
+npx skills update</pre>
+    </div>
+
+    <p>Совет: для большинства задач проще попросить Claude создать скилл с нуля под себя, чем искать готовый. Готовые — для общих сценариев (PDF, презентации, аудит безопасности). Свои — для всего что про твой стиль и твой бизнес.</p>
+
+    <h2 id="scope">Глобальные vs проектные</h2>
+
+    <p>Скиллы можно ставить в двух местах:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;"></th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Глобально</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Проектно</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Где живёт</td>
+          <td style="padding:10px;"><code>~/.claude/skills/</code></td>
+          <td style="padding:10px;"><code>.claude/skills/</code> в проекте</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Где работает</td>
+          <td style="padding:10px;">Во всех проектах на машине</td>
+          <td style="padding:10px;">Только в этом проекте</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Что туда</td>
+          <td style="padding:10px;">Общие методологии, инструменты (PDF, презентации, аудит)</td>
+          <td style="padding:10px;">Авторский стиль, голос, специфика конкретного продукта</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Правило простое: общее — глобально, специфическое — проектно. Например, скилл «писать посты в моём стиле» может быть глобальным если стиль один на все каналы. Но скилл «писать ответы клиентам моей школы английского» — только в проекте этой школы, в других контекстах он будет мешать.</p>
+
+    <h2 id="security">Безопасность</h2>
+
+    <div class="callout warn">
+      <span class="callout-label">Важно</span>
+      <p>Скилл — это инструкции которые выполняет Claude в твоём проекте. Плохой скилл может прочитать пароли из файлов, отправить данные на чужой сервер, выполнить вредоносный код. К источникам нужно относиться так же как к любому коду из интернета.</p>
+    </div>
+
+    <p>Чек-лист перед установкой незнакомого скилла:</p>
+
+    <ul style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li><strong>Кто автор?</strong> Известная компания (Anthropic, GitHub, Microsoft) или аноним?</li>
+      <li><strong>Активный ли репозиторий?</strong> Свежие коммиты, есть issues, кто-то его поддерживает?</li>
+      <li><strong>Понятная документация?</strong> Если описание расплывчатое — пропускай</li>
+      <li><strong>Что просит?</strong> Скилл для написания постов не должен запрашивать доступ к чтению .env</li>
+      <li><strong>Реальные отзывы?</strong> Кто-то им пользуется или скачал бот?</li>
+    </ul>
+
+    <p>Защита через <code>allowed-tools</code> в шапке: если скилл должен только читать — оставь <code>Read</code>, без <code>Edit</code> и <code>Bash</code>. Тогда даже если скилл попробует что-то нехорошее — у него не будет нужных инструментов.</p>
+
+    <h2 id="how-many">Сколько скиллов нужно</h2>
+
+    <p>Соблазн поставить пятьдесят скиллов сразу — велик. Не стоит.</p>
+
+    <div class="callout key">
+      <span class="callout-label">Правило</span>
+      <p>Чем меньше и точнее скиллов — тем лучше результат. Когда у тебя 50 скиллов, Claude путается какой когда применять. 5-10 хорошо настроенных скиллов работают сильнее, чем 50 средних.</p>
+    </div>
+
+    <p>Признак что скилл нужен: ловишь себя что в третий раз объясняешь Claude одни и те же правила. Записал в скилл — больше не объясняешь.</p>
+
+    <p>Признак что скилл лишний: за месяц ни разу не сработал, или ты сам забыл что он есть. Удаляй без сожаления.</p>
+
+    <div class="pager">
+      <a class="pager-prev" href="05-skills-mcp-hooks.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">Расширения — обзор</span>
+      </a>
+      <a class="pager-next" href="05b-mcp.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">MCP</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#how-works">Как это работает</a>
+    <a href="#structure">Структура файлов</a>
+    <a href="#advanced-yaml">Расширенная YAML-шапка</a>
+    <a href="#create">Как создать свой</a>
+    <a href="#where-get">Где брать готовые</a>
+    <a href="#scope">Глобальные vs проектные</a>
+    <a href="#security">Безопасность</a>
+    <a href="#how-many">Сколько скиллов нужно</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>
