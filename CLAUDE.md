@@ -63,7 +63,7 @@
 ## ДЕПЛОЙ
 
 Хостинг — Vercel, автодеплой по `git push` в `main`.
-URL: https://baza-znaniiy-seven.vercel.app
+URL: https://ai-baza.vercel.app
 Конфиг: `vercel.json` (кэш шрифтов, CSS, HTML).
 Свой домен — TBD.
 
