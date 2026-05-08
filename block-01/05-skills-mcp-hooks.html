@@ -41,6 +41,7 @@
       <a href="05a-skills.html"><span class="num">05a</span>Скиллы</a>
       <a href="05b-mcp.html"><span class="num">05b</span>MCP</a>
       <a href="05c-hooks.html"><span class="num">05c</span>Хуки</a>
+      <a href="05d-plugins.html"><span class="num">05d</span>Плагины</a>
       <a href="06-github.html"><span class="num">06</span>GitHub</a>
       <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
       <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
@@ -65,11 +66,11 @@
       <h1><span class="accent">Расширения</span> Claude Code: обзор</h1>
     </div>
 
-    <p id="intro">По умолчанию Claude Code умеет читать файлы, писать код, запускать команды в терминале. Это уже много. Но настоящая мощь начинается когда подключаешь расширения. Их три вида — у каждого своя задача.</p>
+    <p id="intro">По умолчанию Claude Code умеет читать файлы, писать код, запускать команды в терминале. Это уже много. Но настоящая мощь начинается когда подключаешь расширения. Их четыре вида — у каждого своя задача.</p>
 
     <p>Эта статья — обзор и карта местности. Каждое расширение разбираем подробно в отдельной статье. Читай по порядку или сразу в нужную.</p>
 
-    <h2 id="three-extensions">Три расширения</h2>
+    <h2 id="three-extensions">Четыре расширения</h2>
 
     <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
       <thead>
@@ -90,10 +91,15 @@
           <td style="padding:10px;">Подключение внешних сервисов — браузер, базы данных, поиск, мессенджеры</td>
           <td style="padding:10px;">Нужно чтобы Claude умел взаимодействовать с чем-то снаружи папки проекта</td>
         </tr>
-        <tr>
+        <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;"><strong><a href="05c-hooks.html" style="color:var(--accent);">Хуки</a></strong></td>
           <td style="padding:10px;">Автоматические действия на события (звук, тесты, форматирование, защита от опасного)</td>
           <td style="padding:10px;">Хочешь автоматизировать рутину или поставить страховку от ошибок</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><strong><a href="05d-plugins.html" style="color:var(--accent);">Плагины</a></strong></td>
+          <td style="padding:10px;">Готовые наборы скиллов + MCP + хуков в одной коробке, ставятся одной командой</td>
+          <td style="padding:10px;">Хочешь установить готовый набор инструментов или поделиться своим набором с командой</td>
         </tr>
       </tbody>
     </table>
@@ -121,6 +127,14 @@
     <p>Самый практичный хук на старте — звуковое уведомление: можно отойти от экрана и услышать когда задача готова.</p>
 
     <p><a href="05c-hooks.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">Подробно про хуки → 05c</a></p>
+
+    <h2 id="plugins-short">Плагины — коротко</h2>
+
+    <p>Плагин — это упакованный набор скиллов, MCP, хуков и субагентов. Команда <code>/plugin</code> открывает менеджер с официальным маркетплейсом Anthropic — оттуда ставится готовый набор инструментов одной командой.</p>
+
+    <p>Можно создать свой плагин и поделиться с командой — все коллеги получают одинаковый набор инструментов через <code>/plugin install</code>.</p>
+
+    <p><a href="05d-plugins.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">Подробно про плагины → 05d</a></p>
 
     <h2 id="how-combine">Как они работают вместе</h2>
 
@@ -159,10 +173,11 @@
   <aside class="toc">
     <h4>На этой странице</h4>
     <a href="#intro">Вступление</a>
-    <a href="#three-extensions">Три расширения</a>
+    <a href="#three-extensions">Четыре расширения</a>
     <a href="#skills-short">Скиллы</a>
     <a href="#mcp-short">MCP</a>
     <a href="#hooks-short">Хуки</a>
+    <a href="#plugins-short">Плагины</a>
     <a href="#how-combine">Как работают вместе</a>
   </aside>
 </div>
