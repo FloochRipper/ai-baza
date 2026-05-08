@@ -36,7 +36,7 @@
       <a href="#you-sure">Промпт «ты уверен?»</a>
       <a href="#hidden-folders">Скрытые папки</a>
       <a href="#init">Команда /init</a>
-      <a href="#sound-hook">Звук когда готово</a>
+      <a href="#sound-hook">Два первых хука</a>
       <a href="#one-task">Одна задача = один диалог</a>
       <a href="#parallel-tabs">Три вкладки</a>
       <a href="#worktree">Worktree для параллельной работы</a>
@@ -145,11 +145,22 @@
 
     <p>Подробнее: <a href="block-01/02-first-launch.html#commands">статья 02, раздел «Команды»</a></p>
 
-    <h2 id="sound-hook">Звук когда задача готова</h2>
+    <h2 id="sound-hook">Два хука которые ставятся первыми</h2>
 
-    <p>Поставил задачу, ушёл пить кофе — услышал звук, вернулся, всё готово. Один из тех хуков которые ставишь однажды и больше не убираешь. На Mac работает встроенным <code>afplay</code>, ничего ставить не надо.</p>
+    <p>Если только начинаешь работать с хуками — поставь сразу эту пару. Они работают надёжнее любых ручных проверок и реально экономят нервы.</p>
 
-    <p>Подробнее: <a href="block-01/05c-hooks.html#example-sound">статья 05c, готовый пример хука</a></p>
+    <p style="font-size:17px;font-weight:600;margin:24px 0 6px;">1. Звук когда задача готова</p>
+    <p style="margin:0 0 16px;">Поставил задачу, ушёл пить кофе — услышал звук, вернулся, всё готово. На Mac работает встроенным <code>afplay</code>, ничего ставить не надо. На Windows — через <code>powershell</code> с системным звуком, на Linux — <code>paplay</code>.</p>
+
+    <p style="font-size:17px;font-weight:600;margin:0 0 6px;">2. Блокировка rm -rf и других необратимых команд</p>
+    <p style="margin:0 0 16px;">Через <code>permissions.deny</code> в settings.json запрещаешь команды от которых нельзя восстановиться без бэкапа: <code>rm -rf</code>, <code>git push --force</code>, <code>git reset --hard</code>, чтение <code>.env</code>. Один раз настроил — больше не теряешь данные из-за галлюцинации Claude или своего же копи-паста.</p>
+
+    <p>Готовый deny-список с 25+ запретами лежит в <a href="block-01/03-claude-md.html#deny-starter">статье 03</a> — копируешь себе и работаешь спокойнее. Сам хук со звуком — в <a href="block-01/05c-hooks.html#example-sound">статье 05c</a>.</p>
+
+    <div class="callout key" style="margin:16px 0;">
+      <span class="callout-label">Личный сетап Никиты</span>
+      <p>Эти два хука стоят у меня в глобальном <code>~/.claude/settings.json</code> с первого дня работы. Поставил один раз — забыл. Звук помогает не сидеть и пялиться на экран, защита от опасного — чтобы Claude не уронил проект случайной командой.</p>
+    </div>
 
     <h2 id="one-task">Одна задача = один диалог</h2>
 
@@ -194,7 +205,7 @@
     <a href="#you-sure">«Ты уверен?»</a>
     <a href="#hidden-folders">Скрытые папки</a>
     <a href="#init">/init</a>
-    <a href="#sound-hook">Звук готовности</a>
+    <a href="#sound-hook">Два первых хука</a>
     <a href="#one-task">Одна задача = один чат</a>
     <a href="#parallel-tabs">Три вкладки</a>
     <a href="#worktree">Worktree</a>
