@@ -28,6 +28,7 @@
 
 ## Состав базы знаний
 - [Content-zavod-starter - часть базы знаний, не лид-магнит](memory/project_content_zavod_starter_role.md) - раздел внутри baza-znaniy, деплоится как подпапка
+- [Боевой URL платформы — ai-baza.vercel.app](memory/project_correct_domain.md) — не baza-znaniiy-seven, как было в старом CLAUDE.md
 
 ## Архитектура проекта в контенте базы
 - [Третий файл минимума называем CONTEXT.md, не project.md](memory/project_file_naming_convention.md) — своя конвенция, не курсовая
