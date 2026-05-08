@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Виды агентов: когда что использовать | AI База</title>
+  <meta name="description" content="Скилл, команда, субагент, агент-продукт — разные виды агентов в мире Claude Code и когда какой выбирать.">
+  <meta property="og:title" content="Виды агентов: когда что использовать">
+  <meta property="og:description" content="Скилл vs команда vs субагент vs агент-продукт — четыре разных понятия с одним названием. Разбираем когда что нужно.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=10">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Виды агентов: когда что использовать","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="00-registration.html"><span class="num">00</span>Регистрация в Claude</a>
+      <a href="01-what-is.html"><span class="num">01</span>Подготовка к работе</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>Архитектура проекта</a>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Скиллы, MCP, Hooks</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
+      <a href="12-agents-types.html" class="active"><span class="num">12</span>Виды агентов</a>
+      <a href="13-telegram-agent.html"><span class="num">13</span>Агент в Telegram</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      Виды агентов
+    </div>
+
+    <div class="article-head">
+      <h1>Виды <span class="accent">агентов</span>: когда что использовать</h1>
+    </div>
+
+    <p id="intro">«Агенты» — самое перегруженное слово в мире Claude Code. Когда блогер кричит «нужно делать агентов!» — он может иметь в виду совершенно разные вещи. Один говорит про скилл, другой — про субагент в Claude Code, третий — про Telegram-бота-продавца. Это четыре разные сущности с одним названием.</p>
+
+    <p>Эта статья — карта местности. Прежде чем кидаться делать «агентов», разберись о чём именно идёт речь. Под каждый сценарий — свой инструмент, и выбор правильного экономит дни работы.</p>
+
+    <h2 id="comparison">Четыре разные сущности — таблица</h2>
+
+    <p>Перед глубоким разбором — общая картина:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:14px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;"></th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Скилл</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Команда</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Субагент</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Агент-продукт</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Что это</td>
+          <td style="padding:10px;">Готовая инструкция со стилем и правилами для повторяющейся задачи</td>
+          <td style="padding:10px;">Слэш-команда с зашитым промптом</td>
+          <td style="padding:10px;">Помощник внутри Claude Code, работает в изолированном контексте</td>
+          <td style="padding:10px;">Отдельное приложение для клиентов (например, бот в Telegram)</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Где живёт</td>
+          <td style="padding:10px;"><code>.claude/skills/</code></td>
+          <td style="padding:10px;">Тоже <code>.claude/skills/</code> (без YAML-шапки)</td>
+          <td style="padding:10px;"><code>.claude/agents/</code></td>
+          <td style="padding:10px;">На сервере (VPS), Telegram, n8n и т.д.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Кто пользуется</td>
+          <td style="padding:10px;">Ты сам в Claude Code</td>
+          <td style="padding:10px;">Ты сам в Claude Code</td>
+          <td style="padding:10px;">Ты сам в Claude Code</td>
+          <td style="padding:10px;color:#22c55e;font-weight:600;">Клиенты, незнакомцы, аудитория</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Когда нужно</td>
+          <td style="padding:10px;">Каждый раз делаешь одно и то же — посты, ответы, отчёты</td>
+          <td style="padding:10px;">Часто запускаешь один и тот же промпт</td>
+          <td style="padding:10px;">Сложная задача, которую можно разбить на несколько параллельных</td>
+          <td style="padding:10px;">Нужно автоматизировать общение с клиентами</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Сложность</td>
+          <td style="padding:10px;color:#22c55e;">Низкая</td>
+          <td style="padding:10px;color:#22c55e;">Низкая</td>
+          <td style="padding:10px;color:#f59e0b;">Средняя</td>
+          <td style="padding:10px;color:#ef4444;">Высокая</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Ключевое отличие первых трёх от четвёртого: первые три — это <strong>инструменты для тебя</strong>, чтобы ускорить твою работу с Claude Code. Четвёртый — это <strong>продукт для клиентов</strong>, которым ты их обслуживаешь. Это два разных мира, хотя слово «агент» одно.</p>
+
+    <h2 id="skill">Скилл — для повторяющихся задач со своим стилем</h2>
+
+    <p>Скилл — это файл с инструкцией, которую Claude применяет когда подходит ситуация. Например, ты регулярно пишешь посты в Telegram-канал в своём стиле. Каждый раз объяснять «короткие абзацы, без эмодзи, заход с провокации» — утомляет. Создаёшь скилл — и Claude применяет правила автоматически.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Структура простого скилла</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>.claude/skills/post-writer.md
+
+---
+name: post-writer
+description: Пишет посты в Telegram-канал в моём стиле
+---
+
+Когда я прошу написать пост:
+- Короткие абзацы, без эмодзи
+- Заход — провокационный вопрос или факт
+- Заканчивать призывом к действию
+- Не использовать слово «погружение»</pre>
+    </div>
+
+    <p>Когда выбирать скилл: ты делаешь похожие задачи много раз, и есть свод правил, которым нужно следовать. Подробно — в <a href="05-skills-mcp-hooks.html">статье 05</a>.</p>
+
+    <h2 id="command">Команда — быстрый шорткат для часто используемого промпта</h2>
+
+    <p>Команда — это та же файловая структура, что и скилл, но без YAML-шапки. Она запускается явно через <code>/название</code>. Используется когда нужно зашить конкретный сценарий с несколькими шагами в одну строку.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Команда /endday — пример</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>.claude/skills/endday.md
+
+Обнови .claude/handoff.md по итогам сессии:
+1. Что сделали — 1-2 предложения
+2. Что следующим шагом — 3-5 пунктов
+3. Обещания / дедлайны
+4. Дату обновления внизу
+
+Перед сохранением покажи мне предлагаемый текст.</pre>
+    </div>
+
+    <p>Когда выбирать команду: есть конкретный workflow с 3-7 шагами, который запускается часто. Команды и скиллы с 2026 года — одна сущность, разница только в YAML-шапке.</p>
+
+    <h2 id="subagent">Субагент — параллельный помощник внутри Claude Code</h2>
+
+    <p>Субагент — это отдельная сессия Claude с чистым контекстом, которая запускается главным агентом для конкретной подзадачи. Зачем: разбить большую задачу на параллельные куски и не загромождать главный контекст.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Сценарий с тремя субагентами</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Запусти три субагента параллельно:
+- researcher: найди 5 конкурентов в нише X
+- analyzer: разбери наш сайт по 5 критериям
+- writer: напиши черновик статьи на тему Y
+
+Жди всех трёх, потом собери результаты.</pre>
+    </div>
+
+    <p>Когда выбирать субагента: задача большая, состоит из независимых частей, и у каждой части свой узкий контекст. Подробно — в <a href="10-subagents.html">статье 10</a>.</p>
+
+    <div class="callout warn">
+      <span class="callout-label">Важно</span>
+      <p>Субагенты дороже по токенам, чем обычная работа: каждый создаёт свою сессию. Для простых задач — это перебор. Включай субагентов когда выигрыш от параллелизма реально оправдан.</p>
+    </div>
+
+    <h2 id="product-agent">Агент-продукт — приложение для клиентов</h2>
+
+    <p>Это другой мир. Когда блогеры в интернете говорят «делайте агентов» — чаще всего имеют в виду именно это: AI-агент-продавец в Telegram, агент-консьерж для бизнеса, агент-секретарь для записи клиентов. Это <strong>отдельное приложение</strong>, которое ты создаёшь при помощи Claude Code (но это не сам Claude Code).</p>
+
+    <p>Такой агент состоит из 6 компонентов: база знаний, retrieval, системный промпт, модель, оркестратор, интерфейс. Это не тот же субагент. Агент-продукт живёт на сервере, общается с твоими клиентами через мессенджер или сайт, и работает 24/7 без тебя.</p>
+
+    <p>Когда выбирать агент-продукт: у тебя есть бизнес и нужно автоматизировать общение с клиентами — продажи, ответы на вопросы, запись на услуги. Подробно про архитектуру — в <a href="13-telegram-agent.html">статье 13: AI-агент в Telegram</a>.</p>
+
+    <h2 id="orchestration">Оркестрация — что это вообще</h2>
+
+    <p>«Оркестрация агентов» — ещё один популярный термин. Звучит сложно, на деле — простая вещь. Оркестрация это когда главный агент (оркестратор) принимает большую задачу, разбивает её на куски, раздаёт субагентам или другим инструментам, ждёт результаты и собирает их в финальный ответ.</p>
+
+    <div class="callout analogy">
+      <span class="callout-label">Аналогия</span>
+      <p>Оркестратор — это дирижёр оркестра. Он не играет на инструментах, его задача — раздать партитуру музыкантам и слушать, чтобы все играли в такт. Каждый музыкант (субагент) играет свою партию в своём ритме, дирижёр их сводит.</p>
+    </div>
+
+    <p>Где это проявляется в Claude Code: ты пишешь главному Claude «реализуй фичу X», он сам решает что разбить на субагентов (например, один пишет тесты, другой пишет код, третий ревьюит). Тебе не нужно явно говорить «запусти субагентов» — Claude часто решает сам, когда это уместно.</p>
+
+    <h2 id="decision">Когда что выбирать — простое дерево</h2>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Дерево решений</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Что я хочу автоматизировать?
+
+├─ Свою работу с Claude Code
+│  │
+│  ├─ Регулярная задача со своими правилами и стилем
+│  │  → СКИЛЛ
+│  │
+│  ├─ Часто запускаемый сценарий с шагами
+│  │  → КОМАНДА (/название)
+│  │
+│  └─ Большая задача из независимых параллельных частей
+│     → СУБАГЕНТЫ (главный + помощники)
+│
+└─ Общение моих клиентов с моим продуктом
+   → АГЕНТ-ПРОДУКТ (бот в Telegram, виджет на сайте)</pre>
+    </div>
+
+    <p>Универсальное правило: начинай с самого простого. Если задачу решает скилл — не лепи субагентов. Если справляется один Claude Code — не строй агента-продукт «на всякий случай». Сложность инструмента должна быть оправдана сложностью задачи.</p>
+
+    <div class="callout key">
+      <span class="callout-label">Итого</span>
+      <p>Скилл и команда — для тебя в Claude Code, простые. Субагент — для параллельной работы внутри Claude Code, средняя сложность. Агент-продукт — отдельное приложение для клиентов, делается через Claude Code, но живёт самостоятельно. Не путай эти четыре сущности — у них разные задачи.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="11-process.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">Процесс</span>
+      </a>
+      <a class="pager-next" href="13-telegram-agent.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">Агент в Telegram</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#comparison">Таблица — четыре сущности</a>
+    <a href="#skill">Скилл</a>
+    <a href="#command">Команда</a>
+    <a href="#subagent">Субагент</a>
+    <a href="#product-agent">Агент-продукт</a>
+    <a href="#orchestration">Оркестрация</a>
+    <a href="#decision">Когда что выбирать</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>

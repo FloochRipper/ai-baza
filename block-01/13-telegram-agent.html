@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-агент в Telegram: 6 компонентов | AI База</title>
+  <meta name="description" content="Как собрать AI-агента-продавца в Telegram: база знаний, retrieval, промпт, модель, оркестратор, интерфейс. Три варианта по сложности.">
+  <meta property="og:title" content="AI-агент в Telegram: 6 компонентов">
+  <meta property="og:description" content="Архитектура AI-агента в Telegram-боте от идеи до MVP. Три способа собрать: n8n, Claude Agent SDK, Custom Python.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=10">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"AI-агент в Telegram: 6 компонентов","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="00-registration.html"><span class="num">00</span>Регистрация в Claude</a>
+      <a href="01-what-is.html"><span class="num">01</span>Подготовка к работе</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>Архитектура проекта</a>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Скиллы, MCP, Hooks</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
+      <a href="12-agents-types.html"><span class="num">12</span>Виды агентов</a>
+      <a href="13-telegram-agent.html" class="active"><span class="num">13</span>Агент в Telegram</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      Агент в Telegram
+    </div>
+
+    <div class="article-head">
+      <h1>AI-агент в <span class="accent">Telegram</span>: 6 компонентов</h1>
+    </div>
+
+    <p id="intro">Это про другой тип агента — не субагент Claude Code (помощник тебе), а агент-продукт (бот для твоих клиентов). Агент в Telegram отвечает на вопросы клиентов, продаёт, записывает на услуги, обрабатывает возражения — пока ты спишь.</p>
+
+    <p>Если ты ещё не разобрался в чём разница между разными «агентами» — сначала прочитай <a href="12-agents-types.html">статью 12 про виды агентов</a>. Дальше — конкретная архитектура и три способа сборки.</p>
+
+    <h2 id="when-need">Когда вообще нужен такой агент</h2>
+
+    <p>Не каждому бизнесу нужен AI-агент в Telegram. Это инструмент под конкретные ситуации.</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Сценарий</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает агент</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Агент-продавец</td>
+          <td style="padding:10px;">Отвечает на вопросы о продукте, обрабатывает возражения, ведёт к покупке</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Агент-консьерж</td>
+          <td style="padding:10px;">Записывает на услуги, отвечает на типовые вопросы, отсеивает не свою аудиторию</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Агент-эксперт</td>
+          <td style="padding:10px;">Отвечает по специализированной теме (твоей экспертизе) — мини-консультация</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;">Агент-сортировщик</td>
+          <td style="padding:10px;">Принимает входящие, классифицирует по типу, отвечает на простые, эскалирует сложные</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Не нужен когда: у тебя 2 клиента в неделю и можешь отвечать сам. Когда продукт сложный и требует живого общения. Когда твои клиенты не в Telegram.</p>
+
+    <h2 id="components">6 компонентов агента</h2>
+
+    <p>Любой такой агент состоит из шести базовых частей. Без какой-то — не работает. С каждой можно начать просто и улучшить позже.</p>
+
+    <h3 style="font-size:18px;margin:28px 0 12px;">1. База знаний</h3>
+
+    <p>Тексты о продукте, услугах, ценах, частых возражениях, скриптах диалога. Это просто markdown-файлы в папке. Один файл = одна тема.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Структура базы знаний для агента-продавца</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>knowledge/
+  product.md          ← описание продукта и его выгод
+  pricing.md          ← прайс и тарифы
+  objections.md       ← ответы на возражения «дорого», «подумаю», «есть аналоги»
+  funnel.md           ← сценарии воронки: что спросить на шаге 1, шаге 2
+  cases.md            ← истории и кейсы клиентов
+  faq.md              ← частые вопросы и ответы</pre>
+    </div>
+
+    <h3 style="font-size:18px;margin:28px 0 12px;">2. Retrieval — поиск по базе</h3>
+
+    <p>Механизм который находит нужный кусок базы под вопрос клиента. Два варианта по сложности:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Вариант</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Когда выбирать</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>Простой grep по файлам</strong></td>
+          <td style="padding:10px;">База маленькая (до 50 файлов), хватает поиска по словам. Старт всегда отсюда.</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><strong>Векторная база</strong> (Pinecone, Chroma, Weaviate)</td>
+          <td style="padding:10px;">База большая (сотни+ файлов), нужен семантический поиск (поиск по смыслу, не по словам)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Для MVP — простой вариант. Векторку добавишь когда упрёшься в лимит.</p>
+
+    <h3 style="font-size:18px;margin:28px 0 12px;">3. Системный промпт с логикой воронки</h3>
+
+    <p>Это инструкция агенту: кто он, что делает, как ведёт диалог. На 70% поведение агента зависит именно от этого промпта, не от модели.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Системный промпт агента-продавца</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Ты консультант по [продукту]. Твоя задача — довести клиента
+до заявки на бесплатную диагностику.
+
+Воронка:
+1. Выясни какая задача у клиента (1-2 уточняющих вопроса)
+2. Предложи решение из базы знаний (используй product.md и cases.md)
+3. Обработай возражения (см. objections.md)
+4. Предложи бесплатную диагностику
+5. Если согласие — собери контакт и передай менеджеру
+
+Запрещено:
+- Придумывать факты которых нет в базе
+- Обещать то чего нет в продукте
+- Скидывать ссылки на сторонние сайты
+
+Стиль: на «ты», по-дружески, без канцелярита.
+Длина ответа: 1-3 коротких абзаца, не больше.</pre>
+    </div>
+
+    <h3 style="font-size:18px;margin:28px 0 12px;">4. Модель (LLM)</h3>
+
+    <p>Кто генерирует ответы. Выбор зависит от сложности задачи и бюджета.</p>
+
+    <div class="grid-cards cols-3">
+      <div class="grid-card">
+        <div class="card-letter" style="color:#22c55e;">O</div>
+        <div class="card-name">Claude Opus</div>
+        <div class="card-desc">Продажи, сложные возражения, важно качество аргументации. Дороже, медленнее.</div>
+      </div>
+      <div class="grid-card">
+        <div class="card-letter" style="color:var(--accent);">S</div>
+        <div class="card-name">Claude Sonnet</div>
+        <div class="card-desc">Баланс цена/качество. Большинство задач. Старт для MVP — отсюда.</div>
+      </div>
+      <div class="grid-card">
+        <div class="card-letter" style="color:#6b7280;">H</div>
+        <div class="card-name">Claude Haiku</div>
+        <div class="card-desc">Простые ответы, большой объём трафика, чувствителен бюджет.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:18px;margin:28px 0 12px;">5. Оркестратор</h3>
+
+    <p>Штука которая связывает всё остальное. Принимает сообщение от клиента → ищет в базе → собирает контекст → отправляет в модель → возвращает ответ → пишет лог. Три варианта по сложности — разберём ниже отдельно.</p>
+
+    <h3 style="font-size:18px;margin:28px 0 12px;">6. Интерфейс с клиентом</h3>
+
+    <p>Где клиент общается с агентом:</p>
+
+    <ul style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li><strong>Telegram-бот</strong> — проще всего стартовать (n8n сразу умеет, ты тоже умеешь делать)</li>
+      <li><strong>WhatsApp</strong> — через Business API, сложнее и платно</li>
+      <li><strong>Виджет на сайте</strong> — ручная сборка или сервисы вроде Chatwoot</li>
+      <li><strong>Веб-интерфейс</strong> — самый гибкий, но требует фронтенд</li>
+    </ul>
+
+    <p>Для MVP — почти всегда Telegram. Аудитория уже там, бот ставится за час, тестировать удобно.</p>
+
+    <h2 id="three-paths">Три способа собрать — от простого к сложному</h2>
+
+    <p>Те же 6 компонентов можно собрать по-разному. Выбор зависит от твоих навыков и того насколько глубоко хочешь контролировать систему.</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:14px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Параметр</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">n8n</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Claude Agent SDK</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Custom Python</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Подход</td>
+          <td style="padding:10px;">No-code, собираешь блоками мышкой</td>
+          <td style="padding:10px;">Через Claude Code в VS Code, описываешь — Claude пишет код</td>
+          <td style="padding:10px;">Полностью свой код на LangChain или LlamaIndex</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Время до MVP</td>
+          <td style="padding:10px;color:#22c55e;">1-2 дня</td>
+          <td style="padding:10px;color:#22c55e;">3-5 дней</td>
+          <td style="padding:10px;color:#f59e0b;">1-2 недели</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Гибкость</td>
+          <td style="padding:10px;color:#f59e0b;">Средняя</td>
+          <td style="padding:10px;color:#22c55e;">Высокая</td>
+          <td style="padding:10px;color:#22c55e;">Максимальная</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Минимальные навыки</td>
+          <td style="padding:10px;">Чтение документации</td>
+          <td style="padding:10px;">Вайбкодинг через Claude Code</td>
+          <td style="padding:10px;">Реальные знания Python</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Когда выбирать</td>
+          <td style="padding:10px;">MVP за выходные, не хочешь разбираться в коде</td>
+          <td style="padding:10px;">Уже работаешь в Claude Code, хочешь больше контроля</td>
+          <td style="padding:10px;">Сложная логика, есть разработчик, проект на годы</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="path-claude-sdk">Путь через Claude Agent SDK — для вайбкодеров</h2>
+
+    <p>Самый интересный для нашей аудитории — собрать через Claude Code в VS Code. Не нужно знать Python, не нужно учить n8n с нуля. Описываешь задачу — Claude пишет код, ты тестируешь, дорабатываешь.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт старта проекта</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай проект Telegram-агента-продавца на Claude Agent SDK.
+
+Что должен уметь агент:
+- Отвечать клиентам в моём Telegram-боте
+- Использовать базу знаний из папки knowledge/ (md-файлы)
+- Вести диалог по воронке из system-prompt.md
+- Логировать каждый диалог в logs/
+
+Используй официальный @anthropic-ai/claude-agent-sdk.
+Начни с минимально рабочего MVP, потом будем улучшать.
+
+Перед написанием кода — задай мне уточняющие вопросы.</pre>
+    </div>
+
+    <p>Ключевая фраза «задай мне уточняющие вопросы». Без неё Claude начнёт писать первый попавшийся вариант, и потом всё переделывать. Дай ему 5-10 минут на вопросы про архитектуру, токены, хостинг — это сэкономит дни доработок.</p>
+
+    <h2 id="mvp-steps">Путь к MVP за неделю</h2>
+
+    <p>Реалистичный план для одиночки, который умеет вайбкодить:</p>
+
+    <p style="font-size:17px;font-weight:600;margin:24px 0 6px;">День 1: База знаний</p>
+    <p style="margin:0 0 16px;">Сядь и напиши 10-15 md-файлов о своём продукте, ответах на возражения, кейсах. Это самая важная часть — без хорошей базы агент будет нести чушь, какой бы умной ни была модель.</p>
+
+    <p style="font-size:17px;font-weight:600;margin:0 0 6px;">День 2: Системный промпт и воронка</p>
+    <p style="margin:0 0 16px;">Опиши кто агент, какие шаги воронки, что говорить, что запрещено. Прогони на себе: представь себя клиентом и проверь логично ли это.</p>
+
+    <p style="font-size:17px;font-weight:600;margin:0 0 6px;">День 3: Telegram-бот скелет</p>
+    <p style="margin:0 0 16px;">Через @BotFather получи токен. Через Claude Code сгенерируй базовый бот, который пока просто отвечает «Привет». Поставь на свой компьютер и убедись что работает.</p>
+
+    <p style="font-size:17px;font-weight:600;margin:0 0 6px;">День 4: Подключение Claude Agent SDK</p>
+    <p style="margin:0 0 16px;">Подключи модель, retrieval из базы, системный промпт. Бот начинает осмысленно отвечать. Тестируй на разных вопросах.</p>
+
+    <p style="font-size:17px;font-weight:600;margin:0 0 6px;">День 5-6: Тестирование и доработка</p>
+    <p style="margin:0 0 16px;">Прогоняешь 10-20 типичных диалогов, отлавливаешь странные ответы, докручиваешь промпт и базу. Это итерационная работа.</p>
+
+    <p style="font-size:17px;font-weight:600;margin:0 0 6px;">День 7: Деплой на VPS</p>
+    <p style="margin:0 0 16px;">Поднимаешь VPS за $5-20/мес (DigitalOcean, Hetzner, Timeweb), переносишь бот туда. Теперь он работает 24/7 без твоего ноутбука. Запускаешь на тестовом трафике.</p>
+
+    <h2 id="security">Безопасность и подводные камни</h2>
+
+    <div class="callout warn">
+      <span class="callout-label">Ограничь возможности агента</span>
+      <p>Не давай агенту-продавцу доступ ко всему. Он должен <em>читать</em> из базы знаний и <em>писать</em> в логи — всё. Без файловой системы за пределами проекта, без удаления, без shell-команд. Иначе один умный клиент может попросить агента сделать то что не нужно.</p>
+    </div>
+
+    <p>Базовые правила безопасности:</p>
+
+    <ul style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li><strong>Whitelist Telegram ID</strong> — только определённые пользователи могут общаться с агентом (если он внутренний)</li>
+      <li><strong>Лимиты по сообщениям</strong> — не больше N запросов в минуту от одного пользователя (защита от сжигания токенов)</li>
+      <li><strong>Запрет на действия</strong> — агент не отправляет деньги, не выдаёт скидки сам, не подписывает договоры. Финальные действия — через человека.</li>
+      <li><strong>Логи</strong> — каждый диалог сохраняется. Если что-то пойдёт не так — будет что разобрать.</li>
+    </ul>
+
+    <div class="callout key">
+      <span class="callout-label">Итого</span>
+      <p>AI-агент в Telegram — это не магия, а 6 понятных компонентов. База знаний, retrieval, промпт, модель, оркестратор, интерфейс. Соберёшь грамотно — клиенты обслуживаются 24/7. Соберёшь криво — генерирует чушь, которая роняет твою репутацию.</p>
+      <p style="margin-top:8px;">Главное правило: 80% качества агента — это не технология, а база знаний и системный промпт. Не экономь время на этих двух частях.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="12-agents-types.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">Виды агентов</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#when-need">Когда нужен такой агент</a>
+    <a href="#components">6 компонентов</a>
+    <a href="#three-paths">Три способа собрать</a>
+    <a href="#path-claude-sdk">Путь через Claude Agent SDK</a>
+    <a href="#mvp-steps">Путь к MVP за неделю</a>
+    <a href="#security">Безопасность</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>
