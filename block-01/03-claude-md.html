@@ -663,6 +663,57 @@ ALWAYS ask before deleting any file
       <p>Разрешение на <code>Bash(safe-cmd *)</code> не даёт разрешение на <code>safe-cmd && другая-команда</code>. Символы <code>&&</code>, <code>||</code>, <code>;</code>, <code>|</code> разбивают команду на части — каждая часть проверяется отдельно.</p>
     </div>
 
+    <h2 id="deny-starter">Готовый deny-список — скопируй себе</h2>
+
+    <p>Вот рабочий набор запретов для глобального <code>~/.claude/settings.json</code>. Закрывает три категории угроз: чтение секретных файлов, деструктивные команды и опасные сетевые операции. Это реальный конфиг, а не придуманный пример.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ ~/.claude/settings.json — deny-список</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>{
+  "permissions": {
+    "deny": [
+
+      // Секретные файлы — не читать и не выводить в терминал
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(*credentials*)",
+      "Read(*secret*)",
+      "Read(**/*.token*)",
+      "Read(**/*key*.pem)",
+      "Read(**/*key*.json)",
+      "Bash(cat */.env*)",
+      "Bash(cat *.pem)",
+      "Bash(cat *credentials*)",
+      "Bash(cat *secret*)",
+
+      // Деструктивные команды — без права на ошибку
+      "Bash(rm -rf *)",
+      "Bash(rm -r *)",
+      "Bash(git push --force*)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean -f*)",
+      "Bash(git checkout -- .)",
+      "Bash(git branch -D *)",
+      "Bash(chmod 777 *)",
+
+      // Опасные сетевые операции
+      "Bash(curl * | bash)",
+      "Bash(curl * | sh)",
+      "Bash(wget * | bash)",
+      "Bash(eval *)",
+
+      // Запрет экспортировать секреты в переменные окружения
+      "Bash(export *TOKEN*)",
+      "Bash(export *SECRET*)",
+      "Bash(export *KEY*)",
+      "Bash(export *PASSWORD*)"
+    ]
+  }
+}</pre>
+    </div>
+
+    <p>Что тут происходит по группам: первая закрывает случайное чтение файлов с паролями и ключами. Вторая блокирует команды которые нельзя отменить — удаление папок, жёсткий сброс гита, удаление веток. Третья запрещает скачивать и сразу запускать код из интернета — классический вектор атаки. Четвёртая не даёт Claude выставить твои токены как переменные окружения.</p>
+
     <h2 id="settings-what-else">Что ещё можно настроить</h2>
 
     <p>Помимо разрешений в settings.json живут другие настройки. Вот практически полезные:</p>
@@ -773,6 +824,7 @@ ALWAYS ask before deleting any file
     <a href="#automemory">AutoMemory</a>
     <a href="#settings">settings.json</a>
     <a href="#permissions">Permissions</a>
+    <a href="#deny-starter">Готовый deny-список</a>
     <a href="#settings-what-else">Что ещё настроить</a>
   </aside>
 </div>
