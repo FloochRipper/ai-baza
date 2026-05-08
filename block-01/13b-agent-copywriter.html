@@ -8,7 +8,7 @@
   <meta property="og:title" content="Свой Telegram-агент: на примере копирайтера">
   <meta property="og:description" content="Полный туториал сборки своего Telegram-агента под конкретную задачу: база знаний, системный промпт, OpenRouter, деплой на VPS.">
   <meta property="og:type" content="article">
-  <link rel="stylesheet" href="../styles.css?v=14">
+  <link rel="stylesheet" href="../styles.css?v=15">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Article","headline":"Свой Telegram-агент: на примере копирайтера","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
   </script>
@@ -531,9 +531,126 @@ cd tg-copywriter-bot</pre>
 
     <h2 id="step-12">Шаг 12. Деплой через Claude по SSH</h2>
 
-    <p>Готовые промпты для деплоя — в <a href="../knowledge-base/outputs/2026-05-08-deploy-russian-vps.md">моём разборе по русским VPS</a>. Это набор из 6 промптов: подключение к серверу, установка зависимостей, копирование <code>.env</code> с правами 600, настройка systemd, цикл обновления, создание <code>deploy.md</code> для самодокументирования.</p>
-
     <p>Главное правило: ты не лезешь в терминал руками. Даёшь Claude данные сервера (IP, root, пароль) — он сам подключается, клонирует репозиторий, ставит зависимости, копирует <code>.env</code> с локалки, поднимает systemd-сервис.</p>
+
+    <p>Готовые промпты для Claude — раскрой нужный, скопируй, вставь в Claude Code на ноутбуке. Идти строго по порядку: 1 → 2 → 3 → 4 → 5.</p>
+
+    <details class="collapsible">
+      <summary>1. Подключение к VPS и первый запуск бота</summary>
+      <div class="code-block">
+        <div class="code-block-head"><span class="code-title">▸ Промпт 1</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+        <pre>Мне нужно, чтобы ты мог деплоить моего Telegram-бота на VPS-сервер.
+
+Данные сервера:
+IP-адрес: [IP]
+Логин: root
+Способ входа: пароль [PASSWORD]
+
+Твоя задача:
+1. Подключиться через SSH.
+2. Проверить версию Python (нужна 3.11+).
+3. Проверить git.
+4. Создать папку проекта /root/tg-copywriter-bot.
+5. Склонировать репозиторий с GitHub.
+6. Установить зависимости.
+7. Подготовить .env (на следующем шаге я скажу как).
+8. Запустить бота вручную для проверки.
+9. Объяснить, как я могу проверить, что он работает.
+
+Не показывай пароли и ключи в ответе.
+Если чего-то не хватает — скажи, что именно нужно подготовить.</pre>
+      </div>
+    </details>
+
+    <details class="collapsible">
+      <summary>2. Установка зависимостей и виртуального окружения</summary>
+      <div class="code-block">
+        <div class="code-block-head"><span class="code-title">▸ Промпт 2</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+        <pre>Установи все зависимости для моего проекта на сервере.
+
+Сделай:
+1. Проверь Python 3.11.
+2. Создай виртуальное окружение в папке проекта.
+3. Активируй его.
+4. Установи зависимости из requirements.txt.
+5. Проверь, что основные пакеты установились (python-telegram-bot, httpx).
+6. Если возникла ошибка — объясни простыми словами что не так.</pre>
+      </div>
+    </details>
+
+    <details class="collapsible">
+      <summary>3. Копирование .env с правами 600</summary>
+      <div class="code-block">
+        <div class="code-block-head"><span class="code-title">▸ Промпт 3</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+        <pre>Возьми мой .env файл из локального проекта и положи его на VPS.
+
+Важно:
+1. Просто скопируй файл с моего компа на сервер.
+2. Не показывай содержимое .env в ответе.
+3. На сервере выставь права 600 (читает только владелец).
+4. Проверь, что файл лежит в папке проекта.
+5. Проверь, что бот сможет его прочитать.</pre>
+      </div>
+    </details>
+
+    <details class="collapsible">
+      <summary>4. Настройка systemd-службы для работы 24/7</summary>
+      <div class="code-block">
+        <div class="code-block-head"><span class="code-title">▸ Промпт 4</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+        <pre>Настрой systemd-службу для Telegram-бота.
+
+Параметры:
+- Проект: /root/tg-copywriter-bot
+- Файл запуска: bot.py
+- Виртуальное окружение: .venv
+- Название службы: tg-copywriter-bot
+
+Сделай:
+1. Создай unit-файл systemd.
+2. Укажи рабочую папку проекта.
+3. Укажи запуск через python из виртуального окружения.
+4. Настрой Restart=always (если упадёт — перезапустить).
+5. Перезагрузи systemd.
+6. Включи автозапуск (enable).
+7. Запусти службу.
+8. Покажи статус.
+9. Покажи, как смотреть логи: journalctl -u tg-copywriter-bot -f.
+
+Если возникнет ошибка — объясни простыми словами.</pre>
+      </div>
+    </details>
+
+    <details class="collapsible">
+      <summary>5. Цикл обновления — одной командой</summary>
+      <div class="code-block">
+        <div class="code-block-head"><span class="code-title">▸ Промпт 5</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+        <pre>Подключись к серверу [IP], зайди в папку /root/tg-copywriter-bot.
+
+Сделай:
+1. git pull
+2. Если requirements.txt изменился — обнови зависимости в venv.
+3. Перезапусти службу tg-copywriter-bot.
+4. Покажи статус службы.
+5. Покажи последние 50 строк логов.
+6. Напиши, что мне проверить в Telegram.
+
+Не показывай содержимое .env.</pre>
+      </div>
+    </details>
+
+    <details class="collapsible">
+      <summary>Команды systemd, которые полезно знать</summary>
+      <div class="code-block">
+        <div class="code-block-head"><span class="code-title">▸ Команды</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+        <pre>sudo systemctl status tg-copywriter-bot     # статус
+sudo systemctl restart tg-copywriter-bot    # рестарт
+sudo systemctl stop tg-copywriter-bot       # остановка
+sudo systemctl enable tg-copywriter-bot     # автозапуск после ребута
+sudo systemctl disable tg-copywriter-bot    # выключить автозапуск
+journalctl -u tg-copywriter-bot -f          # живые логи
+journalctl -u tg-copywriter-bot -n 100      # последние 100 строк</pre>
+      </div>
+    </details>
 
     <h2 id="step-13">Шаг 13. Закрепить «обнови бота» как триггер</h2>
 
@@ -556,7 +673,7 @@ cd tg-copywriter-bot</pre>
 
     <h2 id="step-14">Шаг 14. Сделать deploy.md</h2>
 
-    <p>Промпт Claude (из того же <a href="../knowledge-base/outputs/2026-05-08-deploy-russian-vps.md">разбора</a>):</p>
+    <p>Промпт Claude:</p>
 
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт самодокументирования</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
