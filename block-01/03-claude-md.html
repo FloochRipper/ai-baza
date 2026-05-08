@@ -495,7 +495,7 @@ ALWAYS ask before deleting any file
     dont-do.md         ← список запретов</pre>
     </div>
 
-    <p>Основной CLAUDE.md остаётся коротким. Claude подхватывает файлы из <code>rules/</code> автоматически.</p>
+    <p>Основной CLAUDE.md остаётся коротким. <code>.claude/rules/</code> — это встроенный механизм Claude Code: он читает все <code>.md</code> файлы из этой папки при каждом запуске автоматически, так же как и сам CLAUDE.md. Связывать или ссылаться не нужно — просто создал файл в папке, и он работает.</p>
 
     <h2 id="memory">CLAUDE.md vs MEMORY.md</h2>
 
