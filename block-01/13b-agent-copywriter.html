@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Свой Telegram-агент: на примере копирайтера | AI База</title>
+  <meta name="description" content="Как собрать свой Telegram-агент-копирайтер для себя — узкий помощник с собственной базой знаний и системным промптом. Стек Python + python-telegram-bot, API через OpenRouter, деплой на русский VPS.">
+  <meta property="og:title" content="Свой Telegram-агент: на примере копирайтера">
+  <meta property="og:description" content="Полный туториал сборки своего Telegram-агента под конкретную задачу: база знаний, системный промпт, OpenRouter, деплой на VPS.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=13">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Свой Telegram-агент: на примере копирайтера","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+    <a href="../lifehacks.html">Лайфхаки</a>
+    <a href="../cc-prompts.html">Промпты</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="00-registration.html"><span class="num">00</span>Регистрация в Claude</a>
+      <a href="01-what-is.html"><span class="num">01</span>Подготовка к работе</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>Архитектура проекта</a>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Расширения — обзор</a>
+      <a href="05a-skills.html"><span class="num">05a</span>Скиллы</a>
+      <a href="05b-mcp.html"><span class="num">05b</span>MCP</a>
+      <a href="05c-hooks.html"><span class="num">05c</span>Хуки</a>
+      <a href="05d-plugins.html"><span class="num">05d</span>Плагины</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
+      <a href="12-agents-types.html"><span class="num">12</span>Виды агентов</a>
+      <a href="13-telegram-agent.html"><span class="num">13</span>Агент в Telegram</a>
+      <a href="13a-claude-via-telegram.html"><span class="num">13a</span>Claude в Telegram</a>
+      <a href="13b-agent-copywriter.html" class="active"><span class="num">13b</span>Свой агент-копирайтер</a>
+      <a href="14-troubleshooting.html"><span class="num">14</span>Troubleshooting</a>
+      <a href="15-whats-next.html"><span class="num">15</span>Что дальше</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      Свой агент-копирайтер
+    </div>
+
+    <div class="article-head">
+      <h1>Свой <span class="accent">Telegram-агент</span>: на примере копирайтера</h1>
+    </div>
+
+    <p id="intro">В уровне 1 мы поднимали <a href="13a-claude-via-telegram.html">Джарвис</a> — общий Claude Code в Telegram, который отвечает на любые вопросы. Здесь задача другая. Я не хочу общего Claude. Хочу узкого помощника: бот, который умеет одно — превращать мои голосовые в готовые посты в моём стиле, со своими правилами, со своей памятью прошлых постов. И пользоваться им буду только я.</p>
+
+    <p>Это уровень 2 практики. Архитектура такая же как у бота-продукта для клиентов (см. <a href="13-telegram-agent.html">статью 13</a> — там разобраны 6 компонентов агента), но проще: один пользователь = ты, нет монетизации, нет защиты от спама. Зато есть чёткая роль, заточенный промпт, своя база знаний.</p>
+
+    <div class="callout" style="margin:20px 0;">
+      <span class="callout-label">Можешь не читать инструкцию вообще (но осторожно)</span>
+      <p>Скажи Claude Code: «Сделай мне Telegram-бота-копирайтера. Я буду присылать ему голосовые с идеями, он будет возвращать готовые посты в моём стиле. Стек — Python + python-telegram-bot, API через OpenRouter, голосовые расшифровывать через Groq Whisper». Claude разберётся и поведёт по шагам.</p>
+      <p style="margin-top:8px;">Только две оговорки. Первая: иногда уведёт не туда — сложный фреймворк там, где нужен простой код. Вторая: следующий раз сделает другим путём. Я ниже расписываю проверенную инструкцию — то что у меня лично работает. Если хочешь без сюрпризов — иди по ней.</p>
+    </div>
+
+    <h2 id="diff">Чем отличается от Джарвиса</h2>
+
+    <table style="width:100%;border-collapse:collapse;font-size:14px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;"></th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">13a Джарвис</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">13b Агент-копирайтер</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Что общается с тобой</td>
+          <td style="padding:10px;">Чистый Claude Code через подписку</td>
+          <td style="padding:10px;">Свой бот с собственной ролью и промптом</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Где живёт логика</td>
+          <td style="padding:10px;">В тебе и Claude Max</td>
+          <td style="padding:10px;">В системном промпте + базе знаний на сервере</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">API</td>
+          <td style="padding:10px;">Через подписку (без отдельного ключа)</td>
+          <td style="padding:10px;">Через ключ OpenRouter (отдельный счёт)</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Контекст</td>
+          <td style="padding:10px;">1М токенов в одной сессии</td>
+          <td style="padding:10px;">Управляешь сам — обычно последние 10-20 сообщений</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Когда нужно</td>
+          <td style="padding:10px;">«Универсальный ассистент»</td>
+          <td style="padding:10px;">«Узкий помощник под повторяющуюся задачу»</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Главное отличие в одном предложении: <em>Джарвис — это сам Claude в Telegram. Агент-копирайтер — это твой кастомный бот, который ходит в Claude по API</em>.</p>
+
+    <h2 id="what-we-build">Что соберём</h2>
+
+    <p>Бот, который:</p>
+
+    <ul style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Принимает голосовое сообщение → расшифровывает через Groq Whisper → возвращает готовый пост в твоём стиле</li>
+      <li>Использует базу знаний с твоими правилами стиля, любимыми оборотами, запрещёнными словами</li>
+      <li>Хранит историю прошлых постов в SQLite (чтобы не повторяться по темам)</li>
+      <li>Команда <code>/last</code> — показать последние 5 постов</li>
+      <li>Защита: только ты можешь писать (whitelist по Telegram-id)</li>
+      <li>Работает 24/7 на VPS</li>
+    </ul>
+
+    <p>Пример именно копирайтер для конкретики. Под другую задачу — бот-секретарь, бот-исследователь, бот-редактор расходов — структура та же, меняется только база знаний и системный промпт.</p>
+
+    <h2 id="components">Архитектура — 6 компонентов</h2>
+
+    <p>Те же шесть компонентов, что в <a href="13-telegram-agent.html#components">статье 13</a>. Здесь — конкретное наполнение для копирайтера:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Компонент</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что в нашем боте</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">База знаний</td>
+          <td style="padding:10px;">Папка <code>knowledge/</code>: <code>style.md</code>, <code>templates.md</code>, <code>vocab.md</code>, <code>archive.md</code></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Retrieval</td>
+          <td style="padding:10px;">Простой grep по <code>knowledge/</code> (на старте)</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Системный промпт</td>
+          <td style="padding:10px;">Файл <code>system-prompt.md</code>: кто бот, какая воронка, что нельзя</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Модель</td>
+          <td style="padding:10px;">Claude Sonnet через OpenRouter</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Оркестратор</td>
+          <td style="padding:10px;">Python + python-telegram-bot — простой бот-handler</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;">Интерфейс</td>
+          <td style="padding:10px;">Telegram-бот через BotFather</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="stack">Стек и принципы</h2>
+
+    <ul style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li><strong>Python + python-telegram-bot</strong> — тот же стек, что в <a href="13a-claude-via-telegram.html">13a про Джарвиса</a>. Один инструмент на все наши туториалы — меньше путаницы. Курс «Агент-копирайтер» Нейроуниверситета использует aiogram, но Claude легко переписывает код с одной библиотеки на другую — для нашей аудитории разницы нет.</li>
+      <li><strong>OpenRouter</strong> для API — это сервис-роутер: один ключ, через него работают и Claude, и GPT, и Gemini. Главный плюс: OpenRouter принимает запросы с русского IP без проблем, в отличие от прямого Anthropic API. Решает проблему блокировок раз и навсегда.</li>
+      <li><strong>Groq Whisper</strong> — для расшифровки голосовых (бесплатно, как в 13a).</li>
+      <li><strong>SQLite</strong> — для хранения истории постов (один файл, без отдельной базы данных).</li>
+    </ul>
+
+    <h2 id="prerequisites">Что нужно перед стартом</h2>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Зачем</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Стоимость</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Claude Code на ноутбуке</td>
+          <td style="padding:10px;">Через него собираем бота</td>
+          <td style="padding:10px;">подписка</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Аккаунт OpenRouter</td>
+          <td style="padding:10px;">API-ключ для общения с моделью</td>
+          <td style="padding:10px;">положить $5-10 на старт</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Аккаунт Groq</td>
+          <td style="padding:10px;">Для расшифровки голосовых</td>
+          <td style="padding:10px;">бесплатно</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Аккаунт в Telegram</td>
+          <td style="padding:10px;">Куда писать боту</td>
+          <td style="padding:10px;">бесплатно</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;">VPS (Beget или TimeWeb)</td>
+          <td style="padding:10px;">Где живёт бот</td>
+          <td style="padding:10px;">~900 ₽/мес</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="step-1">Шаг 1. Бот в BotFather</h2>
+
+    <p>Тот же шаг, что в <a href="13a-claude-via-telegram.html#step-1">13a, шаг 1</a> — <code>@BotFather</code> → <code>/newbot</code> → имя → username → токен. Не повторяю целиком.</p>
+
+    <h2 id="step-2">Шаг 2. Получить OpenRouter API key</h2>
+
+    <p>Заходишь на <a href="https://openrouter.ai" target="_blank" rel="noopener">openrouter.ai</a>, регистрируешься через Google или email. В правом верхнем углу — иконка профиля → <em>Keys</em> → <em>Create Key</em>. Сохраняешь ключ вида <code>sk-or-v1-...</code>.</p>
+
+    <p>Положи на счёт $5-10 для старта (карта работает, в том числе российская в большинстве случаев). Этого хватит на сотни сообщений в Claude Sonnet.</p>
+
+    <div class="callout analogy" style="margin:20px 0;">
+      <span class="callout-label">Аналогия</span>
+      <p>OpenRouter — это как booking.com для нейронок. Один аккаунт, один счёт — а доступ ко всем моделям сразу: Claude, GPT, Gemini, Llama. Удобно, плюс если одна модель сломалась — переключился на другую за минуту, не меняя код.</p>
+    </div>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: OpenRouter Console с созданным API key]</figure>
+
+    <h2 id="step-3">Шаг 3. Получить Groq API Key</h2>
+
+    <p>Тот же шаг, что в <a href="13a-claude-via-telegram.html#step-3">13a, шаг 3</a>. Если уже делал Джарвис — можно использовать тот же ключ.</p>
+
+    <h2 id="step-4">Шаг 4. Создать структуру проекта</h2>
+
+    <p>На ноутбуке создай папку проекта:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Создание папки</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>mkdir tg-copywriter-bot
+cd tg-copywriter-bot</pre>
+    </div>
+
+    <p>Структура папки:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Файлы проекта</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>tg-copywriter-bot/
+  knowledge/
+    style.md          ← правила стиля
+    templates.md      ← шаблоны постов
+    vocab.md          ← словарь: запрещённые и любимые слова
+    archive.md        ← последние 20-30 опубликованных постов
+  system-prompt.md    ← системный промпт для бота
+  bot.py              ← сам бот (напишет Claude)
+  .env.example        ← документация ключей (без значений)
+  requirements.txt    ← зависимости Python
+  CLAUDE.md           ← инструкция для Claude Code</pre>
+    </div>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: структура папки tg-copywriter-bot в IDE]</figure>
+
+    <h2 id="step-5">Шаг 5. CLAUDE.md проекта</h2>
+
+    <p>Базовый файл проекта — что Claude должен знать про этот проект. Стандарт расписан в <a href="03-claude-md.html">статье 03</a>. Для нашего бота минимум:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ CLAUDE.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># Telegram-агент-копирайтер
+
+## Что это
+Бот, который превращает мои голосовые в готовые посты в моём стиле.
+
+## Стек
+- Python 3.11
+- python-telegram-bot 21.x
+- httpx (для OpenRouter и Groq)
+- SQLite для истории постов
+
+## Внешние сервисы
+- OpenRouter — API к Claude Sonnet
+- Groq Whisper — расшифровка голосовых
+- Telegram Bot API
+
+## База знаний
+Лежит в knowledge/. Один файл = одна тема. Бот читает её через простой grep.
+
+## Правила
+- Без enterprise-говна, бот для одного пользователя
+- Не плодить конфигурацию без причины
+- Логи через стандартный logging, не сторонние библиотеки
+- Все ключи через .env, ничего не коммитить</pre>
+    </div>
+
+    <h2 id="knowledge-base">Шаг 6. База знаний — самое важное</h2>
+
+    <p>Раскрою главное правило, которое подсвечено в <a href="13-telegram-agent.html#key-rule">статье 13</a>: <em>80% качества агента = качество базы знаний и системного промпта</em>. Не модель, не стек, не оркестратор. База.</p>
+
+    <p>Для копирайтера база — это четыре файла. Ниже — реальные примеры (мои), можешь забрать как есть и переделать под себя.</p>
+
+    <h3 id="style-md" style="font-size:18px;margin:28px 0 12px;">style.md — правила стиля</h3>
+
+    <p>Здесь ты буквально записываешь как пишешь. Свой голос. Чем точнее распишешь — тем точнее бот попадёт в твой стиль.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ knowledge/style.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># Стиль постов
+
+## Тон
+- На «ты», по-дружески, как с коллегой — без официоза
+- Кратко и по делу, без воды и лишних «как видишь, я успешно сделал...»
+- Без эмодзи в тексте
+- От первого лица: «я», «мне», «у меня»
+
+## Структура
+- Короткие абзацы (1-3 предложения)
+- Заход — конкретная сцена, факт, провокационный вопрос
+- Развитие — 2-3 абзаца
+- Финал — панчлайн без воды. НЕ «а как думаете вы?» — это убивает пост.
+
+## Чего никогда не делаю
+- Жирного текста
+- Маркированных списков внутри текста статьи
+- Канцелярита и «экспертного» языка
+- Дайджеста без позиции (пересказал новости — и что?)
+
+## Авторские фразы (не трогать никогда)
+- «стоит немного подзаморочиться»
+- «я ведь знаю что вам не охота»
+- «копилка чтобы не наступать на те же грабли»
+
+## Длина
+- 800-1500 символов на пост</pre>
+    </div>
+
+    <h3 id="templates-md" style="font-size:18px;margin:28px 0 12px;">templates.md — рабочие шаблоны постов</h3>
+
+    <p>Те структуры, которые у тебя уже работали. Чтобы бот не изобретал, а опирался на проверенное. У меня единая формула на все площадки + типы крючков.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ knowledge/templates.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># Шаблоны постов
+
+## Универсальная формула: КРЮЧОК → КОНТЕКСТ → КОНФЛИКТ → ВЫВОД → ПРИЗЫВ
+
+КРЮЧОК — первые 1-2 строки, стоп-скролл. Решает читать или нет.
+КОНТЕКСТ — почему тема важна, вводит в ситуацию.
+КОНФЛИКТ — столкновение позиций, напряжение. Без конфликта пост — просто
+информация.
+ВЫВОД — неожиданный, честный, может быть спорным. НЕ мотивационный.
+ПРИЗЫВ — конкретное действие. НЕ «а как думаете вы?».
+
+Метрика: репосты и пересылки, не лайки.
+
+## Типы крючков (выбираешь один на пост)
+
+1. Историческая сторителлинг — конкретная дата, имя, место.
+2. Свежее исследование — ссылка на авторитетный источник.
+3. Провокация через абсурд — нелепая, но реальная ситуация.
+4. Личное наблюдение — конкретная сцена, от первого лица.
+5. Парадокс — утверждение которое кажется неверным, но это правда.
+6. Провокационный вопрос — НЕ мягкий «а вы что думаете?», а цепляющий.
+
+## 6 типов контента, которым делятся
+
+1. Резонанс и закрытые темы — то о чём все думают, но никто не говорит.
+2. Разрушение мифов — «все думают X, а на самом деле Y» с доказательствами.
+3. Кейсы и гуру — разбор конкретного примера или авторитета.
+4. Ретроградный взор — «раньше было так, а теперь...».
+5. Смена призмы — посмотреть на привычное с неожиданного угла.
+6. Неожиданные исследования — цифры и факты которые удивляют.</pre>
+    </div>
+
+    <h3 id="vocab-md" style="font-size:18px;margin:28px 0 12px;">vocab.md — словарь</h3>
+
+    <p>Списки запрещённых и любимых слов. Бот учитывает их при генерации.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ knowledge/vocab.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># Словарь
+
+## Запрещённые слова и обороты
+- погружение
+- на стыке
+- уникальная методика
+- пассивный доход
+- гарантированный результат
+- в эпоху цифровой трансформации
+- успешный успех
+- мощный инструмент
+- революционный подход
+
+## Что всегда добивает пост (не делать)
+- Дайджест без позиции
+- Длинный пост без чёткой идеи
+- Финал «а как думаете вы?»
+- Канцелярский язык
+- Пост без личности (мог написать кто угодно)
+
+## Любимые слова и темы
+- вайбкодинг
+- второй мозг
+- прикладной
+- из коробки
+- база знаний
+- грабли (об ошибках)
+- копилка
+- система</pre>
+    </div>
+
+    <h3 id="archive-md" style="font-size:18px;margin:28px 0 12px;">archive.md — история постов</h3>
+
+    <p>Последние 20-30 опубликованных постов. Нужно чтобы бот не повторялся по темам и помнил твой реальный стиль.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ knowledge/archive.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># Архив постов
+
+## 2026-05-07
+[Полный текст последнего поста]
+
+## 2026-05-05
+[Полный текст]
+
+...</pre>
+    </div>
+
+    <p>На старте можно положить хоть 5 постов — главное начать. Дальше будешь добавлять каждый новый. Можно автоматизировать: команду <code>/save</code> боту, которая сохраняет одобренный пост в архив.</p>
+
+    <h2 id="system-prompt">Шаг 7. Системный промпт</h2>
+
+    <p>Файл <code>system-prompt.md</code>. Это инструкция боту: кто он, что делает, как ведёт диалог. Готовый шаблон:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ system-prompt.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Ты помощник [имя] по контенту в Telegram. Твоя задача — превращать
+голосовые сообщения в готовые посты в его стиле.
+
+Воронка:
+1. Получаешь расшифрованное голосовое.
+2. Определяешь тип поста: история, лайфхак, разбор, мнение.
+3. Подтягиваешь релевантный шаблон из knowledge/templates.md.
+4. Пишешь пост по правилам из knowledge/style.md.
+5. Проверяешь по knowledge/vocab.md (нет запрещённых слов, есть любимые).
+6. Сверяешь с knowledge/archive.md, чтобы тема не дублировалась.
+7. Возвращаешь готовый пост.
+
+Запрещено:
+- Использовать запрещённые слова из vocab.md.
+- Дублировать темы из archive.md (последние 30 постов).
+- Менять авторские фразы.
+- Делать пост длиннее 1500 символов или короче 800.
+
+Стиль: на «ты», по-дружески, без официоза.
+Если идея голосового неясная — задай один уточняющий вопрос, потом пиши.</pre>
+    </div>
+
+    <h2 id="step-8">Шаг 8. Первый промпт Claude — собрать MVP</h2>
+
+    <p>Запусти Claude Code в папке проекта (<code>claude</code> в терминале). Дальше — этот промпт буквально:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт сборки</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай Telegram-бот-копирайтер на Python + python-telegram-bot.
+
+Что должен уметь:
+- Принимать голосовые → расшифровывать через Groq Whisper → отдавать
+  в Claude через OpenRouter
+- Использовать knowledge/ как базу знаний (через простой grep по содержимому
+  файлов на ключевые слова из голосового)
+- Использовать system-prompt.md как системный промпт
+- Хранить историю в SQLite (data/bot.db) — последние 30 постов в archive_db
+- Команда /last — показать последние 5 постов
+- Команда /save — сохранить только что сгенерированный пост в архив
+- Whitelist по Telegram-id (только мой)
+- .env с TELEGRAM_BOT_TOKEN, OPENROUTER_API_KEY, GROQ_API_KEY, MY_TELEGRAM_ID
+- Модель: anthropic/claude-sonnet-4 (через OpenRouter)
+- В контексте к модели передавать последние 5 сообщений диалога
+
+Сделай максимально просто, без лишнего enterprise-говна — этим буду
+пользоваться только я. Нейронка тренировалась на сложных open-source
+решениях и любит over-engineering, мне это не надо.
+
+Перед написанием кода — задай мне уточняющие вопросы.</pre>
+    </div>
+
+    <p>Самое важное — фразы «без лишнего enterprise-говна» и «задай мне уточняющие вопросы». Без первой Claude насадит абстракций. Без второй сразу начнёт писать код, и потом всё переделывать.</p>
+
+    <h2 id="step-9">Шаг 9. Тест локально</h2>
+
+    <p>Claude сам всё запустит и покажет как пользоваться. Главное — на этом этапе закрепи правило в <code>memory.md</code> (или <code>CLAUDE.md</code> через <code>/memory add</code>):</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Правило против лени</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Всё что можешь сделать сам — делай сам. Запускай в терминале сам,
+ставь зависимости сам, тестируй сам. Если упёрся в реальный блокер —
+только тогда зови меня. Я не хочу ничего устанавливать руками.</pre>
+    </div>
+
+    <p>Это закрепляется один раз — дальше Claude перестаёт лениться и просить «запусти сам в терминале» по каждому чиху.</p>
+
+    <h2 id="step-10">Шаг 10. GitHub</h2>
+
+    <p>Краткая ссылка на <a href="06-github.html">статью 06</a>. Особенности для бота:</p>
+
+    <ul style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>В <code>.gitignore</code>: <code>.env</code>, <code>data/bot.db</code>, <code>__pycache__/</code>, <code>.venv/</code></li>
+      <li>НЕ клади <code>requirements.txt</code> в gitignore (типичная ошибка) — без него на сервере поставятся другие версии библиотек</li>
+      <li>В <code>.env.example</code> — все ключи без значений, для документации</li>
+    </ul>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">Параноидально проверь .env.example перед push</span>
+      <p>В курсе копирайтера был реальный кейс — Claude обнаружил, что в <code>.env.example</code> остался настоящий ключ шифрования сессии. Без проверки утечка пошла бы даже в приватный репозиторий.</p>
+    </div>
+
+    <h2 id="step-11">Шаг 11. Аренда VPS</h2>
+
+    <p>Не повторяю — всё уже расписано в <a href="13a-claude-via-telegram.html#vps">13a, раздел про VPS</a>. Кратко: Beget, тариф 2/4/30 за ~27 ₽/день, Ubuntu 24.04, регион Москва.</p>
+
+    <h2 id="step-12">Шаг 12. Деплой через Claude по SSH</h2>
+
+    <p>Готовые промпты для деплоя — в <a href="../knowledge-base/outputs/2026-05-08-deploy-russian-vps.md">моём разборе по русским VPS</a>. Это набор из 6 промптов: подключение к серверу, установка зависимостей, копирование <code>.env</code> с правами 600, настройка systemd, цикл обновления, создание <code>deploy.md</code> для самодокументирования.</p>
+
+    <p>Главное правило: ты не лезешь в терминал руками. Даёшь Claude данные сервера (IP, root, пароль) — он сам подключается, клонирует репозиторий, ставит зависимости, копирует <code>.env</code> с локалки, поднимает systemd-сервис.</p>
+
+    <h2 id="step-13">Шаг 13. Закрепить «обнови бота» как триггер</h2>
+
+    <p>Чтобы дальше деплой обновлений был одной фразой — добавь в <code>CLAUDE.md</code> правило:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Триггер деплоя</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>## Деплой обновлений
+Когда я говорю «задеплой» или «обнови бота» — делай:
+1. git add . && git commit -m "..." && git push
+2. ssh root@MY_SERVER_IP
+3. cd /root/tg-copywriter-bot && git pull
+4. Если requirements.txt изменился — pip install -r requirements.txt
+5. systemctl restart tg-copywriter-bot
+6. systemctl status tg-copywriter-bot
+7. journalctl -u tg-copywriter-bot -n 30 | покажи мне</pre>
+    </div>
+
+    <p>Дальше любая правка → одно слово → бот обновлён за минуту.</p>
+
+    <h2 id="step-14">Шаг 14. Сделать deploy.md</h2>
+
+    <p>Промпт Claude (из того же <a href="../knowledge-base/outputs/2026-05-08-deploy-russian-vps.md">разбора</a>):</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт самодокументирования</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай deploy.md в проекте. Опиши: где лежит проект на сервере,
+как называется systemd-служба, как обновить код, как перезапустить,
+как посмотреть статус и логи, где .env, что нельзя коммитить, что
+делать если бот не отвечает. Не вставляй реальные пароли и IP.</pre>
+    </div>
+
+    <p>Через 3 месяца, когда забудешь как обновлять — открыл <code>deploy.md</code>, прочитал, обновил.</p>
+
+    <h2 id="troubleshooting">Грабли</h2>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">requirements.txt НЕЛЬЗЯ в .gitignore</span>
+      <p>Без него на сервере поставятся другие версии — бот будет глючить.</p>
+    </div>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">Права 600 на .env на сервере</span>
+      <p>Чтобы файл с секретами читал только сам бот, не другие пользователи системы.</p>
+    </div>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">Restart=always + systemctl enable</span>
+      <p>В <code>jarvis.service</code> обе настройки. Без <code>enable</code> после ребута сервера бот не стартанёт. Без <code>Restart=always</code> упадёт при первой ошибке.</p>
+    </div>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">Изоляция ботов на одном VPS</span>
+      <p>Если на сервере живёт несколько ботов — каждый в своей папке, со своим venv. Иначе зависимости одного бота сломают другого.</p>
+    </div>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">Сначала база знаний, потом код</span>
+      <p>Самая частая ошибка — «давай быстро напишу код, потом наполню базу». Получается агент с кодом за час, который три недели «доучивается». Лучше наоборот: 2-4 часа на качественную базу + 30 минут на код.</p>
+    </div>
+
+    <div class="callout key" style="margin:20px 0;">
+      <span class="callout-label">Что дальше</span>
+      <p>Это уровень 2 — свой агент под задачу для себя одного. Если задача — продавать продукт клиентам через бот, обрабатывать возражения, доводить до заявки — это уровень 3, см. <a href="13-telegram-agent.html">статью 13 про архитектуру агента-продукта</a>. Там же — про монетизацию (Telegram Stars, Робокасса) и юридические нюансы.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="13a-claude-via-telegram.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">Claude в Telegram</span>
+      </a>
+      <a class="pager-next" href="14-troubleshooting.html">
+        <span class="pager-label">Вперёд →</span>
+        <span class="pager-title">Troubleshooting</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#diff">Чем отличается от Джарвиса</a>
+    <a href="#what-we-build">Что соберём</a>
+    <a href="#components">Архитектура — 6 компонентов</a>
+    <a href="#stack">Стек и принципы</a>
+    <a href="#prerequisites">Что нужно перед стартом</a>
+    <a href="#step-1">Шаг 1. BotFather</a>
+    <a href="#step-2">Шаг 2. OpenRouter</a>
+    <a href="#step-3">Шаг 3. Groq</a>
+    <a href="#step-4">Шаг 4. Структура</a>
+    <a href="#step-5">Шаг 5. CLAUDE.md</a>
+    <a href="#knowledge-base">Шаг 6. База знаний</a>
+    <a href="#system-prompt">Шаг 7. Системный промпт</a>
+    <a href="#step-8">Шаг 8. Промпт сборки</a>
+    <a href="#step-9">Шаг 9. Тест локально</a>
+    <a href="#step-10">Шаг 10. GitHub</a>
+    <a href="#step-11">Шаг 11. VPS</a>
+    <a href="#step-12">Шаг 12. Деплой</a>
+    <a href="#step-13">Шаг 13. Триггер «обнови»</a>
+    <a href="#step-14">Шаг 14. deploy.md</a>
+    <a href="#troubleshooting">Грабли</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>

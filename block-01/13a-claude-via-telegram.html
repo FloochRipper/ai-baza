@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code в Telegram: личный ИИ-ассистент | AI База</title>
+  <meta name="description" content="Как поднять личного Telegram-бота поверх Claude Code: пишешь с телефона — отвечает Claude через твою подписку Max или Pro. Тонкий Python-бот, без отдельного API-ключа, 24/7 на VPS.">
+  <meta property="og:title" content="Claude Code в Telegram: личный ИИ-ассистент">
+  <meta property="og:description" content="Личный Telegram-бот поверх Claude Code: текст и голосовые с телефона, ответы через твою подписку, работает 24/7 на VPS.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=13">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Claude Code в Telegram: личный ИИ-ассистент","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+    <a href="../lifehacks.html">Лайфхаки</a>
+    <a href="../cc-prompts.html">Промпты</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="00-registration.html"><span class="num">00</span>Регистрация в Claude</a>
+      <a href="01-what-is.html"><span class="num">01</span>Подготовка к работе</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>Архитектура проекта</a>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Расширения — обзор</a>
+      <a href="05a-skills.html"><span class="num">05a</span>Скиллы</a>
+      <a href="05b-mcp.html"><span class="num">05b</span>MCP</a>
+      <a href="05c-hooks.html"><span class="num">05c</span>Хуки</a>
+      <a href="05d-plugins.html"><span class="num">05d</span>Плагины</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
+      <a href="12-agents-types.html"><span class="num">12</span>Виды агентов</a>
+      <a href="13-telegram-agent.html"><span class="num">13</span>Агент в Telegram</a>
+      <a href="13a-claude-via-telegram.html" class="active"><span class="num">13a</span>Claude в Telegram</a>
+      <a href="13b-agent-copywriter.html"><span class="num">13b</span>Свой агент-копирайтер</a>
+      <a href="14-troubleshooting.html"><span class="num">14</span>Troubleshooting</a>
+      <a href="15-whats-next.html"><span class="num">15</span>Что дальше</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      Claude Code в Telegram
+    </div>
+
+    <div class="article-head">
+      <h1>Claude Code в <span class="accent">Telegram</span>: личный ИИ-ассистент</h1>
+    </div>
+
+    <p id="intro">Я уехал из дома, на ноутбуке Claude уже не запущен, но в кармане — телефон, на котором я могу написать своему боту в Telegram, и он ответит как обычный Claude. Через ту же подписку. Записал голосовое — он расшифрует, ответит. Этот туториал — как такого личного бота поднять.</p>
+
+    <p>Это самый простой из трёх практических уровней работы с Telegram. Здесь Claude Code = твой личный ассистент в кармане. Уровень 2 — свой Telegram-агент-копирайтер под конкретную задачу, см. <a href="13b-agent-copywriter.html">статью 13b</a>. Уровень 3 — бот для клиентов, его архитектура разобрана в <a href="13-telegram-agent.html">статье 13 про агента в Telegram</a>.</p>
+
+    <div class="callout" style="margin:20px 0;">
+      <span class="callout-label">Можешь не читать инструкцию вообще (но осторожно)</span>
+      <p>Если у тебя уже стоит Claude Code — можешь просто открыть его и сказать: «сделай мне Telegram-бота поверх тебя самого, я хочу писать ему в Telegram а ты будешь отвечать». Claude Code разберётся и поведёт по шагам. Это вообще честный путь вайбкодинга — описывать задачу, а не следовать инструкции.</p>
+      <p style="margin-top:8px;">Только две оговорки. Первая: иногда Claude уведёт не туда — например, поставит сложный фреймворк там, где хватило бы 50 строк кода, или выберет устаревший подход. Вторая: даже если уведёт правильно — путь будет зависеть от настроения Claude в этот раз, и в следующий раз будет уже другой.</p>
+      <p style="margin-top:8px;">Я ниже расписываю проверенную инструкцию — то что у меня реально работает. Если хочешь без сюрпризов — иди по ней. Если хочешь экспериментировать — кидай Claude задачу и посмотри что выйдет.</p>
+    </div>
+
+    <h2 id="what-we-build">Что соберём</h2>
+
+    <p>Личный Telegram-бот, в который ты пишешь как обычному собеседнику. Бот — это тонкая Python-обёртка на сервере, которая принимает твоё сообщение и под капотом дёргает <code>claude --print</code>, то есть запускает Claude Code на сервере с твоей подпиской Max или Pro. Что важно: используется именно подписка, а не отдельный API-ключ. Платишь за Claude как обычно, не доплачиваешь за каждое сообщение боту.</p>
+
+    <p>Что умеет:</p>
+
+    <ul style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Текстовое сообщение → Claude → ответ текстом</li>
+      <li>Голосовое сообщение от тебя → Groq Whisper расшифровывает → Claude отвечает → ответ текстом</li>
+      <li>Whitelist по Telegram-id — никто чужой написать не может</li>
+      <li>Работает 24/7 на VPS</li>
+    </ul>
+
+    <h2 id="when-need">Когда это нужно</h2>
+
+    <div class="grid-cards cols-2">
+      <div class="grid-card">
+        <div class="card-name">Голосовая идея на ходу</div>
+        <div class="card-desc">Иду по улице, в голове хорошая мысль. Наговариваю боту голосовое — расшифрует, я уточняю «оформи в пост», получаю готовый текст.</div>
+      </div>
+      <div class="grid-card">
+        <div class="card-name">Поставил задачу с телефона</div>
+        <div class="card-desc">Пишу боту «найди 5 примеров посадочных по теме X». Claude на сервере делает, я возвращаюсь к ноутбуку — результат уже лежит.</div>
+      </div>
+      <div class="grid-card">
+        <div class="card-name">Уточнение по проекту в дороге</div>
+        <div class="card-desc">Еду в такси, пишу боту «прочитай spec.md и скажи что мы пропустили». Получаю ответ, копирую в заметки.</div>
+      </div>
+      <div class="grid-card">
+        <div class="card-name">Длинный разговор без устали</div>
+        <div class="card-desc">Не теряешь нить, общаешься часами на одну тему. Сильно лучше чем в claude.ai, где после <code>/clear</code> начинаешь заново.</div>
+      </div>
+    </div>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">Чем это НЕ является</span>
+      <p>Это не агент-продукт для клиентов. Бот настроен на одного человека — тебя. Whitelist по Telegram-id жёсткий: чужой пишет → бот игнорирует. Если хочешь делать бот для бизнеса — это уровень 3, см. <a href="13-telegram-agent.html">статью 13</a>.</p>
+    </div>
+
+    <h2 id="prerequisites">Что нужно заранее</h2>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Зачем</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Стоимость</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Подписка Claude Pro или Max</td>
+          <td style="padding:10px;">Чтобы Claude Code работал на сервере по подписке, без отдельного API-ключа</td>
+          <td style="padding:10px;">$20-200/мес</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">VPS с Ubuntu</td>
+          <td style="padding:10px;">Серверчик, на котором живёт бот</td>
+          <td style="padding:10px;">от 27 ₽/день</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Аккаунт в Telegram</td>
+          <td style="padding:10px;">Куда писать боту</td>
+          <td style="padding:10px;">бесплатно</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;">Аккаунт на Groq</td>
+          <td style="padding:10px;">Для расшифровки голосовых</td>
+          <td style="padding:10px;">бесплатно</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="architecture">Что под капотом</h2>
+
+    <p>Простыми словами: на сервере живёт Python-программа (~330 строк), которая ждёт сообщений в Telegram. Получила — отдаёт текст в <code>claude --print "сообщение"</code>. Это значит «запусти Claude в режиме одиночного запроса, верни результат». Claude отвечает, программа возвращает ответ обратно в Telegram.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Поток сообщения</span></div>
+      <pre>[Я в Telegram] ──→ [Python-бот на VPS] ──→ [claude --print]
+                            │                       ↓
+                            │              [твоя подписка Max/Pro]
+                            ↓                       ↓
+                    [ответ обратно ←──────  ответ Claude]</pre>
+    </div>
+
+    <p>Голосовые сообщения сначала уходят в Groq Whisper (бесплатный сервис распознавания речи), оттуда возвращается текст, дальше — как обычное текстовое сообщение. Бот отвечает текстом.</p>
+
+    <h2 id="vps">Про VPS — короткое объяснение</h2>
+
+    <p>VPS — это арендованный «компьютер в интернете», на котором ты ставишь программы и они работают всегда. Для этого туториала подойдёт любой провайдер: Beget, TimeWeb, Hetzner, DigitalOcean. Если ты в России — бери русский (Beget или TimeWeb), если нет — любой удобный.</p>
+
+    <p>Минимальный тариф: 2 ядра / 4 ГБ RAM / 30 ГБ диск. На Beget это ~27 ₽/день (~900 ₽/мес). ОС — Ubuntu любой свежей версии.</p>
+
+    <p>Как зарегистрироваться и арендовать сервер на Beget пошагово:</p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Зайди на beget.com → регистрация → данные приходят на почту</li>
+      <li>В личном кабинете → «Облако» → «Виртуальные серверы» → «Создать VPS»</li>
+      <li>Тариф 2/4/30, регион Москва или Питер, Ubuntu 24.04</li>
+      <li>Отключить бэкапы (лишние деньги для старта)</li>
+      <li>На почту придёт <em>второе письмо</em> — IP сервера, логин <code>root</code>, пароль. Это и есть доступ.</li>
+    </ol>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">Не путай два пароля</span>
+      <p>«Логин/пароль от Beget» (для входа в личный кабинет) ≠ «логин/пароль от арендованного сервера» (для подключения к нему через SSH). Это разные вещи. Под одним аккаунтом Beget можно арендовать хоть десять серверов.</p>
+    </div>
+
+    <h2 id="step-1">Шаг 1. Создать бота в Telegram</h2>
+
+    <p>В Telegram найди <code>@BotFather</code> — это официальный бот Telegram, через который создают других ботов. Отправь команду <code>/newbot</code>. Он спросит:</p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Имя бота — то что будет показываться в чатах. Например <em>Bro</em> или <em>Мой Клод</em>.</li>
+      <li>Username — должен заканчиваться на <code>bot</code>. Например <code>eto_bro_bot</code>.</li>
+    </ol>
+
+    <p>Дальше BotFather пришлёт строку вида <code>8680806819:AAFDrZ1Ta...</code> — это <em>токен бота</em>. Сохрани его. Этот токен ≠ токены текста из <a href="08-context-window.html">статьи 08</a> — это просто пароль для управления ботом.</p>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: окно BotFather с командой /newbot и полученным токеном]</figure>
+
+    <h2 id="step-2">Шаг 2. Узнать свой Telegram-id</h2>
+
+    <p>Чтобы бот отвечал только тебе, ему нужно знать твой ID в Telegram. Способы:</p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Найди бота <code>@userinfobot</code> или <code>@RawDataBot</code>, напиши <code>/start</code> — он покажет твой ID.</li>
+      <li>Или после первого запуска бот будет писать в логи «Blocked user 123456» — этот номер и есть твой ID.</li>
+    </ol>
+
+    <p>Сохрани число — например <code>87654321</code>.</p>
+
+    <h2 id="step-3">Шаг 3. Получить Groq API Key</h2>
+
+    <p><a href="https://console.groq.com" target="_blank" rel="noopener">Groq</a> — бесплатный сервис, который умеет расшифровывать голосовые в текст моделью Whisper. Нужен только если хочешь, чтобы бот понимал голосовые сообщения.</p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Зайди на console.groq.com, зарегистрируйся (бесплатно).</li>
+      <li>В меню → API Keys → Create API Key.</li>
+      <li>Скопируй ключ вида <code>gsk_...</code>.</li>
+    </ol>
+
+    <div class="callout analogy" style="margin:20px 0;">
+      <span class="callout-label">Аналогия</span>
+      <p>Groq для голосовых — это бесплатное такси, которое забирает твой голосовой и отдаёт его в виде текста.</p>
+    </div>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: Groq Console с созданным API key]</figure>
+
+    <h2 id="step-4">Шаг 4. Подключиться к VPS</h2>
+
+    <p>В терминале на ноутбуке:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ SSH-подключение</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>ssh root@IP_СЕРВЕРА</pre>
+    </div>
+
+    <p>Введи пароль (который пришёл в письме при создании сервера). Если всё правильно — увидишь строку <code>root@my-vps:~#</code>. Это значит ты на сервере.</p>
+
+    <div class="callout" style="margin:20px 0;">
+      <span class="callout-label">Можно не лезть в терминал</span>
+      <p>Если используешь Claude Code локально — можешь делать всё это через него. Скажи: «подключись к серверу [IP] с паролем [пароль], дальше я буду говорить тебе что делать на сервере». Claude все SSH-команды выполнит сам.</p>
+    </div>
+
+    <h2 id="step-5">Шаг 5. Установить Claude Code на сервер и войти</h2>
+
+    <p>Если Claude Code ещё не стоит на сервере — установи по официальной инструкции с claude.ai/code (или через <code>curl -fsSL https://claude.ai/install.sh | bash</code>).</p>
+
+    <p>Проверь:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Проверка установки</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>claude --version</pre>
+    </div>
+
+    <p>Войди в свой аккаунт:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Авторизация</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>claude</pre>
+    </div>
+
+    <p>Откроется ссылка для авторизации в браузере. Открой её, войди под аккаунтом с подпиской Max/Pro. После этого Claude Code на сервере подключён к твоей подписке — это значит, когда программа будет дёргать <code>claude --print</code>, ответы будут идти от твоего аккаунта.</p>
+
+    <h2 id="step-6">Шаг 6. Поставить Python 3.11</h2>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Установка Python</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>apt-get update -y
+apt-get install -y python3.11 python3.11-venv</pre>
+    </div>
+
+    <p style="font-size:14px;color:var(--muted);margin-top:6px;">Python — язык программирования, на котором написан наш бот. Версия 3.11 нужна потому что бот использует современные возможности языка.</p>
+
+    <h2 id="step-7">Шаг 7. Скачать файлы бота</h2>
+
+    <p>Бот состоит из четырёх файлов:</p>
+
+    <ul style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li><code>bot.py</code> — сама программа (Python-обёртка над <code>claude --print</code>)</li>
+      <li><code>requirements.txt</code> — список Python-библиотек (всего две: <code>python-telegram-bot</code> и <code>httpx</code>)</li>
+      <li><code>jarvis.service</code> — настройка для systemd (чтобы бот сам перезапускался)</li>
+      <li><code>deploy.sh</code> — скрипт установки в одну команду</li>
+    </ul>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Сюда — 4 разворачиваемых блока с полными текстами файлов bot.py / requirements.txt / jarvis.service / deploy.sh. Минимальная версия без TTS-кода. Готовится отдельно.]</figure>
+
+    <p>Скопируй все 4 файла на сервер в одну папку, например в <code>/root/jarvis-src/</code>. Можно через <code>scp</code> с ноутбука или через любой удобный способ.</p>
+
+    <h2 id="step-8">Шаг 8. Создать .env с настройками</h2>
+
+    <p>В <code>/root/.env</code> положи 3 переменные:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ /root/.env</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>TELEGRAM_BOT_TOKEN=8680806819:AAFDrZ1Ta...
+ALLOWED_USER_IDS=87654321
+GROQ_API_KEY=gsk_...</pre>
+    </div>
+
+    <p>Что значит каждая:</p>
+
+    <ul style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li><code>TELEGRAM_BOT_TOKEN</code> — токен из шага 1</li>
+      <li><code>ALLOWED_USER_IDS</code> — твой Telegram-id из шага 2 (можно перечислить несколько через запятую, если делаешь для семьи)</li>
+      <li><code>GROQ_API_KEY</code> — ключ из шага 3 (если не нужны голосовые входящие — можно оставить пустым, бот будет принимать только текст)</li>
+    </ul>
+
+    <p>Установи права на файл, чтобы его читал только ты:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Защита .env</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>chmod 600 /root/.env</pre>
+    </div>
+
+    <h2 id="step-9">Шаг 9. Запустить установщик</h2>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Установка</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>cd /root/jarvis-src
+bash deploy.sh</pre>
+    </div>
+
+    <p>Скрипт сделает за тебя:</p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Создаст <code>/root/jarvis-venv/</code> — изолированное окружение Python только для этого бота (чтобы не мешать другим программам)</li>
+      <li>Установит библиотеки: <code>python-telegram-bot</code> и <code>httpx</code></li>
+      <li>Скопирует <code>bot.py</code> и <code>requirements.txt</code> в <code>/root/jarvis/</code></li>
+      <li>Скопирует <code>jarvis.service</code> в <code>/etc/systemd/system/</code></li>
+      <li>Включит автозапуск и стартанёт сервис</li>
+    </ol>
+
+    <p>В конце увидишь «Готово».</p>
+
+    <h2 id="step-10">Шаг 10. Проверка</h2>
+
+    <p>Напиши боту в Telegram — должен ответить через несколько секунд. Первый запрос идёт долго (Claude Code на сервере прогревается), дальше быстро.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Команды контроля</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>systemctl status jarvis        # статус — должно быть зелёное "active (running)"
+journalctl -u jarvis -f        # живые логи: видишь свои сообщения и ответы
+systemctl restart jarvis       # перезапуск
+systemctl stop jarvis          # остановить</pre>
+    </div>
+
+    <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: бот в Telegram отвечает на текст и расшифровывает голосовое]</figure>
+
+    <h2 id="troubleshooting">Грабли</h2>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">Бот молчит после перезагрузки сервера</span>
+      <p><code>systemctl status jarvis</code>. Если красный — смотри логи: <code>journalctl -u jarvis -n 50</code>.</p>
+    </div>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">Токен не принимается (401 Unauthorized)</span>
+      <p>Скопируй из BotFather заново — буква <code>O</code> и цифра <code>0</code> в шрифте Telegram легко путаются.</p>
+    </div>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">Голосовые приходят, но бот не отвечает</span>
+      <p><code>GROQ_API_KEY</code> в <code>/root/.env</code> пустой или неверный. Проверь.</p>
+    </div>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">claude --print ругается на авторизацию</span>
+      <p>Сессия Claude Code на сервере истекла. Зайди по SSH, запусти <code>claude</code>, авторизуйся заново.</p>
+    </div>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">Хочешь добавить друга к боту</span>
+      <p>Добавь его Telegram-id в <code>ALLOWED_USER_IDS</code> через запятую: <code>ALLOWED_USER_IDS=87654321,12345678</code>. Перезапусти: <code>systemctl restart jarvis</code>.</p>
+    </div>
+
+    <div class="callout key" style="margin:20px 0;">
+      <span class="callout-label">Что дальше</span>
+      <p>Это уровень 1 — Claude Code как универсальный личный ассистент в Telegram. Когда хочется не просто общаться, а чтобы у бота была своя роль и заточенный под задачу промпт (агент-копирайтер в твоём стиле; агент-секретарь; агент-исследователь по теме) — это уровень 2, см. <a href="13b-agent-copywriter.html">статью 13b про сборку своего Telegram-агента</a>.</p>
+      <p style="margin-top:8px;">Если задача — не личный ассистент, а бот для клиентов с базой знаний и воронкой продаж, это уровень 3 — см. <a href="13-telegram-agent.html">статью 13</a> про архитектуру агента-продукта.</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="13-telegram-agent.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">Агент в Telegram</span>
+      </a>
+      <a class="pager-next" href="13b-agent-copywriter.html">
+        <span class="pager-label">Вперёд →</span>
+        <span class="pager-title">Свой агент-копирайтер</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#what-we-build">Что соберём</a>
+    <a href="#when-need">Когда нужно</a>
+    <a href="#prerequisites">Что нужно заранее</a>
+    <a href="#architecture">Что под капотом</a>
+    <a href="#vps">Про VPS</a>
+    <a href="#step-1">Шаг 1. BotFather</a>
+    <a href="#step-2">Шаг 2. Telegram-id</a>
+    <a href="#step-3">Шаг 3. Groq API</a>
+    <a href="#step-4">Шаг 4. SSH</a>
+    <a href="#step-5">Шаг 5. Claude Code</a>
+    <a href="#step-6">Шаг 6. Python</a>
+    <a href="#step-7">Шаг 7. Файлы бота</a>
+    <a href="#step-8">Шаг 8. .env</a>
+    <a href="#step-9">Шаг 9. Установщик</a>
+    <a href="#step-10">Шаг 10. Проверка</a>
+    <a href="#troubleshooting">Грабли</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>
