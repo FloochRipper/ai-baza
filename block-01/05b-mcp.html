@@ -252,6 +252,160 @@ claude mcp remove exa</pre>
 
     <p>Exa заменяет гугление — Claude сам ищет когда нужна актуальная информация. Context7 решает проблему устаревшей документации в обучающих данных: пишешь код с новой библиотекой — Claude смотрит живую доку, а не то что знал год назад. Chrome DevTools нужен если хочешь тестировать сайты или автоматизировать браузер.</p>
 
+    <div class="callout analogy" style="margin:16px 0;">
+      <span class="callout-label">Как ставить</span>
+      <p>Команды в столбце — это то что вставляется <strong>в терминал</strong> (не в чат с Claude Code). Открываешь Terminal на Mac или PowerShell на Windows, копируешь, нажимаешь Enter. Альтернативный путь без терминала: попроси Claude в чате — «Установи мне MCP-сервер для Exa» — он сам выполнит нужную команду.</p>
+      <p style="margin-top:8px;">Для серверов через Smithery (smithery.ai) — заходишь на сайт, находишь нужный, жмёшь Install — сайт сгенерирует точную команду под твою систему.</p>
+    </div>
+
+    <h2 id="recommended">Подборка MCP по задачам</h2>
+
+    <p>Самые полезные MCP-серверы из проверенных источников. Категоризованы — ставь только под свою задачу. <strong>Не подключай MCP «на всякий случай»</strong> — каждый занимает примерно 2000 токенов в контексте постоянно.</p>
+
+    <h3 id="rec-everyone" style="font-size:18px;margin:28px 0 12px;">Полезно почти всем</h3>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">MCP</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Команда / Источник</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>Context7</strong></td>
+          <td style="padding:10px;">Актуальная документация любой библиотеки прямо в чате — React, Next.js, Stripe, что угодно</td>
+          <td style="padding:10px;"><code>claude mcp install context7</code><br>или плагин <code>/plugin install context7@claude-plugins-official</code></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>Exa</strong></td>
+          <td style="padding:10px;">Поиск в интернете для Claude. 1000 запросов в месяц бесплатно</td>
+          <td style="padding:10px;"><code>claude mcp install exa</code></td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><strong>Chrome DevTools</strong></td>
+          <td style="padding:10px;">Управление браузером: открыть сайт, кликнуть, проверить консоль на ошибки</td>
+          <td style="padding:10px;">Через <a href="https://smithery.ai" target="_blank" rel="noopener" style="color:var(--accent);">smithery.ai</a> → найти Chrome DevTools → Install</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 id="rec-content" style="font-size:18px;margin:28px 0 12px;">Если работаешь с таблицами и заметками</h3>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">MCP</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Команда / Источник</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>Google Sheets</strong></td>
+          <td style="padding:10px;">Читать и писать в твои Google-таблицы. Контент-план, клиенты, бюджеты — всё из чата</td>
+          <td style="padding:10px;"><code>npx mcp-google-sheets</code><br>(потребуется привязка к аккаунту)</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>Notion</strong></td>
+          <td style="padding:10px;">Чтение и обновление страниц/баз в Notion из чата</td>
+          <td style="padding:10px;">Официальный реестр — registry.modelcontextprotocol.io</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><strong>Airtable</strong></td>
+          <td style="padding:10px;">Доступ к твоим базам в Airtable</td>
+          <td style="padding:10px;">Официальный реестр — registry.modelcontextprotocol.io</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 id="rec-bizness" style="font-size:18px;margin:28px 0 12px;">Если у тебя бизнес-системы</h3>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">MCP</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Где взять</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>Stripe</strong></td>
+          <td style="padding:10px;">Доступ к платежам, подпискам, клиентам — для тех у кого продажи через Stripe</td>
+          <td style="padding:10px;">Официальный реестр Anthropic</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>Linear</strong></td>
+          <td style="padding:10px;">Управление задачами, чтение и создание тикетов</td>
+          <td style="padding:10px;">Официальный реестр</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><strong>HubSpot</strong></td>
+          <td style="padding:10px;">CRM-данные: контакты, сделки, переписка</td>
+          <td style="padding:10px;">Официальный реестр</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 id="rec-dev" style="font-size:18px;margin:28px 0 12px;">Если разрабатываешь / тестируешь сайты</h3>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">MCP</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Источник</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>Playwright</strong></td>
+          <td style="padding:10px;">Полная автоматизация браузера: тесты, парсинг, сценарии. Мощнее чем Chrome DevTools</td>
+          <td style="padding:10px;"><a href="https://github.com/microsoft/playwright-mcp" target="_blank" rel="noopener" style="color:var(--accent);">github.com/microsoft/playwright-mcp</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>Vercel</strong></td>
+          <td style="padding:10px;">Управление деплоями, проектами, доменами в Vercel</td>
+          <td style="padding:10px;">Официальный реестр</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><strong>Supabase</strong></td>
+          <td style="padding:10px;">Доступ к твоей базе данных Supabase: чтение, запись, миграции</td>
+          <td style="padding:10px;">Официальный реестр</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout key" style="margin:20px 0;">
+      <span class="callout-label">Минимальный старт для большинства</span>
+      <p>Не пытайся подключать всё. Реалистичный набор: <strong>Context7</strong> (актуальные доки) и <strong>Chrome DevTools</strong> (тестировать сайты). Это уже даёт огромный прирост качества. Дальше добавляй по конкретной задаче — нужны таблицы, добавил Google Sheets. Нужен Stripe — Stripe. И так по факту.</p>
+    </div>
+
+    <h3 id="ask-claude" style="font-size:18px;margin:28px 0 12px;">Если не нашёл подходящего — спроси Claude</h3>
+
+    <p>Перед тем как создавать свой MCP — попроси Claude поискать. Часто что-то уже есть и проверено сообществом.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт для поиска MCP</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Мне нужен MCP-сервер для [конкретная задача].
+
+Поищи в:
+- registry.modelcontextprotocol.io (официальный реестр)
+- smithery.ai
+- mcp.so
+- awesome-mcp-servers на GitHub
+
+Условия:
+- Активный репозиторий (свежие коммиты)
+- Достаточно скачиваний или известный автор
+- Подходит именно под мою задачу
+
+Если ничего подходящего нет — скажи прямо «лучше создать свой»
+и предложи минимальную структуру.</pre>
+    </div>
+
     <h2 id="custom">Создать свой MCP</h2>
 
     <p>Готовый MCP не подошёл? Можно собрать собственный — Claude поможет с кодом. Это отдельный сервер, который ты пишешь под свою задачу.</p>
@@ -363,6 +517,8 @@ claude mcp remove exa</pre>
     <a href="#catalogs">Где искать MCP</a>
     <a href="#quality">Как оценить качество</a>
     <a href="#starter">Три MCP для старта</a>
+    <a href="#recommended">Подборка по задачам</a>
+    <a href="#ask-claude">Поиск через Claude</a>
     <a href="#custom">Создать свой MCP</a>
     <a href="#mcp-vs-skill">MCP или скилл</a>
     <a href="#security">Безопасность</a>
