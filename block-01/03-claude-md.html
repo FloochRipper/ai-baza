@@ -499,7 +499,9 @@ ALWAYS ask before deleting any file
 
     <h2 id="memory">CLAUDE.md vs MEMORY.md</h2>
 
-    <p>В Claude Code есть ещё один механизм памяти — <code>MEMORY.md</code>. Важно понимать разницу:</p>
+    <p>В Claude Code есть два разных механизма памяти — и важно не путать их. CLAUDE.md пишешь ты: правила, инструкции, ограничения. MEMORY.md пишет Claude сам: технические заметки о проекте — какие ошибки встретились и как решили, какие команды используются, особенности архитектуры. Это как рабочие заметки инженера, которые он ведёт сам.</p>
+
+    <p>Главное правило: не смешивай. Твои правила — в CLAUDE.md. Технические наблюдения агента — в MEMORY.md. Если Claude начнёт перезаписывать твои правила своими заметками — будет бардак.</p>
 
     <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
       <thead>
@@ -517,13 +519,13 @@ ALWAYS ask before deleting any file
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;font-size:13px;color:var(--muted);">Где лежит</td>
-          <td style="padding:10px;">В корне проекта</td>
-          <td style="padding:10px;">В скрытой папке настроек</td>
+          <td style="padding:10px;">В корне проекта, видно в git</td>
+          <td style="padding:10px;"><code>~/.claude/projects/&lt;проект&gt;/memory/</code> — локально, не в git</td>
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;font-size:13px;color:var(--muted);">Что внутри</td>
           <td style="padding:10px;">Твои правила и инструкции</td>
-          <td style="padding:10px;">Технические заметки агента</td>
+          <td style="padding:10px;">Технические заметки: ошибки, команды, архитектура</td>
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;font-size:13px;color:var(--muted);">Надёжность</td>
@@ -531,23 +533,25 @@ ALWAYS ask before deleting any file
           <td style="padding:10px;color:var(--muted);">Пишет сам, может записать неточно</td>
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
-          <td style="padding:10px;font-size:13px;color:var(--muted);">Размер</td>
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Лимит</td>
           <td style="padding:10px;">60–100 строк идеально</td>
-          <td style="padding:10px;">До 200 строк (потом обрезается)</td>
+          <td style="padding:10px;">200 строк — всё что длиннее молча обрезается</td>
         </tr>
         <tr>
-          <td style="padding:10px;font-size:13px;color:var(--muted);">Видно в git</td>
-          <td style="padding:10px;">Да — часть проекта</td>
-          <td style="padding:10px;">Нет — локальный файл</td>
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Структура</td>
+          <td style="padding:10px;">Один файл</td>
+          <td style="padding:10px;">Индекс + отдельные файлы по темам (debugging.md, patterns.md…)</td>
         </tr>
       </tbody>
     </table>
 
-    <p>Главный вывод: на CLAUDE.md можно положиться всегда. MEMORY.md — дополнительный слой, который помогает, но требует периодической чистки. Если хочешь что-то зафиксировать надёжно — пиши в CLAUDE.md.</p>
+    <p>На CLAUDE.md можно положиться всегда — ты его контролируешь. MEMORY.md помогает, но требует присмотра: через несколько месяцев там накапливается устаревшая информация, которая начинает мешать.</p>
 
     <h2 id="automemory">AutoMemory</h2>
 
-    <p>В Claude Code есть встроенная автопамять — он сам записывает заметки о проекте и твоих предпочтениях по ходу работы. Это работает параллельно с CLAUDE.md и не требует твоего участия.</p>
+    <p>AutoMemory — встроенный механизм: Claude сам ведёт заметки о проекте параллельно с работой. Не нужно ничего настраивать — просто работает. Пишет не каждую сессию, а когда замечает повторяющийся паттерн или ты его поправляешь несколько раз.</p>
+
+    <p>Что именно туда попадает: какие ошибки встретились и как их решили, какие команды используются для сборки, особенности архитектуры проекта. Первые 200 строк MEMORY.md загружаются в каждую новую сессию автоматически — Claude видит свои прошлые заметки в начале разговора и опирается на них.</p>
 
     <p>Посмотреть что сохранилось, включить или выключить:</p>
 
@@ -556,14 +560,25 @@ ALWAYS ask before deleting any file
       <pre>/memory</pre>
     </div>
 
-    <p>Можно явно попросить что-то запомнить — это надёжнее чем ждать пока он сам запишет:</p>
+    <p>Если хочешь зафиксировать что-то конкретное — лучше попросить явно, это надёжнее чем ждать пока он сам запишет:</p>
 
     <div class="code-block">
-      <div class="code-block-head"><span class="code-title">▸ Запомнить конкретное правило</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <div class="code-block-head"><span class="code-title">▸ Запомнить правило явно</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
       <pre>Запомни что мы всегда используем bun, а не npm в этом проекте</pre>
     </div>
 
-    <p>Минус AutoMemory — пишет всё подряд, иногда не самое нужное. Стоит заходить раз в неделю и чистить лишнее.</p>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Попросить Claude написать заметку о проекте</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Запиши в память: в этом проекте используется чистый HTML без фреймворков,
+стили в styles.css, деплой через Vercel по git push</pre>
+    </div>
+
+    <p>Раз в месяц стоит заходить в <code>/memory</code> и чистить устаревшее. Без этого заметки превращаются в хлам — старые решения, которые уже не актуальны, начинают влиять на новые ответы.</p>
+
+    <div class="callout warn">
+      <span class="callout-label">Лимит 200 строк</span>
+      <p>MEMORY.md молча обрезается после 200 строк — без предупреждения. Если набралось много, Claude просто не видит что там внизу. Поэтому регулярная чистка — не гигиена, а необходимость.</p>
+    </div>
 
     <h2 id="settings">settings.json и settings.local.json</h2>
 
