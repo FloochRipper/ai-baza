@@ -59,7 +59,7 @@
       <tbody>
         <tr>
           <td><strong>Claude Code</strong></td>
-          <td>VS Code, первый проект, скиллы, MCP, деплой</td>
+          <td>VS Code, первый проект, скиллы, MCP, деплой, агенты</td>
           <td>Кто хочет делать сайты и инструменты руками AI</td>
         </tr>
         <tr>
@@ -75,6 +75,46 @@
       <p>Если хочешь делать сайты и инструменты — иди в Claude Code. Если главная задача — контент и аудитория — иди в Контент-систему. Оба блока независимы.</p>
     </div>
 
+    <h2 id="cc-bridge">Что меняется в Claude Code</h2>
+
+    <p>Block-00 был про то как работать с Claude в чате — claude.ai в браузере. Если выбираешь путь Claude Code, переходишь в другой мир: AI становится твоим разработчиком, который сидит в редакторе кода (VS Code) и работает с реальными файлами на твоём компьютере.</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;"></th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Чат Claude.ai (block-00)</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Claude Code (block-01)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Где работаешь</td>
+          <td style="padding:10px;">В браузере на claude.ai</td>
+          <td style="padding:10px;">В VS Code на своём компьютере</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Что делает Claude</td>
+          <td style="padding:10px;">Отвечает текстом, ты копируешь и применяешь сам</td>
+          <td style="padding:10px;">Сам редактирует файлы, создаёт сайты, ставит пакеты</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Что ты получаешь</td>
+          <td style="padding:10px;">Тексты, идеи, объяснения</td>
+          <td style="padding:10px;">Реальные работающие сайты, боты, инструменты</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Уровень навыка</td>
+          <td style="padding:10px;">Никаких технических навыков не нужно</td>
+          <td style="padding:10px;">Не нужно уметь кодить, но придётся освоить минимум: терминал, файлы, GitHub</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Это не «следующий уровень» в смысле сложности — это другая мастерская. В block-01 разбираем по шагам: от установки VS Code до запуска агента в Telegram.</p>
+
+    <p>Параллельно есть отдельная страница с готовыми промптами для Claude Code — <a href="../cc-prompts.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">cc-prompts.html</a>. 50 промптов которые можно копировать и использовать сразу.</p>
+
     <h2 id="mindset">Главная мысль</h2>
     <p>Понимать архитектуру важнее, чем знать каждую команду. AI-инструменты меняются каждые несколько месяцев. Меняться вместе с ними проще, если понимаешь принципы, а не только кнопки.</p>
 
@@ -88,7 +128,10 @@
         <span class="pager-label">← Раньше</span>
         <span class="pager-title">Типичные ошибки</span>
       </a>
-      <div class="pager-next" style="visibility:hidden;"></div>
+      <a class="pager-next" href="../block-01/00-registration.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">Claude Code: регистрация</span>
+      </a>
     </div>
   </main>
 
@@ -96,6 +139,7 @@
     <h4>На этой странице</h4>
     <a href="#done" class="active">Завершение</a>
     <a href="#next-blocks">Следующие разделы</a>
+    <a href="#cc-bridge">Что меняется в Claude Code</a>
     <a href="#mindset">Главная мысль</a>
   </aside>
 </div>

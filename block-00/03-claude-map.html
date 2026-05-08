@@ -129,7 +129,43 @@
       <p>Перестаёшь думать «сейчас задам вопрос AI». Начинаешь думать «работаю внутри проекта X — Claude уже в курсе». Это другая модель работы. И с неё вся польза от Claude начинается.</p>
     </div>
 
-    <p>В Claude Code та же философия, только проект там — это физическая папка у тебя на компьютере. Про это подробнее в следующих разделах.</p>
+    <h2 id="project-vs-project">Project в Claude.ai ≠ проект в Claude Code</h2>
+
+    <p>Дальше будет важная штука которая часто путает новичков: слово «проект» в мире Claude используется в двух разных смыслах. Это два разных понятия с одним именем — нужно различать.</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;"></th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Project в Claude.ai</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">«Проект» в Claude Code</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Что это</td>
+          <td style="padding:10px;">Виртуальная сущность в чате — память AI о твоей задаче</td>
+          <td style="padding:10px;">Реальная папка на твоём компьютере с файлами кода</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Где живёт</td>
+          <td style="padding:10px;">На серверах Anthropic, видишь в браузере на claude.ai</td>
+          <td style="padding:10px;">Локально на твоём диске, можно открыть в Finder/Проводнике</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Что внутри</td>
+          <td style="padding:10px;">История чатов + загруженные документы + инструкции</td>
+          <td style="padding:10px;">Реальные файлы: HTML, CSS, JavaScript, картинки, конфиги</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Для чего</td>
+          <td style="padding:10px;">Чтобы Claude помнил контекст задачи между чатами</td>
+          <td style="padding:10px;">Чтобы Claude мог редактировать файлы, создавать сайты, ставить пакеты</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Философия одна — у каждой задачи свой контекст и память. Но реализация разная. Project в Claude.ai — это «думалка» в облаке. Проект в Claude Code — это твоя рабочая папка где AI создаёт реальные файлы. Когда дальше услышишь «открой проект» — обращай внимание о каком из двух идёт речь.</p>
 
     <div class="pager">
       <a class="pager-prev" href="02-ai-llm-neurons.html">
@@ -150,6 +186,7 @@
     <a href="#chatgpt-chats">ChatGPT vs Claude Projects</a>
     <a href="#claude-projects">Claude — это Projects</a>
     <a href="#mindshift">Смена мышления</a>
+    <a href="#project-vs-project">Project ≠ проект</a>
   </aside>
 
 </div>
