@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Промпт-библиотека Claude Code | AI База</title>
+  <meta name="description" content="50+ готовых промптов для работы с Claude Code: исследование, brief.md, отладка, скиллы, агенты. Скопируй и используй.">
+  <meta property="og:title" content="Промпт-библиотека Claude Code">
+  <meta property="og:description" content="50+ готовых промптов для работы с Claude Code по 10 категориям. От идеи до деплоя.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="styles.css?v=10">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="block-00/01-intro.html">Для новичка</a>
+    <a href="block-01/01-what-is.html">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Категории</div>
+    <div class="section-title">Промпты</div>
+    <nav class="sidebar-nav">
+      <a href="#cat-idea">Идея и старт</a>
+      <a href="#cat-research">Исследование</a>
+      <a href="#cat-docs">Документация</a>
+      <a href="#cat-critique">Критика и улучшение</a>
+      <a href="#cat-content">Создание HTML и UI</a>
+      <a href="#cat-debug">Отладка</a>
+      <a href="#cat-git">Git и деплой</a>
+      <a href="#cat-control">Управление Claude</a>
+      <a href="#cat-extensions">Скиллы и MCP</a>
+      <a href="#cat-agents">Сложные сценарии</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="index.html">AI База</a> <span>/</span>
+      Промпт-библиотека
+    </div>
+
+    <div class="article-head">
+      <h1>Промпт-<span class="accent">библиотека</span> Claude Code</h1>
+    </div>
+
+    <p id="intro">50+ готовых промптов для работы с Claude Code. Скопируй, замени переменные в квадратных скобках на свои, отправь в чат. Все промпты протестированы в реальных проектах.</p>
+
+    <p>Прокручивай по категориям в боковом меню или ищи через Ctrl+F (Cmd+F на Mac).</p>
+
+    <h2 id="cat-idea">Идея и старт</h2>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 1. Сформулировать идею проекта</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Помоги превратить эту идею в чёткую формулировку:
+
+[свободный рассказ что хочется сделать]
+
+Сформулируй по шаблону «Я создаю [ЧТО] для [КОГО], чтобы решить
+проблему [КАКУЮ]». Если в моём описании чего-то не хватает —
+задай уточняющие вопросы.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 2. 10 идей под нишу</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Ты опытный продакт-менеджер. Моя ниша: [твоя ниша/экспертиза].
+
+Предложи 10 идей цифровых продуктов которые я могу создать
+с помощью AI и которые будут полезны моим клиентам.
+
+Для каждого: название, для кого, какую проблему решает,
+формат (лендинг / бот / калькулятор / приложение),
+примерная стоимость на рынке.
+
+Формат: таблица.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 3. Выбрать одну идею из списка</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Из списка идей выше выбери одну лучшую для старта и обоснуй:
+
+1. Насколько это интересно мне (нужно знать чтобы делать 2 месяца)
+2. Есть ли реальная аудитория которой это нужно
+3. Реально ли сделать одному за 1-2 недели
+
+Дай выбор + объяснение.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 4. Стартовая структура проекта</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай в этой папке стартовую структуру проекта:
+- research.md (для исследования)
+- brief.md (техзадание)
+- CLAUDE.md (правила для тебя)
+- PLAN.md (чеклист задач)
+- README.md (описание)
+
+CLAUDE.md и README.md заполни базовыми правилами.
+Остальные оставь пустыми с заголовком.</pre>
+    </div>
+
+    <h2 id="cat-research">Исследование</h2>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 5. Исследование на 5 направлений (универсальный)</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Проведи исследование для моего проекта — [твой проект в одной фразе].
+Запусти 5 агентов параллельно с разными промптами:
+
+1. КОНКУРЕНТЫ: найди 5 примеров в нише [твоя ниша].
+   Для каждого: что делает, какие функции, что хорошо, что плохо.
+
+2. ФУНКЦИИ: какие функции обычно есть в подобных проектах?
+   Список 15-20 функций. Что обязательно для MVP, что потом.
+
+3. UX И СЦЕНАРИИ: 3 типичных сценария использования.
+   Что удобно, что бесит, типичные ошибки разработчиков.
+
+4. ТЕХНОЛОГИИ: какие технологии используют?
+   Сравни 2-3 варианта для каждой задачи.
+
+5. МОНЕТИЗАЦИЯ: как зарабатывают подобные проекты?
+   Подписка, комиссия, реклама — какие модели работают.
+
+Сохрани результат в research.md</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 6. Исследование конкурентов глубже</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Найди 7-10 примеров [тип проекта] в моей нише.
+Посмотри на awwwards.com, dribbble.com, behance.net, onepagelove.com.
+
+Для каждого зафиксируй:
+- Название и ссылка
+- Из каких блоков состоит (структура)
+- Что цепляет визуально
+- Какой стиль/настроение
+- Что можно взять за основу
+
+Добавь раздел в research.md «Референсы».</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 7. Тренды и фишки 2025-2026</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Что модно в [веб-дизайне / UX / контенте] в 2025-2026?
+Зайди на awwwards.com, css-tricks.com, посмотри последние награды.
+
+Список из 10 трендов с описанием и примерами реализации.
+Какие из них применимы к моему проекту [твой проект]?</pre>
+    </div>
+
+    <h2 id="cat-docs">Документация</h2>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 8. Создать brief.md из исследования</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>На основе research.md и моей идеи — составь brief.md, техзадание проекта.
+
+Включи:
+- Что это (2-3 предложения)
+- Для кого (целевая аудитория)
+- Какую проблему решает
+- Основные функции (MVP — что делаем первым)
+- Функции на будущее (что добавим позже)
+- Технологии (что будем использовать)
+- Чего НЕ будет на старте
+- Первые шаги (с чего начать разработку)
+
+Учти рекомендации из критики. Посмотри критически: что я мог упустить?</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 9. Создать CLAUDE.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай CLAUDE.md в корне проекта. Опиши правила работы:
+
+- Стек проекта (что используем)
+- Структура папок
+- Стиль кода и текста
+- Что нельзя делать (NEVER): не коммитить .env, не удалять без подтверждения
+- Что обязательно (ALWAYS): перед фиксом бага искать корневую причину
+
+Размер 60-100 строк. Используй маркеры NEVER, ALWAYS, MUST для правил.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 10. Улучшить существующий CLAUDE.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Посмотри CLAUDE.md и сделай его глубокий разбор.
+Какие детали могут мешать работе, какие ещё необходимо добавить?
+
+Особое внимание:
+- Нет ли противоречий между правилами
+- Нет ли устаревших правил
+- Не слишком ли расплывчатые формулировки
+- Какие реальные ошибки я уже делал и стоит ли их зафиксировать</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 11. Создать PLAN.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Разбей мой проект [короткое описание] на 4-6 этапов
+от первого файла до готового результата.
+
+Каждый этап — конкретный шаг с понятным результатом
+который можно проверить.
+
+Сохрани в PLAN.md в формате:
+- [ ] Этап 1: что делаем, что должно получиться
+- [ ] Этап 2: ...</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 12. Зафиксировать ошибку как правило</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Только что произошла ошибка: [описание что случилось].
+
+Добавь в CLAUDE.md правило, чтобы это не повторялось.
+Формулировка с маркером NEVER или ALWAYS.</pre>
+    </div>
+
+    <h2 id="cat-critique">Критика и улучшение</h2>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 13. Критика от трёх экспертов</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Оцени мой проект [короткое описание] с трёх точек зрения:
+
+🎨 ЭКСПЕРТ 1: UX-дизайнер с 10-летним опытом
+- Какие ошибки в структуре делают новички?
+- Что обязательно должно быть?
+- Что раздражает пользователей и заставляет уйти?
+
+📊 ЭКСПЕРТ 2: маркетолог, специалист по конверсии
+- Какой оффер зацепит клиента?
+- Какие триггеры доверия нужны?
+- Путь от «зашёл» до «оставил заявку»?
+
+👤 ЭКСПЕРТ 3: потенциальный клиент — [твоя ЦА]
+- На что смотрит в первые 5 секунд?
+- Что заставит остаться? Что закрыть вкладку?
+
+Сохрани рекомендации в research.md раздел «Экспертная оценка».</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 14. «Ты уверен?»</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Посмотри ещё раз на [файл / решение / ответ].
+Особенно на технические детали и конкретные цифры — ты уверен что это так?
+Есть ли альтернативы? Что может оказаться неточным или устаревшим?
+
+Не подхалимничай — мне нужен честный взгляд со стороны.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 15. Найди что я упустил</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Я планирую [короткое описание плана].
+
+Что я мог упустить? Какие типичные ошибки делают в таких проектах?
+Какие сценарии или граничные случаи я не учёл?
+
+Дай 5-7 конкретных пунктов с пояснениями.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 16. Критический взгляд senior-разработчика</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Представь что ты опытный senior-разработчик с 10-летним стажем.
+Какие вопросы у тебя возникнут к [этому коду / документу / решению]?
+
+Что слабо проработано, что можно усилить, что вообще не учтено?
+Дай список замечаний по приоритету.</pre>
+    </div>
+
+    <h2 id="cat-content">Создание HTML и UI</h2>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 17. Создать HTML по brief.md</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Прочитай brief.md — это техническое задание.
+Создай файл index.html — полноценный лендинг по этому ТЗ.
+
+Требования:
+- Всё в одном HTML-файле (стили и скрипты внутри)
+- Современный, стильный дизайн
+- Адаптивная вёрстка (мобильный + десктоп)
+- Плавные анимации при прокрутке
+- Заглушки для фото (placeholder-картинки)
+
+Чистый HTML + CSS + JavaScript. Без внешних библиотек.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 18. Добавить вау-эффекты</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Посмотри на index.html и добавь вау-эффекты:
+
+1. Анимации появления — каждый блок плавно появляется при прокрутке
+   (fade-in снизу вверх).
+2. Hover-эффекты — карточки приподнимаются при наведении,
+   кнопки меняют цвет с плавным переходом.
+3. Плавная прокрутка — клик по меню скроллит к секции.
+4. Градиентный фон заголовка — анимированный, медленно меняет цвета.
+
+Сделай так чтобы сайт выглядел дорого и профессионально.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 19. Добавить интерактивность</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Добавь в index.html интерактивные элементы:
+
+1. Кнопка «наверх» — появляется при прокрутке.
+2. Форма обратной связи — имя, email, сообщение.
+   При отправке — анимация успеха (без реальной отправки).
+3. Счётчики — числа плавно «накручиваются» при появлении на экране.
+4. Мобильное меню — гамбургер-иконка раскрывает меню.
+
+Проверь работу на мобильном и десктопе.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 20. Создать визитку</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай файл vizitka.html — персональная визитка.
+
+Данные:
+- Имя: [твоё имя]
+- Специализация: [чем занимаешься]
+- Telegram: [ссылка]
+
+Дизайн:
+- Тёмный фон (#0a0a0a)
+- Имя крупно с градиентным свечением
+- Соцсети — иконки SVG с hover-эффектом
+- Кнопка «Написать мне» с анимацией
+- Адаптивно для телефона
+
+Всё в одном HTML-файле, без внешних зависимостей.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 21. По скриншоту макета</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Вот макет из Figma. Сделай похожую страницу.
+
+Главное — попасть в общее ощущение и структуру,
+а не пиксель в пиксель. Шрифты подбери похожие из Google Fonts.
+
+[прикреплён скриншот]</pre>
+    </div>
+
+    <h2 id="cat-debug">Отладка</h2>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 22. Корневая причина бага</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>[Описание что не работает]
+
+Найди корневую причину этой ошибки, не просто исправь симптом.
+После фикса объясни как убедиться что это не повторится в других местах.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 23. Ошибка из браузера</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>В консоли браузера такая ошибка:
+
+[вставить текст ошибки]
+
+Объясни что это значит и почини.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 24. Не работает кнопка</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Нажимаю кнопку «[название]» — ничего не происходит.
+Должно [что должно происходить].
+
+Посмотри файл [файл]. Найди причину, не лепи try/catch на симптом.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 25. Раньше работало, сломалось</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Вчера работало, сегодня сломалось — [что именно].
+
+Что изменилось? Посмотри последние изменения через git log.
+Найди коммит после которого проблема появилась и разберись.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 26. Выглядит не так</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Должно быть [как должно быть], а получается [как есть].
+
+Посмотри стили и структуру нужного элемента, найди что мешает.
+
+[прикреплён скриншот]</pre>
+    </div>
+
+    <h2 id="cat-git">Git и деплой</h2>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 27. Сделать коммит и пуш</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Сделай коммит со всеми изменениями.
+Сообщение коммита — конкретно что было сделано в этой партии правок.
+После коммита — пуш на GitHub.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 28. Проверка перед деплоем</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Проверь мой проект перед публикацией:
+
+1. Запусти dev-сервер и убедись что он работает без ошибок.
+2. Проверь что все страницы открываются.
+3. Проверь работу форм и интерактивных элементов.
+4. Убедись что нет ошибок на мобильной версии.
+5. Проверь что в коде нет API-ключей и паролей.
+6. Если есть ошибки — исправь их.
+
+Скажи: что работает, что починили, что нужно поправить мне.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 29. Деплой провалился</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Vercel не задеплоил проект. Вот ошибка из Build Logs:
+
+[вставить текст ошибки]
+
+Объясни что не так и почини. После фикса — коммит и пуш.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 30. Правки по обратной связи</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Получил обратную связь по сайту. Нужно исправить:
+
+1. [что не так]
+2. [что нужно добавить]
+3. [что нужно убрать]
+
+Исправь, проверь что не сломал остальное, сделай коммит и пуш.
+Vercel сам обновит сайт за минуту.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 31. Создать Pull Request</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай Pull Request из текущей ветки в main.
+
+Заголовок: «[короткое описание]».
+В описании — что именно изменилось и почему.
+Используй gh CLI если установлен.</pre>
+    </div>
+
+    <h2 id="cat-control">Управление Claude</h2>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 32. Утренний обзор контекста</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Прочитай .claude/handoff.md — там контекст из прошлой сессии.
+
+Кратко доложи:
+- Что в работе сейчас
+- Что следующим шагом
+- Есть ли обещания с дедлайном
+
+Спроси с чего начнём сегодня.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 33. Завершение дня</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Обнови .claude/handoff.md по итогам сегодняшней сессии:
+
+1. Сейчас работаем над — 1-2 предложения
+2. Следующим шагом — 3-5 пунктов
+3. Обещания / дедлайны (если есть)
+
+Внизу обнови дату.
+Перед сохранением покажи мне предлагаемый текст и спроси «так ок?».</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 34. Запомнить факт</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Запомни как факт: [что нужно запомнить].
+
+Например:
+- Запомни что в этом проекте мы используем bun, а не npm
+- Запомни: я предприниматель, объясняй техническое на пальцах
+- Запомни что мы деплоим только через Vercel</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 35. Сжать контекст с инструкцией</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Контекст уже на 60%, давай сожмём через /compact и продолжим.
+
+Сохрани:
+- Текущую задачу: [одна строка]
+- Архитектурные решения которые приняли
+- Важные детали реализации
+
+Можешь убрать:
+- Детальные обмены про CSS
+- Черновики которые уже переделаны
+- Подробные обсуждения которые уже завершены</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 36. Переключение модели</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Эта задача сложная — переключись на Opus.
+
+или
+
+Достаточно Haiku, нужно быстро прогнать поиск по документации.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 37. Сохранить разбор в knowledge-base</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Мы только что разобрали [тема]. Сохрани разбор в
+~/Documents/knowledge-base/outputs/ с датой в имени файла.
+
+Структура: контекст → разбор → решение → источники.</pre>
+    </div>
+
+    <h2 id="cat-extensions">Скиллы и MCP</h2>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 38. Создать скилл</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай скилл для [задача].
+
+Когда я прошу [что], ты должен [как]:
+- Правило 1
+- Правило 2
+- Правило 3
+
+Триггеры (когда применять): [список фраз].
+Сделай его глобальным/проектным.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 39. Улучшить скилл</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>В скилле [название] не хватает [что не так].
+
+Обнови скилл: добавь правило [новое правило] и поправь
+[что мешает]. Сохрани и покажи финальную версию.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 40. Подключить MCP</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Установи MCP-сервер для [сервис]. Подключи и проверь что работает.
+
+Если требуются токены или ключи — спроси у меня.
+После установки покажи что теперь стало возможно.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 41. Проверить MCP перед установкой</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Мне нужен MCP для [сервис]. Вот ссылка: [ссылка].
+
+Изучи: посмотри код, документацию, дату последнего обновления,
+автора, количество скачиваний.
+
+Насколько он надёжный? Стоит ли подключать? Какие риски?</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 42. Custom MCP под задачу</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Мне нужен MCP-сервер для [сервис/задача].
+
+Должен уметь: [список действий — только нужные, без лишнего].
+Зачем: [контекст применения].
+Идеальный рабочий процесс: [описать сценарий].
+
+Принцип минимальных прав: только то что необходимо.
+Сделай и подключи.</pre>
+    </div>
+
+    <h2 id="cat-agents">Сложные сценарии</h2>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 43. Запустить субагентов параллельно</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Запусти три субагента параллельно:
+
+- researcher: [конкретная задача 1]
+- analyzer: [задача 2]
+- writer: [задача 3]
+
+Жди всех трёх, потом собери результаты в один отчёт.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 44. Brainstorm перед реализацией</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Хочу [короткое описание идеи].
+
+Не делай ничего. Давай сначала обсудим:
+- Что именно я хочу получить и зачем?
+- Какие есть варианты как это сделать?
+- Что может пойти не так?
+- Что я мог упустить?
+
+Задавай вопросы один за другим, как нормальный разговор.
+Не предлагай решение пока я не отвечу на твои вопросы.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 45. Спецификация фичи</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>На основе нашего обсуждения собери файл spec.md:
+
+## Что делаем
+[Одна фраза]
+
+## Поведение
+- В обычном случае
+- При ошибках
+- На границах (пустой ввод, нет интернета)
+
+## Чего НЕ будет
+- Что сознательно не делаем сейчас
+
+## Критерии готовности
+- Конкретные пункты для проверки</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 46. Систематическая отладка</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>[Описание проблемы]
+
+Найди корневую причину и почини. После фикса:
+1. Объясни почему это произошло
+2. Как убедиться что не повторится в других местах
+3. Добавь правило в CLAUDE.md если нужно</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 47. Запустить Telegram-агента</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай проект Telegram-агента-[типа: продавец/консьерж/эксперт]
+на Claude Agent SDK.
+
+Что должен уметь:
+- Отвечать клиентам в Telegram-боте
+- Использовать базу знаний из knowledge/ (md-файлы)
+- Вести диалог по воронке из system-prompt.md
+- Логировать каждый диалог в logs/
+
+Используй официальный @anthropic-ai/claude-agent-sdk.
+Начни с минимального MVP, потом будем улучшать.
+
+Перед написанием кода — задай уточняющие вопросы.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 48. Включить Bypass Permissions</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Включи мне режим Bypass Permissions с защитой от опасных команд:
+работать без подтверждений, но запретить удаление папок (rm -rf),
+force-push в гит, удаление веток, чтение секретных файлов
+(.env, credentials, токены, API-ключи).
+
+Настрой это правильным способом и объясни что добавил.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 49. Worktree для параллельной задачи</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай git worktree для новой задачи [название].
+
+Имя ветки: feature/[название].
+Папка: ../[имя-проекта]-[название].
+
+После создания — запусти там новую сессию Claude Code.
+В этой папке буду работать над основной задачей, в той — над фичей.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ 50. Хук на звуковое уведомление</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Добавь в ~/.claude/settings.json хуки на события Stop и Notification:
+после каждого ответа и ожидания подтверждения играть короткий звук.
+
+На Mac используй afplay /System/Library/Sounds/Glass.aiff
+На Windows — соответствующий аналог.
+На Linux — paplay.
+
+Объясни что добавил и где это будет работать.</pre>
+    </div>
+
+    <div class="callout key">
+      <span class="callout-label">Как пользоваться</span>
+      <p>Это не магические заклинания — это шаблоны. Адаптируй под свою задачу: меняй переменные в скобках, добавляй контекст, убирай лишнее. Один и тот же промпт работает в 10 раз лучше когда подогнан под конкретный момент.</p>
+      <p style="margin-top:8px;">Если какой-то промпт не сработал как ожидал — попроси Claude разобрать почему и переформулировать.</p>
+    </div>
+
+  </main>
+
+  <aside class="toc">
+    <h4>Категории</h4>
+    <a href="#cat-idea">Идея и старт</a>
+    <a href="#cat-research">Исследование</a>
+    <a href="#cat-docs">Документация</a>
+    <a href="#cat-critique">Критика</a>
+    <a href="#cat-content">HTML и UI</a>
+    <a href="#cat-debug">Отладка</a>
+    <a href="#cat-git">Git и деплой</a>
+    <a href="#cat-control">Управление</a>
+    <a href="#cat-extensions">Скиллы и MCP</a>
+    <a href="#cat-agents">Сложные сценарии</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>
