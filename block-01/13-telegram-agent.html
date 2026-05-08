@@ -67,6 +67,12 @@
 
     <p>Если ты ещё не разобрался в чём разница между разными «агентами» — сначала прочитай <a href="12-agents-types.html">статью 12 про виды агентов</a>. Дальше — конкретная архитектура и три способа сборки.</p>
 
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">Не путай с другим сценарием</span>
+      <p>Есть похожая, но другая задача: «разместить сам Claude Code в Telegram чтобы общаться с ним из чата на телефоне». Это твой личный ассистент-разработчик в мессенджере, не продукт для клиентов. Собирается за час-полтора, разбираем в <a href="11-process.html#telegram-bot">статье 11 про процесс</a>.</p>
+      <p style="margin-top:8px;">Эта статья — про <strong>агент-продукт для клиентов</strong>, у которого есть своя база знаний и воронка. Тут сборка дольше, потому что время уходит не на код, а на содержимое — что именно агент будет говорить.</p>
+    </div>
+
     <h2 id="when-need">Когда вообще нужен такой агент</h2>
 
     <p>Не каждому бизнесу нужен AI-агент в Telegram. Это инструмент под конкретные ситуации.</p>
@@ -230,9 +236,9 @@
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;font-size:12px;color:var(--muted);">Время до MVP</td>
-          <td style="padding:10px;color:#22c55e;">1-2 дня</td>
-          <td style="padding:10px;color:#22c55e;">3-5 дней</td>
-          <td style="padding:10px;color:#f59e0b;">1-2 недели</td>
+          <td style="padding:10px;color:#22c55e;">от 4 часов до 2 дней</td>
+          <td style="padding:10px;color:#22c55e;">от 2 часов до 1 дня</td>
+          <td style="padding:10px;color:#f59e0b;">от 1 до 2 недель</td>
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;font-size:12px;color:var(--muted);">Гибкость</td>
@@ -248,8 +254,8 @@
         </tr>
         <tr>
           <td style="padding:10px;font-size:12px;color:var(--muted);">Когда выбирать</td>
-          <td style="padding:10px;">MVP за выходные, не хочешь разбираться в коде</td>
-          <td style="padding:10px;">Уже работаешь в Claude Code, хочешь больше контроля</td>
+          <td style="padding:10px;">Не хочешь работать в VS Code, любишь визуальные конструкторы</td>
+          <td style="padding:10px;">Уже работаешь в Claude Code — самый быстрый и гибкий путь</td>
           <td style="padding:10px;">Сложная логика, есть разработчик, проект на годы</td>
         </tr>
       </tbody>
@@ -275,29 +281,70 @@
 Перед написанием кода — задай мне уточняющие вопросы.</pre>
     </div>
 
-    <p>Ключевая фраза «задай мне уточняющие вопросы». Без неё Claude начнёт писать первый попавшийся вариант, и потом всё переделывать. Дай ему 5-10 минут на вопросы про архитектуру, токены, хостинг — это сэкономит дни доработок.</p>
+    <p>Ключевая фраза «задай мне уточняющие вопросы». Без неё Claude начнёт писать первый попавшийся вариант, и потом всё переделывать. Дай ему 5 минут на вопросы про архитектуру, токены, хостинг — это сэкономит часы доработок.</p>
 
-    <h2 id="mvp-steps">Путь к MVP за неделю</h2>
+    <h2 id="mvp-steps">Путь к рабочему MVP</h2>
 
-    <p>Реалистичный план для одиночки, который умеет вайбкодить:</p>
+    <p>Главное что нужно понять про сроки: <strong>сама сборка кода занимает часы, не дни</strong>. Время съедают две вещи — содержательная база знаний и тонкая настройка промпта. Если ты собираешь агента продавать конкретный продукт — без хорошей базы он будет нести чушь, и тут полдня-день надо честно вложить.</p>
 
-    <p style="font-size:17px;font-weight:600;margin:24px 0 6px;">День 1: База знаний</p>
-    <p style="margin:0 0 16px;">Сядь и напиши 10-15 md-файлов о своём продукте, ответах на возражения, кейсах. Это самая важная часть — без хорошей базы агент будет нести чушь, какой бы умной ни была модель.</p>
+    <table style="width:100%;border-collapse:collapse;font-size:14px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Этап</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Время</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делаешь</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Telegram-бот в @BotFather</td>
+          <td style="padding:10px;color:#22c55e;">5 мин</td>
+          <td style="padding:10px;">Команда <code>/newbot</code> → имя → получаешь токен</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Сборка кода через Claude Code</td>
+          <td style="padding:10px;color:#22c55e;">30-60 мин</td>
+          <td style="padding:10px;">Промпт сборки + уточняющие вопросы → Claude пишет SDK + Telegram + retrieval</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">База знаний — минимальная</td>
+          <td style="padding:10px;color:#f59e0b;">2-4 часа</td>
+          <td style="padding:10px;">3-5 md-файлов: продукт, прайс, типовые вопросы, возражения, кейсы</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">База знаний — качественная</td>
+          <td style="padding:10px;color:#f59e0b;">+ 4-8 часов</td>
+          <td style="padding:10px;">Расписать варианты диалога, отшлифовать ответы, добавить кейсы</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Системный промпт + воронка</td>
+          <td style="padding:10px;color:#22c55e;">30-60 мин</td>
+          <td style="padding:10px;">Кто агент, какая воронка, что говорить, чего нельзя</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Тест на себе</td>
+          <td style="padding:10px;color:#22c55e;">1-2 часа</td>
+          <td style="padding:10px;">10-20 диалогов как клиент, отлавливаешь странности, донастраиваешь</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;">Деплой на VPS</td>
+          <td style="padding:10px;color:#22c55e;">1-2 часа</td>
+          <td style="padding:10px;">VPS за $5-20/мес, перенос проекта, запуск через pm2 или systemd</td>
+        </tr>
+      </tbody>
+    </table>
 
-    <p style="font-size:17px;font-weight:600;margin:0 0 6px;">День 2: Системный промпт и воронка</p>
-    <p style="margin:0 0 16px;">Опиши кто агент, какие шаги воронки, что говорить, что запрещено. Прогони на себе: представь себя клиентом и проверь логично ли это.</p>
+    <p>Получается: <strong>код + деплой ≈ 4-6 часов</strong>. <strong>База знаний ≈ от 2 часов (минимум) до целого дня (качественная)</strong>. Итого реалистично за вечер собрать «можно потрогать» MVP, за день-два — версию которую можно показать первому клиенту.</p>
 
-    <p style="font-size:17px;font-weight:600;margin:0 0 6px;">День 3: Telegram-бот скелет</p>
-    <p style="margin:0 0 16px;">Через @BotFather получи токен. Через Claude Code сгенерируй базовый бот, который пока просто отвечает «Привет». Поставь на свой компьютер и убедись что работает.</p>
+    <h3 id="key-rule" style="font-size:18px;margin:28px 0 12px;">Главное правило — не экономь на базе знаний</h3>
 
-    <p style="font-size:17px;font-weight:600;margin:0 0 6px;">День 4: Подключение Claude Agent SDK</p>
-    <p style="margin:0 0 16px;">Подключи модель, retrieval из базы, системный промпт. Бот начинает осмысленно отвечать. Тестируй на разных вопросах.</p>
+    <p>Самая частая ошибка: «давай сначала соберу код, потом наполню базу». Получается агент с кодом за час, который три недели «доучивается». Лучше наоборот — сначала текстовая база (даже без кода), которую ты сам можешь использовать как справочник, потом сборка кода занимает час.</p>
 
-    <p style="font-size:17px;font-weight:600;margin:0 0 6px;">День 5-6: Тестирование и доработка</p>
-    <p style="margin:0 0 16px;">Прогоняешь 10-20 типичных диалогов, отлавливаешь странные ответы, докручиваешь промпт и базу. Это итерационная работа.</p>
+    <p>80% качества агента = качество базы знаний и системного промпта. Не технология, не модель, не оркестратор. Если эти две вещи слабые — никакой Opus не спасёт.</p>
 
-    <p style="font-size:17px;font-weight:600;margin:0 0 6px;">День 7: Деплой на VPS</p>
-    <p style="margin:0 0 16px;">Поднимаешь VPS за $5-20/мес (DigitalOcean, Hetzner, Timeweb), переносишь бот туда. Теперь он работает 24/7 без твоего ноутбука. Запускаешь на тестовом трафике.</p>
+    <h3 id="when-stop" style="font-size:18px;margin:28px 0 12px;">Когда останавливаться</h3>
+
+    <p>Идеала не будет — это нормально. Останавливайся когда агент стабильно справляется с типовыми сценариями (примерно 80% диалогов без помощи человека). Дальше доработки делаются на живом трафике — по реальным диалогам ты увидишь чего не хватает в базе и где промпт ведёт мимо.</p>
 
     <h2 id="security">Безопасность и подводные камни</h2>
 
@@ -336,7 +383,8 @@
     <a href="#components">6 компонентов</a>
     <a href="#three-paths">Три способа собрать</a>
     <a href="#path-claude-sdk">Путь через Claude Agent SDK</a>
-    <a href="#mvp-steps">Путь к MVP за неделю</a>
+    <a href="#mvp-steps">Путь к MVP</a>
+    <a href="#key-rule">Не экономь на базе знаний</a>
     <a href="#security">Безопасность</a>
   </aside>
 </div>
