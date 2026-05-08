@@ -8,7 +8,7 @@
   <meta property="og:title" content="Скиллы Claude Code: создать, установить, использовать">
   <meta property="og:description" content="Полный гайд по скиллам: YAML-шапка, структура папки, промпт для создания, каталоги, безопасность.">
   <meta property="og:type" content="article">
-  <link rel="stylesheet" href="../styles.css?v=12">
+  <link rel="stylesheet" href="../styles.css?v=13">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Article","headline":"Скиллы Claude Code","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
   </script>
@@ -306,34 +306,34 @@ disable-model-invocation: false
         <tr style="border-bottom:2px solid var(--ink);">
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Скилл</th>
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
-          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Команда для чата</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Как поставить</th>
         </tr>
       </thead>
       <tbody>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;"><strong>skill-creator</strong></td>
           <td style="padding:10px;">Мета-скилл для создания других скиллов с правильной YAML-шапкой</td>
-          <td style="padding:10px;"><code>/plugin install skill-creator@claude-plugins-official</code></td>
+          <td style="padding:10px;"><code>/plugin install skill-creator@claude-plugins-official</code><button class="copy-inline" onclick="copyInline(this)" title="Скопировать">⧉</button></td>
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;"><strong>frontend-design</strong></td>
           <td style="padding:10px;">Делает UI-компоненты и страницы с продуманной типографикой и стилем</td>
-          <td style="padding:10px;"><code>/plugin install frontend-design@claude-plugins-official</code></td>
+          <td style="padding:10px;"><code>/plugin install frontend-design@claude-plugins-official</code><button class="copy-inline" onclick="copyInline(this)" title="Скопировать">⧉</button></td>
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;"><strong>superpowers</strong></td>
           <td style="padding:10px;">Большая community-библиотека (40k+ ⭐): brainstorm, worktree, планирование, TDD (разработка через тесты), code review</td>
-          <td style="padding:10px;"><code>/plugin install superpowers@claude-plugins-official</code></td>
+          <td style="padding:10px;"><code>/plugin install superpowers@claude-plugins-official</code><button class="copy-inline" onclick="copyInline(this)" title="Скопировать">⧉</button></td>
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;"><strong>code-review</strong></td>
           <td style="padding:10px;">Проверяет код по стандартным критериям (читаемость, безопасность, ошибки)</td>
-          <td style="padding:10px;"><code>/plugin install code-review@claude-plugins-official</code></td>
+          <td style="padding:10px;"><code>/plugin install code-review@claude-plugins-official</code><button class="copy-inline" onclick="copyInline(this)" title="Скопировать">⧉</button></td>
         </tr>
         <tr>
           <td style="padding:10px;"><strong>code-simplifier</strong></td>
           <td style="padding:10px;">Упрощает запутанный код, убирает дублирование</td>
-          <td style="padding:10px;"><code>/plugin install code-simplifier@claude-plugins-official</code></td>
+          <td style="padding:10px;"><code>/plugin install code-simplifier@claude-plugins-official</code><button class="copy-inline" onclick="copyInline(this)" title="Скопировать">⧉</button></td>
         </tr>
       </tbody>
     </table>
@@ -345,7 +345,7 @@ disable-model-invocation: false
         <tr style="border-bottom:2px solid var(--ink);">
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Скилл</th>
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
-          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Источник</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Как поставить</th>
         </tr>
       </thead>
       <tbody>
@@ -374,7 +374,7 @@ disable-model-invocation: false
         <tr style="border-bottom:2px solid var(--ink);">
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Скилл</th>
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
-          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Источник</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Как поставить</th>
         </tr>
       </thead>
       <tbody>
@@ -403,7 +403,7 @@ disable-model-invocation: false
         <tr style="border-bottom:2px solid var(--ink);">
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Скилл</th>
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
-          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Источник</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Как поставить</th>
         </tr>
       </thead>
       <tbody>
@@ -427,7 +427,7 @@ disable-model-invocation: false
         <tr style="border-bottom:2px solid var(--ink);">
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Скилл</th>
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
-          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Источник</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Как поставить</th>
         </tr>
       </thead>
       <tbody>

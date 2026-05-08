@@ -17,6 +17,16 @@ function copyCode(btn) {
   });
 }
 
+function copyInline(btn) {
+  const code = btn.previousElementSibling;
+  if (!code) return;
+  navigator.clipboard.writeText(code.textContent.trim()).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const tocLinks = document.querySelectorAll('.toc a, .sidebar-toc a');
   const headings = document.querySelectorAll('h2[id], h3[id]');
