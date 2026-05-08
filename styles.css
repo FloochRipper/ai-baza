@@ -176,7 +176,17 @@ a { color: inherit; text-decoration: none; }
   position: sticky;
   top: 72px;
   align-self: start;
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+  padding-right: 4px;
 }
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+.sidebar::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
 .sidebar .section-label {
   font-family: var(--mono);
@@ -592,7 +602,17 @@ a { color: inherit; text-decoration: none; }
   position: sticky;
   top: 72px;
   align-self: start;
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+  padding-right: 4px;
 }
+.toc::-webkit-scrollbar { width: 6px; }
+.toc::-webkit-scrollbar-track { background: transparent; }
+.toc::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+.toc::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 .toc h4 {
   font-family: var(--mono);
   font-size: 12px;
