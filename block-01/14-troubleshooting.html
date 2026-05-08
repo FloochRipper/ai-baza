@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Troubleshooting: что делать если сломалось | AI База</title>
+  <meta name="description" content="Известные проблемы Claude Code и VS Code: зависания, серый экран, не загружается история. Проблемы с регистрацией: VPN, номер, оплата.">
+  <meta property="og:title" content="Troubleshooting: что делать если сломалось">
+  <meta property="og:description" content="FAQ по типичным проблемам Claude Code и регистрации. Что делать когда VS Code зависает, оплата не проходит, или Claude перестал отвечать.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../styles.css?v=10">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Troubleshooting: что делать если сломалось","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><span class="mark"></span>AI БАЗА</a>
+  <nav class="site-nav">
+    <a href="../block-00/01-intro.html">Для новичка</a>
+    <a href="01-what-is.html" class="active">Claude Code</a>
+    <a href="#">Контент-система</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="section-label">Раздел</div>
+    <div class="section-title">Claude Code</div>
+    <nav class="sidebar-nav">
+      <a href="00-registration.html"><span class="num">00</span>Регистрация в Claude</a>
+      <a href="01-what-is.html"><span class="num">01</span>Подготовка к работе</a>
+      <a href="02-first-launch.html"><span class="num">02</span>Первый запуск</a>
+      <a href="03-claude-md.html"><span class="num">03</span>Архитектура проекта</a>
+      <a href="04-first-project.html"><span class="num">04</span>Первый проект</a>
+      <a href="05-skills-mcp-hooks.html"><span class="num">05</span>Скиллы, MCP, Hooks</a>
+      <a href="06-github.html"><span class="num">06</span>GitHub</a>
+      <a href="07-deploy.html"><span class="num">07</span>Деплой</a>
+      <a href="08-context-window.html"><span class="num">08</span>Контекстное окно</a>
+      <a href="09-second-brain.html"><span class="num">09</span>Второй мозг</a>
+      <a href="10-subagents.html"><span class="num">10</span>Субагенты</a>
+      <a href="11-process.html"><span class="num">11</span>Процесс</a>
+      <a href="12-agents-types.html"><span class="num">12</span>Виды агентов</a>
+      <a href="13-telegram-agent.html"><span class="num">13</span>Агент в Telegram</a>
+      <a href="14-troubleshooting.html" class="active"><span class="num">14</span>Troubleshooting</a>
+      <a href="15-whats-next.html"><span class="num">15</span>Что дальше</a>
+    </nav>
+  </aside>
+
+  <main class="article">
+    <div class="breadcrumbs">
+      <a href="../index.html">AI База</a> <span>/</span>
+      <a href="01-what-is.html">Claude Code</a> <span>/</span>
+      Troubleshooting
+    </div>
+
+    <div class="article-head">
+      <h1>Troubleshooting: <span class="accent">что делать если сломалось</span></h1>
+    </div>
+
+    <p id="intro">Claude Code — инструмент молодой, активно развивается. Иногда что-то ломается, виснет, не загружается. Это нормальная часть процесса. Здесь — список самых частых проблем и быстрых решений.</p>
+
+    <p>Совет на старте: если что-то идёт не так — не паникуй и не лезь в настройки. В 80% случаев решает <code>Developer: Reload Window</code> (Cmd+Shift+P → набрать → Enter). Это перезапуск VS Code без потери открытых файлов. Универсальная кнопка.</p>
+
+    <h2 id="vscode-problems">Проблемы с VS Code и Claude Code</h2>
+
+    <h3 id="grey-screen" style="font-size:18px;margin:24px 0 12px;">Серый экран или зависание</h3>
+
+    <p><strong>Что видишь:</strong> панель Claude Code стала серой, ничего не отвечает, может крутиться спиннер.</p>
+
+    <p><strong>Причина:</strong> расширение не успевает обработать команду или потеряло связь с серверами Anthropic.</p>
+
+    <p><strong>Решения по порядку:</strong></p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Закрой вкладку Claude Code и открой новую (Cmd+Shift+Escape).</li>
+      <li>Если не помогло — Developer: Reload Window (Cmd+Shift+P → Reload Window).</li>
+      <li>Всё ещё не работает — закрой VS Code полностью, открой заново.</li>
+      <li>Проверь интернет. Если на нестабильной сети — Claude Code часто капризничает.</li>
+    </ol>
+
+    <h3 id="history-not-loading" style="font-size:18px;margin:24px 0 12px;">История диалогов не загружается</h3>
+
+    <p><strong>Что видишь:</strong> нажимаешь иконку часов — пусто, или висит загрузка, или показывает не те разговоры.</p>
+
+    <p><strong>Причина:</strong> локальные данные истории повредились или не подгружаются.</p>
+
+    <p><strong>Решения:</strong></p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Reload Window — обычно достаточно.</li>
+      <li>Если ты в работе и срочно нужно продолжить — скопируй важный контекст из текущего чата в текстовый файл, потом запусти новый чат и вставь.</li>
+      <li>Если история нужна — попробуй переоткрыть папку проекта (File → Close Folder → File → Open Folder).</li>
+    </ol>
+
+    <h3 id="infinite-loading" style="font-size:18px;margin:24px 0 12px;">Бесконечная загрузка ответа</h3>
+
+    <p><strong>Что видишь:</strong> Claude крутит спиннер «думает» уже минут пять, а ответа нет.</p>
+
+    <p><strong>Решения:</strong></p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Проверь интернет — открой любой сайт. Если медленно загружается — проблема не в Claude.</li>
+      <li>Нажми Stop (или ESC) чтобы прервать запрос. Сформулируй короче и попробуй ещё раз.</li>
+      <li>Если задача правда большая — раздели её на несколько маленьких. Claude меньше виснет на коротких запросах.</li>
+      <li>Reload Window если предыдущее не помогло.</li>
+    </ol>
+
+    <h3 id="memory-eat" style="font-size:18px;margin:24px 0 12px;">VS Code ест много памяти, тормозит</h3>
+
+    <p><strong>Что видишь:</strong> через несколько часов работы ноутбук начинает шуметь вентилятором, всё подтормаживает.</p>
+
+    <p><strong>Причина:</strong> длинные сессии, открытые большие файлы, накопленный контекст в нескольких чатах.</p>
+
+    <p><strong>Решения:</strong></p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Используй <code>/compact</code> в текущем чате — освободит контекст.</li>
+      <li>Закрывай неактивные чаты — они тоже жрут память.</li>
+      <li>Раз в день перезапускай VS Code полностью — это очищает накопившийся мусор.</li>
+      <li>Не открывай в одном окне 5 чатов параллельно — лучше пара активных.</li>
+    </ol>
+
+    <h3 id="claude-not-edit" style="font-size:18px;margin:24px 0 12px;">Claude отказывается редактировать файлы</h3>
+
+    <p><strong>Что видишь:</strong> просишь сделать правку — Claude отвечает текстом «нужно изменить так-то», но файлы не трогает.</p>
+
+    <p><strong>Причина:</strong> вероятно ты в Plan Mode (он только планирует) или Ask before edits (ждёт подтверждения).</p>
+
+    <p><strong>Решения:</strong></p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Нажми Shift+Tab чтобы переключить режим. Поищи Edit automatically внизу панели.</li>
+      <li>Если режим Edit, но всё равно не редактирует — попроси прямо: «Сделай это сейчас, отредактируй файл». Иногда помогает.</li>
+      <li>Проверь что папка проекта открыта (File → Open Folder), а не отдельный файл.</li>
+    </ol>
+
+    <h2 id="auth-problems">Проблемы с регистрацией и оплатой</h2>
+
+    <h3 id="vpn-fails" style="font-size:18px;margin:24px 0 12px;">VPN включён, но Claude всё равно не открывается</h3>
+
+    <p><strong>Решения по порядку:</strong></p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Проверь страну VPN на 2ip.ru — должна быть США, Великобритания или другая принимаемая.</li>
+      <li>Очисти cookies браузера (он мог запомнить старый IP).</li>
+      <li>Попробуй другой VPN-сервер в той же стране.</li>
+      <li>Открой в режиме инкогнито — иногда расширения мешают.</li>
+      <li>Если совсем не идёт — попробуй мобильное приложение Claude через VPN на телефоне.</li>
+    </ol>
+
+    <h3 id="sms-not-coming" style="font-size:18px;margin:24px 0 12px;">SMS-код не приходит</h3>
+
+    <p><strong>Решения:</strong></p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Подожди 5 минут — иногда задержка.</li>
+      <li>Проверь что страна номера совпадает со страной VPN.</li>
+      <li>Запроси повторную отправку (обычно есть кнопка через минуту).</li>
+      <li>Если виртуальный номер уже использовался для Claude — он не работает повторно. Возьми новый.</li>
+      <li>В крайнем случае — eSIM или Telegram-бот с виртуальной картой и номером в комплекте.</li>
+    </ol>
+
+    <h3 id="payment-fails" style="font-size:18px;margin:24px 0 12px;">Оплата не проходит</h3>
+
+    <p><strong>Решения:</strong></p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Billing Address — должен быть из той же страны что и карта. Если карта американская — адрес из США (можно случайный через генератор).</li>
+      <li>На карте должно быть достаточно средств плюс небольшой запас (Anthropic иногда списывает $1 для проверки).</li>
+      <li>Виртуальная карта может быть заблокирована для подписок — попробуй другую.</li>
+      <li>Проверь что VPN включён и страна совпадает с той с которой регистрировался.</li>
+      <li>Если ничего не помогает — посредники типа @platipomiru_bot или @WantToPayBot часто справляются.</li>
+    </ol>
+
+    <h3 id="account-blocked" style="font-size:18px;margin:24px 0 12px;">Аккаунт заблокировали</h3>
+
+    <p><strong>Что произошло:</strong> при входе пишет «account suspended» или похожее.</p>
+
+    <p><strong>Решения:</strong></p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Не паникуй и не создавай новый аккаунт сразу — это может быть автоматическая блокировка из-за смены IP.</li>
+      <li>Напиши в поддержку Anthropic с того же email что регистрировал. Объясни ситуацию (можно через переводчик).</li>
+      <li>Если оплачивал картой — деньги вернут.</li>
+      <li>Если покупал у посредника и аккаунт заблокирован — деньги вернёт только посредник, у которого была история транзакций.</li>
+    </ol>
+
+    <div class="callout warn">
+      <span class="callout-label">Профилактика блокировки</span>
+      <p>Не прыгай между странами VPN во время активной сессии. С какой страны зарегистрировался — с той и работай. Если переехал и нужно сменить — напиши заранее в поддержку.</p>
+    </div>
+
+    <h2 id="claude-code-problems">Claude Code специфичные проблемы</h2>
+
+    <h3 id="bypass-not-saved" style="font-size:18px;margin:24px 0 12px;">Bypass Permissions не сохраняется</h3>
+
+    <p><strong>Что видишь:</strong> включил Bypass, но через час Claude снова спрашивает разрешения.</p>
+
+    <p><strong>Решение:</strong> попроси Claude настроить через файл (промпт из <a href="02-first-launch.html#bypass">статьи 02</a>). Когда настройка в <code>settings.json</code>, она сохраняется навсегда. Через переключатель режима — только на текущую сессию.</p>
+
+    <h3 id="claude-md-ignored" style="font-size:18px;margin:24px 0 12px;">CLAUDE.md не учитывается</h3>
+
+    <p><strong>Что видишь:</strong> прописал правила в CLAUDE.md, но Claude игнорирует.</p>
+
+    <p><strong>Возможные причины:</strong></p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>CLAUDE.md лежит не в корне проекта, а в подпапке. Должен быть в самом верхнем уровне.</li>
+      <li>Файл стал больше 300 строк — тогда правила в конце могут «теряться». Сократи или вынеси в <code>.claude/rules/</code>.</li>
+      <li>Правило сформулировано размыто. «Не делай плохо» — не работает. «NEVER delete files without confirmation» — работает.</li>
+      <li>Открыл проект через File → Open File вместо Open Folder. Тогда контекст папки не подгружается.</li>
+    </ol>
+
+    <h3 id="mcp-not-connecting" style="font-size:18px;margin:24px 0 12px;">MCP-сервер не подключается</h3>
+
+    <p><strong>Решения:</strong></p>
+
+    <ol style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li>Проверь интернет — MCP часто работают через сеть.</li>
+      <li>Попроси Claude показать логи: «Покажи логи последнего подключения MCP-сервера X».</li>
+      <li>Перезапусти Claude Code (Reload Window).</li>
+      <li>Проверь что в <code>settings.json</code> правильные credentials, пути к токенам.</li>
+    </ol>
+
+    <h2 id="prevention">Профилактика — чтобы реже сталкиваться</h2>
+
+    <p>Несколько привычек которые сильно сокращают количество поломок:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Привычка</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что даёт</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Коммитить чаще, не реже раза в час</td>
+          <td style="padding:10px;">При любой поломке — точка возврата свежая, не теряешь полдня работы</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>/clear</code> между задачами</td>
+          <td style="padding:10px;">Контекст не накапливается, Claude не путается</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Раз в день — перезапуск VS Code</td>
+          <td style="padding:10px;">Память освобождается, ничего не лагает</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Не торопись с подтверждениями</td>
+          <td style="padding:10px;">Прочитай что Claude собирается сделать перед Yes — потом не будешь чинить лишнего</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;">Обновляй расширение Claude Code</td>
+          <td style="padding:10px;">Многие баги чинят в новых версиях</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout key">
+      <span class="callout-label">Универсальный план Б</span>
+      <p>Если что-то не работает и не знаешь почему: 1) Reload Window. 2) Не помогло — закрой VS Code полностью и открой заново. 3) Не помогло — git commit того что есть, перезагрузи компьютер. 4) Спроси в чате Claude: «Я сделал X, ожидал Y, получил Z. Что могло пойти не так?»</p>
+    </div>
+
+    <div class="pager">
+      <a class="pager-prev" href="13-telegram-agent.html">
+        <span class="pager-label">← Назад</span>
+        <span class="pager-title">Агент в Telegram</span>
+      </a>
+      <a class="pager-next" href="15-whats-next.html">
+        <span class="pager-label">Дальше →</span>
+        <span class="pager-title">Что дальше</span>
+      </a>
+    </div>
+  </main>
+
+  <aside class="toc">
+    <h4>На этой странице</h4>
+    <a href="#intro">Вступление</a>
+    <a href="#vscode-problems">VS Code и Claude Code</a>
+    <a href="#grey-screen">Серый экран</a>
+    <a href="#history-not-loading">История не загружается</a>
+    <a href="#infinite-loading">Бесконечная загрузка</a>
+    <a href="#memory-eat">Тормозит, ест память</a>
+    <a href="#claude-not-edit">Не редактирует файлы</a>
+    <a href="#auth-problems">Регистрация и оплата</a>
+    <a href="#vpn-fails">VPN не помогает</a>
+    <a href="#sms-not-coming">SMS не приходит</a>
+    <a href="#payment-fails">Оплата не проходит</a>
+    <a href="#account-blocked">Аккаунт заблокировали</a>
+    <a href="#claude-code-problems">Claude Code специфика</a>
+    <a href="#prevention">Профилактика</a>
+  </aside>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Скопировано';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>
