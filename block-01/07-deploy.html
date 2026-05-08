@@ -164,7 +164,7 @@ Vercel требует такие DNS-записи:
 
     <h2 id="netlify">Netlify — альтернатива</h2>
 
-    <p>Netlify работает по той же схеме, что и Vercel: подключаешь GitHub, дальше всё само. Принципиальной разницы для простых сайтов нет — выбирай, что нравится.</p>
+    <p>Netlify работает по той же схеме, что и Vercel: подключаешь GitHub, дальше всё само. По возможностям для простых сайтов — почти идентично. Главная разница в <strong>модели оплаты бесплатного тарифа</strong> — это критично понимать заранее, иначе можно неожиданно получить счёт или отключение сайта.</p>
 
     <p>Netlify немного лучше в нескольких вещах: умеет обрабатывать формы без бэкенда, поддерживает файл <code>_headers</code> для настройки кэша, есть edge-функции (это маленькие программы которые запускаются на серверах рядом с пользователем — для быстрых ответов без полноценного бэкенда). Подключить: netlify.com → New site from Git → выбираешь репозиторий.</p>
 
@@ -178,6 +178,61 @@ Vercel требует такие DNS-записи:
 /styles.css
   Cache-Control: public, max-age=86400</pre>
     </div>
+
+    <h2 id="vercel-vs-netlify">Vercel vs Netlify — главное про тарифы</h2>
+
+    <p>Бесплатные тарифы у обоих платформ работают <strong>принципиально по-разному</strong>. Это не про «у кого больше гигабайт» — это про то что происходит когда ты исчерпаешь лимит.</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:14px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;"></th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Vercel Hobby (бесплатный)</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Netlify Free</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Модель</td>
+          <td style="padding:10px;">Лимиты по конкретным метрикам (трафик, билды)</td>
+          <td style="padding:10px;">Кредиты — общая «валюта», 300 в месяц на Free</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Что включено</td>
+          <td style="padding:10px;">100 GB трафика, 6000 минут билдов, 1M вызовов функций, 100 деплоев в день</td>
+          <td style="padding:10px;">300 кредитов: грубо ≈ 20 production-деплоев или 15 GB трафика, или комбинация</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Что бывает когда лимит кончился</td>
+          <td style="padding:10px;color:#22c55e;">Проект приостанавливается до конца биллингового цикла. <strong>Деньги автоматически НЕ списывают</strong>. Сам решаешь — перейти на Pro ($20/мес) или подождать следующего месяца</td>
+          <td style="padding:10px;color:#f59e0b;">Кредиты заканчиваются — возможно автоматическое включение оплаты (зависит от настроек аккаунта). У Никиты на одном проекте было именно так — кредиты кончились, проект перешёл на платный режим</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Можно ли использовать для бизнеса</td>
+          <td style="padding:10px;color:#ef4444;">Hobby <strong>только для некоммерческих проектов</strong> (по условиям использования). Для коммерческих сайтов — Pro</td>
+          <td style="padding:10px;">Можно</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;font-size:12px;color:var(--muted);">Цена платного тарифа</td>
+          <td style="padding:10px;">Pro — $20/месяц</td>
+          <td style="padding:10px;">Pro — $19/месяц</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">Важно для предпринимателя</span>
+      <p>Если делаешь сайт <strong>для бизнеса</strong> (даже простой лендинг для своих услуг) — формально Vercel Hobby не подходит. Их условия запрещают коммерческое использование на бесплатном тарифе. Либо берёшь Vercel Pro, либо Netlify Free (там нет такого ограничения).</p>
+      <p style="margin-top:8px;">При этом многие предприниматели спокойно живут на Hobby годами — Vercel это не отслеживает массово. Но если внезапно прилетит вопрос — формально они правы. Решай сам по своему уровню риска.</p>
+    </div>
+
+    <h3 id="how-to-choose" style="font-size:18px;margin:28px 0 12px;">Как выбрать на старте</h3>
+
+    <p><strong>Vercel</strong> — если хочешь предсказуемости. Лимит кончился → сайт приостановили → ты сам решаешь что дальше. Никаких сюрпризов в виде неожиданного счёта.</p>
+
+    <p><strong>Netlify</strong> — если нужна форма обратной связи без бэкенда (Vercel такое не умеет на Hobby) или формально коммерческий проект на бесплатном тарифе. Но следи за кредитами в дашборде, чтобы не получить неожиданный счёт.</p>
+
+    <p>Совет: подключи уведомления о состоянии проекта (есть в обоих сервисах) — придёт письмо когда лимит близко к концу. Не игнорь.</p>
 
     <h2 id="github-actions">GitHub Actions — CI/CD без жаргона</h2>
 
@@ -297,6 +352,7 @@ jobs:
     <a href="#vercel-logs">Если деплой провалился</a>
     <a href="#vercel-domain">Свой домен</a>
     <a href="#netlify">Netlify</a>
+    <a href="#vercel-vs-netlify">Vercel vs Netlify — тарифы</a>
     <a href="#github-actions">GitHub Actions</a>
     <a href="#secrets">GitHub Secrets</a>
     <a href="#railway">Railway</a>
