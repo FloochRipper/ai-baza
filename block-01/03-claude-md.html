@@ -582,33 +582,160 @@ ALWAYS ask before deleting any file
 
     <h2 id="settings">settings.json и settings.local.json</h2>
 
-    <p>В папке <code>.claude/</code> могут лежать два файла настроек — важно понимать разницу:</p>
+    <p>Если CLAUDE.md — это инструкция для Claude, то settings.json — это настройки самого приложения Claude Code. Здесь задаётся что ему можно делать, какую модель использовать, как выглядит интерфейс. CLAUDE.md читает Claude, settings.json читает само приложение.</p>
+
+    <p>На самом деле таких файлов четыре, и у каждого своё место:</p>
 
     <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
       <thead>
         <tr style="border-bottom:2px solid var(--ink);">
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Файл</th>
-          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Для чего</th>
-          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Коммитить?</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Где лежит</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Для кого</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">В git?</th>
         </tr>
       </thead>
       <tbody>
         <tr style="border-bottom:1px solid var(--line);">
-          <td style="padding:10px;"><code>settings.json</code></td>
-          <td style="padding:10px;">Общие настройки проекта — разрешения, параметры</td>
-          <td style="padding:10px;color:#22c55e;font-weight:700;">Да</td>
+          <td style="padding:10px;"><code>~/.claude/settings.json</code></td>
+          <td style="padding:10px;">Домашняя папка</td>
+          <td style="padding:10px;">Глобально — все твои проекты</td>
+          <td style="padding:10px;color:var(--muted);">Нет</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>.claude/settings.json</code></td>
+          <td style="padding:10px;">Папка проекта</td>
+          <td style="padding:10px;">Команда — общие правила проекта</td>
+          <td style="padding:10px;color:#22c55e;font-weight:600;">Да</td>
         </tr>
         <tr>
-          <td style="padding:10px;"><code>settings.local.json</code></td>
-          <td style="padding:10px;">Личные настройки твоей машины — bypass permissions и т.д.</td>
-          <td style="padding:10px;color:#ef4444;font-weight:700;">Нет — в .gitignore</td>
+          <td style="padding:10px;"><code>.claude/settings.local.json</code></td>
+          <td style="padding:10px;">Папка проекта</td>
+          <td style="padding:10px;">Только ты — личные переопределения</td>
+          <td style="padding:10px;color:#ef4444;font-weight:600;">Нет — в .gitignore</td>
         </tr>
       </tbody>
     </table>
 
-    <p>Claude Code при первом запуске сам добавляет <code>settings.local.json</code> в <code>.gitignore</code> — так что личные настройки случайно не попадут в репозиторий.</p>
+    <p>Приоритет работает сверху вниз: personal local > проектный > глобальный. Но есть важный нюанс — списки разрешений не заменяют друг друга, а объединяются. Если в глобальном разрешён <code>git status</code>, а в проектном добавлен <code>npm run test</code> — работают оба.</p>
+
+    <p>Файлы не создаются автоматически — ты создаёшь их сам когда нужно что-то настроить. Единственное исключение: когда в интерфейсе нажимаешь "Yes, don't ask again" на какую-то команду — Claude Code сам добавляет это разрешение в <code>settings.local.json</code>.</p>
 
     <p style="font-size:14px;color:var(--muted);margin-top:6px;">Что такое коммит и пуш — разбираем в статье <a href="06-github.html#commit-push">GitHub →</a></p>
+
+    <h2 id="permissions">Permissions — главная настройка</h2>
+
+    <p>Самое важное что живёт в settings.json — это permissions, разрешения. Они определяют что Claude Code может делать без вопросов, что должен спрашивать, а что запрещено вообще.</p>
+
+    <p>Три типа правил: <code>allow</code> — разрешить без вопросов, <code>deny</code> — запретить всегда, <code>ask</code> — спрашивать каждый раз. При конфликте deny всегда побеждает — никакое другое правило его не перекроет.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Структура permissions</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>{
+  "permissions": {
+    "allow": ["Bash(git status)", "Bash(npm run *)"],
+    "deny":  ["Bash(curl *)", "Read(./.env)"],
+    "ask":   ["Bash(git push *)"]
+  }
+}</pre>
+    </div>
+
+    <p>Синтаксис правил: имя инструмента и в скобках — спецификатор. Звёздочка <code>*</code> работает как маска. <code>Bash(npm run *)</code> разрешает любую команду начинающуюся с <code>npm run </code>. Пробел перед звёздочкой важен: <code>Bash(ls *)</code> разрешит <code>ls -la</code>, но не <code>lsof</code>.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Примеры правил</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>// Bash — команды терминала
+"Bash(npm run build)"       — точная команда
+"Bash(git * main)"          — любой git-команде с main
+"Bash(* --version)"         — любая команда с флагом --version
+
+// Файлы
+"Read(~/.zshrc)"            — конкретный файл из домашней папки
+"Read(./.env)"              — .env в текущем проекте
+"Edit(/src/**/*.ts)"        — любой .ts файл внутри src/
+
+// Веб
+"WebFetch(domain:example.com)"   — все запросы к домену</pre>
+    </div>
+
+    <div class="callout warn">
+      <span class="callout-label">Составные команды</span>
+      <p>Разрешение на <code>Bash(safe-cmd *)</code> не даёт разрешение на <code>safe-cmd && другая-команда</code>. Символы <code>&&</code>, <code>||</code>, <code>;</code>, <code>|</code> разбивают команду на части — каждая часть проверяется отдельно.</p>
+    </div>
+
+    <h2 id="settings-what-else">Что ещё можно настроить</h2>
+
+    <p>Помимо разрешений в settings.json живут другие настройки. Вот практически полезные:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Параметр</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Значения</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>model</code></td>
+          <td style="padding:10px;">Какую модель использовать по умолчанию</td>
+          <td style="padding:10px;font-size:13px;color:var(--muted);">"claude-sonnet-4-6"</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>editorMode</code></td>
+          <td style="padding:10px;">Режим ввода в терминале</td>
+          <td style="padding:10px;font-size:13px;color:var(--muted);">"normal" или "vim"</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>autoMemoryEnabled</code></td>
+          <td style="padding:10px;">Включить / выключить AutoMemory</td>
+          <td style="padding:10px;font-size:13px;color:var(--muted);">true / false</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>env</code></td>
+          <td style="padding:10px;">Переменные окружения для всех сессий</td>
+          <td style="padding:10px;font-size:13px;color:var(--muted);">{ "KEY": "value" }</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><code>additionalDirectories</code></td>
+          <td style="padding:10px;">Открыть доступ к папкам вне проекта</td>
+          <td style="padding:10px;font-size:13px;color:var(--muted);">["/path/to/folder"]</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Реальный пример: settings.json для командного проекта — разрешить стандартные команды, заблокировать опасные, и настройки проверить через <code>/status</code> прямо в чате.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ .claude/settings.json — пример для проекта</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>{
+  "permissions": {
+    "allow": [
+      "Bash(npm run lint)",
+      "Bash(npm run test *)",
+      "Bash(git status)",
+      "Bash(git log *)",
+      "Bash(git diff *)"
+    ],
+    "deny": [
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Read(./.env)",
+      "Read(./secrets/**)"
+    ]
+  }
+}</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ ~/.claude/settings.json — глобальный (все проекты)</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>{
+  "autoMemoryEnabled": true,
+  "permissions": {
+    "deny": ["Bash(rm -rf *)"]
+  }
+}</pre>
+    </div>
 
     <div class="callout key">
       <span class="callout-label">Итого</span>
@@ -645,6 +772,8 @@ ALWAYS ask before deleting any file
     <a href="#memory">CLAUDE.md vs MEMORY.md</a>
     <a href="#automemory">AutoMemory</a>
     <a href="#settings">settings.json</a>
+    <a href="#permissions">Permissions</a>
+    <a href="#settings-what-else">Что ещё настроить</a>
   </aside>
 </div>
 
