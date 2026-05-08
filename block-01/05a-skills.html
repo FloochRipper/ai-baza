@@ -288,6 +288,12 @@ disable-model-invocation: false
 
     <p>Самые полезные готовые скиллы из официального маркетплейса и проверенных репозиториев. Категоризованы по типу задач — ставь только то что реально нужно тебе.</p>
 
+    <div class="callout analogy" style="margin:16px 0;">
+      <span class="callout-label">Как ставить</span>
+      <p>Команды вида <code>/plugin install ...</code> в таблицах ниже — это <strong>команды для самого Claude Code</strong>. Копируешь команду, вставляешь прямо в чат с Claude Code, нажимаешь Enter — Claude скачивает и подключает скилл из официального маркетплейса. Альтернативный путь — открыть меню <code>/plugin</code> → вкладка Discover → найти нужное → Install. Подробно про маркетплейс — в <a href="05d-plugins.html">статье 05d</a>.</p>
+      <p style="margin-top:8px;">Для скиллов из GitHub-репозиториев (не из маркетплейса) ставится по-другому: открываешь репозиторий по ссылке, копируешь файл <code>SKILL.md</code> и кладёшь в свою папку <code>~/.claude/skills/имя-скилла/</code>. Или ещё проще — попроси Claude установить: «Установи мне скилл с github.com/автор/репо».</p>
+    </div>
+
     <h3 id="rec-everyone" style="font-size:18px;margin:28px 0 12px;">Полезно почти всем</h3>
 
     <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
@@ -295,7 +301,7 @@ disable-model-invocation: false
         <tr style="border-bottom:2px solid var(--ink);">
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Скилл</th>
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
-          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Где взять</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Команда для чата</th>
         </tr>
       </thead>
       <tbody>
