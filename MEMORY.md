@@ -38,6 +38,9 @@
 ## Рабочий процесс со мной
 - [Деплой после каждой партии правок](memory/feedback_deploy_workflow.md) — git commit + push в main, Netlify подхватывает сам
 
+## Триггеры на реструктуризацию (предложить когда наступит момент)
+- [lifehacks.html → отдельные страницы по категориям при 30+ пунктах](../../../.claude/projects/-Users-mac-Documents-Projects-baza-znaniy/memory/project_lifehacks_restructure.md) — SEO-выгоднее, но сейчас рано (тонкие страницы)
+
 ## Референсы
 - Claude-Code-Starter-Kit.html — эталон формата (10 блоков, промпты внутри)
 - mavgpt.ai — модель Resource Hub, единая точка входа
