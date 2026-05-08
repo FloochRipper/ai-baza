@@ -265,6 +265,8 @@ claude</pre>
 
     <p>Если нужно чтобы агент работал ночью без тебя — выбирай этот путь. Claude Code ставится на удалённый сервер (VPS), к нему подключается Telegram-бот, ты пишешь боту команды как обычному собеседнику, агент их выполняет.</p>
 
+    <p style="font-size:14px;color:var(--muted);margin-top:6px;"><strong>VPS</strong> (Virtual Private Server) — это «компьютер в облаке», всегда включён и доступен через интернет. Арендуешь за $5–20 в месяц, ставишь туда программы — они работают 24/7 даже когда твой ноутбук выключен. <strong>BotFather</strong> — официальный бот в Telegram через которого создают других ботов: пишешь ему команду <code>/newbot</code>, придумываешь имя, получаешь специальный пароль («токен бота»). Этот «токен бота» ≠ токены текста из <a href="08-context-window.html">статьи 08</a> — это именно ключ для управления ботом.</p>
+
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Установка Telegram-бота</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
       <pre># 1. В @BotFather: /newbot → получи токен бота

@@ -130,7 +130,7 @@
 
     <h3 style="font-size:18px;margin:28px 0 12px;">2. Retrieval — поиск по базе</h3>
 
-    <p>Механизм который находит нужный кусок базы под вопрос клиента. Два варианта по сложности:</p>
+    <p><strong>Retrieval</strong> (англ. «извлечение») — механизм который находит нужный кусок базы знаний под вопрос клиента. Клиент написал «сколько стоит?» → retrieval достал из базы файл <code>pricing.md</code> → агент сформулировал ответ опираясь на этот файл. Без retrieval агент будет галлюцинировать (придумывать) — особенно про цены и факты. Два варианта по сложности:</p>
 
     <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
       <thead>
@@ -141,12 +141,12 @@
       </thead>
       <tbody>
         <tr style="border-bottom:1px solid var(--line);">
-          <td style="padding:10px;"><strong>Простой grep по файлам</strong></td>
-          <td style="padding:10px;">База маленькая (до 50 файлов), хватает поиска по словам. Старт всегда отсюда.</td>
+          <td style="padding:10px;"><strong>Простой поиск по словам</strong> (через <code>grep</code> или похожие утилиты)</td>
+          <td style="padding:10px;">База маленькая (до 50 файлов), хватает поиска по точным совпадениям слов. Старт всегда отсюда.</td>
         </tr>
         <tr>
           <td style="padding:10px;"><strong>Векторная база</strong> (Pinecone, Chroma, Weaviate)</td>
-          <td style="padding:10px;">База большая (сотни+ файлов), нужен семантический поиск (поиск по смыслу, не по словам)</td>
+          <td style="padding:10px;">База большая (сотни+ файлов), нужен семантический поиск — то есть поиск по смыслу, а не по точным словам. Агент находит нужный файл, даже если клиент написал вопрос другими словами. Pinecone/Chroma/Weaviate — конкретные сервисы такого поиска</td>
         </tr>
       </tbody>
     </table>
@@ -180,7 +180,7 @@
 
     <h3 style="font-size:18px;margin:28px 0 12px;">4. Модель (LLM)</h3>
 
-    <p>Кто генерирует ответы. Выбор зависит от сложности задачи и бюджета.</p>
+    <p>Кто генерирует ответы. <strong>LLM</strong> (Large Language Model — большая языковая модель) — это и есть «мозги» агента. Claude, ChatGPT, Gemini — всё это разные LLM. Выбор зависит от сложности задачи и бюджета.</p>
 
     <div class="grid-cards cols-3">
       <div class="grid-card">
@@ -235,7 +235,7 @@
           <td style="padding:10px;font-size:12px;color:var(--muted);">Подход</td>
           <td style="padding:10px;">No-code, собираешь блоками мышкой</td>
           <td style="padding:10px;">Через Claude Code в VS Code, описываешь — Claude пишет код</td>
-          <td style="padding:10px;">Полностью свой код на LangChain или LlamaIndex</td>
+          <td style="padding:10px;">Полностью свой код на LangChain или LlamaIndex (это популярные библиотеки на Python для построения AI-приложений)</td>
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;font-size:12px;color:var(--muted);">Время до MVP</td>
