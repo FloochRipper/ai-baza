@@ -220,18 +220,231 @@ disable-model-invocation: false
 
     <h2 id="where-get">Где брать готовые скиллы</h2>
 
-    <p>Прежде чем писать с нуля — посмотри что уже есть. Три источника:</p>
+    <p>Прежде чем писать с нуля — посмотри что уже есть. Основные источники:</p>
 
     <ul style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
-      <li><strong>skills.sh</strong> — каталог от сообщества. Установка одной командой через <code>npx skills</code></li>
-      <li><strong><code>/plugins</code> внутри Claude Code</strong> — официальный маркетплейс, 100+ скиллов от разных авторов</li>
-      <li><strong>anthropic/skills на GitHub</strong> — официальные скиллы от Anthropic для работы с PDF, Word, Excel, презентациями</li>
-      <li><strong>awesome-claude-code на GitHub</strong> — кураторский список лучших скиллов с описаниями</li>
+      <li><strong><code>/plugins</code> внутри Claude Code</strong> — официальный маркетплейс Anthropic. Там как раз лежат проверенные скиллы (frontend-design, skill-creator, code-review и др.). Подробно про маркетплейс — в <a href="05d-plugins.html">статье 05d</a></li>
+      <li><strong><a href="https://github.com/anthropics/skills" target="_blank" rel="noopener" style="color:var(--accent);">anthropic/skills на GitHub</a></strong> — официальные скиллы от Anthropic: работа с PDF, Word, Excel, презентациями</li>
+      <li><strong><a href="https://github.com/hesreallyhim/awesome-claude-code" target="_blank" rel="noopener" style="color:var(--accent);">awesome-claude-code</a></strong> — курируемый список с описаниями и оценками</li>
+      <li><strong>skills.sh</strong> — каталог от сообщества с установкой через <code>npx skills</code></li>
     </ul>
 
+    <h2 id="not-overload">Главный принцип: не перегружай контекст</h2>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">Это критично</span>
+      <p>Не ставь скиллы «на всякий случай». Каждый установленный скилл занимает место в контексте Claude (хоть и небольшое — только описание). Когда у тебя 50 скиллов, Claude путается какой когда применять, и качество падает у всех.</p>
+      <p style="margin-top:8px;">Лучше 5 скиллов которые ты реально используешь, чем 50 «на всякий случай». Скилл который не сработал ни разу за месяц — удаляй без сожаления.</p>
+    </div>
+
+    <h2 id="my-or-ready">Свой или готовый — что выбрать</h2>
+
+    <p>Перед установкой готового скилла спроси себя: <strong>это про мою специфику или общая задача?</strong></p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Ситуация</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что выбрать</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Универсальная задача (работа с PDF, аудит безопасности, генерация UI)</td>
+          <td style="padding:10px;color:#22c55e;">Готовый скилл из официальных источников</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Твой стиль письма, голос бренда, ответы клиентам твоей школы</td>
+          <td style="padding:10px;color:var(--accent);">Свой скилл — никакой готовый не попадёт в твой стиль</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;">Не уверен есть ли готовый — попроси Claude поискать</td>
+          <td style="padding:10px;">Если найдётся проверенный с высоким рейтингом — ставь, иначе делай свой</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Работа с Claude Code — индивидуальная история. Готовые скиллы хорошо закрывают типовые задачи (PDF, дизайн, тесты), но всё что касается твоего бизнеса, голоса, продукта — собирается под себя. Иначе результат будет «средним по больнице», а не твоим.</p>
+
     <div class="code-block">
-      <div class="code-block-head"><span class="code-title">▸ Терминал — установка и управление</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
-      <pre># Установить набор скиллов из каталога
+      <div class="code-block-head"><span class="code-title">▸ Промпт для поиска подходящего скилла</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Мне нужен скилл для [задача — конкретно, своими словами].
+
+Поищи в:
+- Официальном маркетплейсе Claude (/plugins → Discover)
+- На GitHub в awesome-claude-code
+- На anthropic/skills
+
+Условия:
+- Только активные проекты (свежие коммиты, не старше 6 месяцев)
+- Высокий рейтинг или известный автор
+- Подходит именно под мою задачу, а не «похоже»
+
+Если не нашёл подходящего — скажи прямо «лучше создать свой»,
+и предложи структуру под мою задачу.</pre>
+    </div>
+
+    <h2 id="recommended">Подборка скиллов по задачам</h2>
+
+    <p>Самые полезные готовые скиллы из официального маркетплейса и проверенных репозиториев. Категоризованы по типу задач — ставь только то что реально нужно тебе.</p>
+
+    <h3 id="rec-everyone" style="font-size:18px;margin:28px 0 12px;">Полезно почти всем</h3>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Скилл</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Где взять</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>skill-creator</strong></td>
+          <td style="padding:10px;">Мета-скилл для создания других скиллов с правильной YAML-шапкой</td>
+          <td style="padding:10px;"><code>/plugin install skill-creator@claude-plugins-official</code></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>frontend-design</strong></td>
+          <td style="padding:10px;">Делает UI-компоненты и страницы с продуманной типографикой и стилем</td>
+          <td style="padding:10px;"><code>/plugin install frontend-design@claude-plugins-official</code></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>superpowers</strong></td>
+          <td style="padding:10px;">Большая community-библиотека (40k+ ⭐): brainstorm, worktree, planning, TDD, code review</td>
+          <td style="padding:10px;"><code>/plugin install superpowers@claude-plugins-official</code></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>code-review</strong></td>
+          <td style="padding:10px;">Проверяет код по стандартным критериям (читаемость, безопасность, ошибки)</td>
+          <td style="padding:10px;"><code>/plugin install code-review@claude-plugins-official</code></td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><strong>code-simplifier</strong></td>
+          <td style="padding:10px;">Упрощает запутанный код, убирает дублирование</td>
+          <td style="padding:10px;"><code>/plugin install code-simplifier@claude-plugins-official</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 id="rec-content" style="font-size:18px;margin:28px 0 12px;">Если ведёшь контент / SEO</h3>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Скилл</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Источник</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>Stop-Slop</strong></td>
+          <td style="padding:10px;">Чистит текст от AI-штампов («погружение», «революция», структурные клише). Чтобы текст звучал как живой человек</td>
+          <td style="padding:10px;"><a href="https://github.com/hardikpandya/stop-slop" target="_blank" rel="noopener" style="color:var(--accent);">github.com/hardikpandya/stop-slop</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>SEO Machine</strong></td>
+          <td style="padding:10px;">Длинные SEO-статьи: исследование → структура → текст → оптимизация</td>
+          <td style="padding:10px;"><a href="https://github.com/TheCraigHewitt/seomachine" target="_blank" rel="noopener" style="color:var(--accent);">github.com/TheCraigHewitt/seomachine</a></td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><strong>Marketing Skills</strong></td>
+          <td style="padding:10px;">Набор из 30+ маркетинговых агентов: SEO-аудиты, email, CRO, копирайтинг</td>
+          <td style="padding:10px;"><a href="https://github.com/coreyhaines31/marketingskills" target="_blank" rel="noopener" style="color:var(--accent);">github.com/coreyhaines31/marketingskills</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 id="rec-design" style="font-size:18px;margin:28px 0 12px;">Если делаешь UI / сайты</h3>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Скилл</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Источник</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>UI/UX Pro Max</strong></td>
+          <td style="padding:10px;">База из 50+ UI-стилей, 161 цветовая палитра, 57 шрифтовых пар, 99 UX-правил. «Сделай fintech-дашборд» — само подберёт стиль</td>
+          <td style="padding:10px;"><a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill" target="_blank" rel="noopener" style="color:var(--accent);">github.com/nextlevelbuilder/ui-ux-pro-max-skill</a></td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><strong>Frontend Slides</strong></td>
+          <td style="padding:10px;">Анимированные HTML-презентации, конвертирует PowerPoint в веб-слайды</td>
+          <td style="padding:10px;"><a href="https://github.com/zarazhangrui/frontend-slides" target="_blank" rel="noopener" style="color:var(--accent);">github.com/zarazhangrui/frontend-slides</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 id="rec-business" style="font-size:18px;margin:28px 0 12px;">Если у тебя бизнес и продажи</h3>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Скилл</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Источник</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>Entrepreneur Skills</strong></td>
+          <td style="padding:10px;">24 скилла: маркетинг, продажи, операционка, финансы, лидерство</td>
+          <td style="padding:10px;"><a href="https://github.com/mfwarren/entrepreneur-claude-skills" target="_blank" rel="noopener" style="color:var(--accent);">github.com/mfwarren/entrepreneur-claude-skills</a></td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><strong>AI Sales Team</strong></td>
+          <td style="padding:10px;">Лид-квалификация, персонализированные письма, PDF-отчёты по pipeline</td>
+          <td style="padding:10px;"><a href="https://github.com/zubair-trabzada/ai-sales-team-claude" target="_blank" rel="noopener" style="color:var(--accent);">github.com/zubair-trabzada/ai-sales-team-claude</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 id="rec-dev" style="font-size:18px;margin:28px 0 12px;">Если разрабатываешь сложно</h3>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Скилл</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Источник</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>Trail of Bits Security</strong></td>
+          <td style="padding:10px;">Профессиональный security-аудит кода от уважаемой компании</td>
+          <td style="padding:10px;"><a href="https://github.com/trailofbits/skills" target="_blank" rel="noopener" style="color:var(--accent);">github.com/trailofbits/skills</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><strong>Playwright</strong></td>
+          <td style="padding:10px;">Автоматизация браузера: тесты, проверки, парсинг</td>
+          <td style="padding:10px;"><a href="https://github.com/lackeyjb/playwright-skill" target="_blank" rel="noopener" style="color:var(--accent);">github.com/lackeyjb/playwright-skill</a></td>
+        </tr>
+        <tr>
+          <td style="padding:10px;"><strong>Context Engineering Kit</strong></td>
+          <td style="padding:10px;">Учит Claude писать ответы экономнее по токенам без потери качества</td>
+          <td style="padding:10px;"><a href="https://github.com/NeoLabHQ/context-engineering-kit" target="_blank" rel="noopener" style="color:var(--accent);">github.com/NeoLabHQ/context-engineering-kit</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout key">
+      <span class="callout-label">Стартовый набор для большинства предпринимателей</span>
+      <p>Не пытайся ставить всё сразу. Реалистичный старт: <strong>skill-creator + frontend-design + superpowers</strong>. Если ведёшь контент — добавь <strong>Stop-Slop</strong>. Если строишь продукт — <strong>Entrepreneur Skills</strong>. Дальше добавляй точечно когда столкнёшься с задачей под которую нет скилла.</p>
+    </div>
+
+    <h2 id="install-cmd">Управление скиллами через терминал</h2>
+
+    <p>Если предпочитаешь команды вместо интерфейса:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Терминал</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># Установить набор скиллов из GitHub-репозитория
 npx skills add anthropics/skills -a claude-code
 
 # Посмотреть что установлено
@@ -240,8 +453,6 @@ npx skills ls
 # Обновить все
 npx skills update</pre>
     </div>
-
-    <p>Совет: для большинства задач проще попросить Claude создать скилл с нуля под себя, чем искать готовый. Готовые — для общих сценариев (PDF, презентации, аудит безопасности). Свои — для всего что про твой стиль и твой бизнес.</p>
 
     <h2 id="scope">Глобальные vs проектные</h2>
 
@@ -328,6 +539,10 @@ npx skills update</pre>
     <a href="#advanced-yaml">Расширенная YAML-шапка</a>
     <a href="#create">Как создать свой</a>
     <a href="#where-get">Где брать готовые</a>
+    <a href="#not-overload">Не перегружай контекст</a>
+    <a href="#my-or-ready">Свой или готовый</a>
+    <a href="#recommended">Подборка по задачам</a>
+    <a href="#install-cmd">Управление через терминал</a>
     <a href="#scope">Глобальные vs проектные</a>
     <a href="#security">Безопасность</a>
     <a href="#how-many">Сколько скиллов нужно</a>
