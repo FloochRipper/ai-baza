@@ -41,6 +41,9 @@
 ## Триггеры на реструктуризацию (предложить когда наступит момент)
 - [lifehacks.html → отдельные страницы по категориям при 30+ пунктах](../../../.claude/projects/-Users-mac-Documents-Projects-baza-znaniy/memory/project_lifehacks_restructure.md) — SEO-выгоднее, но сейчас рано (тонкие страницы)
 
+## Отложенные решения (вернуться когда наступит триггер)
+- [AI Knowledge Base от Pantela — внедрять или нет](../../../Documents/Projects/knowledge-base/outputs/2026-05-08-ai-knowledge-base-pantela-vs-current.md) — Python CLI для автоматического сбора YouTube/PDF/HTML в базу знаний. Триггер: когда начнём активно делать контент-завод и пойдёт регулярный поток входящих материалов. Сейчас не внедряем — текущая `knowledge-base/` справляется, дополнительный CLI избыточен.
+
 ## Референсы
 - Claude-Code-Starter-Kit.html — эталон формата (10 блоков, промпты внутри)
 - mavgpt.ai — модель Resource Hub, единая точка входа
