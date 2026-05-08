@@ -270,6 +270,127 @@ Claude Code опишет план: какие файлы создаст, что 
 
     <p>«Остальное не трогай» — это не просьба, это инструкция. Без неё Claude Code честно попытается улучшить всё, что заметил по пути.</p>
 
+    <h2 id="visual-effects">Вау-эффекты и интерактивность</h2>
+
+    <p>Скелет сайта готов — текст, секции, навигация. Дальше начинается то, что отличает обычный сайт от «вау, выглядит как у больших». Анимации появления, плавные переходы, hover-эффекты, мобильное меню. Всё это — отдельной задачей, после того как основа собрана.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт для вау-эффектов</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Посмотри на index.html и добавь вау-эффекты:
+
+1. Анимации появления — каждый блок плавно появляется при прокрутке
+   (fade-in снизу вверх).
+2. Hover-эффекты — карточки приподнимаются при наведении,
+   кнопки меняют цвет с плавным переходом.
+3. Плавная прокрутка — клик по меню скроллит к секции.
+4. Градиентный фон заголовка — анимированный, медленно меняет цвета.
+
+Сделай так, чтобы сайт выглядел дорого и профессионально.
+Остальное не трогай.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт для интерактивности</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Добавь в index.html интерактивные элементы:
+
+1. Кнопка «наверх» — появляется при прокрутке,
+   плавно возвращает к началу.
+2. Форма обратной связи — имя, email, сообщение.
+   При отправке — красивая анимация успеха
+   (реальная отправка не нужна, только визуал).
+3. Счётчики — числа плавно «накручиваются» при появлении на экране.
+4. Мобильное меню — гамбургер-иконка раскрывает меню на телефоне.
+
+Проверь работу на мобильном и десктопе.
+После проверки выдай отчёт что добавил.</pre>
+    </div>
+
+    <p>Не делай это всё одним промптом — анимации одной задачей, интерактив другой. Так Claude меньше путается, и легче откатить если что-то пошло не так.</p>
+
+    <h2 id="screenshots">Скриншоты как контекст</h2>
+
+    <p>Иногда словами объяснить тяжело — проще показать. Claude умеет читать картинки: ошибку из браузера, макет из Figma, скриншот «получилось не так». Скриншот плюс короткое описание — самый быстрый способ объяснить что не нравится.</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Система</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Сделать скриншот</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Вставить в чат</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Mac</td>
+          <td style="padding:10px;"><code>Cmd + Shift + 4</code> — выделить область</td>
+          <td style="padding:10px;"><code>Cmd + V</code> прямо в поле ввода</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;">Windows</td>
+          <td style="padding:10px;"><code>Win + Shift + S</code> — выделить область</td>
+          <td style="padding:10px;"><code>Ctrl + V</code> прямо в поле ввода</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Три ситуации где скриншот незаменим:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Скриншот ошибки</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Вот что показывает браузер. Почему не работает?
+[прикреплён скриншот]</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Скриншот макета</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Вот макет из Figma. Сделай похожую страницу.
+Главное — попасть в общее ощущение, а не пиксель в пиксель.
+[прикреплён скриншот]</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Скриншот «получилось не так»</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Получилось вот так, но мне нужно по-другому.
+Кнопка должна быть справа, а не слева. Текст крупнее.
+[прикреплён скриншот]</pre>
+    </div>
+
+    <h2 id="navigation">Поиск по проекту</h2>
+
+    <p>Когда проект разрастается — десятки файлов и тысячи строк — найти что-то глазами становится тяжело. Claude видит все файлы сразу и может найти быстрее. Несколько готовых промптов на каждый день.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Структура проекта</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Покажи структуру проекта — какие папки и файлы есть в корне,
+что в подпапках. Только список, без содержимого файлов.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Найти файл</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>В каком файле находится секция «Цены»?
+
+или
+
+Найди где определена функция calculateTotal.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Найти упоминания</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Покажи все места где упоминается слово «диагностика».
+
+или
+
+Найди все места где вызывается API /users.</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Объяснить файл</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Прочитай файл styles.css и объясни простыми словами
+что там происходит. Какие секции, что они делают.</pre>
+    </div>
+
+    <p>Эти промпты — не «команды», а обычные предложения. Можешь говорить любыми словами, Claude поймёт.</p>
+
     <h2 id="when-wrong">Когда что-то пошло не так</h2>
 
     <p>Бывает: попросил одно, получил другое, и файлы уже изменены. Без паники — есть два инструмента.</p>
@@ -303,6 +424,9 @@ Claude Code опишет план: какие файлы создаст, что 
     <a href="#critique">Критика — три эксперта</a>
     <a href="#plan-mode">Plan Mode</a>
     <a href="#give-tasks">Как давать задачи</a>
+    <a href="#visual-effects">Вау-эффекты</a>
+    <a href="#screenshots">Скриншоты как контекст</a>
+    <a href="#navigation">Поиск по проекту</a>
     <a href="#one-task-one-dialog">Одна задача = один диалог</a>
     <a href="#iterations">Итерации и правки</a>
     <a href="#when-wrong">Когда что-то пошло не так</a>
