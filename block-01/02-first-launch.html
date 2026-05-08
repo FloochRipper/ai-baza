@@ -8,7 +8,7 @@
   <meta property="og:title" content="Первый запуск — рабочее место">
   <meta property="og:description" content="Как настроить VS Code и Claude Code с нуля, что такое Bypass Permissions и команды которые нужны в первую очередь.">
   <meta property="og:type" content="article">
-  <link rel="stylesheet" href="../styles.css?v=10">
+  <link rel="stylesheet" href="../styles.css?v=11">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Article","headline":"Первый запуск — рабочее место","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
   </script>
@@ -171,6 +171,8 @@ force-push в гит, удаление веток, чтение секретны
 
     <p>Claude создал HTML-страницу или сайт — где её посмотреть? Двойной клик по файлу <code>index.html</code> работает только для самых простых случаев. Для всего остального нужен локальный сервер — программа, которая показывает твой сайт в браузере как настоящий, по адресу <code>localhost:8080</code> или похожему.</p>
 
+    <p style="font-size:14px;color:var(--muted);margin-top:6px;"><strong>localhost</strong> — это твой собственный компьютер выступает в роли сервера. <strong>8080</strong> — это «номер двери» (порт), через которую браузер обращается к серверу. То есть <code>localhost:8080</code> — это «открой сервер на моём компьютере на двери 8080». В интернет это пока не выложено — только ты видишь.</p>
+
     <p>Чтобы не разбираться с командами вручную — попроси Claude:</p>
 
     <div class="code-block">
@@ -190,7 +192,7 @@ force-push в гит, удаление веток, чтение секретны
 Network: http://192.168.1.100:8080/</pre>
     </div>
 
-    <p>Открываешь <code>localhost:8080</code> в браузере — видишь свой сайт. Меняешь файл — сайт обновляется сам, без F5 (это называется hot reload, работает почти везде).</p>
+    <p>Открываешь <code>localhost:8080</code> в браузере — видишь свой сайт. Меняешь файл — сайт обновляется сам, без нажатия F5. Это называется <strong>hot reload</strong> («горячая перезагрузка») — работает почти во всех современных проектах. Очень удобно: правишь текст, переключаешься в браузер, и уже видишь новую версию.</p>
 
     <h3 id="mobile-preview" style="font-size:18px;margin:28px 0 12px;">Посмотреть на телефоне</h3>
 

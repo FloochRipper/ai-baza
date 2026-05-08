@@ -8,7 +8,7 @@
   <meta property="og:title" content="Архитектура проекта">
   <meta property="og:description" content="Четыре файла проекта, CLAUDE.md, PLAN.md — как один раз настроить и больше не объяснять с нуля.">
   <meta property="og:type" content="article">
-  <link rel="stylesheet" href="../styles.css?v=10">
+  <link rel="stylesheet" href="../styles.css?v=11">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Article","headline":"Архитектура проекта","author":{"@type":"Person","name":"Никита Шлык"},"publisher":{"@type":"Organization","name":"AI База"}}
   </script>
@@ -742,7 +742,7 @@ ALWAYS ask before deleting any file
 }</pre>
     </div>
 
-    <p>Синтаксис правил: имя инструмента и в скобках — спецификатор. Звёздочка <code>*</code> работает как маска. <code>Bash(npm run *)</code> разрешает любую команду начинающуюся с <code>npm run </code>. Пробел перед звёздочкой важен: <code>Bash(ls *)</code> разрешит <code>ls -la</code>, но не <code>lsof</code>.</p>
+    <p>Синтаксис правил: имя инструмента и в скобках — спецификатор. Звёздочка <code>*</code> работает как «подстановочный знак» — то есть «что угодно вместо звёздочки». <code>Bash(npm run *)</code> разрешает любую команду начинающуюся с <code>npm run </code> — например <code>npm run build</code>, <code>npm run test</code>, <code>npm run dev</code>. Пробел перед звёздочкой важен: <code>Bash(ls *)</code> разрешит <code>ls -la</code> (потому что есть пробел после <code>ls</code>), но не <code>lsof</code> (это другое слово, без пробела).</p>
 
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Примеры правил</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
