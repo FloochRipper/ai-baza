@@ -535,7 +535,7 @@ ALWAYS ask before deleting any file
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;font-size:13px;color:var(--muted);">Лимит</td>
           <td style="padding:10px;">60–100 строк идеально</td>
-          <td style="padding:10px;">200 строк — всё что длиннее молча обрезается</td>
+          <td style="padding:10px;">Первые 200 строк (или 25KB) — остальное не грузится в контекст</td>
         </tr>
         <tr>
           <td style="padding:10px;font-size:13px;color:var(--muted);">Структура</td>
@@ -577,7 +577,7 @@ ALWAYS ask before deleting any file
 
     <div class="callout warn">
       <span class="callout-label">Лимит 200 строк</span>
-      <p>MEMORY.md молча обрезается после 200 строк — без предупреждения. Если набралось много, Claude просто не видит что там внизу. Поэтому регулярная чистка — не гигиена, а необходимость.</p>
+      <p>При старте сессии Claude загружает только первые 200 строк MEMORY.md (или первые 25KB — что меньше). Файл остаётся целым, но всё что ниже этой отметки — в контекст не попадает. Без предупреждения. Поэтому регулярная чистка — не гигиена, а необходимость.</p>
     </div>
 
     <h2 id="settings">settings.json и settings.local.json</h2>
