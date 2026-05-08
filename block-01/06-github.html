@@ -322,9 +322,18 @@ build/
       <p>Представь что у тебя одна квартира, и все вещи в ней. Если хочешь устроить второй ремонт параллельно — некуда. Worktree — это как снять вторую квартиру по соседству для второго ремонта. Хозяин (репозиторий) тот же, но это две физически разных квартиры. Каждый ремонт идёт независимо, потом результаты можно слить.</p>
     </div>
 
-    <h3 style="font-size:18px;margin:28px 0 12px;">Как пользоваться (без чтения документации)</h3>
+    <h3 style="font-size:18px;margin:28px 0 12px;">Как пользоваться</h3>
 
-    <p>Самый простой путь — попросить Claude. Он сам выполнит нужные команды:</p>
+    <p>Самый простой путь — slash-команда прямо в чате Claude Code. Если у тебя установлен скилл/плагин <code>worktree</code> (он есть в плагине superpowers и устанавливается одной командой — см. <a href="05a-skills.html">статью 05a</a>):</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Slash-команда в чате Claude</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>/worktree имя-задачи</pre>
+    </div>
+
+    <p>Claude сам создаст папку, ветку, переключит сессию в новый worktree — за пару секунд без ручных команд git. Это самый удобный способ, рекомендую начинать с него.</p>
+
+    <p>Альтернатива №1 — попросить Claude обычными словами (если скилла нет, но ставить не хочется):</p>
 
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Промпт для создания worktree</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -338,10 +347,17 @@ build/
 оставь как есть.</pre>
     </div>
 
-    <p>Что Claude сделает под капотом (если интересно):</p>
+    <p>Альтернатива №2 — встроенный флаг при запуске Claude Code из терминала. Запускаешь Claude уже сразу в новом worktree:</p>
 
     <div class="code-block">
-      <div class="code-block-head"><span class="code-title">▸ Команды git под капотом</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <div class="code-block-head"><span class="code-title">▸ Флаг при запуске</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>claude --worktree имя-задачи</pre>
+    </div>
+
+    <p>Если интересно что происходит «под капотом» — Claude (или флаг) в итоге выполняет такие git-команды:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Чистый git без скиллов и флагов</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
       <pre># Создать новую папку рядом с проектом (../) с новой веткой внутри
 git worktree add ../my-project-feature feature/имя-задачи
 
