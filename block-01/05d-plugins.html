@@ -264,7 +264,7 @@ mkdir my-first-plugin/.claude-plugin</pre>
     </div>
 
     <p style="font-size:17px;font-weight:600;margin:0 0 6px;">2. Создай манифест</p>
-    <p style="margin:0 0 8px;">Файл <code>my-first-plugin/.claude-plugin/plugin.json</code>:</p>
+    <p style="margin:0 0 8px;"><strong>Манифест</strong> — это файл с «паспортом» плагина: имя, описание, автор, версия. Без него Claude не поймёт что это вообще за папка. Файл должен называться ровно <code>plugin.json</code> и лежать в подпапке <code>.claude-plugin/</code>:</p>
 
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ plugin.json</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -278,7 +278,7 @@ mkdir my-first-plugin/.claude-plugin</pre>
 }</pre>
     </div>
 
-    <p style="font-size:14px;color:var(--muted);margin-top:6px;">Поле <code>name</code> станет namespace для скиллов: <code>/my-first-plugin:hello</code>.</p>
+    <p style="font-size:14px;color:var(--muted);margin-top:6px;">Поле <code>name</code> станет «префиксом» для всех скиллов внутри плагина — это и называется <em>namespace</em> (пространство имён). Если в плагине <code>my-first-plugin</code> есть скилл <code>hello</code>, он будет вызываться как <code>/my-first-plugin:hello</code>. Это нужно чтобы скиллы из разных плагинов не конфликтовали — два разных автора могут назвать свои скиллы одинаково «hello», но префикс плагина их разведёт.</p>
 
     <p style="font-size:17px;font-weight:600;margin:16px 0 6px;">3. Положи внутрь скилл</p>
 
