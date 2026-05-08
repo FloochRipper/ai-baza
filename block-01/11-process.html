@@ -83,11 +83,56 @@
 
     <p>Первые два шага — brainstorm и спецификация — кажутся лишними, когда хочется сразу делать. Но именно они спасают от главной потери времени: построить не то.</p>
 
-    <p>Brainstorm — это разговор с Claude: что именно нужно сделать, зачем, какие ограничения, какие есть варианты подхода. Спецификация — конкретное описание результата: какие функции, как должно вести себя, что точно не нужно. После этого у тебя есть критерии для шага 5 — ты знаешь, по чему проверять.</p>
+    <h3 id="brainstorm-example" style="font-size:18px;margin:28px 0 12px;">Шаг 1: Brainstorm — разговор об идее</h3>
 
-    <h2 id="plan-mode-first">Plan Mode — обязательный первый шаг</h2>
+    <p>Brainstorm — это не ритуал, это обычный разговор с Claude. Не «сделай мне это», а «давай обсудим что именно нам нужно». Claude задаёт вопросы — ты отвечаешь — Claude уточняет — ты решаешь.</p>
 
-    <p>Перед тем как написать первую строчку кода — включи Plan Mode. Нажимаешь Shift+Tab, описываешь задачу. Claude показывает полный план: какие файлы создаст, какие изменения внесёт, в какой последовательности.</p>
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт для brainstorm</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Хочу [короткое описание идеи].
+
+Не делай ничего. Давай сначала обсудим:
+- Что именно я хочу получить и зачем?
+- Какие есть варианты как это сделать?
+- Что может пойти не так?
+- Что я мог упустить?
+
+Задавай вопросы один за другим, как нормальный разговор.
+Не предлагай решение пока я не отвечу на твои вопросы.</pre>
+    </div>
+
+    <p>Ключевая фраза — «не делай ничего». Без неё Claude по привычке начнёт сразу писать код. Ты тратишь токены на код, а потом всё равно переделываешь — потому что в процессе brainstorm понимаешь, что нужно было совсем другое.</p>
+
+    <h3 id="spec-example" style="font-size:18px;margin:28px 0 12px;">Шаг 2: Спецификация — конкретный документ</h3>
+
+    <p>После brainstorm — собрать в файл что именно строим. Это не «бриф проекта» (он шире, про продукт целиком), а спецификация конкретной фичи — что именно делаем сейчас.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт для спецификации</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>На основе нашего обсуждения — собери файл spec.md со спецификацией:
+
+## Что делаем
+[Одна фраза]
+
+## Поведение
+- Что происходит в обычном случае
+- Что происходит при ошибках
+- Что происходит на границах (пустой ввод, нет интернета, и т.д.)
+
+## Чего НЕ будет
+- Что сознательно не делаем сейчас
+
+## Критерии готовности
+- Конкретные пункты по которым проверим что задача сделана</pre>
+    </div>
+
+    <p>Этот файл потом — твой чек-лист для шага 5 (Review). Без него «готово или нет» — это интуиция. С ним — конкретные пункты, которые можно проверить руками.</p>
+
+    <h2 id="plan-mode-first">Plan Mode — ключевой шаг (шаг 3)</h2>
+
+    <p>В цикле выше Plan Mode — шаг 3, после brainstorm и спецификации. Но это самый важный момент перехода: от «что хотим» к «как сделаем». Если пропустить — Claude может пойти не туда даже при идеальной спецификации.</p>
+
+    <p>Включаешь Plan Mode (Shift+Tab), описываешь задачу. Claude показывает полный план: какие файлы создаст, какие изменения внесёт, в какой последовательности.</p>
 
     <figure style="border:2px dashed #333;border-radius:6px;padding:32px;text-align:center;color:#555;font-size:13px;margin:20px 0;">[Скриншот: Plan Mode — вывод плана с шагами до изменения файлов]</figure>
 
@@ -110,6 +155,28 @@
 
     <p>Когда что-то не работает, я прошу Claude так: «Найди корневую причину этой ошибки, не просто исправь симптом». После фикса — «как убедиться что это не повторится?». Два вопроса, которые превращают отладку в обучение.</p>
 
+    <h3 id="debug-example" style="font-size:18px;margin:28px 0 12px;">Пример сессии отладки</h3>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Полный диалог</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Я:     Кнопка «Записаться» не работает. Клик не срабатывает.
+       Найди корневую причину, не просто исправь симптом.
+
+Claude: [находит причину] Проблема в том, что обработчик кликов
+        привязан до создания DOM. Скрипт грузится в head без defer,
+        и к моменту выполнения кнопки ещё нет.
+
+Я:     Хорошо. Почини, и объясни как убедиться что это не повторится
+       в других местах.
+
+Claude: [чинит] Добавил defer к скрипту. Чтобы не повторялось:
+        - все скрипты в head должны иметь defer или async
+        - обработчики событий — внутри DOMContentLoaded
+        Добавил эти правила в CLAUDE.md в раздел «Frontend rules».</pre>
+    </div>
+
+    <p>Цикл «причина — фикс — правило в CLAUDE.md» превращает каждый баг в страховку от десятка похожих в будущем.</p>
+
     <h2 id="worktree-parallel">Git Worktree — несколько задач одновременно</h2>
 
     <p>Git Worktree создаёт вторую копию проекта в отдельной папке. Один агент работает над фичей A в одной папке, другой над фичей B в другой — никаких конфликтов, каждый в своей ветке.</p>
@@ -128,27 +195,84 @@ claude</pre>
 
     <h2 id="phone">Claude из телефона</h2>
 
-    <p>Поставил задачу агенту, закрыл ноутбук, уехал. Как следить за прогрессом и давать инструкции с телефона? Два способа.</p>
+    <p>Поставил задачу агенту, закрыл ноутбук, уехал. Как следить за прогрессом и давать инструкции с телефона? Два разных подхода — выбор зависит от того что именно тебе нужно.</p>
 
-    <p>Первый — Remote Control. В Claude Code есть встроенный режим <code>/remote-control</code>, который позволяет управлять активной сессией через приложение Claude на телефоне. Запустил задачу на ноутбуке, закрыл крышку — проверяешь и направляешь с телефона.</p>
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;"></th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Remote Control</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Telegram-бот</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Что это</td>
+          <td style="padding:10px;">Официальный режим от Anthropic — управление активной сессией с телефона</td>
+          <td style="padding:10px;">Свой Telegram-бот, через который пишешь команды агенту</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Когда нужно</td>
+          <td style="padding:10px;">Хочу следить за работающей сессией с телефона</td>
+          <td style="padding:10px;">Хочу чтобы агент работал ночью на сервере без меня</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Где работает</td>
+          <td style="padding:10px;">Только пока ноутбук включён и сессия активна</td>
+          <td style="padding:10px;">На VPS-сервере 24/7, ноутбук можно выключить</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Как настроить</td>
+          <td style="padding:10px;">QR-код, одно нажатие — ничего ставить не нужно</td>
+          <td style="padding:10px;">Нужен VPS, BotFather, MCP-сервер — настраивается раз</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;font-size:13px;color:var(--muted);">Сложность</td>
+          <td style="padding:10px;color:#22c55e;">Простая</td>
+          <td style="padding:10px;color:#f59e0b;">Средняя</td>
+        </tr>
+      </tbody>
+    </table>
 
-    <p>Второй — Telegram. Подключаешь Claude Code к своему Telegram-боту через MCP, и дальше общаешься с агентом прямо в мессенджере:</p>
+    <h3 id="remote-control" style="font-size:18px;margin:28px 0 12px;">Remote Control — самый простой способ</h3>
+
+    <p>В Claude Code есть встроенный режим <code>/remote-control</code>. Команда выдаёт QR-код — сканируешь его в приложении Claude на телефоне, и сессия твоего ноутбука появляется в телефоне. Запустил задачу — закрыл крышку — проверяешь и направляешь с телефона.</p>
 
     <div class="code-block">
-      <div class="code-block-head"><span class="code-title">▸ Подключить Telegram</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
-      <pre># 1. В @BotFather: /newbot → получи токен
-# 2. Установить MCP-сервер:
-claude mcp install @anthropic-ai/mcp-server-channels
+      <div class="code-block-head"><span class="code-title">▸ Включение Remote Control</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># В Claude Code на ноутбуке:
+/remote-control
 
-# 3. Запустить в channels-режиме:
-claude --channels</pre>
+# Появится QR-код — сканируешь его
+# приложением Claude на iPhone/Android.
+
+# Дальше работаешь с телефона как с ноутбука.</pre>
     </div>
 
-    <p>После этого пишешь боту в Telegram, он передаёт инструкции агенту, агент отвечает обратно. Полноценное управление проектом с телефона, без ноутбука под рукой.</p>
+    <p>Минус один: ноутбук должен быть включён, сессия активна. Если ноутбук уснул или сел аккумулятор — Remote Control больше не работает до следующего запуска.</p>
+
+    <h3 id="telegram-bot" style="font-size:18px;margin:28px 0 12px;">Telegram-бот на VPS — для автономной работы</h3>
+
+    <p>Если нужно чтобы агент работал ночью без тебя — выбирай этот путь. Claude Code ставится на удалённый сервер (VPS), к нему подключается Telegram-бот, ты пишешь боту команды как обычному собеседнику, агент их выполняет.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Установка Telegram-бота</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre># 1. В @BotFather: /newbot → получи токен бота
+
+# 2. На VPS установить MCP-сервер для каналов:
+claude mcp install @anthropic-ai/mcp-server-channels
+
+# 3. Запустить Claude Code в channels-режиме:
+claude --channels
+
+# 4. В настройках указать токен бота — связь готова.</pre>
+    </div>
+
+    <p>Дальше пишешь боту в Telegram, он передаёт инструкции агенту, агент отвечает обратно. Можно поставить задачу вечером, утром получить готовый результат. VPS стоит $5–20 в месяц у любого провайдера (DigitalOcean, Hetzner, Timeweb).</p>
 
     <div class="callout analogy">
       <span class="callout-label">Аналогия</span>
-      <p>Это как оставить кухарку на кухне — ты ушёл, она готовит. Телефон даёт тебе возможность подойти проверить и дать новые инструкции не возвращаясь домой.</p>
+      <p>Remote Control — это как удалённый пульт от своего телевизора. Telegram-бот на VPS — это как чужой телевизор который работает сам, а ты иногда заходишь и смотришь что показывает.</p>
     </div>
 
     <div class="callout key">
@@ -169,10 +293,15 @@ claude --channels</pre>
     <a href="#intro">Вступление</a>
     <a href="#why-process">Почему порядок важнее инструментов</a>
     <a href="#superpowers-flow">Процесс Superpowers</a>
+    <a href="#brainstorm-example">Brainstorm</a>
+    <a href="#spec-example">Спецификация</a>
     <a href="#plan-mode-first">Plan Mode</a>
     <a href="#systematic-debug">Systematic Debugging</a>
+    <a href="#debug-example">Пример отладки</a>
     <a href="#worktree-parallel">Git Worktree</a>
     <a href="#phone">Claude из телефона</a>
+    <a href="#remote-control">Remote Control</a>
+    <a href="#telegram-bot">Telegram-бот на VPS</a>
   </aside>
 </div>
 
