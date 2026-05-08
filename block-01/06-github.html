@@ -127,6 +127,57 @@ git push</pre>
       <p>Коммить партиями, не каждый чих. Сделал работающую фичу — коммит. Исправил баг — коммит. Хорошее описание коммита: что сделал, а не как. «Добавил форму обратной связи» — хорошо. «Изменил строку 42 в index.html» — бесполезно.</p>
     </div>
 
+    <h3 id="working-day" style="font-size:18px;margin:28px 0 12px;">Пример рабочего дня с git</h3>
+
+    <p>Чтобы сразу было понятно как это вплетается в работу — вот обычный день когда ты делаешь сайт:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Рабочий день</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Утро    → доделал шапку сайта → "Сделай коммит: 'Готова шапка'"
+День    → собрал блок «Услуги»  → "Коммит: 'Добавил услуги'"
+Вечер   → форма заработала      → "Коммит: 'Форма обратной связи работает'"
+Ухожу   → "Сделай пуш"           ← один раз в конце дня
+
+В следующий раз когда сядешь — уже на GitHub есть точки возврата
+к каждой работающей версии. Сломалось? Откатился к утреннему коммиту.</pre>
+    </div>
+
+    <p>Совет от практики: фраза «сделай коммит и пуш» должна стать привычной как «сохрани документ». Один раз закроешь ноутбук без пуша — потом потратишь час на восстановление того что забыл сохранить.</p>
+
+    <h3 id="git-mistakes" style="font-size:18px;margin:28px 0 12px;">Типичные ошибки новичков</h3>
+
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--ink);">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Ошибка</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что происходит</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Как избежать</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Забыл коммит</td>
+          <td style="padding:10px;">Что-то сломалось и нет точки возврата к рабочей версии</td>
+          <td style="padding:10px;">Коммить после каждой работающей фичи, не реже раза в час</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Забыл пуш</td>
+          <td style="padding:10px;">Сломался ноутбук — все коммиты потеряны, остался только GitHub-снимок недельной давности</td>
+          <td style="padding:10px;">Пуш в конце каждого рабочего дня — это как закрыть дверь перед уходом</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;">Коммит с нерабочим кодом</td>
+          <td style="padding:10px;">Откатываешься к коммиту — а там не работает</td>
+          <td style="padding:10px;">Перед коммитом — открой в браузере, проверь хотя бы что страница загружается</td>
+        </tr>
+        <tr>
+          <td style="padding:10px;">Бесполезные сообщения</td>
+          <td style="padding:10px;">«update», «fix», «изменения» — через неделю не поймёшь что было</td>
+          <td style="padding:10px;">Описывай <em>что</em> сделал: «Добавил форму на главной», «Починил отображение на мобильном»</td>
+        </tr>
+      </tbody>
+    </table>
+
     <h2 id="github-cli">GitHub CLI — проще чем SSH</h2>
 
     <p>По умолчанию GitHub требует настроить SSH-ключи, чтобы пушить изменения. Это небыстрая история: сгенерировать ключ, добавить в настройки аккаунта, разобраться почему не работает. Для новичка — лишний барьер.</p>
@@ -196,13 +247,43 @@ build/
       <p>Если ты случайно запушил <code>.env</code> с ключами — считай что ключи скомпрометированы, даже если репозиторий приватный. Правильное действие: немедленно отозвать ключи в сервисе (OpenAI, Stripe, что угодно) и выпустить новые. История гита хранит всё, даже если ты удалил файл в следующем коммите.</p>
     </div>
 
-    <h2 id="branch-protection">Защита ветки main</h2>
+    <h2 id="branches-pr">Ветки и Pull Request</h2>
 
-    <p>В платном GitHub (Teams и выше) можно включить защиту ветки: напрямую в <code>main</code> пушить нельзя. Любые изменения — только через отдельную ветку и Pull Request.</p>
+    <p>Пока у тебя один проект и работаешь один — всё живёт в одной ветке <code>main</code>. Каждый коммит идёт прямо в неё. Это нормально для соло-сайтов, но как только захочешь что-то экспериментально попробовать или работать вдвоём — нужны ветки и Pull Request.</p>
 
-    <p>Это удобно в паре с Claude Code: Claude работает в своей feature-ветке, создаёт PR, ты смотришь что именно изменилось и нажимаешь «Merge». Никаких сюрпризов в боевом коде.</p>
+    <p style="font-size:17px;font-weight:600;margin:24px 0 8px;">Зачем ветки</p>
 
-    <p>Для соло-проектов это необязательно, но хорошая привычка. Даже когда работаешь один — PR даёт возможность просмотреть изменения перед тем как они попадут в main.</p>
+    <p>Ветка — это параллельная линия истории проекта. Хочешь попробовать новую фичу, но не уверен что получится — создаёшь ветку, экспериментируешь там. Получилось — сливаешь в main. Не получилось — выкидываешь, основной проект не пострадал.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт для работы с ветками</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай новую ветку для эксперимента: попробуем темную тему сайта.
+Назови её feature/dark-theme.
+
+После работы:
+"Слей feature/dark-theme в main и удали ветку"
+или
+"Я передумал. Удали feature/dark-theme, остался на старом."</pre>
+    </div>
+
+    <p style="font-size:17px;font-weight:600;margin:24px 0 8px;">Зачем Pull Request</p>
+
+    <p>Pull Request (PR) — это запрос на слияние ветки в main с возможностью посмотреть и обсудить изменения до слияния. На GitHub это страница со списком всех изменений, с комментариями и кнопкой «Merge».</p>
+
+    <p>Когда полезно даже если работаешь один: Claude поработал в feature-ветке, создал PR — ты смотришь что именно поменялось (вся диффа на одной странице), и только потом сливаешь в main. Никаких сюрпризов в боевом коде.</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт для PR</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Создай Pull Request из текущей ветки в main.
+Заголовок: «Тёмная тема сайта».
+В описании — что именно изменилось и почему.</pre>
+    </div>
+
+    <p>Если установлен GitHub CLI — Claude сделает PR одной командой <code>gh pr create</code>, ты получишь ссылку. Без CLI — Claude напишет описание и подскажет как создать PR через интерфейс GitHub.</p>
+
+    <p style="font-size:17px;font-weight:600;margin:24px 0 8px;">Защита main (для команд)</p>
+
+    <p>В платном GitHub (Teams и выше) можно включить защиту ветки <code>main</code>: напрямую пушить запрещено, изменения — только через PR. Для соло-проектов это необязательно, но хорошая привычка для дисциплины.</p>
 
     <h2 id="worktree">Git Worktree: несколько задач параллельно</h2>
 
@@ -254,7 +335,7 @@ git worktree remove ../project-feature-branch</pre>
     <a href="#commit-push">Commit и Push</a>
     <a href="#github-cli">GitHub CLI</a>
     <a href="#gitignore">.gitignore</a>
-    <a href="#branch-protection">Защита ветки main</a>
+    <a href="#branches-pr">Ветки и Pull Request</a>
     <a href="#worktree">Git Worktree</a>
   </aside>
 </div>
