@@ -789,3 +789,59 @@ details.collapsible > summary::before {
 details.collapsible[open] > summary::before { content: '▾ '; }
 details.collapsible > summary::-webkit-details-marker { display: none; }
 details.collapsible[open] > summary { margin-bottom: 8px; }
+
+/* ============================================================
+   CTA — кнопка в шапке + блок в конце статей
+   ============================================================ */
+.site-nav .nav-cta {
+  background: var(--accent);
+  color: var(--paper);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-weight: 700;
+  border-bottom: none;
+  margin-left: 4px;
+  letter-spacing: 0.04em;
+  transition: background 0.15s, transform 0.1s;
+}
+.site-nav .nav-cta:hover {
+  background: #d63d10;
+  color: var(--paper);
+  border-bottom-color: transparent;
+}
+.site-nav .nav-cta:active { transform: translateY(1px); }
+
+.cta-block {
+  margin: 48px 0 24px;
+  padding: 28px 32px;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 10px;
+}
+.cta-block h3 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 0 0 10px;
+  color: var(--paper);
+}
+.cta-block p {
+  font-size: 15px;
+  margin: 0 0 18px;
+  opacity: 0.82;
+  line-height: 1.55;
+}
+.cta-block .cta-button {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--paper);
+  padding: 11px 22px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  transition: background 0.15s, transform 0.1s;
+}
+.cta-block .cta-button:hover { background: #d63d10; }
+.cta-block .cta-button:active { transform: translateY(1px); }
