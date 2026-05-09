@@ -110,14 +110,15 @@
 name: researcher
 description: Research agent. Searches for information, reads docs, summarizes findings.
   Use for: finding information, checking documentation, competitive analysis.
-model: claude-haiku-4-5
+tools: Read, Grep, Glob
+model: haiku
 ---
 
 You are a research assistant. Your task is to find and summarize information.
 Always cite sources. Be concise. Output structured summaries.</pre>
     </div>
 
-    <p>Поле <code>description</code> — самое важное. Именно по нему оркестратор решает, какого агента вызвать под конкретную задачу. Пиши описание чётко: что делает, когда использовать.</p>
+    <p>Поле <code>description</code> — самое важное. Именно по нему оркестратор решает, какого агента вызвать под конкретную задачу. Пиши описание чётко: что делает, когда использовать. Поле <code>tools</code> ограничивает доступ — если не указать, субагент наследует все инструменты главного агента. <code>model</code> можно задавать алиасом (<code>sonnet</code>/<code>opus</code>/<code>haiku</code>) или конкретным ID. Если не указать — наследует модель основной сессии.</p>
 
     <h2 id="model-choice">Выбор модели под задачу</h2>
 
@@ -184,31 +185,41 @@ Always cite sources. Be concise. Output structured summaries.</pre>
 
     <h2 id="builtin">Встроенные субагенты Anthropic</h2>
 
-    <p>Claude Code поставляется с несколькими встроенными субагентами. Они запускаются автоматически или по команде, и покрывают самые частые задачи при работе с кодом:</p>
+    <p>Claude Code поставляется с пятью встроенными субагентами. Запускаются автоматически когда задача подходит, или по явному вызову:</p>
 
     <table style="width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;">
       <thead>
         <tr style="border-bottom:2px solid var(--ink);">
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Агент</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Модель</th>
           <th style="text-align:left;padding:8px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Что делает</th>
         </tr>
       </thead>
       <tbody>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;"><code>Explore</code></td>
-          <td style="padding:10px;">Поиск по кодовой базе: где что определено, что что использует</td>
+          <td style="padding:10px;">Haiku</td>
+          <td style="padding:10px;">Поиск по кодовой базе: где что определено, кто что использует. Только чтение, не пишет файлы</td>
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;"><code>Plan</code></td>
-          <td style="padding:10px;">Планирование реализации: архитектура, шаги, trade-offs</td>
+          <td style="padding:10px;">наследует</td>
+          <td style="padding:10px;">Сбор контекста для plan mode перед тем как Claude представит план. Только чтение</td>
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
-          <td style="padding:10px;"><code>Code Guide</code></td>
-          <td style="padding:10px;">Вопросы о Claude Code: как что работает, настройки, команды</td>
+          <td style="padding:10px;"><code>general-purpose</code></td>
+          <td style="padding:10px;">наследует</td>
+          <td style="padding:10px;">Универсальный агент для сложных multi-step задач — и поиск, и действия. Самый часто используемый</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px;"><code>statusline-setup</code></td>
+          <td style="padding:10px;">Sonnet</td>
+          <td style="padding:10px;">Настройка statusline в терминале (запускается через <code>/statusline</code>)</td>
         </tr>
         <tr>
-          <td style="padding:10px;"><code>StatusLine</code></td>
-          <td style="padding:10px;">Настройка statusline в терминале</td>
+          <td style="padding:10px;"><code>claude-code-guide</code></td>
+          <td style="padding:10px;">Haiku</td>
+          <td style="padding:10px;">Отвечает на вопросы про сам Claude Code: как что работает, настройки, команды</td>
         </tr>
       </tbody>
     </table>
@@ -220,8 +231,9 @@ Always cite sources. Be concise. Output structured summaries.</pre>
     <p>Когда это нужно: сложные исследовательские задачи, где важно рассмотреть тему с нескольких сторон — один агент ищет аргументы за, другой против, третий синтезирует. Или сценарии ревью, где один агент пишет, другой критикует.</p>
 
     <div class="callout warn">
-      <span class="callout-label">Важно</span>
-      <p>Agent Teams — мощный инструмент, но жрёт много токенов и времени. Для стандартных задач — субагенты без общения между собой. Agent Teams рассматривай только когда тебе действительно нужны несколько независимых точек зрения на одну задачу.</p>
+      <span class="callout-label">Это экспериментальная фича</span>
+      <p>Agent Teams выключены по умолчанию. Чтобы включить — нужна переменная окружения <code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code> и Claude Code версии 2.1.32+. Без этого функция не работает.</p>
+      <p style="margin-top:8px;">Также жрёт много токенов и времени. Для стандартных задач — субагенты без общения между собой. Agent Teams рассматривай только когда тебе действительно нужны несколько независимых точек зрения на одну задачу.</p>
     </div>
 
     <div class="callout key">

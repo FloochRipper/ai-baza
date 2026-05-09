@@ -96,9 +96,9 @@
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
           <td style="padding:10px;font-size:12px;color:var(--muted);">Где живёт</td>
-          <td style="padding:10px;"><code>.claude/skills/</code></td>
-          <td style="padding:10px;">Тоже <code>.claude/skills/</code> (без YAML-шапки)</td>
-          <td style="padding:10px;"><code>.claude/agents/</code></td>
+          <td style="padding:10px;"><code>.claude/skills/&lt;имя&gt;/SKILL.md</code></td>
+          <td style="padding:10px;"><code>.claude/commands/&lt;имя&gt;.md</code></td>
+          <td style="padding:10px;"><code>.claude/agents/&lt;имя&gt;.md</code></td>
           <td style="padding:10px;">На сервере (VPS), Telegram, n8n и т.д.</td>
         </tr>
         <tr style="border-bottom:1px solid var(--line);">
@@ -129,14 +129,16 @@
 
     <h2 id="skill">Скилл — для повторяющихся задач со своим стилем</h2>
 
-    <p>Скилл — это файл с инструкцией, которую Claude применяет когда подходит ситуация. Например, ты регулярно пишешь посты в Telegram-канал в своём стиле. Каждый раз объяснять «короткие абзацы, без эмодзи, заход с провокации» — утомляет. Создаёшь скилл — и Claude применяет правила автоматически.</p>
+    <p>Скилл — это инструкция, которую Claude применяет когда подходит ситуация. Например, ты регулярно пишешь посты в Telegram-канал в своём стиле. Каждый раз объяснять «короткие абзацы, без эмодзи, заход с провокации» — утомляет. Создаёшь скилл — и Claude применяет правила автоматически.</p>
+
+    <p>Скилл живёт в отдельной папке. Минимум — папка с одним файлом <code>SKILL.md</code>. Если нужно — добавляются вспомогательные файлы (примеры, шаблоны, скрипты), но основной файл всегда <code>SKILL.md</code>:</p>
 
     <div class="code-block">
-      <div class="code-block-head"><span class="code-title">▸ Структура простого скилла</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
-      <pre>.claude/skills/post-writer.md
+      <div class="code-block-head"><span class="code-title">▸ Структура скилла</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>.claude/skills/post-writer/
+└── SKILL.md       ← главный файл с инструкцией
 
 ---
-name: post-writer
 description: Пишет посты в Telegram-канал в моём стиле
 ---
 
@@ -147,15 +149,15 @@ description: Пишет посты в Telegram-канал в моём стиле
 - Не использовать слово «погружение»</pre>
     </div>
 
-    <p>Когда выбирать скилл: ты делаешь похожие задачи много раз, и есть свод правил, которым нужно следовать. Подробно — в <a href="05-skills-mcp-hooks.html">статье 05</a>.</p>
+    <p>Когда выбирать скилл: ты делаешь похожие задачи много раз, и есть свод правил, которым нужно следовать. Подробно — в <a href="05a-skills.html">статье 05a</a>.</p>
 
     <h2 id="command">Команда — быстрый шорткат для часто используемого промпта</h2>
 
-    <p>Команда — это та же файловая структура, что и скилл, но без YAML-шапки. Она запускается явно через <code>/название</code>. Используется когда нужно зашить конкретный сценарий с несколькими шагами в одну строку.</p>
+    <p>Команда — это плоский md-файл в папке <code>.claude/commands/</code>. Запускается явно через <code>/название</code>. Используется когда нужно зашить конкретный сценарий с несколькими шагами в одну строку.</p>
 
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Команда /endday — пример</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
-      <pre>.claude/skills/endday.md
+      <pre>.claude/commands/endday.md
 
 Обнови .claude/handoff.md по итогам сессии:
 1. Что сделали — 1-2 предложения
@@ -166,7 +168,13 @@ description: Пишет посты в Telegram-канал в моём стиле
 Перед сохранением покажи мне предлагаемый текст.</pre>
     </div>
 
-    <p>Когда выбирать команду: есть конкретный workflow с 3-7 шагами, который запускается часто. Команды и скиллы с 2026 года — одна сущность, разница только в YAML-шапке.</p>
+    <p>Когда выбирать команду: есть конкретный workflow с 3-7 шагами, который запускается часто.</p>
+
+    <div class="callout" style="margin:20px 0;">
+      <span class="callout-label">Команды и скиллы — что общего, что разное</span>
+      <p>Anthropic «слили» команды и скиллы в одно семейство — обе формы создают <code>/название</code> и работают одинаково при вызове. Старые файлы в <code>.claude/commands/</code> по-прежнему работают.</p>
+      <p style="margin-top:8px;">Но это разные пути и форматы. Команда — плоский md-файл в <code>.claude/commands/</code>. Скилл — папка с <code>SKILL.md</code> в <code>.claude/skills/</code>. Скилл рекомендуют как новый стандарт: умеет вспомогательные файлы, динамические команды через <code>!`...`</code>, контроль кто его вызывает (только ты или ещё Claude автоматически).</p>
+    </div>
 
     <h2 id="subagent">Субагент — параллельный помощник внутри Claude Code</h2>
 

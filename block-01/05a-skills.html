@@ -103,14 +103,17 @@ description: Пишет посты в мой Telegram-канал.
 
     <h2 id="structure">Структура файлов</h2>
 
-    <p>Простой скилл — один файл:</p>
+    <p>Скилл — это всегда папка. Внутри обязательно файл <code>SKILL.md</code> — главная инструкция. По желанию рядом могут лежать вспомогательные файлы: примеры, шаблоны, скрипты.</p>
+
+    <p>Минимальный скилл — папка с одним <code>SKILL.md</code>:</p>
 
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Минимальный скилл</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
-      <pre>.claude/skills/post-writer.md     ← один файл с YAML-шапкой и инструкцией</pre>
+      <pre>.claude/skills/post-writer/
+└── SKILL.md            ← файл с YAML-шапкой и инструкцией</pre>
     </div>
 
-    <p>Расширенный — папка со вспомогательными файлами:</p>
+    <p>Расширенный — добавляются вспомогательные файлы. Claude подгружает их по ссылкам из <code>SKILL.md</code> когда нужно:</p>
 
     <div class="code-block">
       <div class="code-block-head"><span class="code-title">▸ Расширенный скилл</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
@@ -123,7 +126,12 @@ description: Пишет посты в мой Telegram-канал.
     └── narrative.md</pre>
     </div>
 
-    <p>Когда папка нужна: скилл сложный, есть примеры или шаблоны на которые опирается. Когда хватает файла: правила компактные, всё помещается в одной инструкции.</p>
+    <p>Когда вспомогательные файлы нужны: скилл сложный, есть примеры или шаблоны на которые опирается. Когда не нужны: правила компактные, всё помещается в одном <code>SKILL.md</code>.</p>
+
+    <div class="callout warn" style="margin:20px 0;">
+      <span class="callout-label">Плоский файл — не валидно</span>
+      <p>Структура <code>.claude/skills/post-writer.md</code> (один md-файл сразу в <code>skills/</code>, без папки) — не работает. Claude Code такой скилл не увидит. Если хочется простой плоский файл с промптом — это команда, и она кладётся в <code>.claude/commands/&lt;имя&gt;.md</code>. Подробнее про разницу — в <a href="12-agents-types.html#command">статье 12, раздел про команды</a>.</p>
+    </div>
 
     <h2 id="advanced-yaml">Расширенные настройки в шапке</h2>
 
