@@ -46,6 +46,7 @@
       <a href="#bypass">Bypass с защитой</a>
       <a href="#sound-hook">Два первых хука</a>
       <a href="#hidden-folders">Скрытые папки</a>
+      <a href="#claude-md-imports">Ссылки в CLAUDE.md</a>
 
       <div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:14px 12px 6px;">Команды и промпты</div>
       <a href="#init">Команда /init</a>
@@ -222,6 +223,34 @@
     </ul>
 
     <p>Или вообще не заморачиваться: попроси Claude открыть нужный файл напрямую — «Открой ~/.claude/CLAUDE.md и добавь правило...».</p>
+
+    <h3 id="claude-md-imports" style="font-size:22px;margin:28px 0 12px;">Ссылки в CLAUDE.md — Claude по ним файлы не открывает</h3>
+
+    <p>В CLAUDE.md (главный файл с инструкциями для Claude в твоём проекте) удобно ссылаться на другие файлы — мол, подробности смотри там. Хитрая засада: обычная markdown-ссылка для Claude — просто текст. Файл по ней он автоматически не открывает.</p>
+
+    <p>Если в CLAUDE.md написано «детали в [файле](memory/правила.md)» — Claude видит что есть какой-то файл, но в работу его не подтянет. Откроет только если по ходу задачи сам решит что нужно. Никаких гарантий. Поэтому критичные правила, выложенные «по ссылке в feedback-файл», часто игнорируются — не потому что ты плохо их написал, а потому что Claude до них не дошёл.</p>
+
+    <p>Чтобы файл реально загрузился вместе с CLAUDE.md в начале сессии — используй символ <code>@</code>:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Так Claude НЕ откроет файл</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Подробности смотри в [файле с правилами](memory/правила.md)</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Так Claude гарантированно подтянет файл</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Подробности смотри здесь:
+@memory/правила.md</pre>
+    </div>
+
+    <p>Работает с относительными и абсолютными путями, можно через <code>~/.claude/file.md</code>. Глубина импортов до 5 уровней — то есть подтянутый файл может тянуть свои.</p>
+
+    <div class="callout key" style="margin:20px 0;">
+      <span class="callout-label">Когда что использовать</span>
+      <p>Правило срабатывает <strong>всегда</strong> и критично — пиши прямо в CLAUDE.md, без всяких ссылок. Большой документ нужен <strong>в каждой сессии</strong> — подключи через <code>@</code>. Файл нужен <strong>иногда для справки</strong> — обычная markdown-ссылка ок, Claude откроет если решит что нужно. Действие должно <strong>выполняться детерминированно</strong> (например, проверка перед коммитом) — это уже не про CLAUDE.md, а про hooks.</p>
+    </div>
+
+    <p>Минус <code>@</code>-импортов: токены жгутся. Подтянутые файлы добавляются к CLAUDE.md и сидят в контексте каждого разговора. Если у тебя десяток feedback-файлов и ты все подтянул через <code>@</code> — это +20 000 знаков в каждой сессии. Поэтому правильный приём такой: критичную выжимку держишь прямо в CLAUDE.md (короткими строками), полные файлы оставляешь по обычным ссылкам или внутри скиллов.</p>
 
     <h2 id="cat-commands" style="margin-top:48px;padding-bottom:8px;border-bottom:2px solid var(--ink);">Команды и промпты</h2>
 
