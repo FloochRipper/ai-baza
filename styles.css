@@ -829,7 +829,8 @@ details.collapsible[open] > summary { margin-bottom: 8px; }
 .cta-block p {
   font-size: 15px;
   margin: 0 0 18px;
-  opacity: 0.82;
+  color: var(--paper);
+  opacity: 0.95;
   line-height: 1.55;
 }
 .cta-block .cta-button {
