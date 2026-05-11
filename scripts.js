@@ -28,6 +28,51 @@ function copyInline(btn) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initMobileNav();
+  initTocSpy();
+});
+
+function initMobileNav() {
+  const sidebar = document.querySelector('.sidebar');
+  if (!sidebar) return;
+
+  const sectionTitle = sidebar.querySelector('.section-title')?.textContent || 'Разделы';
+  const navHtml = sidebar.querySelector('.sidebar-nav')?.outerHTML || '';
+  if (!navHtml) return;
+
+  const btn = document.createElement('button');
+  btn.className = 'mobile-nav-toggle';
+  btn.setAttribute('aria-label', 'Открыть меню разделов');
+  btn.innerHTML = '<span></span><span></span><span></span>';
+
+  const drawer = document.createElement('div');
+  drawer.className = 'mobile-nav-drawer';
+  drawer.innerHTML = `
+    <div class="mobile-nav-backdrop"></div>
+    <aside class="mobile-nav-panel">
+      <div class="mobile-nav-head">
+        <div class="section-label">Раздел</div>
+        <div class="section-title">${sectionTitle}</div>
+        <button class="mobile-nav-close" aria-label="Закрыть">✕</button>
+      </div>
+      ${navHtml}
+    </aside>
+  `;
+
+  const header = document.querySelector('.site-header');
+  header.appendChild(btn);
+  document.body.appendChild(drawer);
+
+  const open = () => { document.body.classList.add('mobile-nav-open'); };
+  const close = () => { document.body.classList.remove('mobile-nav-open'); };
+
+  btn.addEventListener('click', open);
+  drawer.querySelector('.mobile-nav-backdrop').addEventListener('click', close);
+  drawer.querySelector('.mobile-nav-close').addEventListener('click', close);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+}
+
+function initTocSpy() {
   const tocLinks = document.querySelectorAll('.toc a, .sidebar-toc a');
   const headings = document.querySelectorAll('h2[id], h3[id]');
   if (!tocLinks.length || !headings.length) return;
@@ -51,4 +96,4 @@ document.addEventListener('DOMContentLoaded', () => {
       a.classList.add('active');
     });
   });
-});
+}
