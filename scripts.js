@@ -28,6 +28,37 @@ function copyInline(btn) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initMobileInlineNav();
+  initTocSpy();
+});
+
+function initMobileInlineNav() {
+  const sidebar = document.querySelector('.sidebar');
+  const main = document.querySelector('.layout > main');
+  if (!sidebar || !main) return;
+
+  const sectionTitle = sidebar.querySelector('.section-title')?.textContent || 'Разделы';
+  const navEl = sidebar.querySelector('.sidebar-nav');
+  if (!navEl) return;
+
+  const total = navEl.querySelectorAll('a').length;
+
+  const details = document.createElement('details');
+  details.className = 'mobile-inline-nav';
+  details.innerHTML = `
+    <summary>
+      <span class="mobile-inline-label">Все разделы: ${sectionTitle}</span>
+      <span class="mobile-inline-count">${total}</span>
+    </summary>
+    <div class="mobile-inline-body">
+      ${navEl.outerHTML}
+    </div>
+  `;
+
+  main.insertBefore(details, main.firstChild);
+}
+
+function initTocSpy() {
   const tocLinks = document.querySelectorAll('.toc a, .sidebar-toc a');
   const headings = document.querySelectorAll('h2[id], h3[id]');
   if (!tocLinks.length || !headings.length) return;
@@ -42,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Immediate on load + click
   updateActive();
   window.addEventListener('scroll', updateActive);
   tocLinks.forEach(a => {
@@ -51,4 +81,4 @@ document.addEventListener('DOMContentLoaded', () => {
       a.classList.add('active');
     });
   });
-});
+}

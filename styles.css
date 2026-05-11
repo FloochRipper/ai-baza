@@ -754,6 +754,95 @@ a { color: inherit; text-decoration: none; }
   .site-nav { display: none; }
 }
 
+/* ============================================================
+   MOBILE NAV — inline collapsible в начале статьи (вариант C)
+   ============================================================ */
+.mobile-inline-nav { display: none; }
+
+@media (max-width: 900px) {
+  .mobile-inline-nav {
+    display: block;
+    margin: 0 0 24px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--paper);
+    overflow: hidden;
+  }
+  .mobile-inline-nav summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    list-style: none;
+    background: var(--paper-2);
+  }
+  .mobile-inline-nav summary::-webkit-details-marker { display: none; }
+  .mobile-inline-nav summary::after {
+    content: '▾';
+    color: var(--muted);
+    font-size: 12px;
+    margin-left: auto;
+    transition: transform 0.2s;
+  }
+  .mobile-inline-nav[open] summary::after { transform: rotate(180deg); }
+  .mobile-inline-label {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .mobile-inline-count {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    padding: 2px 7px;
+    background: var(--paper);
+    border-radius: 4px;
+    border: 1px solid var(--line);
+  }
+  .mobile-inline-body {
+    padding: 8px;
+  }
+  .mobile-inline-body .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+  }
+  .mobile-inline-body .sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--muted);
+    text-decoration: none;
+    border-radius: 6px;
+  }
+  .mobile-inline-body .sidebar-nav a:hover,
+  .mobile-inline-body .sidebar-nav a.active {
+    background: var(--paper-2);
+    color: var(--ink);
+  }
+  .mobile-inline-body .sidebar-nav a.active {
+    background: rgba(255, 75, 31, 0.08);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .mobile-inline-body .sidebar-nav .num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    min-width: 32px;
+  }
+  .mobile-inline-body .sidebar-nav a.active .num { color: var(--accent); }
+}
+
 @media (max-width: 600px) {
   .hub-sections { grid-template-columns: 1fr; }
   .hub-hero h1 { font-size: 32px; }
