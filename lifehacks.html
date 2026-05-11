@@ -53,6 +53,7 @@
       <a href="#you-sure">Промпт «ты уверен?»</a>
 
       <div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:14px 12px 6px;">Продвинутое</div>
+      <a href="#browser-harness">Browser Harness вместо Playwright</a>
       <a href="#worktree">Worktree</a>
       <a href="#network">Посмотреть на телефоне</a>
     </nav>
@@ -269,6 +270,38 @@
     <p>Подробнее: <a href="block-01/03-claude-md.html#improvement-cycle">статья 03, цикл улучшения документации</a></p>
 
     <h2 id="cat-advanced" style="margin-top:48px;padding-bottom:8px;border-bottom:2px solid var(--ink);">Продвинутое</h2>
+
+    <h3 id="browser-harness" style="font-size:22px;margin:28px 0 12px;">Browser Harness вместо Playwright — экономия токенов в 78 раз</h3>
+
+    <div class="callout key" style="margin:20px 0;">
+      <span class="callout-label">Если Claude часто лезет в браузер — переключайся</span>
+      <p>Когда Claude Code открывает сайт чтобы что-то посмотреть, выгрузить, найти — он по умолчанию подключает плагин Playwright. <strong>Это самый дорогой инструмент в твоём стеке.</strong> На одном запросе он жрёт в 78 раз больше токенов чем альтернатива.</p>
+    </div>
+
+    <p>Замерил 11 мая 2026 на одинаковой задаче — открыть Wildberries, поиск "iPhone 16", вытащить топ-3 товара с ценами:</p>
+
+    <ul style="margin:0 0 20px;padding-left:24px;line-height:1.8;">
+      <li><strong>Playwright MCP:</strong> 20 689 токенов в ответе (≈ $0.06 за один прогон на Sonnet 4.6)</li>
+      <li><strong>Browser Harness:</strong> 265 токенов в ответе (≈ $0.0008 за один прогон)</li>
+      <li><strong>Разница: 78 раз</strong></li>
+    </ul>
+
+    <p>Для активного пользователя Claude Code (30-50 браузерных задач в день) это $50-90 экономии в месяц на одном инструменте.</p>
+
+    <p><strong>Почему такая разница.</strong> Playwright возвращает Claude полное дерево страницы (DOM accessibility tree) после каждого действия. Browser Harness даёт писать точечные JS-запросы как разработчику в DevTools и возвращает только то что попросил. Логика "зрячего" агента вместо "слепого".</p>
+
+    <p><strong>Бонус для русских сайтов.</strong> Browser Harness подключается к твоему реальному Chrome через CDP — со всеми твоими логинами и cookies. Wildberries, Озон, Авито, Кинопоиск не банят его антиботом. Playwright всегда headless без cookies — на этих сайтах сразу получает заглушку.</p>
+
+    <p><strong>Установка через Claude Code</strong> — буквально одной фразой, Claude сам всё сделает:</p>
+
+    <div class="code-block">
+      <div class="code-block-head"><span class="code-title">▸ Промпт для установки</span><button class="code-copy" onclick="copyCode(this)">⧉ Копировать</button></div>
+      <pre>Поставь мне https://github.com/browser-use/browser-harness — прочитай install.md и подключи к моему Chrome.</pre>
+    </div>
+
+    <p>Claude прочитает инструкцию, поставит uv (менеджер пакетов Python), клонирует репозиторий в <code>~/Developer/browser-harness</code>, зарегистрирует глобальный CLI и добавит импорт скилла в твой <code>~/.claude/CLAUDE.md</code>. От тебя нужно дважды кликнуть в Chrome — поставить галку в <code>chrome://inspect/#remote-debugging</code> и нажать "Allow" на попапе. 5-7 минут на всё.</p>
+
+    <p>После установки Claude в любой новой сессии автоматически выберет Browser Harness вместо Playwright для браузерных задач. Playwright остаётся как фолбэк на случай если нужен изолированный профиль или фоновая автоматизация без открытого Chrome.</p>
 
     <h3 id="worktree" style="font-size:22px;margin:28px 0 12px;">Worktree для параллельной работы агентов</h3>
 
